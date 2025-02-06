@@ -39,9 +39,18 @@ export default {
     const sendQuery = async () => {
       if (!query.value) return;
       messages.value.push({ text: query.value, type: 'user', timestamp: new Date().toLocaleTimeString() });
-      query.value = '';
+      const currentQuery = query.value; // 保存当前的query值
+      query.value = ''; // 清空输入框
       try {
-        const res = await axios.post('http://127.0.0.1:5000/api/query', { query: query.value });
+        const res = await axios.post('http://127.0.0.1:5000/api/query', { 
+          query: currentQuery // 使用保存的query值
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json', // 明确指定请求头
+            'Accept': 'application/json' 
+          }
+        });
         messages.value.push({ text: res.data.response, type: 'ai', timestamp: new Date().toLocaleTimeString() });
       } catch (error) {
         console.error('Error fetching response:', error);
