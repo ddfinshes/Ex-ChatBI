@@ -1,0 +1,65 @@
+F-YTD: From the first day of the fiscal year (April 1st each year) to yesterday.&&
+C-YTD: From the first day of this year to yesterday.&&
+YTD: From the first day of this year to yesterday.&&
+FY23: Refers to the fiscal year 2023, i.e., from April 1, 2022, to March 31, 2023. &&
+FY24: Refers to the fiscal year 2024, i.e., from April 1, 2023, to March 31, 2024. &&
+FY25: Refers to the fiscal year 2025, i.e., from April 1, 2024, to March 31, 2025. &&
+FY26: Refers to the fiscal year 2026, i.e., from April 1, 2025, to March 31, 2026. &&
+MTD: From the first day of the current month to yesterday.&&
+QTD: （Quarter-to-date）.QTD refers to the period from the first day of the current quarter to yesterday.&&
+LWK: Last week.&&
+WTD: From the first day (Sunday) of the current week to yesterday.&&
+Sales: Sales amount, the revenue generated from store sales.&&
+Qty/Quantity: Quantity of items transacted; sales quantity.&&
+Amt: Actual transaction amount for the order; total transaction amount for multiple items.&&
+Target: Target sales amount; target sales set per store/day.&&
+Channel: Channel where the store belongs.For example, :EC/FP/O&O.&&
+EC: E-commerce,the channel is EC.&&
+FP: Distributor,the channel is FP.&&
+O&O: Retail store.the channel is O&O.&&
+Retail: Retail store.the channel is O&O.&&
+WH: Wholesale.&&
+Store Type: Type of the store.For example, :BH/FH.
+BH: Direct-operated store,the store_type is BH.
+FH: Factory store,the store_type is FH.&&
+Region: Region where the store is located, e.g., South/West/North/APAC.&&
+Province: Province where the store is located, stored in English in the database.&&
+City: City where the store is located, stored in English in the database.&&
+Store Name: Name of the store, stored in English (Pinyin) in the database.&&
+Store Code: Store number, a unique identifier assigned by the system to the store. For example, if the store code is UABH_CHN_1234, UABH indicates a BH store of UA, CHN stands for mainland China, and 1234 is the store number of UA.&&
+Comp:could be the Comp Store which have been open for a full 12 months; stores flagged as comp_flag=‘Y’ in the database.&&
+Open Date: Opening date of the store.&&
+Store Status: Status of the store opening or closing: open/closed.&&
+Closed Date: Closing date of the store.&&
+Customer Code: Code of the distributor the store belongs to.&&
+Customer Name: Name of the distributor the store belongs to.&&
+Division: Division attribute of the product, e.g., APP (Apparel), ACC (Accessories), FTW (Footwear).&&
+Gender: Gender attribute of the product, e.g., MENS, WOMENS, BOYS, GIRLS, Unisex.&&
+End Use: End use attribute of the product, e.g., BASEBALL, GOLF, TRAINING, RUNNING, Outdoor.&&
+Silhouette: Silhouette attribute of the product, e.g., BOTTOMS, ONE PIECES, SANDALS, Gloves.&&
+Fit Type: Fit type attribute of the product, e.g., LOOSE, REGULAR, FITTED, ONE SIZE.&&
+key catagory: Key_stories attribute of the product, e.g., CURRY, FAT TIRE, Cotton, Ottoman Fleece,slipspeed.&&
+MSRP: Manufacturer's Suggested Retail Price; Tag price; MSRP label price.&&
+Style: Product style; Sample: 1234567.&&
+Material: Product material; Article level; Sample: 1234567-123; Defined as: style + color.&&
+SKU: Stock Keeping Unit; Color and size level; Sample: 1234567-123-XXL; Defined as: material + size.&&
+Traffic: Customer traffic at the store; Also referred to as foot traffic.&&
+Onhand Stock: Inventory information of products in the store, generally referring to the quantity and value of inventory.&&
+Season:(e.g., SS24/FW24). Selling season of the product; Spring-Summer is SS + the last two digits of the year (e.g., SS23); Fall-Winter is FW + the last two digits of the year (e.g., FW23).&&
+Season: Selling time from January to June is SS + the last two digits of the year (e.g., SS24); Selling time from July to December is FW + the last two digits of the year (e.g., FW24).&&
+Broken Size: Meets the following conditions: 1. Golden size is less than or equal to 2; 2. Inventory is less than or equal to 6; 3. Onhand of golden size is less than half of the total onhand.&&
+APAC: Refers to region='APAC'.&&
+China: Refers to mainland China, country=mainland In Database.&&
+CN: Refers to mainland China, country=mainland In Database.&&
+APP / FTW / ACCS: Values of the attribute division; APP: division=Apparel; FTW: division=Footwear; ACCS: division=Accessories.&&
+Mainland: Refers to mainland China, country=mainland In Database.&&
+Week id(第几周):To clarify, the week_id uses the fiscal year (FY) rather than the calendar year. The fiscal year runs from April 1st to March 31st of the following year. For example, if the fiscal year starts on April 1, 2023, then the week_id for the first week of the fiscal year would be labeled as 202401(fiscal year+weekid).&&
+FY/Fiscal Year: From April 1 of the previous year to March 31 of the current year, e.g., FY24 refers to 2023-04-01 to 2024-03-31; FY25 refers to 2024-04-01 to 2025-03-31, and so on.&&
+FY: Financial Year; FY24 refers to 2023-04-01 to 2024-03-31; FY25 refers to 2024-04-01 to 2025-03-31, and so on.&&
+Armour Print；Women's Bra & Fitted Bottoms；Vanish；HOVR；AMP；Curry；Outerwear；Project Rock；Unstoppable；FLOW；Iso-Chill；Fleece；Meridian；Motion；Warm Footwear；Clone Magnetico；STORM FTW；Slipspeed；Fat Tire；Tribase Reign；The above content refers to the key_stories attribute of the product.&&
+MFO:refers to the product_line attribute of the porduct.For Example:Inline;MFO;Promo;etc.,&&
+season: The date falls within the associated season; for example, SS24 (Spring/Summer 2024) refers to January 1, 2024 to June 30, 2024; FW24 (Fall/Winter 2024) refers to July 1, 2024 to December 31, 2024.&&
+ACH/achievement:amt_net/amt_target -1 .&&
+MOM%:amt_net/lm_amt_net -1 .&&
+WOW%:amt_net/lw_amt_net -1 .&&
+

@@ -1,0 +1,657 @@
+**问题示例**:
+查询销售金额以及销售件数/交易笔数/客流量
+**描述**:
+查询某时间范围内的某些店铺的销售情况，注意：无法获取商品属性相关的信息。
+**名词解释**:
+销售额是指公司（UA）店铺在一个时间范围内的交易总笔数，客流量总和，销售总额，包括含税销售额和不含税（NET）销售额以及换算成美元的不含税销售额（USD）。
+**SQL查询文示例**:
+ SELECT 
+    -- 此处添加group by字段，并且根据问题删减sum字段，只保留和问题相关字段。
+    SUM(qty) as total_qty, -- 销售件数 
+    SUM(amt) as total_amt, -- 销售金额 
+    SUM(amt_net) as total_amt_net, -- 销售额不含税（NET） 
+    SUM(amt_usd_net) as total_amt_usd_net , -- 销售额美元不含税（NET）
+    SUM(trans) as total_trans, -- 交易笔数 
+    SUM(traffic) as total_traffic  -- 客流量 
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+   --日期范围相关条件,根据问题删减条件。
+    year_id = 'yyyy'  -- 年份4位数字(YYYY),当前年份可使用to_char(current_timestamp, 'YYYY')
+    AND month_id = 'yyyymm'  -- 年份+月份6位数字(YYYYMM)
+    AND date_code ='YYYY-MM-DD' -- 年月日(YYYY-MM-DD)，当日可以使用to_char(CURRENT_DATE, 'YYYY-MM-DD')
+    --店铺相关条件,根据问题删减条件
+    AND country = '?' -- 国家英文名，中国用Mainland表示 
+    AND channel = '?' -- 渠道 
+    AND customer_name = '?' -- 经销商客户
+    AND region ='?' -- 地区，例如north/south/east/west 
+    AND province = '?' -- 省份英文名 
+    AND city = '?' -- 城市英文名
+    AND store_type = '?' -- 店铺类型（BH/FH）
+    AND store_code= '?' -- 门店号 
+    AND store_name like '%?%'-- 门店名称,使用like模糊查询
+ GROUP BY 
+    -- 根据问题选择合适的group by字段,并且将group by字段添加到SELECT字段中。
+    year_id,
+    month_id,
+    country,
+    channel,
+    customer_name,
+    region,
+    province,
+    city,
+    store_type,
+    store_code 
+ ORDER BY
+    SUM(amt) DESC
+&&
+
+**问题示例**:
+查询店铺销售额，以及销售额同比/环比数值
+**描述**:
+查询某时间范围内的某些店铺的销售金额，并且计算去年同比/上月环比/上周环比/前日环比的数值。注意：无法获取商品属性相关的信息。
+**名词解释**:
+
+**SQL查询文示例**:
+ SELECT 
+    -- 此处添加group by字段，并且根据问题删减sum字段，只保留和问题相关字段。判断计算公式的除数为0时，则结果为0。
+    SUM(amt) as total_amt, -- 销售金额 
+    SUM(amt_net) as Sales_net , -- 销售额不含税（NET）
+    SUM(case when day_comp='Y' THEN amt_net else 0 END) as Sales_net_Comp , -- 参与比较的店铺产生的销售额不含税（NET） 
+    SUM(case when day_comp='Y' THEN lyd_amt_net else 0 END) as sales_net_lyd_comp, -- 参与比较的店铺去年同期的销售额不含税（NET）
+    SUM(amt_net)/SUM(lyd_amt_net)-1 as sales_net_yoy_per , -- 所有店铺的销售额与去年同期的同比 
+    SUM(case when day_comp='Y' THEN amt_net else 0 END)/SUM(case when day_comp='Y' THEN lyd_amt_net else 0 END)-1 as sales_net_comp_per , -- 参与比较的店铺销售金额与去年同期的同比 
+    SUM(amt_net)/SUM(lm_amt_net)-1 as sales_net_mom_per , -- 销售额与上月同期的环比 
+    SUM(amt_net)/SUM(lw_amt_net)-1 as sales_net_wow_per , -- 销售额与上周同期的环比 
+    SUM(amt_net)/SUM(ld_amt_net)-1 as sales_net_dod_per  -- 销售额与前日环比 
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+   --日期范围相关条件,根据问题删减条件。
+    year_id = 'yyyy'  -- 年份4位数字(YYYY),当前年份可使用to_char(current_timestamp, 'YYYY')
+    AND month_id = 'yyyymm'  -- 年份+月份6位数字(YYYYMM)
+    AND date_code ='YYYY-MM-DD' -- 年月日(YYYY-MM-DD)，当日可以使用to_char(CURRENT_DATE, 'YYYY-MM-DD')
+    --店铺相关条件,根据问题删减条件
+    AND country = '?' -- 国家英文名，中国用Mainland表示 
+    AND channel = '?' -- 渠道 
+    AND customer_name = '?' -- 经销商客户
+    AND region ='?' -- 地区，例如north/south/east/west 
+    AND province = '?' -- 省份英文名 
+    AND city = '?' -- 城市英文名
+    AND store_type = '?' -- 店铺类型（BH/FH）
+    AND store_code= '?' -- 门店号 
+    AND store_name like '%?%'-- 门店名称,使用like模糊查询
+ GROUP BY 
+    -- 根据问题选择合适的group by字段,并且将group by字段添加到SELECT字段中。
+    year_id,
+    month_id,
+    country,
+    channel,
+    customer_name,
+    region,
+    province,
+    city,
+    store_type,
+    store_code
+ ORDER BY
+    SUM(amt) DESC
+&&
+
+**问题示例**:
+查询店铺销售件数qty，以及销售件数的同比/环比数值
+**描述**:
+查询某时间范围内的某些店铺的销售件数，并且计算去年同比/上月环比/上周环比/前日环比的数值。注意：无法获取商品属性相关的信息。
+**名词解释**:
+
+**SQL查询文示例**:
+ SELECT 
+    -- 此处添加group by字段，并且根据问题删减sum字段，只保留和问题相关字段。判断计算公式的除数为0时，则结果为0。
+    SUM(qty) as Sales_Qty,  -- 销售件数 
+    SUM(case when day_comp = 'Y' THEN qty else 0 END) as Sales_Qty_Comp,  -- 参与比较的店铺销售件数 
+    SUM(case when day_comp='Y' THEN lyd_qty else 0 END) as Sales_Qty_Comp_LY, -- 参与比较的店铺去年同期的销售件数 
+    SUM(case when day_comp = 'Y' THEN qty else 0 END)/SUM(case when day_comp='Y' THEN lyd_qty else 0 END)-1 as sales_qty_comp_per , -- 参与比较的店铺销售件数与去年同期的同比 
+    SUM(qty)/SUM(lm_qty)-1 as qty_mom_per , -- 销售件数与上月同期的环比 
+    SUM(qty)/SUM(lw_qty)-1 as qty_wow_per , -- 销售件数与上周同期的环比 
+    SUM(qty)/SUM(ld_qty)-1 as qty_dod_per  -- 销售件数与前日环比 
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+   --日期范围相关条件,根据问题删减条件。
+    year_id = 'yyyy'  -- 年份4位数字(YYYY),当前年份可使用to_char(current_timestamp, 'YYYY')
+    AND month_id = 'yyyymm'  -- 年份+月份6位数字(YYYYMM)
+    AND date_code ='YYYY-MM-DD' -- 年月日(YYYY-MM-DD)，当日可以使用to_char(CURRENT_DATE, 'YYYY-MM-DD')
+    --店铺相关条件,根据问题删减条件
+    AND country = '?' -- 国家英文名，中国用Mainland表示 
+    AND channel = '?' -- 渠道 
+    AND customer_name = '?' -- 经销商客户
+    AND region ='?' -- 地区，例如north/south/east/west 
+    AND province = '?' -- 省份英文名 
+    AND city = '?' -- 城市英文名
+    AND store_type = '?' -- 店铺类型（BH/FH）
+    AND store_code= '?' -- 门店号 
+    AND store_name like '%?%'-- 门店名称,使用like模糊查询
+ GROUP BY 
+    -- 根据问题选择合适的group by字段,并且将group by字段添加到SELECT字段中。
+    year_id,
+    month_id,
+    country,
+    channel,
+    customer_name,
+    region,
+    province,
+    city,
+    store_type,
+    store_code
+ ORDER BY
+    Sales_Qty DESC
+&&
+
+    
+**问题示例**:
+查询店铺客流量traffic，以及客流量的同比/环比数值
+**描述**:
+查询某时间范围内的某些店铺的客流量数据，并且计算去年同比/上月环比/上周环比/前日环比的数值。注意：无法获取商品属性相关的信息。
+**名词解释**:
+客流量，也可以叫做traffic或者客量，人流。
+**SQL查询文示例**:
+ SELECT 
+    -- 此处添加group by字段，并且根据问题删减sum字段，只保留和问题相关字段。判断计算公式的除数为0时，则结果为0。
+    SUM(traffic) as traffic,  -- 客流量 
+    SUM(case when day_comp = 'Y' THEN traffic else 0 END) as traffic_Comp,  -- 参与比较的店铺客流量 
+    SUM(case when day_comp='Y' THEN lyd_traffic else 0 END) as traffic_Comp_LY, -- 参与比较的店铺去年同期的客流量 
+    SUM(case when day_comp = 'Y' THEN traffic else 0 END)/SUM(case when day_comp='Y' THEN lyd_traffic else 0 END)-1 as sales_traffic_comp_per , -- 参与比较的店铺客流量与去年同期的同比 
+    SUM(traffic)/SUM(lm_traffic)-1 as traffic_mom_per , -- 客流量与上月同期的环比 
+    SUM(traffic)/SUM(lw_traffic)-1 as traffic_wow_per , -- 客流量与上周同期的环比 
+    SUM(traffic)/SUM(ld_traffic)-1 as traffic_dod_per  -- 客流量与前日环比 
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+   --日期范围相关条件,根据问题删减条件。
+    year_id = 'yyyy'  -- 年份4位数字(YYYY),当前年份可使用to_char(current_timestamp, 'YYYY')
+    AND month_id = 'yyyymm'  -- 年份+月份6位数字(YYYYMM)
+    AND date_code ='YYYY-MM-DD' -- 年月日(YYYY-MM-DD)，当日可以使用to_char(CURRENT_DATE, 'YYYY-MM-DD')
+    --店铺相关条件,根据问题删减条件
+    AND country = '?' -- 国家英文名，中国用Mainland表示 
+    AND channel = '?' -- 渠道 
+    AND customer_name = '?' -- 经销商客户
+    AND region ='?' -- 地区，例如north/south/east/west 
+    AND province = '?' -- 省份英文名 
+    AND city = '?' -- 城市英文名
+    AND store_type = '?' -- 店铺类型（BH/FH）
+    AND store_code= '?' -- 门店号 
+    AND store_name like '%?%'-- 门店名称,使用like模糊查询
+ GROUP BY 
+    -- 根据问题选择合适的group by字段,并且将group by字段添加到SELECT字段中。
+    year_id,
+    month_id,
+    country,
+    channel,
+    customer_name,
+    region,
+    province,
+    city,
+    store_type,
+    store_code
+ ORDER BY
+    traffic DESC
+&&
+
+
+**问题示例**:
+查询每件销售均价(ASP)，以及ASP的同比/环比数值
+**描述**:
+查询某时间范围内的某些店铺的ASP(每件均价)，并且计算去年同比/上月环比/上周环比/前日环比的数值。注意：无法获取商品属性相关的信息。
+**名词解释**:
+ASP:每件均价=销售总额/销售件数
+**SQL查询文示例**:
+ SELECT 
+    -- 此处添加group by字段，并且根据问题删减sum字段，只保留和问题相关字段。判断计算公式的除数为0时，则结果为0。
+    SUM(amt_net)/SUM(qty) as ASP, -- 每件均价 
+    SUM(case when day_comp='Y' THEN amt_net else 0 END)/SUM(case when day_comp = 'Y' THEN qty else 0 END) as ASP_Comp , -- 参与比较的店铺销售的每件均价
+    SUM(case when day_comp='Y' THEN lyd_amt_net else 0 END)/SUM(case when day_comp='Y' THEN lyd_qty else 0 END) as ASP_LY_Comp , -- 参与比较的店铺去年同期的销售的每件均价
+    SUM(case when day_comp='Y' THEN amt_net else 0 END)/SUM(case when day_comp = 'Y' THEN qty else 0 END)/(SUM(case when day_comp='Y' THEN lyd_amt_net else 0 END)/SUM(case when day_comp='Y' THEN lyd_qty else 0 END)) -1 as ASP_Comp_per , -- 参与比较的店铺ASP与去年的同比 
+    SUM(amt_net)/SUM(qty)/(SUM(lm_amt_net)/SUM(lm_qty))-1 as asp_mom_per , -- ASP与上月同期的环比 
+    SUM(amt_net)/SUM(qty)/(SUM(lw_amt_net)/SUM(lw_qty))-1 as asp_wow_per , -- ASP与上周同期的环比 
+    SUM(amt_net)/SUM(qty)/(SUM(ld_amt_net)/SUM(ld_qty))-1 as asp_dod_per  -- ASP与前日环比 
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+   --日期范围相关条件,根据问题删减条件。
+    year_id = 'yyyy'  -- 年份4位数字(YYYY),当前年份可使用to_char(current_timestamp, 'YYYY')
+    AND month_id = 'yyyymm'  -- 年份+月份6位数字(YYYYMM)
+    AND date_code ='YYYY-MM-DD' -- 年月日(YYYY-MM-DD)，当日可以使用to_char(CURRENT_DATE, 'YYYY-MM-DD')
+    --店铺相关条件,根据问题删减条件
+    AND country = '?' -- 国家英文名，中国用Mainland表示 
+    AND channel = '?' -- 渠道 
+    AND customer_name = '?' -- 经销商客户
+    AND region ='?' -- 地区，例如north/south/east/west 
+    AND province = '?' -- 省份英文名 
+    AND city = '?' -- 城市英文名
+    AND store_type = '?' -- 店铺类型（BH/FH）
+    AND store_code= '?' -- 门店号 
+    AND store_name like '%?%'-- 门店名称,使用like模糊查询
+ GROUP BY 
+    -- 根据问题选择合适的group by字段,并且将group by字段添加到SELECT字段中。
+    year_id,
+    month_id,
+    country,
+    channel,
+    customer_name,
+    region,
+    province,
+    city,
+    store_type,
+    store_code
+ ORDER BY
+    ASP DESC
+&&
+
+**问题示例**:
+查询每单交易均价(ATV)，以及ATV的同比/环比数值
+**描述**:
+查询某时间范围内的某些店铺的每单交易均价(ATV)，并且计算去年同比/上月环比/上周环比/前日环比的数值。注意：无法获取商品属性相关的信息。
+**名词解释**:
+ATV:也可以称为AOV，每件均价=销售总额/销售交易笔数
+**SQL查询文示例**:
+ SELECT 
+    -- 此处添加group by字段，并且根据问题删减sum字段，只保留和问题相关字段。判断计算公式的除数为0时，则结果为0。
+    SUM(amt_net)/SUM(trans) as ATV , -- 每单均价 
+    SUM(case when day_comp='Y' THEN amt_net else 0 END)/SUM(case when day_comp='Y' THEN trans else 0 END) as ATV_comp , --  参与比较的店铺销售的每单均价
+    SUM(case when day_comp='Y' THEN lyd_amt_net else 0 END)/SUM(case when day_comp='Y' THEN lyd_trans else 0 END) as ATV_LY_Comp, -- 参与比较的店铺去年同期的销售的每单均价 
+    SUM(case when day_comp='Y' THEN amt_net else 0 END)/SUM(case when day_comp='Y' THEN trans else 0 END)/(SUM(case when day_comp='Y' THEN lyd_amt_net else 0 END)/SUM(case when day_comp='Y' THEN lyd_trans else 0 END))-1 as ATV_Comp_per,-- 参与比较的店铺ATV(每单均价)与去年的同比 
+    --ASP环比
+    SUM(amt_net)/SUM(trans)/(SUM(lm_amt_net)/SUM(lm_trans))-1 as atv_mom_per , -- ATV与上月同期的环比 
+    SUM(amt_net)/SUM(trans)/(SUM(lw_amt_net)/SUM(lw_trans))-1 as atv_wow_per , -- ATV与上周同期的环比 
+    SUM(amt_net)/SUM(trans)/(SUM(ld_amt_net)/SUM(ld_trans))-1 as atv_dod_per  -- ATV与前日环比 
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+   --日期范围相关条件,根据问题删减条件。
+    year_id = 'yyyy'  -- 年份4位数字(YYYY),当前年份可使用to_char(current_timestamp, 'YYYY')
+    AND month_id = 'yyyymm'  -- 年份+月份6位数字(YYYYMM)
+    AND date_code ='YYYY-MM-DD' -- 年月日(YYYY-MM-DD)，当日可以使用to_char(CURRENT_DATE, 'YYYY-MM-DD')
+    --店铺相关条件,根据问题删减条件
+    AND country = '?' -- 国家英文名，中国用Mainland表示 
+    AND channel = '?' -- 渠道 
+    AND customer_name = '?' -- 经销商客户
+    AND region ='?' -- 地区，例如north/south/east/west 
+    AND province = '?' -- 省份英文名 
+    AND city = '?' -- 城市英文名
+    AND store_type = '?' -- 店铺类型（BH/FH）
+    AND store_code= '?' -- 门店号 
+    AND store_name like '%?%'-- 门店名称,使用like模糊查询
+ GROUP BY 
+    -- 根据问题选择合适的group by字段,并且将group by字段添加到SELECT字段中。
+    year_id,
+    month_id,
+    country,
+    channel,
+    customer_name,
+    region,
+    province,
+    city,
+    store_type,
+    store_code
+ ORDER BY
+    ATV DESC
+&&
+
+**问题示例**:
+查询客流转化率CR，以及CR的同比/环比数值
+**描述**:
+查询某时间范围内的某些店铺的客流转化率CR，并且计算去年同比/上月环比/上周环比/前日环比的数值。注意：无法获取商品属性相关的信息。
+**名词解释**:
+CR:客流转化率=销售交易笔数/客流量
+**SQL查询文示例**:
+ SELECT 
+    -- 此处添加group by字段，并且根据问题删减sum字段，只保留和问题相关字段。判断计算公式的除数为0时，则结果为0。
+    SUM(case when traffic is not null  THEN trans else 0 END)/SUM(traffic) as CR , -- 客流转化率CR 
+    SUM(case when traffic is not null and day_comp='Y' THEN trans else 0 END)/SUM(case when day_comp='Y' THEN traffic else 0 END) as CR_comp , -- 参与比较的店铺的客流转化率CR
+    SUM(case when traffic is not null and day_comp='Y' THEN lyd_trans else 0 END)/SUM(case when day_comp='Y' THEN lyd_traffic else 0 END) as CR_LY_Comp , -- 参与比较的店铺的去年同期的客流转化率CR
+    SUM(case when traffic is not null and day_comp='Y' THEN trans else 0 END)/SUM(case when day_comp='Y' THEN traffic else 0 END)/(SUM(case when traffic is not null and day_comp='Y' THEN lyd_trans else 0 END)/SUM(case when day_comp='Y' THEN lyd_traffic else 0 END)) -1 as CR_comp_per ,-- 参与比较的店铺客流转化率CR与去年的同比 
+    --CR环比
+    SUM(case when traffic is not null  THEN trans else 0 END)/SUM(traffic)/(SUM(case when lm_traffic is not null  THEN lm_trans else 0 END)/SUM(lm_traffic))-1 as cr_mom_per , -- CR与上月同期的环比 
+    SUM(case when traffic is not null  THEN trans else 0 END)/SUM(traffic)/(SUM(case when lw_traffic is not null  THEN lw_trans else 0 END)/SUM(lw_traffic))-1 as cr_wow_per , -- CR与上周同期的环比 
+    SUM(case when traffic is not null  THEN trans else 0 END)/SUM(traffic)/(SUM(case when ld_traffic is not null  THEN ld_trans else 0 END)/SUM(ld_traffic))-1 as cr_dod_per  -- CR与前日环比 
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+   --日期范围相关条件,根据问题删减条件。
+    year_id = 'yyyy'  -- 年份4位数字(YYYY),当前年份可使用to_char(current_timestamp, 'YYYY')
+    AND month_id = 'yyyymm'  -- 年份+月份6位数字(YYYYMM)
+    AND date_code ='YYYY-MM-DD' -- 年月日(YYYY-MM-DD)，当日可以使用to_char(CURRENT_DATE, 'YYYY-MM-DD')
+    --店铺相关条件,根据问题删减条件
+    AND country = '?' -- 国家英文名，中国用Mainland表示 
+    AND channel = '?' -- 渠道 
+    AND customer_name = '?' -- 经销商客户
+    AND region ='?' -- 地区，例如north/south/east/west 
+    AND province = '?' -- 省份英文名 
+    AND city = '?' -- 城市英文名
+    AND store_type = '?' -- 店铺类型（BH/FH）
+    AND store_code= '?' -- 门店号 
+    AND store_name like '%?%'-- 门店名称,使用like模糊查询
+ GROUP BY 
+    -- 根据问题选择合适的group by字段,并且将group by字段添加到SELECT字段中。
+    year_id,
+    month_id,
+    country,
+    channel,
+    customer_name,
+    region,
+    province,
+    city,
+    store_type,
+    store_code
+ ORDER BY
+    CR DESC
+&&
+
+**问题示例**:
+查询每单平均销售件数UPT，以及UPT的同比/环比数值
+**描述**:
+查询某时间范围内的某些店铺的客流转化率CR，并且计算去年同比/上月环比/上周环比/前日环比的数值。注意：无法获取商品属性相关的信息。
+**名词解释**:
+UPT:每单平均件数=销售件数/销售交易笔数
+**SQL查询文示例**:
+ SELECT 
+    -- 此处添加group by字段，并且根据问题删减sum字段，只保留和问题相关字段。判断计算公式的除数为0时，则结果为0。
+    SUM(qty)/SUM(trans) as UPT ,-- 每单平均件数
+    SUM(case when day_comp = 'Y' THEN qty else 0 END)/SUM(case when day_comp = 'Y' THEN trans else 0 END) as UPT_comp, -- 参与比较的店铺每单平均件数
+    SUM(case when day_comp='Y' THEN lyd_qty else 0 END)/SUM(case when day_comp='Y' THEN lyd_trans else 0 END) as UPT_comp_LY,-- 参与比较的店铺去年同期的每单平均件数
+    SUM(case when day_comp = 'Y' THEN qty else 0 END)/SUM(case when day_comp = 'Y' THEN trans else 0 END)/(SUM(case when day_comp='Y' THEN lyd_qty else 0 END)/SUM(case when day_comp='Y' THEN lyd_trans else 0 END)) -1 as UPT_comp_per ,-- 参与比较的店铺每单平均件数与去年的同比 
+    --UPT环比
+    SUM(qty)/SUM(trans)/(SUM(lm_qty)/SUM(lm_trans))-1 as UPT_mom_per , -- UPT与上月同期的环比 
+    SUM(qty)/SUM(trans)/(SUM(lw_qty)/SUM(lw_trans))-1 as UPT_wow_per , -- UPT与上周同期的环比 
+    SUM(qty)/SUM(trans)/(SUM(ld_qty)/SUM(ld_trans))-1 as UPT_dod_per  -- UPT与前日环比 
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+   --日期范围相关条件,根据问题删减条件。
+    year_id = 'yyyy'  -- 年份4位数字(YYYY),当前年份可使用to_char(current_timestamp, 'YYYY')
+    AND month_id = 'yyyymm'  -- 年份+月份6位数字(YYYYMM)
+    AND date_code ='YYYY-MM-DD' -- 年月日(YYYY-MM-DD)，当日可以使用to_char(CURRENT_DATE, 'YYYY-MM-DD')
+    --店铺相关条件,根据问题删减条件
+    AND country = '?' -- 国家英文名，中国用Mainland表示 
+    AND channel = '?' -- 渠道 
+    AND customer_name = '?' -- 经销商客户
+    AND region ='?' -- 地区，例如north/south/east/west 
+    AND province = '?' -- 省份英文名 
+    AND city = '?' -- 城市英文名
+    AND store_type = '?' -- 店铺类型（BH/FH）
+    AND store_code= '?' -- 门店号 
+    AND store_name like '%?%'-- 门店名称,使用like模糊查询
+ GROUP BY 
+    -- 根据问题选择合适的group by字段,并且将group by字段添加到SELECT字段中。
+    year_id,
+    month_id,
+    country,
+    channel,
+    customer_name,
+    region,
+    province,
+    city,
+    store_type,
+    store_code
+ ORDER BY
+    UPT DESC
+&&
+
+**问题示例**:
+查询F-YTD的各项指标（销售额/销售件数/交易笔数/客流量/ASP/ATV/CR/UPT）的达成率
+**描述**:
+查询某时间范围内的某些店铺的目标销售的达成率，并且计算去年同比/上月环比/上周环比/前日环比的数值。注意：无法获取商品属性相关的信息。
+**名词解释**:
+达成率:简称ACH，达成率=实际数字/目标数字-1。
+F-YTD：财年。当前日期大于4月1日时，取4月1日到当前的日期范围。当前日期小于4月1日时，取去年的4月1日到当前的日期范围。
+**SQL查询文示例**:
+ SELECT 
+    -- 此处添加group by字段，并且根据问题删减sum字段，只保留和问题相关字段。判断计算公式的除数为0时，则结果为0。
+    case when SUM(amt_net_target_f1) = 0 then 0 else SUM(amt_net)/SUM(amt_net_target_f1)-1 END as amt_ach,-- F-YTD的销售额达成率 
+    case when SUM(qty_target_f1) = 0 then 0 else SUM(qty)/SUM(qty_target_f1)-1 END as qty_ach, -- F-YTD的销售件数达成率
+    case when SUM(trans_target_f1) = 0 then 0 else SUM(trans)/SUM(trans_target_f1)-1 END as trans_ach, -- F-YTD的交易笔数达成率 
+    case when SUM(traffic_target_f1) = 0 then 0 else SUM(traffic)/SUM(traffic_target_f1)-1 END as traffic_ach, -- F-YTD的客流量达成率
+    case when SUM(ASP_TARGET_F1) = 0 then 0 else SUM(amt_net)/SUM(qty)/SUM(ASP_TARGET_F1)-1 END as asp_ach, -- F-YTD的每件均价ASP达成率
+    case when SUM(ATV_TARGET_F1) = 0 then 0 else SUM(amt_net)/SUM(trans)/SUM(ATV_TARGET_F1)-1  END as atv_ach , -- F-YTD的每单交易均价ATV达成率
+    case when SUM(CR_TARGET_F1) = 0 then 0 else SUM(case when traffic is not null  THEN trans else 0 END)/SUM(traffic)/SUM(CR_TARGET_F1)-1  END as cr_ach , -- F-YTD的客流转化率CR 达成率
+    case when SUM(UPT_TARGET_F1) = 0 then 0 else SUM(qty)/SUM(trans)/SUM(UPT_TARGET_F1)-1  END as upt_ach  -- F-YTD的每单平均件数UPT达成率
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+    --日期范围相关条件,根据问题删减条件。
+    year_id = 'yyyy'  -- 年份4位数字(YYYY),当前年份可使用to_char(current_timestamp, 'YYYY')
+    AND month_id = 'yyyymm'  -- 年份+月份6位数字(YYYYMM)
+    AND date_code ='YYYY-MM-DD' -- 年月日(YYYY-MM-DD)，当日可以使用to_char(CURRENT_DATE, 'YYYY-MM-DD')
+    --店铺相关条件,根据问题删减条件
+    AND country = '?' -- 国家英文名，中国用Mainland表示 
+    AND channel = '?' -- 渠道 
+    AND customer_name = '?' -- 经销商客户
+    AND region ='?' -- 地区，例如north/south/east/west 
+    AND province = '?' -- 省份英文名 
+    AND city = '?' -- 城市英文名
+    AND store_type = '?' -- 店铺类型（BH/FH）
+    AND store_code= '?' -- 门店号 
+    AND store_name like '%?%'-- 门店名称,使用like模糊查询
+ GROUP BY 
+    -- 根据问题选择合适的group by字段,并且将group by字段添加到SELECT字段中。
+    year_id,
+    month_id,
+    country,
+    channel,
+    customer_name,
+    region,
+    province,
+    city,
+    store_type,
+    store_code
+&&
+
+**问题示例**:
+查询指标（销售额/销售件数/交易笔数/客流量/ASP/ATV/CR/UPT）的达成率，（F-YTD以外的场合时使用）。
+**描述**:
+查询某时间范围内的某些店铺的目标销售及各项指标（销售件数/交易笔数/客流量/ASP/ATV/CR/UPT）的达成率，注意：无法获取商品属性相关的信息。
+非F-YTD时使用。
+**名词解释**:
+达成率:简称ACH，达成率=实际数字/目标数字-1。
+F-YTD：财年。当前日期大于4月1日时，取4月1日到当前的日期范围。当前日期小于4月1日时，取去年的4月1日到当前的日期范围。
+**SQL查询文示例**:
+ SELECT 
+    -- 此处添加group by字段，并且根据问题删减sum字段，只保留和问题相关字段。
+    case when SUM(amt_net_target) = 0 then 0 else SUM(amt_net)/SUM(amt_net_target)-1 END as amt_ach,-- 销售额达成率 
+    case when SUM(qty_target) = 0 then 0 else SUM(qty)/SUM(qty_target)-1 END as qty_ach, -- 销售件数达成率
+    case when SUM(trans_target) = 0 then 0 else SUM(trans)/SUM(trans_target)-1 END as trans_ach, -- 交易笔数达成率 
+    case when SUM(traffic_target) = 0 then 0 else SUM(traffic)/SUM(traffic_target)-1 END as traffic_ach, -- 客流量达成率
+    case when SUM(ASP_TARGET) = 0 then 0 else SUM(amt_net)/SUM(qty)/SUM(ASP_TARGET)-1 END as asp_ach, -- 每件均价ASP达成率
+    case when SUM(ATV_TARGET) = 0 then 0 else SUM(amt_net)/SUM(trans)/SUM(ATV_TARGET)-1  END as atv_ach , -- 每单交易均价ATV达成率
+    case when SUM(CR_TARGET) = 0 then 0 else SUM(case when traffic is not null  THEN trans else 0 END)/SUM(traffic)/SUM(CR_TARGET)-1  END as cr_ach , -- 客流转化率CR 达成率
+    case when SUM(UPT_TARGET) = 0 then 0 else SUM(qty)/SUM(trans)/SUM(UPT_TARGET)-1  END as upt_ach  -- 每单平均件数UPT达成率
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+   --日期范围相关条件,根据问题删减条件。
+    year_id = 'yyyy'  -- 年份4位数字(YYYY),当前年份可使用to_char(current_timestamp, 'YYYY')
+    AND month_id = 'yyyymm'  -- 年份+月份6位数字(YYYYMM)
+    AND date_code ='YYYY-MM-DD' -- 年月日(YYYY-MM-DD)，当日可以使用to_char(CURRENT_DATE, 'YYYY-MM-DD')
+    --店铺相关条件,根据问题删减条件
+    AND country = '?' -- 国家英文名，中国用Mainland表示 
+    AND channel = '?' -- 渠道 
+    AND customer_name = '?' -- 经销商客户
+    AND region ='?' -- 地区，例如north/south/east/west
+    AND province = '?' -- 省份英文名 
+    AND city = '?' -- 城市英文名
+    AND store_type = '?' -- 店铺类型（BH/FH）
+    AND store_code= '?' -- 门店号 
+    AND store_name like '%?%'-- 门店名称,使用like模糊查询
+ GROUP BY 
+    -- 根据问题选择合适的group by字段,并且将group by字段添加到SELECT字段中。
+    year_id,
+    month_id,
+    country,
+    channel,
+    customer_name,
+    region,
+    province,
+    city,
+    store_type,
+    store_code
+&&
+
+**问题示例**:
+查询店铺销售的折扣情况
+**描述**:
+可以按店铺属性筛选，查询某时间范围内的店铺的销售折扣情况，注意：无法获取商品属性相关的信息。
+**名词解释**:
+折扣discount，是指实际销售金额与原价（orig_price）的比值-1
+**数据表说明**:
+dm_fact_sales_chatbi：每日的每家店铺的销售数据的明细。
+**SQL查询文示例**:
+ SELECT 
+    -- 此处添加group by字段
+    SUM(amt)/SUM(orig_price)-1 as discount -- 折扣discount 
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+   --日期范围相关条件,根据问题删减条件。
+    year_id = 'yyyy'  -- 年份4位数字(YYYY),当前年份可使用to_char(current_timestamp, 'YYYY')
+    AND month_id = 'yyyymm'  -- 年份+月份6位数字(YYYYMM)
+    AND date_code ='YYYY-MM-DD' -- 年月日(YYYY-MM-DD)，当日可以使用to_char(CURRENT_DATE, 'YYYY-MM-DD')
+    --店铺相关条件,根据问题删减条件
+    AND country = '?' -- 国家英文名，中国用Mainland表示 
+    AND channel = '?' -- 渠道 
+    AND customer_name = '?' -- 经销商客户
+    AND region ='?' -- 地区，例如north/south/east/west 
+    AND province = '?' -- 省份英文名 
+    AND city = '?' -- 城市英文名
+    AND store_type = '?' -- 店铺类型（BH/FH）
+    AND store_code= '?' -- 门店号 
+    AND store_name like '%?%'-- 门店名称,使用like模糊查询
+ GROUP BY 
+    -- 根据问题选择合适的group by字段,并且将group by字段添加到SELECT字段中。
+    year_id,
+    month_id,
+    country,
+    channel,
+    customer_name,
+    region,
+    province,
+    city,
+    store_type,
+    store_code 
+ ORDER BY
+    discount DESC
+&&
+
+**问题示例**:
+查询店铺的商品的销售金额以及销售件数
+**描述**:
+可以按商品的属性（division/product name/gender等）筛选，按店铺的属性做筛选，查询某时间范围内的店铺的销售金额和销售件数。
+**数据表说明**:
+dm_fact_sales_sku_chatbi：每日的每家店铺的每个商品的销售件数和销售金额的数据明细。
+**SQL查询文示例**:
+ SELECT 
+    -- 此处添加group by字段，并且根据问题删减sum字段，只保留和问题相关字段。
+    SUM(qty) as total_qty, -- 销售件数 
+    SUM(amt) as total_amt -- 销售金额 
+ FROM 
+    dm_fact_sales_sku_chatbi 
+ WHERE 
+   --日期范围相关条件,根据问题删减条件。
+    year_id = 'yyyy'  -- 年份4位数字(YYYY),当前年份可使用to_char(current_timestamp, 'YYYY')
+    AND month_id = 'yyyymm'  -- 年份+月份6位数字(YYYYMM)
+	date_code ='YYYY-MM-DD' -- 销售日期,年月日(YYYY-MM-DD)
+    -- 店铺相关条件,根据问题删减条件。禁止使用不存在字段。
+    AND country = '?' -- 国家英文名，中国用Mainland表示 
+    AND channel = '?' -- 渠道 
+    AND customer_name = '?' -- 经销商客户
+    AND region ='?' -- 地区，例如north/south/east/west 
+    AND province = '?' -- 省份英文名 
+    AND store_type = '?' -- 店铺类型（BH/FH）
+    AND store_code= '?' -- 门店号 
+    AND store_name like '%?%'-- 门店名称,使用like模糊查询
+	-- 商品信息，根据问题删减条件:
+    AND style= '?'  -- 产品类型
+    AND division= '?' -- 商品类别 
+    AND gender like '%?%'  -- 商品适用性别,使用like模糊查询。
+    AND enduse like '%?%' -- 商品用途,使用like模糊查询。
+    AND silhouette like '%?%' -- 商品部位,使用like模糊查询。
+    AND sub_silhouette like '%?%' -- 商品部位细分
+    AND fit_type= '?' -- 商品松紧类型
+    AND material= '?' -- 商品款号,article 
+    AND product_name like '%?%' -- 商品名称,使用like模糊查询。
+ GROUP BY 
+    -- 根据问题选择合适的group by字段,并且将group by字段添加到SELECT字段中。
+    channel,
+    customer_name,
+    region,
+    province,
+    store_type,
+    division
+ ORDER BY
+    SUM(amt) DESC
+&&
+
+**问题示例**:
+查询店铺的商品的库存onhand信息
+**描述**:
+可以按商品的属性做筛选，按店铺的属性做筛选，查询某时间范围内的店铺的库存信息
+**名词解释**:
+以下内容是商品的属性：
+division-- 商品类别 ;
+gender -- 商品适用性别;
+material -- 商品款号,article ;
+product_name -- 商品名称 ;
+**数据表说明**:
+dm_fact_onhand_chatbi：每日的每家店铺的每个商品的库存件数和在途件数的数据明细。
+**SQL查询文示例**:
+ SELECT 
+    -- 此处添加group by字段，并且根据问题删减sum字段，只保留和问题相关字段。
+    sum(stock) as total_stock, -- 当日库存数量 
+    sum(stock_amt） as total_stock_amt , -- 当日库存商品的总价格
+    sum(intransit）as total_instransit, -- 当日在途的商品数量 
+    sum(intransit_amt) as total_intransit_amt -- 当日在途商品的总价格
+ FROM 
+    dm_fact_onhand_chatbi 
+ WHERE 
+   --日期范围：
+	date_code ='YYYY-MM-DD' -- 库存日期,年月日(YYYY-MM-DD)
+    --店铺相关条件,根据问题删减条件。禁止使用不存在字段。
+    AND country = '?' -- 国家英文名，中国用Mainland表示 
+    AND channel = '?' -- 渠道 
+    AND customer_name = '?' -- 经销商客户
+    AND region ='?' -- 地区，例如north/south/east/west 
+    AND province = '?' -- 省份英文名 
+    AND store_type = '?' -- 店铺类型（BH/FH）
+    AND store_code= '?' -- 门店号 
+	-- 商品信息，根据问题删减条件:
+    AND division= '?' -- 商品类别 
+    AND gender like '%?%'  -- 商品适用性别,使用like模糊查询。
+    AND material= '?' -- 商品款号,article 
+    AND product_name like '%?%' -- 商品名称,使用like模糊查询。
+ GROUP BY 
+    -- 根据问题选择合适的group by字段,并且将group by字段添加到SELECT字段中。
+    channel,
+    customer_name,
+    region,
+    province,
+    store_type,
+    division
+ ORDER BY
+    SUM(stock) DESC
+&&
+
+**问题示例**:
+查询日期的节假日信息
+**描述**:
+查询某日期的节假日信息，包括星期几是否是休息日。
+**表字段说明**:
+重要说明：dm_dim_holiday_chatbi只有3个字段date_code；week_day；holiday_flag。所有国家地区的假期都认为是一样的。
+**SQL查询文示例**:
+ SELECT 
+    date_code, -- 日期
+    week_day, -- 星期几 
+    holiday_flag -- Y是holiday;N不是holiday; 
+ FROM 
+    dm_dim_holiday_chatbi 
+ WHERE 
+    -- 只有date_code 一个条件，禁止使用其他字段。
+    date_code ='YYYY-MM-DD' -- 年月日(YYYY-MM-DD)，当日可以使用to_char(CURRENT_DATE, 'YYYY-MM-DD')
+&&

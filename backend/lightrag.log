@@ -1,0 +1,342 @@
+2025-02-02 22:57:44,593 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-02 22:57:44,617 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-02 22:57:44,617 - lightrag - INFO - Load KV llm_response_cache with 0 data
+2025-02-02 22:57:44,617 - lightrag - INFO - Load KV full_docs with 0 data
+2025-02-02 22:57:44,617 - lightrag - INFO - Load KV text_chunks with 0 data
+2025-02-02 22:57:44,698 - lightrag - INFO - Loaded document status storage with 0 records
+2025-02-02 22:57:44,700 - lightrag - INFO - Processing 1 new unique documents
+2025-02-02 22:57:45,093 - lightrag - INFO - Inserting 26 vectors to chunks
+2025-02-02 23:05:47,624 - lightrag - INFO - Inserting 106 vectors to entities
+2025-02-02 23:05:53,218 - lightrag - INFO - Inserting 26 vectors to relationships
+2025-02-02 23:05:53,673 - lightrag - INFO - Writing graph with 119 nodes, 26 edges
+2025-02-02 23:05:53,765 - lightrag - INFO - Query: WTD sales vs Target?, top_k: 60, cosine: 0.2
+2025-02-02 23:05:53,773 - lightrag - INFO - Truncate 26 to 3 chunks
+2025-02-02 23:06:11,581 - lightrag - INFO - Using hybrid mode for query processing
+2025-02-02 23:06:11,675 - lightrag - INFO - Query: WTD sales, Target, top_k: 60, cosine: 0.2
+2025-02-02 23:06:11,814 - lightrag - INFO - Query: Sales comparison, Target performance, Performance analysis, top_k: 60, cosine: 0.2
+2025-02-02 23:06:11,830 - lightrag - INFO - Global query uses 40 entites, 26 relations, 3 text units
+2025-02-02 23:06:11,837 - lightrag - INFO - Local query uses 60 entites, 16 relations, 3 text units
+2025-02-03 00:10:57,975 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-03 00:10:58,038 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-03 00:10:58,045 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-03 00:10:58,046 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-03 00:10:58,047 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-03 00:10:58,127 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-03 00:10:58,134 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-03 00:10:58,135 - lightrag - INFO - Creating a new event loop in main thread.
+2025-02-03 00:13:19,048 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-03 00:13:19,071 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-03 00:13:19,079 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-03 00:13:19,079 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-03 00:13:19,080 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-03 00:13:19,160 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-03 00:13:19,167 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-03 00:13:46,691 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-03 00:13:46,715 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-03 00:13:46,723 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-03 00:13:46,724 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-03 00:13:46,724 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-03 00:13:46,804 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-03 00:13:46,812 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-03 00:14:17,515 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-03 00:14:17,539 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-03 00:14:17,546 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-03 00:14:17,547 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-03 00:14:17,547 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-03 00:14:17,625 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-03 00:14:17,633 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-03 00:16:40,812 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-03 00:16:40,836 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-03 00:16:40,843 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-03 00:16:40,844 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-03 00:16:40,845 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-03 00:16:40,925 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-03 00:16:40,932 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-03 00:17:03,070 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-03 00:17:03,093 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-03 00:17:03,100 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-03 00:17:03,101 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-03 00:17:03,102 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-03 00:17:03,183 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-03 00:17:03,190 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-03 00:17:52,857 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-03 00:17:52,923 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-03 00:17:52,930 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-03 00:17:52,931 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-03 00:17:52,932 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-03 00:17:53,017 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-03 00:17:53,025 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-03 00:17:53,025 - lightrag - INFO - Creating a new event loop in main thread.
+2025-02-03 00:17:58,984 - lightrag - INFO - Using hybrid mode for query processing
+2025-02-03 00:18:00,153 - lightrag - INFO - Query: WTD, MTD, QTD, YTD, Target, top_k: 60, cosine: 0.2
+2025-02-03 00:18:00,304 - lightrag - INFO - Query: Sales performance comparison, top_k: 60, cosine: 0.2
+2025-02-03 00:18:00,667 - lightrag - INFO - Global query uses 40 entites, 26 relations, 3 text units
+2025-02-03 00:18:00,672 - lightrag - INFO - Local query uses 60 entites, 15 relations, 3 text units
+2025-02-03 00:25:02,665 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-03 00:25:02,733 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-03 00:25:02,740 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-03 00:25:02,741 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-03 00:25:02,742 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-03 00:25:02,827 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-03 00:25:02,835 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-03 00:25:02,835 - lightrag - INFO - Creating a new event loop in main thread.
+2025-02-03 00:25:02,845 - lightrag - INFO - Using hybrid mode for query processing
+2025-02-03 00:25:04,039 - lightrag - INFO - Query: WTD, MTD, QTD, YTD, Target, top_k: 60, cosine: 0.2
+2025-02-03 00:25:04,177 - lightrag - INFO - Query: Sales performance comparison, top_k: 60, cosine: 0.2
+2025-02-03 00:25:04,545 - lightrag - INFO - Global query uses 40 entites, 26 relations, 3 text units
+2025-02-03 00:25:04,550 - lightrag - INFO - Local query uses 60 entites, 15 relations, 3 text units
+2025-02-03 00:25:31,195 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-03 00:25:31,196 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-03 00:25:31,215 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-03 00:25:31,217 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-03 00:25:31,219 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-03 00:25:31,222 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-03 00:25:31,228 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-03 00:25:31,229 - lightrag - INFO - Creating a new event loop in main thread.
+2025-02-03 18:12:33,627 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-03 18:12:33,694 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-03 18:12:33,701 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-03 18:12:33,702 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-03 18:12:33,703 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-03 18:12:33,784 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-03 18:12:33,791 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-03 18:12:33,792 - lightrag - INFO - Creating a new event loop in main thread.
+2025-02-03 18:12:35,263 - lightrag - WARNING - low_level_keywords is empty, switching from hybrid mode to global mode
+2025-02-03 18:12:35,263 - lightrag - INFO - Using global mode for query processing
+2025-02-03 18:12:36,455 - lightrag - INFO - Query: Hello, Greetings, Social interaction, top_k: 60, cosine: 0.2
+2025-02-03 18:12:36,842 - lightrag - INFO - Global query uses 40 entites, 26 relations, 3 text units
+2025-02-03 18:16:24,692 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-03 18:16:24,693 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-03 18:16:24,712 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-03 18:16:24,713 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-03 18:16:24,715 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-03 18:16:24,719 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-03 18:16:24,725 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-03 18:16:24,725 - lightrag - INFO - Creating a new event loop in main thread.
+2025-02-03 18:16:24,735 - lightrag - WARNING - low_level_keywords is empty, switching from hybrid mode to global mode
+2025-02-03 18:16:24,736 - lightrag - INFO - Using global mode for query processing
+2025-02-03 18:16:24,793 - lightrag - INFO - Query: Hello, Greetings, Social interaction, top_k: 60, cosine: 0.2
+2025-02-03 18:16:24,817 - lightrag - INFO - Global query uses 40 entites, 26 relations, 3 text units
+2025-02-03 20:54:59,854 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-03 20:54:59,856 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-03 20:54:59,875 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-03 20:54:59,876 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-03 20:54:59,877 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-03 20:54:59,882 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-03 20:54:59,887 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-03 20:54:59,887 - lightrag - INFO - Creating a new event loop in main thread.
+2025-02-03 20:55:12,863 - lightrag - INFO - Using hybrid mode for query processing
+2025-02-03 20:55:14,027 - lightrag - INFO - Query: Deforestation, Biodiversity loss, Ecosystem disruption, Species extinction, top_k: 60, cosine: 0.2
+2025-02-03 20:55:14,154 - lightrag - INFO - Query: Environmental consequences, Deforestation, Biodiversity, top_k: 60, cosine: 0.2
+2025-02-03 20:55:14,176 - lightrag - INFO - Global query uses 40 entites, 26 relations, 3 text units
+2025-02-03 20:55:14,183 - lightrag - INFO - Local query uses 60 entites, 18 relations, 4 text units
+2025-02-04 00:30:18,689 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-04 00:30:18,691 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-04 00:30:18,707 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-04 00:30:18,708 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-04 00:30:18,710 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-04 00:30:18,714 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-04 00:30:18,719 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-04 00:30:18,719 - lightrag - INFO - Creating a new event loop in main thread.
+2025-02-04 00:30:18,730 - lightrag - INFO - Using hybrid mode for query processing
+2025-02-04 00:30:19,927 - lightrag - INFO - Query: Deforestation, Biodiversity loss, Ecosystem disruption, Species extinction, top_k: 60, cosine: 0.2
+2025-02-04 00:30:20,061 - lightrag - INFO - Query: Environmental consequences, Deforestation, Biodiversity, top_k: 60, cosine: 0.2
+2025-02-04 00:30:20,075 - lightrag - INFO - Global query uses 40 entites, 26 relations, 3 text units
+2025-02-04 00:30:20,082 - lightrag - INFO - Local query uses 60 entites, 18 relations, 4 text units
+2025-02-04 00:46:10,579 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-04 00:46:10,580 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-04 00:46:10,598 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-04 00:46:10,599 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-04 00:46:10,601 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-04 00:46:10,606 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-04 00:46:10,611 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-04 00:46:10,612 - lightrag - INFO - Creating a new event loop in main thread.
+2025-02-04 00:46:10,622 - lightrag - INFO - Using hybrid mode for query processing
+2025-02-04 00:46:11,874 - lightrag - INFO - Query: Deforestation, Biodiversity loss, Ecosystem disruption, Species extinction, top_k: 60, cosine: 0.2
+2025-02-04 00:46:12,006 - lightrag - INFO - Query: Environmental consequences, Deforestation, Biodiversity, top_k: 60, cosine: 0.2
+2025-02-04 00:46:12,029 - lightrag - INFO - Global query uses 40 entites, 26 relations, 3 text units
+2025-02-04 00:46:12,035 - lightrag - INFO - Local query uses 60 entites, 18 relations, 4 text units
+2025-02-04 00:52:00,238 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-04 00:52:00,240 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-04 00:52:00,259 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-04 00:52:00,260 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-04 00:52:00,262 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-04 00:52:00,266 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-04 00:52:00,272 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-04 00:52:00,272 - lightrag - INFO - Creating a new event loop in main thread.
+2025-02-04 00:52:00,282 - lightrag - INFO - Using hybrid mode for query processing
+2025-02-04 00:52:01,460 - lightrag - INFO - Query: Deforestation, Biodiversity loss, Ecosystem disruption, Species extinction, top_k: 60, cosine: 0.2
+2025-02-04 00:52:01,591 - lightrag - INFO - Query: Environmental consequences, Deforestation, Biodiversity, top_k: 60, cosine: 0.2
+2025-02-04 00:52:01,607 - lightrag - INFO - Global query uses 40 entites, 26 relations, 3 text units
+2025-02-04 00:52:01,613 - lightrag - INFO - Local query uses 60 entites, 18 relations, 4 text units
+2025-02-04 00:55:28,317 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-04 00:55:28,318 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-04 00:55:28,334 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-04 00:55:28,336 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-04 00:55:28,337 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-04 00:55:28,342 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-04 00:55:28,347 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-04 00:55:28,347 - lightrag - INFO - Creating a new event loop in main thread.
+2025-02-04 00:55:28,358 - lightrag - INFO - Using hybrid mode for query processing
+2025-02-04 00:55:28,427 - lightrag - INFO - Query: Deforestation, Biodiversity loss, Ecosystem disruption, Species extinction, top_k: 60, cosine: 0.2
+2025-02-04 00:55:28,565 - lightrag - INFO - Query: Environmental consequences, Deforestation, Biodiversity, top_k: 60, cosine: 0.2
+2025-02-04 00:55:28,578 - lightrag - INFO - Global query uses 40 entites, 26 relations, 3 text units
+2025-02-04 00:55:28,584 - lightrag - INFO - Local query uses 60 entites, 18 relations, 4 text units
+2025-02-04 00:56:15,440 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-04 00:56:15,441 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-04 00:56:15,458 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-04 00:56:15,459 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-04 00:56:15,461 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-04 00:56:15,465 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-04 00:56:15,470 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-04 00:56:15,470 - lightrag - INFO - Creating a new event loop in main thread.
+2025-02-04 00:56:15,481 - lightrag - INFO - Using hybrid mode for query processing
+2025-02-04 00:56:15,539 - lightrag - INFO - Query: Deforestation, Biodiversity loss, Ecosystem disruption, Species extinction, top_k: 60, cosine: 0.2
+2025-02-04 00:56:15,697 - lightrag - INFO - Query: Environmental consequences, Deforestation, Biodiversity, top_k: 60, cosine: 0.2
+2025-02-04 00:56:15,719 - lightrag - INFO - Global query uses 40 entites, 26 relations, 3 text units
+2025-02-04 00:56:15,725 - lightrag - INFO - Local query uses 60 entites, 18 relations, 4 text units
+2025-02-04 00:57:19,507 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-04 00:57:19,509 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-04 00:57:19,528 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-04 00:57:19,529 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-04 00:57:19,530 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-04 00:57:19,535 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-04 00:57:19,540 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-04 00:57:19,540 - lightrag - INFO - Creating a new event loop in main thread.
+2025-02-04 00:57:19,550 - lightrag - INFO - Using hybrid mode for query processing
+2025-02-04 00:57:19,620 - lightrag - INFO - Query: Deforestation, Biodiversity loss, Ecosystem disruption, Species extinction, top_k: 60, cosine: 0.2
+2025-02-04 00:57:19,755 - lightrag - INFO - Query: Environmental consequences, Deforestation, Biodiversity, top_k: 60, cosine: 0.2
+2025-02-04 00:57:19,784 - lightrag - INFO - Global query uses 40 entites, 26 relations, 3 text units
+2025-02-04 00:57:19,792 - lightrag - INFO - Local query uses 60 entites, 18 relations, 4 text units
+2025-02-04 00:59:25,358 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-04 00:59:25,359 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-04 00:59:25,376 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-04 00:59:25,377 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-04 00:59:25,379 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-04 00:59:25,383 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-04 00:59:25,389 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-04 00:59:25,389 - lightrag - INFO - Creating a new event loop in main thread.
+2025-02-04 00:59:25,399 - lightrag - INFO - Using hybrid mode for query processing
+2025-02-04 00:59:25,470 - lightrag - INFO - Query: Deforestation, Biodiversity loss, Ecosystem disruption, Species extinction, top_k: 60, cosine: 0.2
+2025-02-04 00:59:25,618 - lightrag - INFO - Query: Environmental consequences, Deforestation, Biodiversity, top_k: 60, cosine: 0.2
+2025-02-04 00:59:25,646 - lightrag - INFO - Global query uses 40 entites, 26 relations, 3 text units
+2025-02-04 00:59:25,654 - lightrag - INFO - Local query uses 60 entites, 18 relations, 4 text units
+2025-02-04 01:01:53,427 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-04 01:01:53,428 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-04 01:01:53,445 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-04 01:01:53,446 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-04 01:01:53,447 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-04 01:01:53,451 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-04 01:01:53,457 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-04 01:01:53,457 - lightrag - INFO - Creating a new event loop in main thread.
+2025-02-04 01:01:53,479 - lightrag - INFO - Using hybrid mode for query processing
+2025-02-04 01:01:53,581 - lightrag - INFO - Query: Deforestation, Biodiversity loss, Ecosystem disruption, Species extinction, top_k: 60, cosine: 0.2
+2025-02-04 01:01:53,723 - lightrag - INFO - Query: Environmental consequences, Deforestation, Biodiversity, top_k: 60, cosine: 0.2
+2025-02-04 01:01:53,753 - lightrag - INFO - Global query uses 40 entites, 26 relations, 3 text units
+2025-02-04 01:01:53,760 - lightrag - INFO - Local query uses 60 entites, 18 relations, 4 text units
+2025-02-04 01:03:44,679 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-04 01:03:44,680 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-04 01:03:44,699 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-04 01:03:44,700 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-04 01:03:44,701 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-04 01:03:44,706 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-04 01:03:44,712 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-04 01:03:44,712 - lightrag - INFO - Creating a new event loop in main thread.
+2025-02-04 01:03:44,722 - lightrag - INFO - Using hybrid mode for query processing
+2025-02-04 01:03:44,789 - lightrag - INFO - Query: Deforestation, Biodiversity loss, Ecosystem disruption, Species extinction, top_k: 60, cosine: 0.2
+2025-02-04 01:03:44,921 - lightrag - INFO - Query: Environmental consequences, Deforestation, Biodiversity, top_k: 60, cosine: 0.2
+2025-02-04 01:03:44,934 - lightrag - INFO - Global query uses 40 entites, 26 relations, 3 text units
+2025-02-04 01:03:44,941 - lightrag - INFO - Local query uses 60 entites, 18 relations, 4 text units
+2025-02-04 01:06:19,247 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-04 01:06:19,315 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-04 01:06:19,322 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-04 01:06:19,323 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-04 01:06:19,324 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-04 01:06:19,408 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-04 01:06:19,416 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-04 01:06:19,416 - lightrag - INFO - Creating a new event loop in main thread.
+2025-02-04 01:06:19,417 - lightrag - INFO - Using hybrid mode for query processing
+2025-02-04 01:06:19,495 - lightrag - INFO - Query: Deforestation, Biodiversity loss, Ecosystem disruption, Species extinction, top_k: 60, cosine: 0.2
+2025-02-04 01:06:19,637 - lightrag - INFO - Query: Environmental consequences, Deforestation, Biodiversity, top_k: 60, cosine: 0.2
+2025-02-04 01:06:19,982 - lightrag - INFO - Global query uses 40 entites, 26 relations, 3 text units
+2025-02-04 01:06:19,987 - lightrag - INFO - Local query uses 60 entites, 18 relations, 4 text units
+2025-02-04 01:17:38,901 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-04 01:17:38,964 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-04 01:17:38,971 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-04 01:17:38,972 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-04 01:17:38,972 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-04 01:17:39,052 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-04 01:17:39,060 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-04 01:17:39,060 - lightrag - INFO - Creating a new event loop in main thread.
+2025-02-04 01:18:24,073 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-04 01:18:24,074 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-04 01:18:24,092 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-04 01:18:24,094 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-04 01:18:24,095 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-04 01:18:24,100 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-04 01:18:24,106 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-04 01:18:24,106 - lightrag - INFO - Creating a new event loop in main thread.
+2025-02-04 01:22:34,967 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-04 01:22:35,031 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-04 01:22:35,038 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-04 01:22:35,039 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-04 01:22:35,039 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-04 01:22:35,119 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-04 01:22:35,127 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-04 01:22:35,127 - lightrag - INFO - Creating a new event loop in main thread.
+2025-02-04 01:24:42,816 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-04 01:24:42,885 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-04 01:24:42,892 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-04 01:24:42,893 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-04 01:24:42,893 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-04 01:24:42,976 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-04 01:24:42,984 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-04 01:24:42,984 - lightrag - INFO - Creating a new event loop in main thread.
+2025-02-04 01:26:14,371 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-04 01:26:14,437 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-04 01:26:14,444 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-04 01:26:14,445 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-04 01:26:14,446 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-04 01:26:14,527 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-04 01:26:14,535 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-04 01:26:14,536 - lightrag - INFO - Creating a new event loop in main thread.
+2025-02-04 01:29:03,025 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-04 01:29:03,026 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-04 01:29:03,044 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-04 01:29:03,045 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-04 01:29:03,046 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-04 01:29:03,050 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-04 01:29:03,055 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-04 01:29:03,055 - lightrag - INFO - Creating a new event loop in main thread.
+2025-02-04 01:31:17,681 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-04 01:31:17,682 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-04 01:31:17,700 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-04 01:31:17,701 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-04 01:31:17,703 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-04 01:31:17,707 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-04 01:31:17,712 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-04 01:31:17,713 - lightrag - INFO - Creating a new event loop in main thread.
+2025-02-04 01:33:54,599 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-04 01:33:54,600 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-04 01:33:54,617 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-04 01:33:54,618 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-04 01:33:54,619 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-04 01:33:54,624 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-04 01:33:54,630 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-04 01:33:54,630 - lightrag - INFO - Creating a new event loop in main thread.
+2025-02-04 01:37:31,486 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-04 01:37:31,487 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-04 01:37:31,505 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-04 01:37:31,506 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-04 01:37:31,508 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-04 01:37:31,512 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-04 01:37:31,517 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-04 01:37:31,517 - lightrag - INFO - Creating a new event loop in main thread.
+2025-02-04 01:37:59,210 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-04 01:37:59,212 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-04 01:37:59,230 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-04 01:37:59,231 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-04 01:37:59,233 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-04 01:37:59,237 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-04 01:37:59,242 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-04 01:37:59,243 - lightrag - INFO - Creating a new event loop in main thread.
