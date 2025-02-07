@@ -382,3 +382,66 @@
 2025-02-07 03:16:42,320 - lightrag - INFO - Load KV text_chunks with 26 data
 2025-02-07 03:16:42,404 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
 2025-02-07 03:16:42,412 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-07 16:47:47,823 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-07 16:47:47,884 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-07 16:47:47,893 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-07 16:47:47,894 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-07 16:47:47,895 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-07 16:47:48,008 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-07 16:47:48,019 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-07 16:55:58,940 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-07 16:55:59,001 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-07 16:55:59,008 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-07 16:55:59,008 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-07 16:55:59,009 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-07 16:55:59,094 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-07 16:55:59,102 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-07 17:01:54,802 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-07 17:01:54,863 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-07 17:01:54,870 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-07 17:01:54,871 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-07 17:01:54,872 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-07 17:01:54,956 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-07 17:01:54,964 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-07 22:02:10,957 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-07 22:02:11,017 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-07 22:02:11,024 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-07 22:02:11,025 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-07 22:02:11,026 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-07 22:02:11,111 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-07 22:02:11,119 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-07 22:03:01,961 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-07 22:03:02,022 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-07 22:03:02,029 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-07 22:03:02,029 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-07 22:03:02,030 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-07 22:03:02,113 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-07 22:03:02,121 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-08 02:07:32,032 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-08 02:07:32,095 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-08 02:07:32,102 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-08 02:07:32,103 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-08 02:07:32,104 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-08 02:07:32,187 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-08 02:07:32,194 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-08 02:10:56,211 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-08 02:10:56,273 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-08 02:10:56,281 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-08 02:10:56,281 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-08 02:10:56,282 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-08 02:10:56,364 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-08 02:10:56,372 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-08 02:12:25,191 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-08 02:12:25,254 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-08 02:12:25,262 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-08 02:12:25,262 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-08 02:12:25,263 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-08 02:12:25,346 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-08 02:12:25,354 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-08 02:12:58,348 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-08 02:12:58,410 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-08 02:12:58,417 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-08 02:12:58,418 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-08 02:12:58,419 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-08 02:12:58,501 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-08 02:12:58,510 - lightrag - INFO - Loaded document status storage with 1 records

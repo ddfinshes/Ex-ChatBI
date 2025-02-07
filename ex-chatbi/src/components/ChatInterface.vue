@@ -7,7 +7,7 @@
         <el-main id="main">
           <div class="message-container">
             <div v-for="(msg, index) in messages" :key="index" :class="msg.type">
-              <pre v-if="msg.type === 'ai'" class="sql-code"><code>{{ extractSQL(msg.text) }}</code></pre>
+              <pre v-if="msg.type === 'ai'" class="sql-code"><code>{{ msg.text }}</code></pre>
               <p v-else class="message-text">{{ msg.text }}</p>
             </div>
           </div>

@@ -7,11 +7,14 @@ from lightrag_deepseek import my_lightrag
 import uvicorn  # FastAPI推荐的生产级服务器
 from typing import Dict, Any
 from pydantic import BaseModel, Field
+import re
+import logging
+from db.connect import excute_sql
 
 # 初始化FastAPI应用
 app = FastAPI(
     title="NL2BI Backend",
-    description="自然语言到BI系统的转换接口",
+    description="NL2BI系统的转换接口",
     version="1.0.0"
 )
 
@@ -27,8 +30,19 @@ app.add_middleware(
 # 初始化DeepSeek模型（保持与原始代码相同的初始化方式）
 # 注意：如果实际使用时需要保持模型实例，建议使用lifespan管理
 # llm = DeepSeek_Coder_LLM(mode_name_or_path="/root/...")
-class QueryRequest(BaseModel):
-    query: str = Field(..., min_length=1, example="显示季度销售额")  
+
+# 获取LLM response中SQL 代码部分
+def get_sql_code(sql_response):
+    # 定义正则表达式模式来匹配```sql```代码块
+    sql_pattern = r"```sql\n(.*?)\n```"
+
+    # 使用re.findall()提取所有SQL代码块
+    sql_code_blocks = re.findall(sql_pattern, sql_response, re.DOTALL)
+    sql_code_blocks = [f"```sql\n{sql_code}\n```" for sql_code in sql_code_blocks]
+    
+    
+    return sql_code_blocks
+
 
 @app.post("/api/query")
 async def query_handler(request: Dict[str, Any]):
@@ -42,7 +56,6 @@ async def query_handler(request: Dict[str, Any]):
     """
     try:
         # 参数提取与验证
-        print('*** user_query ***', request)
         user_query = request['query']
         
         if not user_query:
@@ -54,16 +67,24 @@ async def query_handler(request: Dict[str, Any]):
         # 构造LLM提示词
         llm_prompt = (
             f"Generate executable PostgreSQL code that correctly answers {user_query} "
-            f"based on {rag_response}. You only need to return the SQL section, "
-            "without any other text."
+            f"based on {rag_response}. "
         )
         
         # 调用LLM生成SQL
         sql_response = LLM(llm_prompt)
-        print('*** Generated SQL ***', sql_response)  # 生产环境建议使用logging
+        logging.info('*** Generated SQL ***', sql_response)
         
+        # 提取SQL代码块
+        sql_code_blocks = get_sql_code(sql_response)
+        # logging.info('*** SQL Code ***', sql_code_blocks)
+
+        # 执行SQL代码
+        excute_sql_res = excute_sql(sql_code_blocks[0].replace('```sql\n', '').replace('\n```', ''))
+        print('*** excute_sql_res ***', excute_sql_res)
+
+
         # 返回标准化响应
-        return {"response": sql_response}
+        return {"response": sql_code_blocks[0]}
     
     except Exception as e:
         # 异常处理与日志记录
