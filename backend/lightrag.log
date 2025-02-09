@@ -445,3 +445,31 @@
 2025-02-08 02:12:58,419 - lightrag - INFO - Load KV text_chunks with 26 data
 2025-02-08 02:12:58,501 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
 2025-02-08 02:12:58,510 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-08 15:35:50,831 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-08 15:35:50,892 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-08 15:35:50,899 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-08 15:35:50,900 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-08 15:35:50,901 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-08 15:35:50,981 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-08 15:35:50,989 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-08 19:59:32,009 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-08 19:59:32,072 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-08 19:59:32,079 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-08 19:59:32,080 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-08 19:59:32,080 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-08 19:59:32,164 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-08 19:59:32,172 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-08 20:56:58,784 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-08 20:56:58,848 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-08 20:56:58,855 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-08 20:56:58,856 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-08 20:56:58,857 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-08 20:56:58,943 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-08 20:56:58,951 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-08 20:58:29,090 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-08 20:58:29,091 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-08 20:58:29,109 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-08 20:58:29,110 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-08 20:58:29,112 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-08 20:58:29,115 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-08 20:58:29,121 - lightrag - INFO - Loaded document status storage with 1 records
