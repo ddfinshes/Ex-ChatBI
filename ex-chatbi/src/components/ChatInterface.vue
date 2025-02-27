@@ -80,98 +80,82 @@ import axios from "axios";
 import MarkdownRenderer from "./MarkdownRenderer.vue";
 import { useTabs } from "@/assets/ts/useTabs.ts";
 export default {
-  components: {
+components: {
     MarkdownRenderer,
   },
   data() {
     return {
-      // activeName: 'data', // 默认激活的 tab
+      activeName: 'data', // 默认激活的 tab
+      query: '', // 输入框的值
+      response: '', // 响应数据（如果需要的话）
       messages: {
         code: '',
-        data: '',
-        user: '' 
-      }
-  }
-},
-  setup() {
-    const query = ref("");
-    const response = ref("");
-
-
-    const { activeName, handleClick } = useTabs();
-
-    const extractSQL = (text) => {
+        data: { text: '', type: 'data', timestamp: '' },
+        user: { text: '', type: 'user', timestamp: '' },
+      },
+    };
+  },
+  methods: {
+    handleClick(tab) {
+      console.log('当前 tab:', tab.name); // tab 切换时的处理
+    },
+    extractSQL(text) {
       const sqlRegex = /```sql[\s\S]*?```/gis; // 提取SQL代码块的正则表达式
       const matches = text.match(sqlRegex);
       return matches
         ? matches
-            .map((match) => match.replace(/```sql|```/g, "").trim())
-            .join("\n")
-        : "No SQL code found";
-    };
-    const sendQuery = async () => {
-      if (!query.value) return;
-      const formattedText = query.value.replace(/\n/g, "<br>"); // 将换行符替换为 <br>
-      // messages.value.push({
-      //   text: formattedText,
-      //   type: "user",
-      //   timestamp: new Date().toLocaleTimeString(),
-      // });
-      this.messages["user"] = {
+            .map((match) => match.replace(/```sql|```/g, '').trim())
+            .join('\n')
+        : 'No SQL code found';
+    },
+    async sendQuery() {
+      if (!this.query) return;
+
+      const formattedText = this.query.replace(/\n/g, '<br>'); // 将换行符替换为 <br>
+      this.messages.user = {
         text: formattedText,
-        type: "user",
+        type: 'user',
         timestamp: new Date().toLocaleTimeString(),
       };
-      const currentQuery = query.value; // 保存当前的query值
-      query.value = ""; // 清空输入框
+
+      const currentQuery = this.query; // 保存当前的 query 值
+      this.query = ''; // 清空输入框
+
       try {
         const res = await axios.post(
-          "/api/query",
-          {
-            query: currentQuery, // 使用保存的query值
-          },
+          '/api/query',
+          { query: currentQuery },
           {
             headers: {
-              "Content-Type": "application/json", // 明确指定请求头
-              Accept: "application/json",
+              'Content-Type': 'application/json',
+              Accept: 'application/json',
             },
           }
         );
-        // const formattedResponse = res.data.response.replace(/\n/g, '<br>'); // 将响应中的换行符替换为 <br>
 
-        this.messages["code"] = res.data.response.code;
-        this.messages["data"] = {
-          text: res.data.response.data,
-          type: "data",
+        this.messages.code = res.data.response.code || '';
+        this.messages.data = {
+          text: res.data.response.data || '',
+          type: 'data',
           timestamp: new Date().toLocaleTimeString(),
         };
         console.log(this.messages.data.text);
-
-        // messages.value.push({
-        //   text: res.data.response.code,
-        //   type: "code",
-        //   timestamp: new Date().toLocaleTimeString(),
-        // });
-        // messages.value.push({
-        //   text: res.data.response.data,
-        //   type: "data",
-        //   timestamp: new Date().toLocaleTimeString(),
-        // });
       } catch (error) {
-        console.error("Error fetching response:", error);
+        console.error('Error fetching response:', error);
       }
-    };
-
-    const handleEnter = (event) => {
+    },
+    handleEnter(event) {
       if (event.shiftKey) {
-        return;
+        return; // 按 Shift + Enter 不触发发送
       } else {
-        event.preventDefault();
-        sendQuery();
+        event.preventDefault(); // 阻止默认的 Enter 换行
+        this.sendQuery(); // 调用发送方法
       }
-    };
-
-    return { query, response, sendQuery, extractSQL, handleEnter };
+    },
+  },
+  mounted() {
+    // 如果需要初始化数据，可以在这里添加逻辑
+    console.log('组件已挂载');
   },
 };
 </script>
