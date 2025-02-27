@@ -44,16 +44,43 @@
                 @tab-click="handleClick"
               >
                 <el-tab-pane label="data" name="data">
-                  <MarkdownRenderer
-                    class="message-text"
-                    :content="messages.data?.text || ''"
-                  />
+                  <!-- 动态生成表格 -->
+                  <table v-if="messages.data" class="result-table">
+                    <!-- 表头 -->
+                    <thead>
+                      <tr>
+                        <th
+                          v-for="(column, index) in messages.data.column"
+                          :key="index"
+                        >
+                          {{ column }}
+                        </th>
+                      </tr>
+                    </thead>
+                    <!-- 表格内容 -->
+                    <tbody>
+                      <tr
+                        v-for="(row, rowIndex) in messages.data.data"
+                        :key="rowIndex"
+                      >
+                        <td v-for="(cell, cellIndex) in row" :key="cellIndex">
+                          {{ cell }}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <!-- 如果没有数据，显示提示信息 -->
+                  <p v-else class="no-data">no data</p>
                 </el-tab-pane>
-                <el-tab-pane label="chart" name="chart"> Chart </el-tab-pane>
+                <el-tab-pane label="chart" name="chart">
+                   <!-- 柱状图、折线图和饼图 -->
+                   
+                   </el-tab-pane>
                 <el-tab-pane label="code" name="code">
                   <MarkdownRenderer
                     class="sql-code"
-                    :content="messages.code || ''"
+                    :content="messages.code?.text || ''"
                   />
                 </el-tab-pane>
               </el-tabs>
@@ -80,68 +107,74 @@ import axios from "axios";
 import MarkdownRenderer from "./MarkdownRenderer.vue";
 import { useTabs } from "@/assets/ts/useTabs.ts";
 export default {
-components: {
+  components: {
     MarkdownRenderer,
   },
   data() {
     return {
-      activeName: 'data', // 默认激活的 tab
-      query: '', // 输入框的值
-      response: '', // 响应数据（如果需要的话）
+      activeName: "data", // 默认激活的 tab
+      query: "", // 输入框的值
+      response: "", // 响应数据（如果需要的话）
       messages: {
-        code: '',
-        data: { text: '', type: 'data', timestamp: '' },
-        user: { text: '', type: 'user', timestamp: '' },
+        code: "",
+        data: {},
+        user: { text: "", type: "user", timestamp: "" },
       },
     };
   },
   methods: {
     handleClick(tab) {
-      console.log('当前 tab:', tab.name); // tab 切换时的处理
+      console.log("当前 tab:", tab.name); // tab 切换时的处理
     },
     extractSQL(text) {
       const sqlRegex = /```sql[\s\S]*?```/gis; // 提取SQL代码块的正则表达式
       const matches = text.match(sqlRegex);
       return matches
         ? matches
-            .map((match) => match.replace(/```sql|```/g, '').trim())
-            .join('\n')
-        : 'No SQL code found';
+            .map((match) => match.replace(/```sql|```/g, "").trim())
+            .join("\n")
+        : "No SQL code found";
+    },
+    chart() {
+
     },
     async sendQuery() {
       if (!this.query) return;
 
-      const formattedText = this.query.replace(/\n/g, '<br>'); // 将换行符替换为 <br>
+      const formattedText = this.query.replace(/\n/g, "<br>"); // 将换行符替换为 <br>
       this.messages.user = {
         text: formattedText,
-        type: 'user',
+        type: "user",
         timestamp: new Date().toLocaleTimeString(),
       };
 
       const currentQuery = this.query; // 保存当前的 query 值
-      this.query = ''; // 清空输入框
+      this.query = ""; // 清空输入框
 
       try {
         const res = await axios.post(
-          '/api/query',
+          "/api/query",
           { query: currentQuery },
           {
             headers: {
-              'Content-Type': 'application/json',
-              Accept: 'application/json',
+              "Content-Type": "application/json",
+              Accept: "application/json",
             },
           }
         );
 
-        this.messages.code = res.data.response.code || '';
-        this.messages.data = {
-          text: res.data.response.data || '',
-          type: 'data',
+        this.messages.code = {
+          text: res.data.response.code || "",
+          type: "code",
           timestamp: new Date().toLocaleTimeString(),
         };
-        console.log(this.messages.data.text);
+        this.messages.data = res.data.response.data; //字典类型
+        
+        // 处理chart
+        console.log(res.data.response['vis_tag'])
+        chart(res.data.response['vis_tag'])
       } catch (error) {
-        console.error('Error fetching response:', error);
+        console.error("Error fetching response:", error);
       }
     },
     handleEnter(event) {
@@ -155,7 +188,7 @@ components: {
   },
   mounted() {
     // 如果需要初始化数据，可以在这里添加逻辑
-    console.log('组件已挂载');
+    console.log("组件已挂载");
   },
 };
 </script>
@@ -281,5 +314,30 @@ components: {
 }
 .message-text {
   white-space: pre-line;
+}
+
+/* 为表格添加样式 */
+.result-table {
+  width: 100%; /* 确保表格占满容器宽度 */
+  border-collapse: collapse; /* 合并边框，避免双重边框 */
+}
+
+/* 为表头和单元格添加边框 */
+.result-table th,
+.result-table td {
+  border: 1px solid #dcdcdc; /* 设置边框颜色和样式 */
+  padding: 8px; /* 添加内边距，使内容不紧贴边框 */
+  text-align: left; /* 设置文本对齐方式 */
+}
+
+/* 为表头添加背景色*/
+.result-table th {
+  background-color: #f5f5f5; /* 表头背景色 */
+  font-weight: bold; /* 加粗表头文字 */
+}
+
+/* 为表格行添加悬停效果*/
+.result-table tbody tr:hover {
+  background-color: #fafafa; /* 鼠标悬停时的背景色 */
 }
 </style>

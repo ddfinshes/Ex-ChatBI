@@ -24,11 +24,20 @@ def excute_sql(query):
         conn = psycopg2.connect(database="chatbi", user="postgres", password="123456", host="127.0.0.1", port="5432")
         cursor = conn.cursor()
         cursor.execute(query)
+
+        # 获取列名
+        column_names = [desc[0] for desc in cursor.description]
+
+        # 获取数据
         rows = cursor.fetchall()
-        print("查询结果：")
+        print("数据库查询结果：")
         for row in rows:
             print(row)
-        return rows
+        result = {
+            "column": column_names,
+            "data": rows
+        }
+        return result
     
     except OperationalError as e:
         print(f"连接数据库失败: {e}")

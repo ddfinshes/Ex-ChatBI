@@ -1,7 +1,8 @@
 from fastapi import FastAPI, Body, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from models.llm_deepseck import DeepSeek_Coder_LLM
-from get_llm_deepseek import LLM
+from utils.get_llm_deepseek import LLM
+from utils.getVisTag import get_vis_tag
 
 # lightrag have error for import 
 # from lightrag_deepseek import my_lightrag
@@ -63,7 +64,7 @@ async def query_handler(request: Dict[str, Any]):
         
         # 知识库检索
         print("==========================my_lightrag========================================")
-        # rag_response = my_lightrag(user_query)
+        # sql_code = my_lightrag(user_query)
         sql_code = """
         ```sql
             SELECT
@@ -79,8 +80,18 @@ async def query_handler(request: Dict[str, Any]):
         excute_sql_output = excute_sql(sql_code.replace('```sql\n', '').replace('\n```', ''))
         final_response = {
             "code": sql_code,
-            "data": str(excute_sql_output),
+            "data": excute_sql_output,
         }
+
+        # chart准备数据
+        # 思路：将用户query和查询得到的数据给到LLM，让其推荐可视化的格式（柱状图、折线图、饼状图）
+        # user_query之后需要改成LLM理解过后的
+        user_query = "What is the sales MOM% for APAC EC?"
+        # vis_tag = get_vis_tag(user_query, excute_sql_output)
+        # 注意！！！！死数据
+        vis_tag = {"vis_tag":"bar chart"}
+        final_response['vis_tag'] = vis_tag['vis_tag']
+        
         # 构造LLM提示词
         # llm_prompt = (
         #     f"Generate executable PostgreSQL code that correctly answers {user_query} "
