@@ -45,15 +45,13 @@
               >
                 <el-tab-pane label="data" name="data">
                   <MarkdownRenderer
-                    
                     class="message-text"
-                    :content="messages.data || ''"
+                    :content="messages.data?.text || ''"
                   />
                 </el-tab-pane>
                 <el-tab-pane label="chart" name="chart"> Chart </el-tab-pane>
                 <el-tab-pane label="code" name="code">
                   <MarkdownRenderer
-                    
                     class="sql-code"
                     :content="messages.code || ''"
                   />
@@ -85,10 +83,20 @@ export default {
   components: {
     MarkdownRenderer,
   },
+  data() {
+    return {
+      // activeName: 'data', // 默认激活的 tab
+      messages: {
+        code: '',
+        data: '',
+        user: '' 
+      }
+  }
+},
   setup() {
     const query = ref("");
     const response = ref("");
-    const messages = ref({});
+
 
     const { activeName, handleClick } = useTabs();
 
@@ -101,7 +109,6 @@ export default {
             .join("\n")
         : "No SQL code found";
     };
-
     const sendQuery = async () => {
       if (!query.value) return;
       const formattedText = query.value.replace(/\n/g, "<br>"); // 将换行符替换为 <br>
@@ -110,11 +117,11 @@ export default {
       //   type: "user",
       //   timestamp: new Date().toLocaleTimeString(),
       // });
-      messages['user'] = {
+      this.messages["user"] = {
         text: formattedText,
         type: "user",
         timestamp: new Date().toLocaleTimeString(),
-      }
+      };
       const currentQuery = query.value; // 保存当前的query值
       query.value = ""; // 清空输入框
       try {
@@ -131,14 +138,14 @@ export default {
           }
         );
         // const formattedResponse = res.data.response.replace(/\n/g, '<br>'); // 将响应中的换行符替换为 <br>
-        
-        messages['code'] = res.data.response.code;
-        messages['data'] = {
+
+        this.messages["code"] = res.data.response.code;
+        this.messages["data"] = {
           text: res.data.response.data,
           type: "data",
           timestamp: new Date().toLocaleTimeString(),
-        }
-        console.log(messages.data.text);
+        };
+        console.log(this.messages.data.text);
 
         // messages.value.push({
         //   text: res.data.response.code,
@@ -164,7 +171,7 @@ export default {
       }
     };
 
-    return { query, response, sendQuery, messages, extractSQL, handleEnter };
+    return { query, response, sendQuery, extractSQL, handleEnter };
   },
 };
 </script>
