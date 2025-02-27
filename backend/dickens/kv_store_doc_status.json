@@ -6,5 +6,14 @@
     "created_at": "2025-02-02T22:57:44.700119",
     "updated_at": "2025-02-02T23:05:53.642627",
     "chunks_count": 26
+  },
+  "doc-5493bf640009df365cc23bc6acfddd99": {
+    "content_summary": "1**description**:\nQuery the achievement rate of sales within a certain period of time. The formula f...",
+    "content_length": 52294,
+    "status": "failed",
+    "created_at": "2025-02-13T16:37:34.643400",
+    "updated_at": "2025-02-13T16:37:35.064858",
+    "chunks_count": 56,
+    "error": "Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download"
   }
 }

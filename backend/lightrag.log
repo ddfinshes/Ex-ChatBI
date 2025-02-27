@@ -473,3 +473,567 @@
 2025-02-08 20:58:29,112 - lightrag - INFO - Load KV text_chunks with 26 data
 2025-02-08 20:58:29,115 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
 2025-02-08 20:58:29,121 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-11 22:57:55,767 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-11 22:57:55,830 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-11 22:57:55,837 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-11 22:57:55,837 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-11 22:57:55,838 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-11 22:57:55,922 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-11 22:57:55,930 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-13 16:37:34,516 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-13 16:37:34,541 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-13 16:37:34,548 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-13 16:37:34,549 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-13 16:37:34,550 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-13 16:37:34,634 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-13 16:37:34,642 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-13 16:37:34,643 - lightrag - INFO - Processing 1 new unique documents
+2025-02-13 16:37:35,050 - lightrag - INFO - Inserting 56 vectors to chunks
+2025-02-13 16:37:35,065 - lightrag - ERROR - Failed to process document doc-5493bf640009df365cc23bc6acfddd99: Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download
+Traceback (most recent call last):
+  File "/root/UIST2025/Ex-ChatBI/backend/LightRAG/lightrag/lightrag.py", line 477, in ainsert
+    raise e
+  File "/root/UIST2025/Ex-ChatBI/backend/LightRAG/lightrag/lightrag.py", line 433, in ainsert
+    await self.chunks_vdb.upsert(chunks)
+  File "/root/UIST2025/Ex-ChatBI/backend/LightRAG/lightrag/kg/nano_vector_db_impl.py", line 125, in upsert
+    embeddings_list = await asyncio.gather(*embedding_tasks)
+  File "/root/UIST2025/Ex-ChatBI/backend/LightRAG/lightrag/kg/nano_vector_db_impl.py", line 117, in wrapped_task
+    result = await self.embedding_func(batch)
+  File "/root/UIST2025/Ex-ChatBI/backend/LightRAG/lightrag/utils.py", line 136, in wait_func
+    result = await func(*args, **kwargs)
+  File "/root/UIST2025/Ex-ChatBI/backend/LightRAG/lightrag/utils.py", line 64, in __call__
+    return await self.func(*args, **kwargs)
+  File "/root/UIST2025/Ex-ChatBI/backend/LightRAG/lightrag/llm/ollama.py", line 157, in ollama_embed
+    data = ollama_client.embed(model=embed_model, input=texts)
+  File "/root/miniconda3/envs/langchain-chatbi/lib/python3.10/site-packages/ollama/_client.py", line 357, in embed
+    return self._request(
+  File "/root/miniconda3/envs/langchain-chatbi/lib/python3.10/site-packages/ollama/_client.py", line 178, in _request
+    return cls(**self._request_raw(*args, **kwargs).json())
+  File "/root/miniconda3/envs/langchain-chatbi/lib/python3.10/site-packages/ollama/_client.py", line 124, in _request_raw
+    raise ConnectionError(CONNECTION_ERROR_MESSAGE) from None
+ConnectionError: Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download
+
+2025-02-13 16:38:05,836 - lightrag - INFO - Logger initialized for working directory: ./dickens
+2025-02-13 16:38:05,861 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-13 16:38:05,868 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-13 16:38:05,869 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-13 16:38:05,870 - lightrag - INFO - Load KV text_chunks with 26 data
+2025-02-13 16:38:05,952 - lightrag - INFO - Loaded graph from ./dickens/graph_chunk_entity_relation.graphml with 119 nodes, 26 edges
+2025-02-13 16:38:05,961 - lightrag - INFO - Loaded document status storage with 2 records
+2025-02-13 16:39:35,469 - lightrag - INFO - Logger initialized for working directory: ./dickens/sql_sample_kb_naive
+2025-02-13 16:39:35,494 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-13 16:39:35,494 - lightrag - INFO - Load KV llm_response_cache with 0 data
+2025-02-13 16:39:35,494 - lightrag - INFO - Load KV full_docs with 0 data
+2025-02-13 16:39:35,494 - lightrag - INFO - Load KV text_chunks with 0 data
+2025-02-13 16:39:35,578 - lightrag - INFO - Loaded document status storage with 0 records
+2025-02-13 16:39:35,579 - lightrag - INFO - Processing 1 new unique documents
+2025-02-13 16:39:35,977 - lightrag - INFO - Inserting 56 vectors to chunks
+2025-02-13 16:39:35,992 - lightrag - ERROR - Failed to process document doc-5493bf640009df365cc23bc6acfddd99: Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download
+Traceback (most recent call last):
+  File "/root/UIST2025/Ex-ChatBI/backend/LightRAG/lightrag/lightrag.py", line 477, in ainsert
+    raise e
+  File "/root/UIST2025/Ex-ChatBI/backend/LightRAG/lightrag/lightrag.py", line 433, in ainsert
+    await self.chunks_vdb.upsert(chunks)
+  File "/root/UIST2025/Ex-ChatBI/backend/LightRAG/lightrag/kg/nano_vector_db_impl.py", line 125, in upsert
+    embeddings_list = await asyncio.gather(*embedding_tasks)
+  File "/root/UIST2025/Ex-ChatBI/backend/LightRAG/lightrag/kg/nano_vector_db_impl.py", line 117, in wrapped_task
+    result = await self.embedding_func(batch)
+  File "/root/UIST2025/Ex-ChatBI/backend/LightRAG/lightrag/utils.py", line 136, in wait_func
+    result = await func(*args, **kwargs)
+  File "/root/UIST2025/Ex-ChatBI/backend/LightRAG/lightrag/utils.py", line 64, in __call__
+    return await self.func(*args, **kwargs)
+  File "/root/UIST2025/Ex-ChatBI/backend/LightRAG/lightrag/llm/ollama.py", line 157, in ollama_embed
+    data = ollama_client.embed(model=embed_model, input=texts)
+  File "/root/miniconda3/envs/langchain-chatbi/lib/python3.10/site-packages/ollama/_client.py", line 357, in embed
+    return self._request(
+  File "/root/miniconda3/envs/langchain-chatbi/lib/python3.10/site-packages/ollama/_client.py", line 178, in _request
+    return cls(**self._request_raw(*args, **kwargs).json())
+  File "/root/miniconda3/envs/langchain-chatbi/lib/python3.10/site-packages/ollama/_client.py", line 124, in _request_raw
+    raise ConnectionError(CONNECTION_ERROR_MESSAGE) from None
+ConnectionError: Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download
+
+2025-02-13 16:40:45,442 - lightrag - INFO - Logger initialized for working directory: ./dickens/sql_sample_kb_naive
+2025-02-13 16:40:45,467 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-13 16:40:45,467 - lightrag - INFO - Load KV llm_response_cache with 0 data
+2025-02-13 16:40:45,467 - lightrag - INFO - Load KV full_docs with 0 data
+2025-02-13 16:40:45,467 - lightrag - INFO - Load KV text_chunks with 0 data
+2025-02-13 16:40:45,552 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-13 16:43:02,727 - lightrag - INFO - Logger initialized for working directory: ./dickens/sql_sample_kb_naive
+2025-02-13 16:43:02,752 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-13 16:43:02,752 - lightrag - INFO - Load KV llm_response_cache with 0 data
+2025-02-13 16:43:02,752 - lightrag - INFO - Load KV full_docs with 0 data
+2025-02-13 16:43:02,752 - lightrag - INFO - Load KV text_chunks with 0 data
+2025-02-13 16:43:02,838 - lightrag - INFO - Loaded document status storage with 0 records
+2025-02-13 16:43:02,838 - lightrag - INFO - Processing 1 new unique documents
+2025-02-13 16:43:03,254 - lightrag - INFO - Inserting 56 vectors to chunks
+2025-02-13 17:09:06,352 - lightrag - INFO - Inserting 152 vectors to entities
+2025-02-13 17:09:18,834 - lightrag - INFO - Inserting 70 vectors to relationships
+2025-02-13 17:09:20,635 - lightrag - INFO - Writing graph with 180 nodes, 70 edges
+2025-02-13 17:15:00,273 - lightrag - INFO - Logger initialized for working directory: ./dickens/sql_sample_kb_naive
+2025-02-13 17:15:00,298 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-13 17:15:00,311 - lightrag - INFO - Load KV llm_response_cache with 1 data
+2025-02-13 17:15:00,311 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-13 17:15:00,312 - lightrag - INFO - Load KV text_chunks with 56 data
+2025-02-13 17:15:00,396 - lightrag - INFO - Loaded graph from ./dickens/sql_sample_kb_naive/graph_chunk_entity_relation.graphml with 180 nodes, 70 edges
+2025-02-13 17:15:00,406 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-13 17:16:25,112 - lightrag - INFO - Logger initialized for working directory: ./dickens/sql_sample_kb_naive
+2025-02-13 17:16:25,136 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-13 17:16:25,149 - lightrag - INFO - Load KV llm_response_cache with 1 data
+2025-02-13 17:16:25,149 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-13 17:16:25,150 - lightrag - INFO - Load KV text_chunks with 56 data
+2025-02-13 17:16:25,234 - lightrag - INFO - Loaded graph from ./dickens/sql_sample_kb_naive/graph_chunk_entity_relation.graphml with 180 nodes, 70 edges
+2025-02-13 17:16:25,245 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-13 17:19:14,099 - lightrag - INFO - Logger initialized for working directory: ./dickens/sql_sample_kb_naive
+2025-02-13 17:19:14,123 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-13 17:19:14,136 - lightrag - INFO - Load KV llm_response_cache with 1 data
+2025-02-13 17:19:14,137 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-13 17:19:14,137 - lightrag - INFO - Load KV text_chunks with 56 data
+2025-02-13 17:19:14,221 - lightrag - INFO - Loaded graph from ./dickens/sql_sample_kb_naive/graph_chunk_entity_relation.graphml with 180 nodes, 70 edges
+2025-02-13 17:19:14,232 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-13 17:20:38,580 - lightrag - INFO - Logger initialized for working directory: ./dickens/sql_sample_kb_naive
+2025-02-13 17:20:38,604 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-13 17:20:38,616 - lightrag - INFO - Load KV llm_response_cache with 1 data
+2025-02-13 17:20:38,616 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-13 17:20:38,617 - lightrag - INFO - Load KV text_chunks with 56 data
+2025-02-13 17:20:38,701 - lightrag - INFO - Loaded graph from ./dickens/sql_sample_kb_naive/graph_chunk_entity_relation.graphml with 180 nodes, 70 edges
+2025-02-13 17:20:38,711 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-13 17:20:39,919 - lightrag - INFO - Query: Which store has the best wow sales growth%?, top_k: 60, cosine: 0.2
+2025-02-13 17:20:40,338 - lightrag - INFO - Truncate 56 to 17 chunks
+2025-02-13 17:20:56,998 - lightrag - INFO - Using hybrid mode for query processing
+2025-02-13 17:20:57,143 - lightrag - INFO - Query: Wow sales, % growth, top_k: 60, cosine: 0.2
+2025-02-13 17:20:57,343 - lightrag - INFO - Query: World of Warcraft, Sales growth%, Growth%, top_k: 60, cosine: 0.2
+2025-02-13 17:20:57,365 - lightrag - INFO - Global query uses 78 entites, 60 relations, 16 text units
+2025-02-13 17:20:57,372 - lightrag - INFO - Local query uses 60 entites, 27 relations, 14 text units
+2025-02-13 17:25:42,048 - lightrag - INFO - Logger initialized for working directory: ./dickens/sql_sample_kb_naive
+2025-02-13 17:25:42,073 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-13 17:25:42,085 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-13 17:25:42,086 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-13 17:25:42,086 - lightrag - INFO - Load KV text_chunks with 56 data
+2025-02-13 17:25:42,170 - lightrag - INFO - Loaded graph from ./dickens/sql_sample_kb_naive/graph_chunk_entity_relation.graphml with 180 nodes, 70 edges
+2025-02-13 17:25:42,180 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-13 17:25:42,180 - lightrag - INFO - Using hybrid mode for query processing
+2025-02-13 17:25:42,275 - lightrag - INFO - Query: Wow sales, % growth, top_k: 60, cosine: 0.2
+2025-02-13 17:25:42,425 - lightrag - INFO - Query: World of Warcraft, Sales growth%, Growth%, top_k: 60, cosine: 0.2
+2025-02-13 17:25:42,852 - lightrag - INFO - Global query uses 78 entites, 60 relations, 16 text units
+2025-02-13 17:25:42,858 - lightrag - INFO - Local query uses 60 entites, 27 relations, 14 text units
+2025-02-13 17:38:10,347 - lightrag - INFO - Logger initialized for working directory: ./dickens/sql_sample_kb_naive
+2025-02-13 17:38:10,371 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-13 17:38:10,384 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-13 17:38:10,384 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-13 17:38:10,385 - lightrag - INFO - Load KV text_chunks with 56 data
+2025-02-13 17:38:10,470 - lightrag - INFO - Loaded graph from ./dickens/sql_sample_kb_naive/graph_chunk_entity_relation.graphml with 180 nodes, 70 edges
+2025-02-13 17:38:10,481 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-13 17:38:20,375 - lightrag - INFO - Using global mode for query processing
+2025-02-13 17:38:21,644 - lightrag - INFO - Query: Sales growth%, top_k: 10, cosine: 0.2
+2025-02-13 17:38:22,065 - lightrag - INFO - Global query uses 14 entites, 10 relations, 4 text units
+2025-02-13 17:51:18,511 - lightrag - INFO - Logger initialized for working directory: ./dickens/sql_sample_kb_naive
+2025-02-13 17:51:18,536 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-13 17:51:18,549 - lightrag - INFO - Load KV llm_response_cache with 4 data
+2025-02-13 17:51:18,549 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-13 17:51:18,550 - lightrag - INFO - Load KV text_chunks with 56 data
+2025-02-13 17:51:18,635 - lightrag - INFO - Loaded graph from ./dickens/sql_sample_kb_naive/graph_chunk_entity_relation.graphml with 180 nodes, 70 edges
+2025-02-13 17:51:18,645 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-13 17:51:26,416 - lightrag - INFO - Using local mode for query processing
+2025-02-13 17:51:27,718 - lightrag - INFO - Query: Store, Best, Wow, Sales growth%, top_k: 10, cosine: 0.2
+2025-02-13 17:51:28,138 - lightrag - INFO - Local query uses 10 entites, 7 relations, 6 text units
+2025-02-13 17:54:33,910 - lightrag - INFO - Logger initialized for working directory: ./dickens/sql_sample_kb_naive
+2025-02-13 17:54:33,935 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-13 17:54:33,948 - lightrag - INFO - Load KV llm_response_cache with 5 data
+2025-02-13 17:54:33,948 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-13 17:54:33,949 - lightrag - INFO - Load KV text_chunks with 56 data
+2025-02-13 17:54:34,035 - lightrag - INFO - Loaded graph from ./dickens/sql_sample_kb_naive/graph_chunk_entity_relation.graphml with 180 nodes, 70 edges
+2025-02-13 17:54:34,045 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-13 17:54:34,164 - lightrag - INFO - Query: Which store has the best wow sales growth%?, top_k: 10, cosine: 0.2
+2025-02-13 17:54:34,564 - lightrag - INFO - Truncate 10 to 10 chunks
+2025-02-13 17:54:41,005 - lightrag - INFO - Query: Blizzard Inc., Stores, top_k: 10, cosine: 0.2
+2025-02-13 17:54:41,174 - lightrag - INFO - Query: World of Warcraft, Sales growth%, top_k: 10, cosine: 0.2
+2025-02-13 17:54:41,189 - lightrag - INFO - Global query uses 17 entites, 10 relations, 7 text units
+2025-02-13 17:54:41,195 - lightrag - INFO - Local query uses 10 entites, 9 relations, 10 text units
+2025-02-13 21:40:54,150 - lightrag - INFO - Logger initialized for working directory: ./dickens/business_kb
+2025-02-13 21:40:54,176 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-13 21:40:54,176 - lightrag - INFO - Load KV llm_response_cache with 0 data
+2025-02-13 21:40:54,176 - lightrag - INFO - Load KV full_docs with 0 data
+2025-02-13 21:40:54,176 - lightrag - INFO - Load KV text_chunks with 0 data
+2025-02-13 21:40:54,261 - lightrag - INFO - Loaded document status storage with 0 records
+2025-02-13 21:40:54,262 - lightrag - INFO - Processing 1 new unique documents
+2025-02-13 21:40:54,642 - lightrag - INFO - Inserting 5 vectors to chunks
+2025-02-13 21:43:20,352 - lightrag - INFO - Inserting 21 vectors to entities
+2025-02-13 21:43:22,100 - lightrag - INFO - Inserting 3 vectors to relationships
+2025-02-13 21:43:22,193 - lightrag - INFO - Writing graph with 23 nodes, 3 edges
+2025-02-13 21:43:22,341 - lightrag - INFO - Query: Which store has the best wow sales growth%?, top_k: 10, cosine: 0.2
+2025-02-13 21:43:22,344 - lightrag - INFO - Truncate 5 to 5 chunks
+2025-02-13 21:43:27,851 - lightrag - INFO - Query: Store, Best, Wow, %, top_k: 10, cosine: 0.2
+2025-02-13 21:43:28,021 - lightrag - INFO - Query: Wow sales growth%, top_k: 10, cosine: 0.2
+2025-02-13 21:43:28,024 - lightrag - INFO - Global query uses 6 entites, 3 relations, 2 text units
+2025-02-13 21:43:28,025 - lightrag - INFO - Local query uses 10 entites, 0 relations, 2 text units
+2025-02-13 21:43:42,322 - lightrag - INFO - Using hybrid mode for query processing
+2025-02-13 21:43:42,456 - lightrag - INFO - Query: Wow, Sales growth, %, top_k: 60, cosine: 0.2
+2025-02-13 21:43:42,611 - lightrag - INFO - Query: Sales growth%, World of Warcraft, Gaming industry, top_k: 60, cosine: 0.2
+2025-02-13 21:43:42,618 - lightrag - INFO - Global query uses 6 entites, 3 relations, 2 text units
+2025-02-13 21:43:42,620 - lightrag - INFO - Local query uses 21 entites, 3 relations, 4 text units
+2025-02-13 22:04:22,970 - lightrag - INFO - Logger initialized for working directory: ./dickens/business_kb
+2025-02-13 22:04:22,995 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-13 22:04:22,996 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-13 22:04:22,996 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-13 22:04:22,996 - lightrag - INFO - Load KV text_chunks with 5 data
+2025-02-13 22:04:23,077 - lightrag - INFO - Loaded graph from ./dickens/business_kb/graph_chunk_entity_relation.graphml with 23 nodes, 3 edges
+2025-02-13 22:04:23,083 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-13 22:04:36,452 - lightrag - INFO - Logger initialized for working directory: ./dickens/business_kb
+2025-02-13 22:04:36,479 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-13 22:04:36,481 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-13 22:04:36,481 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-13 22:04:36,481 - lightrag - INFO - Load KV text_chunks with 5 data
+2025-02-13 22:04:36,574 - lightrag - INFO - Loaded graph from ./dickens/business_kb/graph_chunk_entity_relation.graphml with 23 nodes, 3 edges
+2025-02-13 22:04:36,579 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-13 22:04:37,843 - lightrag - INFO - Query: Which store has the best wow sales growth%?, top_k: 10, cosine: 0.2
+2025-02-13 22:04:38,251 - lightrag - INFO - Truncate 5 to 5 chunks
+2025-02-13 22:04:38,392 - lightrag - INFO - Query: Store, Best, Wow, %, top_k: 10, cosine: 0.2
+2025-02-13 22:04:38,577 - lightrag - INFO - Query: Wow sales growth%, top_k: 10, cosine: 0.2
+2025-02-13 22:04:38,581 - lightrag - INFO - Global query uses 6 entites, 3 relations, 2 text units
+2025-02-13 22:04:38,581 - lightrag - INFO - Local query uses 10 entites, 0 relations, 2 text units
+2025-02-13 22:04:54,316 - lightrag - INFO - Using hybrid mode for query processing
+2025-02-13 22:04:54,447 - lightrag - INFO - Query: Wow, Sales growth, %, top_k: 60, cosine: 0.2
+2025-02-13 22:04:54,610 - lightrag - INFO - Query: Sales growth%, World of Warcraft, Gaming industry, top_k: 60, cosine: 0.2
+2025-02-13 22:04:54,614 - lightrag - INFO - Global query uses 6 entites, 3 relations, 2 text units
+2025-02-13 22:04:54,616 - lightrag - INFO - Local query uses 21 entites, 3 relations, 4 text units
+2025-02-13 22:13:40,383 - lightrag - INFO - Logger initialized for working directory: ./dickens/business_kb
+2025-02-13 22:13:40,410 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-13 22:13:40,411 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-13 22:13:40,411 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-13 22:13:40,411 - lightrag - INFO - Load KV text_chunks with 5 data
+2025-02-13 22:13:40,498 - lightrag - INFO - Loaded graph from ./dickens/business_kb/graph_chunk_entity_relation.graphml with 23 nodes, 3 edges
+2025-02-13 22:13:40,504 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-13 22:13:41,767 - lightrag - INFO - Query: Which store has the best wow sales growth%?, top_k: 10, cosine: 0.2
+2025-02-13 22:13:42,187 - lightrag - INFO - Truncate 5 to 5 chunks
+2025-02-13 22:13:42,306 - lightrag - INFO - Query: Store, Best, Wow, %, top_k: 10, cosine: 0.2
+2025-02-13 22:13:42,461 - lightrag - INFO - Query: Wow sales growth%, top_k: 10, cosine: 0.2
+2025-02-13 22:13:42,465 - lightrag - INFO - Global query uses 6 entites, 3 relations, 2 text units
+2025-02-13 22:13:42,465 - lightrag - INFO - Local query uses 10 entites, 0 relations, 2 text units
+2025-02-13 22:13:54,067 - lightrag - INFO - Using hybrid mode for query processing
+2025-02-13 22:13:54,218 - lightrag - INFO - Query: Wow, Sales growth, %, top_k: 60, cosine: 0.2
+2025-02-13 22:13:54,378 - lightrag - INFO - Query: Sales growth%, World of Warcraft, Gaming industry, top_k: 60, cosine: 0.2
+2025-02-13 22:13:54,383 - lightrag - INFO - Global query uses 6 entites, 3 relations, 2 text units
+2025-02-13 22:13:54,385 - lightrag - INFO - Local query uses 21 entites, 3 relations, 4 text units
+2025-02-13 22:14:05,379 - lightrag - INFO - Logger initialized for working directory: ./dickens/business_kb
+2025-02-13 22:14:05,406 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-13 22:14:05,408 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-13 22:14:05,408 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-13 22:14:05,408 - lightrag - INFO - Load KV text_chunks with 5 data
+2025-02-13 22:14:05,500 - lightrag - INFO - Loaded graph from ./dickens/business_kb/graph_chunk_entity_relation.graphml with 23 nodes, 3 edges
+2025-02-13 22:14:05,506 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-13 22:14:05,645 - lightrag - INFO - Query: Which store has the best wow sales growth%?, top_k: 10, cosine: 0.2
+2025-02-13 22:14:06,104 - lightrag - INFO - Truncate 5 to 5 chunks
+2025-02-13 22:14:06,244 - lightrag - INFO - Query: Store, Best, Wow, %, top_k: 10, cosine: 0.2
+2025-02-13 22:14:06,426 - lightrag - INFO - Query: Wow sales growth%, top_k: 10, cosine: 0.2
+2025-02-13 22:14:06,431 - lightrag - INFO - Global query uses 6 entites, 3 relations, 2 text units
+2025-02-13 22:14:06,432 - lightrag - INFO - Local query uses 10 entites, 0 relations, 2 text units
+2025-02-13 22:14:13,036 - lightrag - INFO - Using hybrid mode for query processing
+2025-02-13 22:14:13,158 - lightrag - INFO - Query: Wow, Sales growth, %, top_k: 60, cosine: 0.2
+2025-02-13 22:14:13,322 - lightrag - INFO - Query: Sales growth%, World of Warcraft, Gaming industry, top_k: 60, cosine: 0.2
+2025-02-13 22:14:13,326 - lightrag - INFO - Global query uses 6 entites, 3 relations, 2 text units
+2025-02-13 22:14:13,329 - lightrag - INFO - Local query uses 21 entites, 3 relations, 4 text units
+2025-02-13 22:16:04,030 - lightrag - INFO - Logger initialized for working directory: ./dickens/business_kb
+2025-02-13 22:16:04,055 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-13 22:16:04,057 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-13 22:16:04,057 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-13 22:16:04,057 - lightrag - INFO - Load KV text_chunks with 5 data
+2025-02-13 22:16:04,139 - lightrag - INFO - Loaded graph from ./dickens/business_kb/graph_chunk_entity_relation.graphml with 23 nodes, 3 edges
+2025-02-13 22:16:04,145 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-13 22:16:04,145 - lightrag - INFO - Using hybrid mode for query processing
+2025-02-13 22:16:04,267 - lightrag - INFO - Query: Wow, Sales growth, %, top_k: 10, cosine: 0.2
+2025-02-13 22:16:04,425 - lightrag - INFO - Query: Sales growth%, World of Warcraft, Gaming industry, top_k: 10, cosine: 0.2
+2025-02-13 22:16:04,819 - lightrag - INFO - Global query uses 6 entites, 3 relations, 2 text units
+2025-02-13 22:16:04,820 - lightrag - INFO - Local query uses 10 entites, 0 relations, 2 text units
+2025-02-13 22:21:37,667 - lightrag - INFO - Logger initialized for working directory: ./dickens/business_kb
+2025-02-13 22:21:37,691 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-13 22:21:37,692 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-13 22:21:37,693 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-13 22:21:37,693 - lightrag - INFO - Load KV text_chunks with 5 data
+2025-02-13 22:21:37,775 - lightrag - INFO - Loaded graph from ./dickens/business_kb/graph_chunk_entity_relation.graphml with 23 nodes, 3 edges
+2025-02-13 22:21:37,780 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-13 22:21:47,540 - lightrag - INFO - Using hybrid mode for query processing
+2025-02-13 22:21:48,837 - lightrag - INFO - Query: WEEKLY sales, Monthly comparisons, Quarterly data, Target, top_k: 10, cosine: 0.2
+2025-02-13 22:21:49,051 - lightrag - INFO - Query: Sales analysis, Comparison tools, top_k: 10, cosine: 0.2
+2025-02-13 22:21:49,438 - lightrag - INFO - Global query uses 6 entites, 3 relations, 2 text units
+2025-02-13 22:21:49,438 - lightrag - INFO - Local query uses 10 entites, 0 relations, 2 text units
+2025-02-13 22:26:01,045 - lightrag - INFO - Logger initialized for working directory: ./dickens/business_kb2
+2025-02-13 22:26:01,069 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-13 22:26:01,069 - lightrag - INFO - Load KV llm_response_cache with 0 data
+2025-02-13 22:26:01,069 - lightrag - INFO - Load KV full_docs with 0 data
+2025-02-13 22:26:01,069 - lightrag - INFO - Load KV text_chunks with 0 data
+2025-02-13 22:26:01,153 - lightrag - INFO - Loaded document status storage with 0 records
+2025-02-13 22:26:01,154 - lightrag - INFO - Processing 1 new unique documents
+2025-02-13 22:26:01,535 - lightrag - INFO - Inserting 73 vectors to chunks
+2025-02-13 22:48:56,113 - lightrag - INFO - Inserting 135 vectors to entities
+2025-02-13 22:49:08,601 - lightrag - INFO - Inserting 24 vectors to relationships
+2025-02-13 22:49:09,433 - lightrag - INFO - Writing graph with 140 nodes, 24 edges
+2025-02-13 22:49:13,885 - lightrag - INFO - Using hybrid mode for query processing
+2025-02-13 22:49:14,070 - lightrag - INFO - Query: WTD, Target, top_k: 10, cosine: 0.2
+2025-02-13 22:49:14,314 - lightrag - INFO - Query: Sales, Target, top_k: 10, cosine: 0.2
+2025-02-13 22:49:14,318 - lightrag - INFO - Global query uses 14 entites, 10 relations, 4 text units
+2025-02-13 22:49:14,320 - lightrag - INFO - Local query uses 10 entites, 3 relations, 10 text units
+2025-02-13 23:07:02,423 - lightrag - INFO - Logger initialized for working directory: ./dickens/sql_sample_kb_naive
+2025-02-13 23:07:02,448 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-13 23:07:02,460 - lightrag - INFO - Load KV llm_response_cache with 6 data
+2025-02-13 23:07:02,461 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-13 23:07:02,461 - lightrag - INFO - Load KV text_chunks with 56 data
+2025-02-13 23:07:02,546 - lightrag - INFO - Loaded graph from ./dickens/sql_sample_kb_naive/graph_chunk_entity_relation.graphml with 180 nodes, 70 edges
+2025-02-13 23:07:02,556 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-13 23:07:02,557 - lightrag - INFO - Processing 1 new unique documents
+2025-02-13 23:07:02,946 - lightrag - INFO - Inserting 73 vectors to chunks
+2025-02-13 23:07:33,640 - lightrag - INFO - Logger initialized for working directory: ./dickens/sql_sample_kb_naive
+2025-02-13 23:07:33,664 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-13 23:07:33,676 - lightrag - INFO - Load KV llm_response_cache with 6 data
+2025-02-13 23:07:33,677 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-13 23:07:33,677 - lightrag - INFO - Load KV text_chunks with 56 data
+2025-02-13 23:07:33,761 - lightrag - INFO - Loaded graph from ./dickens/sql_sample_kb_naive/graph_chunk_entity_relation.graphml with 180 nodes, 70 edges
+2025-02-13 23:07:33,771 - lightrag - INFO - Loaded document status storage with 2 records
+2025-02-13 23:07:41,002 - lightrag - INFO - Using hybrid mode for query processing
+2025-02-13 23:07:41,150 - lightrag - INFO - Query: Weekend Touchdown (WTD), Sales data comparison, Target, top_k: 10, cosine: 0.2
+2025-02-13 23:07:41,321 - lightrag - INFO - Query: Sales comparison, WTD sales, Target performance, top_k: 10, cosine: 0.2
+2025-02-13 23:07:41,727 - lightrag - INFO - Global query uses 17 entites, 10 relations, 6 text units
+2025-02-13 23:07:41,730 - lightrag - INFO - Local query uses 10 entites, 1 relations, 6 text units
+2025-02-13 23:13:55,469 - lightrag - INFO - Logger initialized for working directory: ./dickens/sql_sample_kb_naive
+2025-02-13 23:13:55,493 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-13 23:13:55,505 - lightrag - INFO - Load KV llm_response_cache with 6 data
+2025-02-13 23:13:55,506 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-13 23:13:55,506 - lightrag - INFO - Load KV text_chunks with 56 data
+2025-02-13 23:13:55,591 - lightrag - INFO - Loaded graph from ./dickens/sql_sample_kb_naive/graph_chunk_entity_relation.graphml with 180 nodes, 70 edges
+2025-02-13 23:13:55,601 - lightrag - INFO - Loaded document status storage with 2 records
+2025-02-13 23:14:54,795 - lightrag - INFO - Logger initialized for working directory: ./dickens/sql_sample_kb_naive
+2025-02-13 23:14:54,820 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-13 23:14:54,833 - lightrag - INFO - Load KV llm_response_cache with 6 data
+2025-02-13 23:14:54,833 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-13 23:14:54,834 - lightrag - INFO - Load KV text_chunks with 56 data
+2025-02-13 23:14:54,918 - lightrag - INFO - Loaded graph from ./dickens/sql_sample_kb_naive/graph_chunk_entity_relation.graphml with 180 nodes, 70 edges
+2025-02-13 23:14:54,928 - lightrag - INFO - Loaded document status storage with 2 records
+2025-02-13 23:15:05,341 - lightrag - INFO - Using hybrid mode for query processing
+2025-02-13 23:15:06,683 - lightrag - INFO - Query: Week-to-Date, sales, Target, top_k: 5, cosine: 0.2
+2025-02-13 23:15:06,870 - lightrag - INFO - Query: Sales performance comparison, top_k: 5, cosine: 0.2
+2025-02-13 23:15:07,281 - lightrag - INFO - Global query uses 9 entites, 5 relations, 4 text units
+2025-02-13 23:15:07,283 - lightrag - INFO - Local query uses 5 entites, 1 relations, 3 text units
+2025-02-13 23:16:32,689 - lightrag - INFO - Logger initialized for working directory: ./dickens/sql_sample_kb_naive
+2025-02-13 23:16:32,713 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-13 23:16:32,726 - lightrag - INFO - Load KV llm_response_cache with 6 data
+2025-02-13 23:16:32,726 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-13 23:16:32,727 - lightrag - INFO - Load KV text_chunks with 56 data
+2025-02-13 23:16:32,810 - lightrag - INFO - Loaded graph from ./dickens/sql_sample_kb_naive/graph_chunk_entity_relation.graphml with 180 nodes, 70 edges
+2025-02-13 23:16:32,821 - lightrag - INFO - Loaded document status storage with 2 records
+2025-02-13 23:16:36,155 - lightrag - INFO - Using hybrid mode for query processing
+2025-02-13 23:16:36,308 - lightrag - INFO - Query: Weeks, Dollars, Competitor, top_k: 5, cosine: 0.2
+2025-02-13 23:16:36,483 - lightrag - INFO - Query: WTD sales, Target comparison, top_k: 5, cosine: 0.2
+2025-02-13 23:16:36,879 - lightrag - INFO - Global query uses 8 entites, 5 relations, 3 text units
+2025-02-13 23:16:36,879 - lightrag - INFO - Local query uses 5 entites, 0 relations, 6 text units
+2025-02-15 02:19:53,892 - lightrag - INFO - Logger initialized for working directory: ./dickens/sql_sample_kb_naive
+2025-02-15 02:19:53,917 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-15 02:19:53,930 - lightrag - INFO - Load KV llm_response_cache with 6 data
+2025-02-15 02:19:53,931 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-15 02:19:53,931 - lightrag - INFO - Load KV text_chunks with 56 data
+2025-02-15 02:19:54,016 - lightrag - INFO - Loaded graph from ./dickens/sql_sample_kb_naive/graph_chunk_entity_relation.graphml with 180 nodes, 70 edges
+2025-02-15 02:19:54,026 - lightrag - INFO - Loaded document status storage with 2 records
+2025-02-15 02:28:59,374 - lightrag - INFO - Logger initialized for working directory: ./dickens/sql_sample_kb_naive2
+2025-02-15 02:28:59,399 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-15 02:28:59,399 - lightrag - INFO - Load KV llm_response_cache with 0 data
+2025-02-15 02:28:59,399 - lightrag - INFO - Load KV full_docs with 0 data
+2025-02-15 02:28:59,399 - lightrag - INFO - Load KV text_chunks with 0 data
+2025-02-15 02:28:59,484 - lightrag - INFO - Loaded document status storage with 0 records
+2025-02-15 02:28:59,485 - lightrag - INFO - Processing 1 new unique documents
+2025-02-15 02:28:59,892 - lightrag - INFO - Inserting 56 vectors to chunks
+2025-02-15 02:28:59,907 - lightrag - ERROR - Failed to process document doc-5493bf640009df365cc23bc6acfddd99: Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download
+Traceback (most recent call last):
+  File "/root/UIST2025/Ex-ChatBI/backend/LightRAG/lightrag/lightrag.py", line 477, in ainsert
+    raise e
+  File "/root/UIST2025/Ex-ChatBI/backend/LightRAG/lightrag/lightrag.py", line 433, in ainsert
+    await self.chunks_vdb.upsert(chunks)
+  File "/root/UIST2025/Ex-ChatBI/backend/LightRAG/lightrag/kg/nano_vector_db_impl.py", line 125, in upsert
+    embeddings_list = await asyncio.gather(*embedding_tasks)
+  File "/root/UIST2025/Ex-ChatBI/backend/LightRAG/lightrag/kg/nano_vector_db_impl.py", line 117, in wrapped_task
+    result = await self.embedding_func(batch)
+  File "/root/UIST2025/Ex-ChatBI/backend/LightRAG/lightrag/utils.py", line 136, in wait_func
+    result = await func(*args, **kwargs)
+  File "/root/UIST2025/Ex-ChatBI/backend/LightRAG/lightrag/utils.py", line 64, in __call__
+    return await self.func(*args, **kwargs)
+  File "/root/UIST2025/Ex-ChatBI/backend/LightRAG/lightrag/llm/ollama.py", line 157, in ollama_embed
+    data = ollama_client.embed(model=embed_model, input=texts)
+  File "/root/miniconda3/envs/langchain-chatbi/lib/python3.10/site-packages/ollama/_client.py", line 357, in embed
+    return self._request(
+  File "/root/miniconda3/envs/langchain-chatbi/lib/python3.10/site-packages/ollama/_client.py", line 178, in _request
+    return cls(**self._request_raw(*args, **kwargs).json())
+  File "/root/miniconda3/envs/langchain-chatbi/lib/python3.10/site-packages/ollama/_client.py", line 124, in _request_raw
+    raise ConnectionError(CONNECTION_ERROR_MESSAGE) from None
+ConnectionError: Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download
+
+2025-02-15 02:29:20,343 - lightrag - INFO - Logger initialized for working directory: ./dickens/sql_sample_kb_naive2
+2025-02-15 02:29:20,367 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-15 02:29:20,367 - lightrag - INFO - Load KV llm_response_cache with 0 data
+2025-02-15 02:29:20,367 - lightrag - INFO - Load KV full_docs with 0 data
+2025-02-15 02:29:20,367 - lightrag - INFO - Load KV text_chunks with 0 data
+2025-02-15 02:29:20,452 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-15 02:29:46,777 - lightrag - INFO - Logger initialized for working directory: ./dickens/sql_sample_kb_naive2
+2025-02-15 02:29:46,802 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-15 02:29:46,802 - lightrag - INFO - Load KV llm_response_cache with 0 data
+2025-02-15 02:29:46,802 - lightrag - INFO - Load KV full_docs with 0 data
+2025-02-15 02:29:46,802 - lightrag - INFO - Load KV text_chunks with 0 data
+2025-02-15 02:29:46,886 - lightrag - INFO - Loaded document status storage with 0 records
+2025-02-15 02:29:46,887 - lightrag - INFO - Processing 1 new unique documents
+2025-02-15 02:29:47,285 - lightrag - INFO - Inserting 56 vectors to chunks
+2025-02-15 02:56:01,473 - lightrag - INFO - Inserting 102 vectors to entities
+2025-02-15 02:56:10,371 - lightrag - INFO - Inserting 33 vectors to relationships
+2025-02-15 02:56:11,486 - lightrag - INFO - Writing graph with 114 nodes, 33 edges
+2025-02-15 02:56:27,288 - lightrag - INFO - Using hybrid mode for query processing
+2025-02-15 02:56:27,421 - lightrag - INFO - Query: Weekend sales, Sales promotions, Marketing strategies, Weekends, Retail companies, top_k: 5, cosine: 0.2
+2025-02-15 02:56:27,611 - lightrag - INFO - Query: Sales comparison, WTD sales, Target, top_k: 5, cosine: 0.2
+2025-02-15 02:56:27,617 - lightrag - INFO - Global query uses 8 entites, 5 relations, 4 text units
+2025-02-15 02:56:27,619 - lightrag - INFO - Local query uses 5 entites, 3 relations, 3 text units
+2025-02-15 02:56:47,128 - lightrag - INFO - Query: WTD sales vs Target? , top_k: 60, cosine: 0.2
+2025-02-15 02:56:47,139 - lightrag - INFO - Truncate 56 to 19 chunks
+2025-02-15 03:11:29,186 - lightrag - INFO - Logger initialized for working directory: ./dickens/sql_sample_kb_glm
+2025-02-15 03:11:29,211 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-15 03:11:29,211 - lightrag - INFO - Load KV llm_response_cache with 0 data
+2025-02-15 03:11:29,211 - lightrag - INFO - Load KV full_docs with 0 data
+2025-02-15 03:11:29,211 - lightrag - INFO - Load KV text_chunks with 0 data
+2025-02-15 03:11:29,298 - lightrag - INFO - Loaded document status storage with 0 records
+2025-02-15 03:11:29,299 - lightrag - INFO - Processing 1 new unique documents
+2025-02-15 03:11:29,713 - lightrag - INFO - Inserting 56 vectors to chunks
+2025-02-15 03:11:32,359 - lightrag - ERROR - Failed to process document doc-5975f1c13da7a4ba172ffb30f33df29c: model "glm" not found, try pulling it first (status code: 404)
+Traceback (most recent call last):
+  File "/root/UIST2025/Ex-ChatBI/backend/LightRAG/lightrag/lightrag.py", line 477, in ainsert
+    raise e
+  File "/root/UIST2025/Ex-ChatBI/backend/LightRAG/lightrag/lightrag.py", line 436, in ainsert
+    maybe_new_kg = await extract_entities(
+  File "/root/UIST2025/Ex-ChatBI/backend/LightRAG/lightrag/operate.py", line 480, in extract_entities
+    results.append(await result)
+  File "/root/miniconda3/envs/langchain-chatbi/lib/python3.10/asyncio/tasks.py", line 575, in _wait_for_one
+    return f.result()  # May raise f.exception().
+  File "/root/UIST2025/Ex-ChatBI/backend/LightRAG/lightrag/operate.py", line 412, in _process_single_content
+    final_result = await _user_llm_func_with_cache(hint_prompt)
+  File "/root/UIST2025/Ex-ChatBI/backend/LightRAG/lightrag/operate.py", line 380, in _user_llm_func_with_cache
+    res: str = await use_llm_func(input_text)
+  File "/root/UIST2025/Ex-ChatBI/backend/LightRAG/lightrag/utils.py", line 136, in wait_func
+    result = await func(*args, **kwargs)
+  File "/root/UIST2025/Ex-ChatBI/backend/LightRAG/lightrag/llm/ollama.py", line 126, in ollama_model_complete
+    return await ollama_model_if_cache(
+  File "/root/miniconda3/envs/langchain-chatbi/lib/python3.10/site-packages/tenacity/asyncio/__init__.py", line 189, in async_wrapped
+    return await copy(fn, *args, **kwargs)
+  File "/root/miniconda3/envs/langchain-chatbi/lib/python3.10/site-packages/tenacity/asyncio/__init__.py", line 111, in __call__
+    do = await self.iter(retry_state=retry_state)
+  File "/root/miniconda3/envs/langchain-chatbi/lib/python3.10/site-packages/tenacity/asyncio/__init__.py", line 153, in iter
+    result = await action(retry_state)
+  File "/root/miniconda3/envs/langchain-chatbi/lib/python3.10/site-packages/tenacity/_utils.py", line 99, in inner
+    return call(*args, **kwargs)
+  File "/root/miniconda3/envs/langchain-chatbi/lib/python3.10/site-packages/tenacity/__init__.py", line 398, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+  File "/root/miniconda3/envs/langchain-chatbi/lib/python3.10/concurrent/futures/_base.py", line 438, in result
+    return self.__get_result()
+  File "/root/miniconda3/envs/langchain-chatbi/lib/python3.10/concurrent/futures/_base.py", line 390, in __get_result
+    raise self._exception
+  File "/root/miniconda3/envs/langchain-chatbi/lib/python3.10/site-packages/tenacity/asyncio/__init__.py", line 114, in __call__
+    result = await fn(*args, **kwargs)
+  File "/root/UIST2025/Ex-ChatBI/backend/LightRAG/lightrag/llm/ollama.py", line 106, in ollama_model_if_cache
+    response = await ollama_client.chat(model=model, messages=messages, **kwargs)
+  File "/root/miniconda3/envs/langchain-chatbi/lib/python3.10/site-packages/ollama/_client.py", line 837, in chat
+    return await self._request(
+  File "/root/miniconda3/envs/langchain-chatbi/lib/python3.10/site-packages/ollama/_client.py", line 682, in _request
+    return cls(**(await self._request_raw(*args, **kwargs)).json())
+  File "/root/miniconda3/envs/langchain-chatbi/lib/python3.10/site-packages/ollama/_client.py", line 626, in _request_raw
+    raise ResponseError(e.response.text, e.response.status_code) from None
+ollama._types.ResponseError: model "glm" not found, try pulling it first (status code: 404)
+
+2025-02-15 03:12:17,159 - lightrag - INFO - Logger initialized for working directory: ./dickens/sql_sample_kb_glm
+2025-02-15 03:12:17,183 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-15 03:12:17,183 - lightrag - INFO - Load KV llm_response_cache with 0 data
+2025-02-15 03:12:17,183 - lightrag - INFO - Load KV full_docs with 0 data
+2025-02-15 03:12:17,184 - lightrag - INFO - Load KV text_chunks with 0 data
+2025-02-15 03:12:17,267 - lightrag - INFO - Loaded document status storage with 0 records
+2025-02-15 03:12:17,268 - lightrag - INFO - Processing 1 new unique documents
+2025-02-15 03:12:17,666 - lightrag - INFO - Inserting 56 vectors to chunks
+2025-02-15 03:12:19,237 - lightrag - ERROR - Failed to process document doc-5975f1c13da7a4ba172ffb30f33df29c: model "glm:9b" not found, try pulling it first (status code: 404)
+Traceback (most recent call last):
+  File "/root/UIST2025/Ex-ChatBI/backend/LightRAG/lightrag/lightrag.py", line 477, in ainsert
+    raise e
+  File "/root/UIST2025/Ex-ChatBI/backend/LightRAG/lightrag/lightrag.py", line 436, in ainsert
+    maybe_new_kg = await extract_entities(
+  File "/root/UIST2025/Ex-ChatBI/backend/LightRAG/lightrag/operate.py", line 480, in extract_entities
+    results.append(await result)
+  File "/root/miniconda3/envs/langchain-chatbi/lib/python3.10/asyncio/tasks.py", line 575, in _wait_for_one
+    return f.result()  # May raise f.exception().
+  File "/root/UIST2025/Ex-ChatBI/backend/LightRAG/lightrag/operate.py", line 412, in _process_single_content
+    final_result = await _user_llm_func_with_cache(hint_prompt)
+  File "/root/UIST2025/Ex-ChatBI/backend/LightRAG/lightrag/operate.py", line 380, in _user_llm_func_with_cache
+    res: str = await use_llm_func(input_text)
+  File "/root/UIST2025/Ex-ChatBI/backend/LightRAG/lightrag/utils.py", line 136, in wait_func
+    result = await func(*args, **kwargs)
+  File "/root/UIST2025/Ex-ChatBI/backend/LightRAG/lightrag/llm/ollama.py", line 126, in ollama_model_complete
+    return await ollama_model_if_cache(
+  File "/root/miniconda3/envs/langchain-chatbi/lib/python3.10/site-packages/tenacity/asyncio/__init__.py", line 189, in async_wrapped
+    return await copy(fn, *args, **kwargs)
+  File "/root/miniconda3/envs/langchain-chatbi/lib/python3.10/site-packages/tenacity/asyncio/__init__.py", line 111, in __call__
+    do = await self.iter(retry_state=retry_state)
+  File "/root/miniconda3/envs/langchain-chatbi/lib/python3.10/site-packages/tenacity/asyncio/__init__.py", line 153, in iter
+    result = await action(retry_state)
+  File "/root/miniconda3/envs/langchain-chatbi/lib/python3.10/site-packages/tenacity/_utils.py", line 99, in inner
+    return call(*args, **kwargs)
+  File "/root/miniconda3/envs/langchain-chatbi/lib/python3.10/site-packages/tenacity/__init__.py", line 398, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+  File "/root/miniconda3/envs/langchain-chatbi/lib/python3.10/concurrent/futures/_base.py", line 438, in result
+    return self.__get_result()
+  File "/root/miniconda3/envs/langchain-chatbi/lib/python3.10/concurrent/futures/_base.py", line 390, in __get_result
+    raise self._exception
+  File "/root/miniconda3/envs/langchain-chatbi/lib/python3.10/site-packages/tenacity/asyncio/__init__.py", line 114, in __call__
+    result = await fn(*args, **kwargs)
+  File "/root/UIST2025/Ex-ChatBI/backend/LightRAG/lightrag/llm/ollama.py", line 106, in ollama_model_if_cache
+    response = await ollama_client.chat(model=model, messages=messages, **kwargs)
+  File "/root/miniconda3/envs/langchain-chatbi/lib/python3.10/site-packages/ollama/_client.py", line 837, in chat
+    return await self._request(
+  File "/root/miniconda3/envs/langchain-chatbi/lib/python3.10/site-packages/ollama/_client.py", line 682, in _request
+    return cls(**(await self._request_raw(*args, **kwargs)).json())
+  File "/root/miniconda3/envs/langchain-chatbi/lib/python3.10/site-packages/ollama/_client.py", line 626, in _request_raw
+    raise ResponseError(e.response.text, e.response.status_code) from None
+ollama._types.ResponseError: model "glm:9b" not found, try pulling it first (status code: 404)
+
+2025-02-15 03:13:14,984 - lightrag - INFO - Logger initialized for working directory: ./dickens/sql_sample_kb_glm
+2025-02-15 03:13:15,008 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-15 03:13:15,008 - lightrag - INFO - Load KV llm_response_cache with 0 data
+2025-02-15 03:13:15,008 - lightrag - INFO - Load KV full_docs with 0 data
+2025-02-15 03:13:15,008 - lightrag - INFO - Load KV text_chunks with 0 data
+2025-02-15 03:13:15,093 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-15 03:13:33,597 - lightrag - INFO - Logger initialized for working directory: ./dickens/sql_sample_kb_glm
+2025-02-15 03:13:33,621 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-15 03:13:33,621 - lightrag - INFO - Load KV llm_response_cache with 0 data
+2025-02-15 03:13:33,621 - lightrag - INFO - Load KV full_docs with 0 data
+2025-02-15 03:13:33,621 - lightrag - INFO - Load KV text_chunks with 0 data
+2025-02-15 03:13:33,705 - lightrag - INFO - Loaded document status storage with 0 records
+2025-02-15 03:13:33,706 - lightrag - INFO - Processing 1 new unique documents
+2025-02-15 03:13:34,103 - lightrag - INFO - Inserting 56 vectors to chunks
+2025-02-15 03:32:50,663 - lightrag - INFO - Inserting 309 vectors to entities
+2025-02-15 03:33:02,486 - lightrag - INFO - Inserting 274 vectors to relationships
+2025-02-15 03:33:08,334 - lightrag - INFO - Writing graph with 359 nodes, 274 edges
+2025-02-15 03:33:09,571 - lightrag - INFO - Using hybrid mode for query processing
+2025-02-15 03:33:09,686 - lightrag - INFO - Query: Walmart (WTD), Target, Sales figures, Consumer behavior, top_k: 5, cosine: 0.2
+2025-02-15 03:33:09,849 - lightrag - INFO - Query: Retail sales, Comparison of companies, Business performance, top_k: 5, cosine: 0.2
+2025-02-15 03:33:09,856 - lightrag - INFO - Global query uses 10 entites, 5 relations, 5 text units
+2025-02-15 03:33:09,861 - lightrag - INFO - Local query uses 5 entites, 14 relations, 8 text units
+2025-02-15 03:33:21,647 - lightrag - INFO - Query: WTD sales vs Target? , top_k: 60, cosine: 0.2
+2025-02-15 03:33:21,657 - lightrag - INFO - Truncate 56 to 19 chunks
+2025-02-15 03:35:17,808 - lightrag - INFO - Logger initialized for working directory: ./dickens/sql_sample_kb_glm
+2025-02-15 03:35:17,832 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-15 03:35:17,843 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-15 03:35:17,844 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-15 03:35:17,844 - lightrag - INFO - Load KV text_chunks with 56 data
+2025-02-15 03:35:17,934 - lightrag - INFO - Loaded graph from ./dickens/sql_sample_kb_glm/graph_chunk_entity_relation.graphml with 359 nodes, 274 edges
+2025-02-15 03:35:17,954 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-15 03:35:18,102 - lightrag - INFO - Query: WTD sales vs Target? , top_k: 5, cosine: 0.2
+2025-02-15 03:35:18,516 - lightrag - INFO - Truncate 5 to 5 chunks
+2025-02-15 03:35:28,454 - lightrag - INFO - Query: WTD sales vs Target? , top_k: 60, cosine: 0.2
+2025-02-15 03:35:28,462 - lightrag - INFO - Truncate 56 to 19 chunks
+2025-02-15 03:47:25,726 - lightrag - INFO - Logger initialized for working directory: ./dickens/sql_sample_kb_glm
+2025-02-15 03:47:25,751 - lightrag - INFO - Load KV json_doc_status_storage with 0 data
+2025-02-15 03:47:25,762 - lightrag - INFO - Load KV llm_response_cache with 3 data
+2025-02-15 03:47:25,763 - lightrag - INFO - Load KV full_docs with 1 data
+2025-02-15 03:47:25,763 - lightrag - INFO - Load KV text_chunks with 56 data
+2025-02-15 03:47:25,856 - lightrag - INFO - Loaded graph from ./dickens/sql_sample_kb_glm/graph_chunk_entity_relation.graphml with 359 nodes, 274 edges
+2025-02-15 03:47:25,876 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-15 03:47:27,139 - lightrag - INFO - Query: WTD sales vs Target? , top_k: 5, cosine: 0.2
+2025-02-15 03:47:27,549 - lightrag - INFO - Truncate 5 to 5 chunks
+2025-02-15 03:47:42,091 - lightrag - INFO - Query: WTD sales vs Target? , top_k: 5, cosine: 0.2
+2025-02-15 03:47:42,094 - lightrag - INFO - Truncate 5 to 5 chunks

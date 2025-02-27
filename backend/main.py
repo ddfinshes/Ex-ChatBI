@@ -1,9 +1,10 @@
 from fastapi import FastAPI, Body, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from models.llm_deepseck import DeepSeek_Coder_LLM
-from crag import CRAG
 from get_llm_deepseek import LLM
-from lightrag_deepseek import my_lightrag
+
+# lightrag have error for import 
+# from lightrag_deepseek import my_lightrag
 import uvicorn  # FastAPI推荐的生产级服务器
 from typing import Dict, Any
 from pydantic import BaseModel, Field
@@ -40,7 +41,6 @@ def get_sql_code(sql_response):
     sql_code_blocks = re.findall(sql_pattern, sql_response, re.DOTALL)
     sql_code_blocks = [f"```sql\n{sql_code}\n```" for sql_code in sql_code_blocks]
     
-    
     return sql_code_blocks
 
 
@@ -62,35 +62,55 @@ async def query_handler(request: Dict[str, Any]):
             raise HTTPException(status_code=400, detail="Missing query parameter")
         
         # 知识库检索
-        rag_response = my_lightrag(user_query)
-        
+        print("==========================my_lightrag========================================")
+        # rag_response = my_lightrag(user_query)
+        sql_code = """
+        ```sql
+            SELECT
+            COUNT(*) AS open_stores_count
+            FROM
+            edw_dim_store_prod
+            WHERE
+            date_code BETWEEN '2025-02-10' AND '2025-02-24'
+            AND open_flag = 'open'
+            AND country = 'Mainland';
+        ```
+        """
+        excute_sql_output = excute_sql(sql_code.replace('```sql\n', '').replace('\n```', ''))
+        final_response = {
+            "code": sql_code,
+            "data": str(excute_sql_output),
+        }
         # 构造LLM提示词
-        llm_prompt = (
-            f"Generate executable PostgreSQL code that correctly answers {user_query} "
-            f"based on {rag_response}. "
-        )
+        # llm_prompt = (
+        #     f"Generate executable PostgreSQL code that correctly answers {user_query} "
+        #     f"based on {rag_response}. "
+        # )
         
         # 调用LLM生成SQL
-        sql_response = LLM(llm_prompt)
-        logging.info('*** Generated SQL ***', sql_response)
+        # sql_response = LLM(llm_prompt)
+        # print('*** Generated SQL ***', sql_response)
         
         # 提取SQL代码块
-        sql_code_blocks = get_sql_code(sql_response)
+        # sql_code_blocks = get_sql_code(rag_response)
         # logging.info('*** SQL Code ***', sql_code_blocks)
 
         # 执行SQL代码
-        excute_sql_res = excute_sql(sql_code_blocks[0].replace('```sql\n', '').replace('\n```', ''))
-        print('*** excute_sql_res ***', excute_sql_res)
-
-
+        # excute_sql_res = excute_sql(sql_code_blocks[0].replace('```sql\n', '').replace('\n```', ''))
+        print('*** excute_sql_res***', final_response)
         # 返回标准化响应
-        return {"response": sql_code_blocks[0]}
+        return {"response": final_response}
     
     except Exception as e:
         # 异常处理与日志记录
         import traceback
         traceback.print_exc()  # 打印完整堆栈跟踪
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/executesql")
+def execute_sql(sql_code):
+    excute_sql_res = excute_sql(sql_code[0].replace('```sql\n', '').replace('\n```', ''))
+    return {"response": excute_sql_res}
 
 if __name__ == "__main__":
     # 生产部署推荐使用: 
