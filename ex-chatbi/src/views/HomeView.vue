@@ -12,49 +12,7 @@
 				<span style="font-weight: bold; padding-left: 10px">TransBI</span>
 			</el-row>
 		</el-header>
-		<el-container>
-			<el-aside
-				id="selectPanelContainer"
-				width="105px">
-				<button
-					@click="drawer = true"
-					type="button"
-					class="btn btn-link"
-					style="border-top: 10px; margin-bottom: 15px; border-left: 5px solid white; padding-left: 26px">
-					<img
-						style="width: 48px; height: 48px"
-						src="@/assets/image/database.png"
-						alt="..."
-						:fit="`fill`" />
-				</button>
-				<button
-					@click="drawer = true"
-					type="button"
-					class="btn btn-link"
-					style="margin-bottom: 15px; border-left: 5px solid none; padding-left: 26px">
-					<img
-						style="width: 48px; height: 48px"
-						src="@/assets/image/chat_history.png"
-						alt="..."
-						:fit="`fill`" />
-				</button>
-				<button
-					@click="saveLog"
-					type="button"
-					class="btn btn-link"
-					style="margin-bottom: 15px; border-left: 5px solid none; padding-left: 26px">
-					<img
-						style="width: 48px; height: 48px"
-						src="@/assets/image/save.png"
-						alt="..."
-						:fit="`fill`" />
-				</button>
-				<el-drawer
-					:visible.sync="drawer"
-					:direction="direction">
-					<!-- <SelectBar /> -->
-				</el-drawer>
-			</el-aside>
+		<el-container class="body">
 			<el-main id="mainContainer">
 				<el-container id="DBPanelContainerFather">
 					<el-main id="mainView">
@@ -66,18 +24,26 @@
 					</el-main>
 				</el-container>
 			</el-main>
+
+			<el-aside
+				id="selectPanelContainer"
+				width="605px">
+				<SelectPanelVue/>
+			</el-aside>
 		</el-container>
 	</el-container>
 </template>
 
 <script>
 import ChatInterfaceVue from '../components/ChatInterface.vue'
+import SelectPanelVue from '../components/SelectPanel.vue'
+
 // @ is an alias to /src
 export default {
 	name: "HomeView",
 	components: {
-		ChatInterfaceVue
-		
+		ChatInterfaceVue,
+		SelectPanelVue
 	},
 	data() {
 		return {
@@ -112,7 +78,7 @@ export default {
 }
 #selectPanelContainer {
 	height: 1352px;
-	background-color: #2c2c2c;
+	background-color: #f5f5f5;
 }
 #DBPanelContainer {
 	height: 1352px;
@@ -129,4 +95,5 @@ export default {
 	background-color: #f3f3f3;
 	padding: 0%;
 }
+
 </style>
