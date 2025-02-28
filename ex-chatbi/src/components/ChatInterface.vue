@@ -74,9 +74,14 @@
                   <p v-else class="no-data">no data</p>
                 </el-tab-pane>
                 <el-tab-pane label="chart" name="chart">
-                   <!-- 柱状图、折线图和饼图 -->
-                   
-                   </el-tab-pane>
+                  <!-- 柱状图、折线图和饼图 -->
+                  <div id="vis_tag">
+                    <div
+                      :id="messages.vis_data.vis_tag"
+                      style="width: 600px; height: 400px"
+                    ></div>
+                  </div>
+                </el-tab-pane>
                 <el-tab-pane label="code" name="code">
                   <MarkdownRenderer
                     class="sql-code"
@@ -106,6 +111,8 @@ import { ref } from "vue";
 import axios from "axios";
 import MarkdownRenderer from "./MarkdownRenderer.vue";
 import { useTabs } from "@/assets/ts/useTabs.ts";
+import { chart } from "@/assets/ts/chart.ts";
+import { nextTick } from "vue";
 export default {
   components: {
     MarkdownRenderer,
@@ -119,6 +126,7 @@ export default {
         code: "",
         data: {},
         user: { text: "", type: "user", timestamp: "" },
+        vis_data: {},
       },
     };
   },
@@ -135,9 +143,7 @@ export default {
             .join("\n")
         : "No SQL code found";
     },
-    chart() {
 
-    },
     async sendQuery() {
       if (!this.query) return;
 
@@ -169,10 +175,9 @@ export default {
           timestamp: new Date().toLocaleTimeString(),
         };
         this.messages.data = res.data.response.data; //字典类型
-        
+        this.messages.vis_data = res.data.response.vis_data;
         // 处理chart
-        console.log(res.data.response['vis_tag'])
-        chart(res.data.response['vis_tag'])
+        chart(res.data.response.vis_data);
       } catch (error) {
         console.error("Error fetching response:", error);
       }
@@ -189,6 +194,10 @@ export default {
   mounted() {
     // 如果需要初始化数据，可以在这里添加逻辑
     console.log("组件已挂载");
+    nextTick(() => {
+      console.log("组件已挂载");
+
+    });
   },
 };
 </script>

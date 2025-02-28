@@ -31,13 +31,13 @@ def get_vis_tag(user_query, excute_sql_output):
                 }
             }
         # Processing Requirements
-            1. Strictly limit the output to only one of the following three options: bar chart / line chart / pie chart.
+            1. Strictly limit the output to only one of the following three options: bar-chart / line-chart / pie-chart.
             2. Must verify whether the data characteristics meet the applicable conditions of the selected chart type.
             3. If the data does not meet the conditions for any chart type, return a bar chart by default.
             4. The output must be in pure JSON format, with no additional explanations allowed.
         # Output Example
         ```json
-            {"vis_tag":"bar chart"}
+            {"vis_tag":"bar-chart"}
         ```
     """
     prompt_user = {
