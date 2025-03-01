@@ -3,11 +3,10 @@
 uvicorn main:app --reload --host 0.0.0.0 --port 5000
 
 2. Start frontend
-
 ```bash
 cd ./frontend
 npm install # you may omit if have run it.
 npm run serve
-# maybe
+# or
 npm run dev
 ```

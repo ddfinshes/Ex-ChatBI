@@ -113,17 +113,19 @@ if __name__ == "__main__":
     cursor = conn.cursor()
     
     # CSV文件路径
-    table_name = 'edw_dim_store'
-    CSV_FILE = "./data/edw_dim_store/edw_dim_store_2025-02-10.csv"
-    root_path = './data/2025-02-11'
+    table_name = ''
+    CSV_FILE = ""
+    root_path = './data/2025-02-17'
     dirs = os.listdir(root_path)
+    i = 0
     for dir in dirs:
         table_name = dir.split('-')[0]
         CSV_FILE = os.path.join(root_path, dir)
-        
+        i += 1
         if(insert_query(conn, cursor, table_name, CSV_FILE)):
             print('Error: '+table_name)
-            break
+            print("Error index: ", i-1)
+            continue
         
         
     if conn:

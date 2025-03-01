@@ -6,46 +6,84 @@
           <!-- 只有当有消息时才显示 message-container -->
           <div class="message-container" v-if="messageHistory.length > 0">
             <!-- 遍历历史消息 -->
-            <div v-for="(message, index) in messageHistory" :key="index" :class="message.type">
+            <div
+              v-for="(message, index) in messageHistory"
+              :key="index"
+              :class="[
+                'message-wrapper',
+                message.type === 'user' ? 'user-message' : 'ai-message',
+              ]"
+            >
               <!-- 用户消息 -->
-              <div v-if="message.type === 'user'" class="user">
-                <div class="message-text" v-html="message.text"></div>
-                <span class="timestamp">{{ message.timestamp }}</span>
+              <div v-if="message.type === 'user'" class="user-content">
+                <img
+                  class="avatar"
+                  src="@/assets/image/human.png"
+                  alt="User Avatar"
+                />
+                <div class="message-bubble user-bubble">
+                  <div class="message-text" v-html="message.text"></div>
+                  <span class="timestamp">{{ message.timestamp }}</span>
+                </div>
+                
               </div>
-              <!-- LLM 响应 -->
-              <div v-else class="ai">
-                <el-tabs v-model="activeName" type="card" class="demo-tabs" @tab-click="handleClick">
-                  <el-tab-pane label="data" name="data">
-                    <table v-if="message.data" class="result-table">
-                      <thead>
-                        <tr>
-                          <th v-for="(column, idx) in message.data.column" :key="idx">
-                            {{ column }}
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr v-for="(row, rowIdx) in message.data.data" :key="rowIdx">
-                          <td v-for="(cell, cellIdx) in row" :key="cellIdx">
-                            {{ cell }}
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <p v-else class="no-data">no data</p>
-                  </el-tab-pane>
-                  <el-tab-pane label="chart" name="chart">
-                    <div id="chart-container">
-                      <div :id="message.vis_data?.vis_tag" style="width: 600px; height: 400px">
-                    </div>
-                    
-                    </div>
-                  </el-tab-pane>
-                  <el-tab-pane label="code" name="code">
-                    <MarkdownRenderer class="sql-code" :content="message.code?.text || ''" />
-                  </el-tab-pane>
-                </el-tabs>
-                <span class="timestamp">{{ message.timestamp }}</span>
+
+              <!-- AI 响应 -->
+              <div v-else class="ai-content">
+                <img
+                  class="avatar"
+                  src="@/assets/image/robot.png"
+                  alt="AI Avatar"
+                />
+                <div class="message-bubble ai-bubble">
+                  <el-tabs
+                    v-model="activeName"
+                    type="card"
+                    class="demo-tabs"
+                    @tab-click="handleClick"
+                  >
+                    <el-tab-pane label="data" name="data">
+                      <table v-if="message.data" class="result-table">
+                        <thead>
+                          <tr>
+                            <th
+                              v-for="(column, idx) in message.data.column"
+                              :key="idx"
+                            >
+                              {{ column }}
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr
+                            v-for="(row, rowIdx) in message.data.data"
+                            :key="rowIdx"
+                          >
+                            <td v-for="(cell, cellIdx) in row" :key="cellIdx">
+                              {{ cell }}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <p v-else class="no-data">no data</p>
+                    </el-tab-pane>
+                    <el-tab-pane label="chart" name="chart">
+                      <div id="chart-container">
+                        <div
+                          :id="message.vis_data?.vis_tag"
+                          style="width: 600px; height: 400px"
+                        ></div>
+                      </div>
+                    </el-tab-pane>
+                    <el-tab-pane label="code" name="code">
+                      <MarkdownRenderer
+                        class="sql-code"
+                        :content="message.code?.text || ''"
+                      />
+                    </el-tab-pane>
+                  </el-tabs>
+                  <span class="timestamp">{{ message.timestamp }}</span>
+                </div>
               </div>
             </div>
           </div>
@@ -84,14 +122,14 @@ export default {
   },
   methods: {
     handleClick(tab) {
-      console.log(tab)
-      const tab_name =tab.props.name;
+      console.log(tab);
+      const tab_name = tab.props.name;
       if (tab_name === "chart") {
         // 找到当前激活的消息（假设是最后一条 AI 消息）
         const lastAiMessage = this.messageHistory
           .slice()
           .reverse()
-          .find(msg => msg.type === "ai");
+          .find((msg) => msg.type === "ai");
         if (lastAiMessage && lastAiMessage.vis_data) {
           nextTick(() => {
             chart(lastAiMessage.vis_data.vis_tag, lastAiMessage.vis_data);
@@ -145,14 +183,16 @@ export default {
           data: res.data.response.data,
           vis_data: {
             ...res.data.response.vis_data,
-            vis_tag: res.data.response.vis_data.vis_tag || `chart_${Date.now()}_${this.messageHistory.length}`,
+            vis_tag:
+              res.data.response.vis_data.vis_tag ||
+              `chart_${Date.now()}_${this.messageHistory.length}`,
           },
-         
+
           timestamp: new Date().toLocaleTimeString(),
         });
 
         // 处理图表
-        console.log(res.data.response.vis_data)
+        console.log(res.data.response.vis_data);
         // const vis_id = "vis_tag_"+String(this.messageHistory.length-1)
         // chart(res.data.response.vis_data, vis_id);
       } catch (error) {
@@ -202,11 +242,11 @@ export default {
   justify-content: space-between;
 }
 
-.message-container {
+/* .message-container {
   flex: 1;
   overflow-y: auto;
   max-width: 100%;
-}
+} */
 
 .user {
   border-bottom: 3px solid #a5a5a5;
@@ -268,5 +308,96 @@ export default {
 
 .message-text {
   white-space: pre-line;
+}
+
+/* --- */
+.message-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.message-wrapper {
+  display: flex;
+  margin-bottom: 20px;
+  align-items: flex-start;
+}
+
+.user-message {
+  justify-content: flex-end;
+}
+
+.ai-message {
+  justify-content: flex-start;
+}
+
+.user-content, .ai-content {
+  display: flex;
+  align-items: flex-start;
+  max-width: 70%;
+}
+
+.user-content {
+  flex-direction: row-reverse;
+}
+
+.ai-content {
+  flex-direction: row;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin: 0 10px;
+  object-fit: cover;
+}
+
+.message-bubble {
+  padding: 12px 16px;
+  border-radius: 12px;
+  position: relative;
+}
+
+.user-bubble {
+  background-color: #409EFF;
+  color: white;
+  margin-left: 10px;
+}
+
+.ai-bubble {
+  background-color: #f5f5f5;
+  color: #333;
+  margin-right: 10px;
+}
+
+.timestamp {
+  font-size: 12px;
+  margin-top: 4px;
+  display: block;
+}
+
+.user-bubble .timestamp {
+  color: rgba(255, 255, 255, 0.7);
+  text-align: right;
+}
+
+.ai-bubble .timestamp {
+  color: #666;
+  text-align: left;
+}
+
+.demo-tabs {
+  width: 100%;
+}
+
+.result-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.no-data {
+  padding: 10px;
+  color: #666;
 }
 </style>
