@@ -1,15 +1,19 @@
 import * as d3 from 'd3';
-
-export function chart(vis_tag:any, vis_data:any) {
-  // 使用动态传入的 vis_tag，而不是固定的 "vis-tag"
-  const container = document.getElementById(vis_tag);
-  if (!container) {
-    console.error(`Container with ID ${vis_tag} not found`);
-    return;
-  }
+// LLM需要给出横轴、纵轴、变化数据、标题
+// X轴：类别；
+// Y轴：数值
+// Title: 
+// legend: x轴，y轴标签
+// Tooltip
+export function chart(vis_data: any) {
+  // 获取容器
+  
+  const container = document.getElementById("vis-tag");
+  console.log(container);
+  if (!container) return;
 
   // 清空现有内容
-  d3.select(`#${vis_tag}`).selectAll("*").remove();
+  d3.select(`#vis-tag`).selectAll("*").remove();
 
   // 设置图表尺寸
   const width = 600;
@@ -18,7 +22,7 @@ export function chart(vis_tag:any, vis_data:any) {
 
   // 创建SVG容器
   const svg = d3
-    .select(`#${vis_tag}`)
+    .select(`#vis-tag`)
     .append("svg")
     .attr("width", width)
     .attr("height", height);
@@ -156,68 +160,12 @@ function drawBarChart(svg: any, vis_data: any, width: number, height: number, ma
     .text(vis_data["title"]);
 }
 
-// 绘制折线图（简单实现）
-function drawLineChart(svg, vis_data, width, height, margin) {
-  const data = vis_data["x"].map((x, i) => ({
-    xvalue: x,
-    yvalue: vis_data["y"][i],
-  }));
-
-  const x = d3
-    .scalePoint()
-    .domain(vis_data['x'])
-    .range([margin.left, width - margin.right]);
-
-  const y = d3
-    .scaleLinear()
-    .domain([Math.min(0, d3.min(vis_data['y'])), d3.max(vis_data['y'])])
-    .nice()
-    .range([height - margin.bottom, margin.top]);
-
-  const line = d3
-    .line()
-    .x(d => x(d.xvalue))
-    .y(d => y(d.yvalue));
-
-  svg
-    .append("path")
-    .datum(data)
-    .attr("fill", "none")
-    .attr("stroke", "steelblue")
-    .attr("stroke-width", 2)
-    .attr("d", line);
-
-  svg
-    .append("g")
-    .attr("transform", `translate(0, ${height - margin.bottom})`)
-    .call(d3.axisBottom(x));
-
-  svg
-    .append("g")
-    .attr("transform", `translate(${margin.left}, 0)`)
-    .call(d3.axisLeft(y));
+// 占位：折线图实现（未完成）
+function drawLineChart(svg: any, vis_data: any, width: number, height: number, margin: any) {
+  console.log("Line chart not implemented yet.");
 }
 
-// 绘制饼图（简单实现）
-function drawPieChart(svg, vis_data, width, height, margin) {
-  const radius = Math.min(width, height) / 2 - margin.top;
-  const pie = d3.pie().value(d => d.yvalue);
-  const arc = d3.arc().innerRadius(0).outerRadius(radius);
-
-  const data = vis_data["x"].map((x, i) => ({
-    xvalue: x,
-    yvalue: vis_data["y"][i],
-  }));
-
-  const arcs = svg
-    .selectAll("arc")
-    .data(pie(data))
-    .enter()
-    .append("g")
-    .attr("transform", `translate(${width / 2}, ${height / 2})`);
-
-  arcs
-    .append("path")
-    .attr("d", arc)
-    .attr("fill", (_, i) => d3.schemeCategory10[i % 10]);
+// 占位：饼图实现（未完成）
+function drawPieChart(svg: any, vis_data: any, width: number, height: number, margin: any) {
+  console.log("Pie chart not implemented yet.");
 }

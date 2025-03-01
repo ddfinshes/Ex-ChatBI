@@ -56,13 +56,20 @@ async def query_handler(request: Dict[str, Any]):
     - JSON响应: {"response": "生成的SQL语句"}
     """
     try:
-        # 参数提取与验证
+        # 1. 参数提取与验证
         user_query = request['query']
         
         if not user_query:
             raise HTTPException(status_code=400, detail="Missing query parameter")
         
-        # 知识库检索
+        # 2. 知识库检索+生成sql代码
+        ###
+        # rag_response: {
+        # user_query_understanding: "",
+        # thinking_flow: "",
+        # final_sql_code: ""
+        #  }
+        ###
         print("==========================my_lightrag========================================")
         # sql_code = my_lightrag(user_query)
         sql_code = """
@@ -77,13 +84,15 @@ async def query_handler(request: Dict[str, Any]):
             AND country = 'Mainland';
         ```
         """
+
+        # 3. 执行生成的sql 代码
         excute_sql_output = excute_sql(sql_code.replace('```sql\n', '').replace('\n```', ''))
         final_response = {
             "code": sql_code,
             "data": excute_sql_output,
         }
 
-        # chart准备数据
+        # 4. chart准备数据
         # 思路：将用户query和查询得到的数据给到LLM，让其推荐可视化的格式（柱状图、折线图、饼状图）
         # user_query之后需要改成LLM理解过后的
         user_query = "What is the sales MOM% for APAC EC?"
@@ -101,23 +110,7 @@ async def query_handler(request: Dict[str, Any]):
         # vis_tag = {"vis_tag":"bar-chart"}
         final_response['vis_data'] = vis_data
         
-        # 构造LLM提示词
-        # llm_prompt = (
-        #     f"Generate executable PostgreSQL code that correctly answers {user_query} "
-        #     f"based on {rag_response}. "
-        # )
-        
-        # 调用LLM生成SQL
-        # sql_response = LLM(llm_prompt)
-        # print('*** Generated SQL ***', sql_response)
-        
-        # 提取SQL代码块
-        # sql_code_blocks = get_sql_code(rag_response)
-        # logging.info('*** SQL Code ***', sql_code_blocks)
 
-        # 执行SQL代码
-        # excute_sql_res = excute_sql(sql_code_blocks[0].replace('```sql\n', '').replace('\n```', ''))
-        print('*** excute_sql_res***', final_response)
         # 返回标准化响应
         return {"response": final_response}
     
