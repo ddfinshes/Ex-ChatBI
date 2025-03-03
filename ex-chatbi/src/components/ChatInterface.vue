@@ -95,6 +95,7 @@
               @keydown.enter="handleEnter"
             ></el-input>
             <el-button type="primary" @click="sendQuery">Send</el-button>
+            <SelectPanel ref="selectPanelKey"/>
           </div>
         </el-main>
       </el-container>
@@ -106,6 +107,8 @@
 import { ref } from "vue";
 import axios from "axios";
 import MarkdownRenderer from "./MarkdownRenderer.vue";
+import SelectPanel from './SelectPanel.vue'
+import { useQueryStore } from '@/stores/query';
 import { chart } from "@/assets/ts/chart.ts";
 import { nextTick } from "vue";
 
@@ -117,8 +120,13 @@ export default {
     return {
       activeName: "data", // 默认激活的 tab
       query: "", // 输入框的值
+      currentQuery: "",
       messageHistory: [], // 存储所有对话历史
     };
+  },
+  setup() {
+    const queryStore = useQueryStore();
+    return { queryStore };
   },
   methods: {
     handleClick(tab) {
@@ -156,14 +164,17 @@ export default {
         text: formattedText,
         timestamp: new Date().toLocaleTimeString(),
       });
+      console.log(this.messageHistory)
+      this.currentQuery = this.query;
 
-      const currentQuery = this.query;
+      this.queryStore.setCurrentQuery(this.query);
+      console.log('Parent sending to Pinia:', this.queryStore.currentQuery);
       this.query = ""; // 清空输入框
 
       try {
         const res = await axios.post(
           "/api/query",
-          { query: currentQuery },
+          { query: this.currentQuery },
           {
             headers: {
               "Content-Type": "application/json",
@@ -171,6 +182,9 @@ export default {
             },
           }
         );
+
+        this.queryStore.setResponse(res.data);
+        console.log('Parent stored response in Pinia:', res.data);
 
         // 将 LLM 响应添加到历史记录
         this.messageHistory.push({
@@ -207,6 +221,11 @@ export default {
         this.sendQuery();
       }
     },
+
+    handleSubmitQuery(newQuery) {
+      this.currentQuery = newQuery
+      // this.query = newQuery
+    }
   },
   mounted() {
     console.log("组件已挂载");
