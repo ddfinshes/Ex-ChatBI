@@ -27,7 +27,7 @@
 
 			<el-aside
 				id="selectPanelContainer"
-				width="605px">
+				width="905px">
 				<SelectPanelVue/>
 			</el-aside>
 		</el-container>
@@ -95,5 +95,13 @@ export default {
 	background-color: #f3f3f3;
 	padding: 0%;
 }
+
+/* .body {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
 
 </style>
