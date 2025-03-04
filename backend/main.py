@@ -12,6 +12,7 @@ from pydantic import BaseModel, Field
 import re
 import logging
 from db.connect import excute_sql
+from utils.getVisTag import get_vis_tag
 
 # 初始化FastAPI应用
 app = FastAPI(
@@ -96,22 +97,19 @@ async def query_handler(request: Dict[str, Any]):
         # 思路：将用户query和查询得到的数据给到LLM，让其推荐可视化的格式（柱状图、折线图、饼状图）
         # user_query之后需要改成LLM理解过后的
         user_query = "What is the sales MOM% for APAC EC?"
-        # vis_tag = get_vis_tag(user_query, excute_sql_output)
-        # 注意！！！！死数据
-        vis_data = {
-            "vis_tag": "bar-chart",
-            "x": ["sales_amt", "sales_notax"],
-            "y": [-5235, -4634],
-            "title": "202502's sales for APAC EC",
-            "x-legend": "class",
-            "y-legend": "sales",
-            "tooltip": "sales_notax_mom_per:-1.000290111880263"
-        }
-        # vis_tag = {"vis_tag":"bar-chart"}
+        vis_data = get_vis_tag(user_query, excute_sql_output)
+        # ===========================================================
+        # vis_data = {
+        #     "vis_tag": "bar-chart",
+        #     "x": ["sales_amt", "sales_notax"],
+        #     "y": [-5235, -4634],
+        #     "title": "202502's sales for APAC EC",
+        #     "x-legend": "class",
+        #     "y-legend": "sales",
+        #     "tooltip": "sales_notax_mom_per:-1.000290111880263"
+        # }
         final_response['vis_data'] = vis_data
-        
 
-        # 返回标准化响应
         return {"response": final_response}
     
     except Exception as e:

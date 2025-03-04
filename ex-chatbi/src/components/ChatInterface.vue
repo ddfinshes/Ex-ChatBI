@@ -70,7 +70,7 @@
                     <el-tab-pane label="chart" name="chart">
                       <div id="chart-container">
                         <div
-                          :id="message.vis_data?.vis_tag"
+                          :id="message.vis_tag_name"
                           style="width: 600px; height: 400px"
                         ></div>
                       </div>
@@ -126,13 +126,16 @@ export default {
       const tab_name = tab.props.name;
       if (tab_name === "chart") {
         // 找到当前激活的消息（假设是最后一条 AI 消息）
+      
         const lastAiMessage = this.messageHistory
           .slice()
           .reverse()
           .find((msg) => msg.type === "ai");
+        console.log("lastAiMessage: ", lastAiMessage)
         if (lastAiMessage && lastAiMessage.vis_data) {
           nextTick(() => {
-            chart(lastAiMessage.vis_data.vis_tag, lastAiMessage.vis_data);
+            console.log("lastAiMessage.vis_data", lastAiMessage.vis_data)
+            chart(lastAiMessage.vis_tag_name, lastAiMessage.vis_data);
           });
         }
       }
@@ -181,15 +184,16 @@ export default {
             timestamp: new Date().toLocaleTimeString(),
           },
           data: res.data.response.data,
-          vis_data: {
-            ...res.data.response.vis_data,
-            vis_tag:
-              res.data.response.vis_data.vis_tag ||
-              `chart_${Date.now()}_${this.messageHistory.length}`,
-          },
-
+          vis_data: res.data.response.vis_data,
+          vis_tag_name: `chart_${Date.now()}_${this.messageHistory.length}`,
+          //{ 
+            // vis_tag:
+            //   res.data.response.vis_data.vis_tag ||
+            //   `chart_${Date.now()}_${this.messageHistory.length}`,
+          //},
           timestamp: new Date().toLocaleTimeString(),
         });
+
 
         // 处理图表
         console.log(res.data.response.vis_data);
