@@ -70,7 +70,7 @@
                     <el-tab-pane label="chart" name="chart">
                       <div id="chart-container">
                         <div
-                          :id="message.vis_data?.vis_tag"
+                          :id="message.vis_tag_name"
                           style="width: 600px; height: 400px"
                         ></div>
                       </div>
@@ -95,6 +95,7 @@
               @keydown.enter="handleEnter"
             ></el-input>
             <el-button type="primary" @click="sendQuery">Send</el-button>
+            <SelectPanel ref="selectPanelKey"/>
           </div>
         </el-main>
       </el-container>
@@ -106,6 +107,8 @@
 import { ref } from "vue";
 import axios from "axios";
 import MarkdownRenderer from "./MarkdownRenderer.vue";
+import SelectPanel from './SelectPanel.vue'
+import { useQueryStore } from '@/stores/query';
 import { chart } from "@/assets/ts/chart.ts";
 import { nextTick } from "vue";
 
@@ -117,8 +120,13 @@ export default {
     return {
       activeName: "data", // 默认激活的 tab
       query: "", // 输入框的值
+      currentQuery: "",
       messageHistory: [], // 存储所有对话历史
     };
+  },
+  setup() {
+    const queryStore = useQueryStore();
+    return { queryStore };
   },
   methods: {
     handleClick(tab) {
@@ -126,13 +134,16 @@ export default {
       const tab_name = tab.props.name;
       if (tab_name === "chart") {
         // 找到当前激活的消息（假设是最后一条 AI 消息）
+      
         const lastAiMessage = this.messageHistory
           .slice()
           .reverse()
           .find((msg) => msg.type === "ai");
+        console.log("lastAiMessage: ", lastAiMessage)
         if (lastAiMessage && lastAiMessage.vis_data) {
           nextTick(() => {
-            chart(lastAiMessage.vis_data.vis_tag, lastAiMessage.vis_data);
+            console.log("lastAiMessage.vis_data", lastAiMessage.vis_data)
+            chart(lastAiMessage.vis_tag_name, lastAiMessage.vis_data);
           });
         }
       }
@@ -156,14 +167,17 @@ export default {
         text: formattedText,
         timestamp: new Date().toLocaleTimeString(),
       });
+      console.log(this.messageHistory)
+      this.currentQuery = this.query;
 
-      const currentQuery = this.query;
+      this.queryStore.setCurrentQuery(this.query);
+      console.log('Parent sending to Pinia:', this.queryStore.currentQuery);
       this.query = ""; // 清空输入框
 
       try {
         const res = await axios.post(
           "/api/query",
-          { query: currentQuery },
+          { query: this.currentQuery },
           {
             headers: {
               "Content-Type": "application/json",
@@ -171,6 +185,9 @@ export default {
             },
           }
         );
+
+        this.queryStore.setResponse(res.data);
+        console.log('Parent stored response in Pinia:', res.data);
 
         // 将 LLM 响应添加到历史记录
         this.messageHistory.push({
@@ -181,15 +198,16 @@ export default {
             timestamp: new Date().toLocaleTimeString(),
           },
           data: res.data.response.data,
-          vis_data: {
-            ...res.data.response.vis_data,
-            vis_tag:
-              res.data.response.vis_data.vis_tag ||
-              `chart_${Date.now()}_${this.messageHistory.length}`,
-          },
-
+          vis_data: res.data.response.vis_data,
+          vis_tag_name: `chart_${Date.now()}_${this.messageHistory.length}`,
+          //{ 
+            // vis_tag:
+            //   res.data.response.vis_data.vis_tag ||
+            //   `chart_${Date.now()}_${this.messageHistory.length}`,
+          //},
           timestamp: new Date().toLocaleTimeString(),
         });
+
 
         // 处理图表
         console.log(res.data.response.vis_data);
@@ -207,6 +225,11 @@ export default {
         this.sendQuery();
       }
     },
+
+    handleSubmitQuery(newQuery) {
+      this.currentQuery = newQuery
+      // this.query = newQuery
+    }
   },
   mounted() {
     console.log("组件已挂载");
