@@ -65,7 +65,6 @@ async def query_handler(request: Dict[str, Any]):
     try:
         # 1. 参数提取与验证
         user_query = request['query']
-        
         if not user_query:
             raise HTTPException(status_code=400, detail="Missing query parameter")
         
