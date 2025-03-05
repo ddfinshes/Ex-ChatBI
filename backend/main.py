@@ -1,9 +1,9 @@
 from fastapi import FastAPI, Body, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from models.llm_deepseck import DeepSeek_Coder_LLM
+# from models.llm_deepseck import DeepSeek_Coder_LLM
 # from utils.get_llm_deepseek import LLM
 # from utils.getVisTag import get_vis_tag
-
+from LightRAG.examples.lightrag_openai_compatible_demo import query
 # lightrag have error for import 
 # from lightrag_deepseek import my_lightrag
 import uvicorn  # FastAPI推荐的生产级服务器
@@ -28,6 +28,7 @@ app.add_middleware(
     allow_methods=["POST", "GET"],  # 根据实际需求调整
     allow_headers=["*"],
 )
+
 
 # 初始化DeepSeek模型（保持与原始代码相同的初始化方式）
 # 注意：如果实际使用时需要保持模型实例，建议使用lifespan管理
@@ -72,18 +73,8 @@ async def query_handler(request: Dict[str, Any]):
         ###
         print("==========================my_lightrag========================================")
         # sql_code = my_lightrag(user_query)
-        sql_code = """
-        ```sql
-            SELECT
-            COUNT(*) AS open_stores_count
-            FROM
-            edw_dim_store_prod
-            WHERE
-            date_code BETWEEN '2025-02-10' AND '2025-02-24'
-            AND open_flag = 'open'
-            AND country = 'Mainland';
-        ```
-        """
+
+        sql_code = await query(user_query)
 
         # 3. 执行生成的sql 代码
         excute_sql_output = excute_sql(sql_code.replace('```sql\n', '').replace('\n```', ''))
