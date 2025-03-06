@@ -1204,3 +1204,12 @@ ollama._types.ResponseError: model "glm:9b" not found, try pulling it first (sta
 2025-03-05 22:31:19,707 - lightrag - INFO - Query nodes: Sales, Target, 2025/2/20, Thursday, top_k: 60, cosine: 0.2
 2025-03-05 22:31:25,613 - lightrag - INFO - Local query uses 60 entites, 21 relations, 11 chunks
 2025-03-05 22:31:50,506 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-03-05 22:34:06,362 - lightrag - INFO - Loaded document status storage with 6 records
+2025-03-05 22:34:06,367 - lightrag - INFO - No new unique documents were found.
+2025-03-05 22:34:06,367 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-05 22:34:06,367 - lightrag - INFO - No new unique documents were found.
+2025-03-05 22:34:06,368 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-05 22:34:19,587 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-03-05 22:34:19,588 - lightrag - INFO - Query nodes: WTD, Sales, Target, 2025/2/20, Thursday, top_k: 60, cosine: 0.2
+2025-03-05 22:34:28,453 - lightrag - INFO - Local query uses 60 entites, 15 relations, 7 chunks
+2025-03-05 22:34:47,713 - lightrag - INFO - Inserting 1 to llm_response_cache
