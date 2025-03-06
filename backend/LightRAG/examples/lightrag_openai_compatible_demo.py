@@ -34,7 +34,7 @@ async def llm_model_func(
 async def embedding_func(texts: list[str]) -> np.ndarray:
     return await openai_embed(
         texts,
-        model="text-embedding-3-small",
+        model="text-embedding-3-large",
         api_key='sk-234NEybMLmKyfLjp0bD64709016c4b67B0Cf405a2f90Ba7b',
         base_url='https://api.mixrai.com/v1',
     )
