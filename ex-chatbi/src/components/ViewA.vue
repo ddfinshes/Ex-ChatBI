@@ -2,44 +2,87 @@
 <template>
     <el-row type="flex" justify="space-between" style="padding: 10px">
       <!-- User Input Card -->
-      <el-col :span="8">
-        <el-card shadow="hover" style="width: 180px; margin-right: 10px">
+      <el-col :span="6">
+        <!-- <el-card shadow="hover" style="width: 180px; margin-right: 10px">
           <div slot="header">User Input</div>
           <div style="text-align: left">{{ currentQuery }}</div>
+        </el-card> -->
+
+        <el-card 
+          shadow="hover" 
+          style="width: 160px; margin-right: 10px; padding: 0; border: none;"
+          body-style="padding: 0;"
+        >
+          <div slot="header" style="background-color: #909aa3; color: white; padding: 10px; border-radius: 4px 4px 0 0; text-transform: uppercase; text-align: center;">
+            User Input
+          </div>
+          <div style="background-color: #ffffff; color: #303133; padding: 10px; text-align: left; border-radius: 0 0 4px 4px; min-height: 40px;">
+            {{ currentQuery }}
+          </div>
         </el-card>
       </el-col>
-  
+      
+      <el-col :span="4">
       <div
         class="arrow-connector"
         style="
           position: absolute;
           left: 180px;
           top: 50%;
-          transform: translateY(-50%) rotate(0deg);
-          width: 20px;
-          height: 2px;
-          background-color: #000;
+          transform: translateY(-50%);
+          display: flex;
+          align-items: center;
+          width: 60px;
+          justify-content: space-between;
         "
       >
+        <!-- 左箭头 -->
         <div
           style="
-            position: absolute;
-            top: -5px;
-            right: -8px;
             width: 0;
             height: 0;
             border-top: 5px solid transparent;
             border-bottom: 5px solid transparent;
-            border-left: 8px solid #000;
+            border-right: 8px solid #409EFF;
+          "
+        ></div>
+        
+        <!-- 中间圆点 -->
+        <div
+          style="
+            width: 15px;
+            height: 15px;
+            background-color: #3da59b;
+            border-radius: 50%;
+          "
+        ></div>
+        
+        <!-- 右箭头 -->
+        <div
+          style="
+            width: 0;
+            height: 0;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            border-left: 8px solid #409EFF;
           "
         ></div>
       </div>
-  
+      </el-col>
+
       <!-- Model Understanding Card -->
-      <el-col :span="10">
-        <el-card shadow="hover" style="width: 220px; margin-right: 10px">
-          <div slot="header">Model Understanding</div>
-          <div style="text-align: left">{{ modelResponse }}</div>
+      <el-col :span="8">
+        <el-card 
+          shadow="hover" 
+          style="width: 230px; margin-right: 10px; padding: 0; border: none;"
+          body-style="padding: 0;"
+        >
+          <div slot="header" style="background-color: #909aa3; color: white; padding: 10px; border-radius: 4px 4px 0 0; text-transform: uppercase; text-align: center;">
+            Model Understanding
+          </div>
+          <div style="background-color: #ffffff; color: #303133; padding: 10px; text-align: left; border-radius: 0 0 4px 4px; min-height: 40px;">
+            {{ modelResponse }}
+          </div>
         </el-card>
       </el-col>
   
@@ -115,7 +158,7 @@
         query: '',
         messageHistory: [],
         modelResponse: '',
-        topKSimilar: []
+        topKSimilar: [],
       };
     },
     watch: {

@@ -1,9 +1,9 @@
 from fastapi import FastAPI, Body, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from models.llm_deepseck import DeepSeek_Coder_LLM
+# from models.llm_deepseck import DeepSeek_Coder_LLM
 # from utils.get_llm_deepseek import LLM
 # from utils.getVisTag import get_vis_tag
-
+from LightRAG.examples.lightrag_openai_compatible_demo import query
 # lightrag have error for import 
 # from lightrag_deepseek import my_lightrag
 import uvicorn  # FastAPI推荐的生产级服务器
@@ -11,6 +11,8 @@ from typing import Dict, Any
 from pydantic import BaseModel, Field
 import re
 import logging
+from db.connect import excute_sql
+from utils.getVisTag import get_vis_tag
 from decimal import Decimal
 from sentence_transformers import SentenceTransformer, util
 # from db.connect import excute_sql
@@ -31,6 +33,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 # 初始化DeepSeek模型（保持与原始代码相同的初始化方式）
 # 注意：如果实际使用时需要保持模型实例，建议使用lifespan管理
 # llm = DeepSeek_Coder_LLM(mode_name_or_path="/root/...")
@@ -48,7 +51,7 @@ def get_sql_code(sql_response):
 
 # 存储对话历史
 conversation_history = []  # 列表存储历史查询
-model = SentenceTransformer('all-MiniLM-L6-v2')  # 加载预训练模型计算相似度
+# model = SentenceTransformer('all-MiniLM-L6-v2')  # 加载预训练模型计算相似度
 
 @app.post("/api/query")
 async def query_handler(request: Dict[str, Any]):
@@ -63,7 +66,6 @@ async def query_handler(request: Dict[str, Any]):
     try:
         # 1. 参数提取与验证
         user_query = request['query']
-        
         if not user_query:
             raise HTTPException(status_code=400, detail="Missing query parameter")
         
@@ -77,18 +79,8 @@ async def query_handler(request: Dict[str, Any]):
         ###
         print("==========================my_lightrag========================================")
         # sql_code = my_lightrag(user_query)
-        sql_code = """
-        ```sql
-            SELECT
-            COUNT(*) AS open_stores_count
-            FROM
-            edw_dim_store_prod
-            WHERE
-            date_code BETWEEN '2025-02-10' AND '2025-02-24'
-            AND open_flag = 'open'
-            AND country = 'Mainland';
-        ```
-        """
+
+        sql_code = await query(user_query)
 
         # 3. 执行生成的sql 代码
         # excute_sql_output = excute_sql(sql_code.replace('```sql\n', '').replace('\n```', ''))
@@ -104,24 +96,24 @@ async def query_handler(request: Dict[str, Any]):
         conversation_history.append(user_query)
 
         # 计算与历史查询的相似度
-        if len(conversation_history) > 1:
-            # 生成当前查询的嵌入
-            current_embedding = model.encode(user_query, convert_to_tensor=True)
-            # 历史查询嵌入
-            history_embeddings = model.encode(conversation_history[:-1], convert_to_tensor=True)
-            # 计算余弦相似度
-            similarities = util.cos_sim(current_embedding, history_embeddings)[0].tolist()
-        else:
-            similarities = []
+        # if len(conversation_history) > 1:
+        #     # 生成当前查询的嵌入
+        #     current_embedding = model.encode(user_query, convert_to_tensor=True)
+        #     # 历史查询嵌入
+        #     history_embeddings = model.encode(conversation_history[:-1], convert_to_tensor=True)
+        #     # 计算余弦相似度
+        #     similarities = util.cos_sim(current_embedding, history_embeddings)[0].tolist()
+        # else:
+        #     similarities = []
 
-        # 准备返回数据：历史查询和相似度
-        history_with_similarity = [
-            {"query": q, "similarity": sim}
-            for q, sim in zip(conversation_history[:-1], similarities)
-        ] if similarities else []
-
-        # 按相似度降序排序并取 Top K（例如 K=3）
-        top_k = sorted(history_with_similarity, key=lambda x: x["similarity"], reverse=True)[:3]
+        # # 准备返回数据：历史查询和相似度
+        # history_with_similarity = [
+        #     {"query": q, "similarity": sim}
+        #     for q, sim in zip(conversation_history[:-1], similarities)
+        # ] if similarities else []
+        #
+        # # 按相似度降序排序并取 Top K（例如 K=3）
+        # top_k = sorted(history_with_similarity, key=lambda x: x["similarity"], reverse=True)[:3]
 
         # return {
         #     "sql_output": excute_sql_output,
@@ -132,23 +124,21 @@ async def query_handler(request: Dict[str, Any]):
         # 思路：将用户query和查询得到的数据给到LLM，让其推荐可视化的格式（柱状图、折线图、饼状图）
         # user_query之后需要改成LLM理解过后的
         user_query = "What is the sales MOM% for APAC EC?"
-        # vis_tag = get_vis_tag(user_query, excute_sql_output)
-        # 注意！！！！死数据
-        vis_data = {
-            "vis_tag": "bar-chart",
-            "x": ["sales_amt", "sales_notax"],
-            "y": [-5235, -4634],
-            "title": "202502's sales for APAC EC",
-            "x-legend": "class",
-            "y-legend": "sales",
-            "tooltip": "sales_notax_mom_per:-1.000290111880263"
-        }
-        # vis_tag = {"vis_tag":"bar-chart"}
+        vis_data = get_vis_tag(user_query, excute_sql_output)
+        # ===========================================================
+        # vis_data = {
+        #     "vis_tag": "bar-chart",
+        #     "x": ["sales_amt", "sales_notax"],
+        #     "y": [-5235, -4634],
+        #     "title": "202502's sales for APAC EC",
+        #     "x-legend": "class",
+        #     "y-legend": "sales",
+        #     "tooltip": "sales_notax_mom_per:-1.000290111880263"
+        # }
         final_response['vis_data'] = vis_data
-        
 
         # 返回标准化响应
-        return {"response": final_response, "top_k_similar": top_k}
+        return {"response": final_response, "top_k_similar": 3} # modified
     
     except Exception as e:
         # 异常处理与日志记录

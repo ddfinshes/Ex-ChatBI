@@ -1,0 +1,1040 @@
+2025-02-20 15:48:27,432 - lightrag - INFO - Loaded document status storage with 0 records
+2025-02-20 15:51:43,684 - lightrag - INFO - Loaded document status storage with 0 records
+2025-02-20 15:54:06,211 - lightrag - INFO - Loaded document status storage with 0 records
+2025-02-20 15:54:06,213 - lightrag - INFO - Inserting 1 to doc_status
+2025-02-20 15:54:06,217 - lightrag - INFO - Stored 1 new unique documents
+2025-02-20 15:54:06,217 - lightrag - INFO - Number of batches to process: 1.
+2025-02-20 15:54:06,217 - lightrag - INFO - Start processing batch 1 of 1.
+2025-02-20 15:54:10,395 - lightrag - INFO - Inserting 1 to doc_status
+2025-02-20 15:54:10,397 - lightrag - INFO - Inserting 42 to chunks
+2025-02-20 15:54:10,398 - lightrag - INFO - Inserting 1 to full_docs
+2025-02-20 15:54:10,399 - lightrag - INFO - Inserting 42 to text_chunks
+2025-02-20 15:54:10,897 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:11,148 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:11,401 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:11,650 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:11,901 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:12,154 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:12,408 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:12,659 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:12,913 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:13,167 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:13,421 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:13,672 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:13,926 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:14,178 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:14,433 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:14,684 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:14,936 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:14,936 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:14,937 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:14,937 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:14,937 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:14,937 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:14,937 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:14,937 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:14,938 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:14,938 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:14,938 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:14,938 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:14,938 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:14,938 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:14,938 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:14,938 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:14,939 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:14,939 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:14,939 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:14,939 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:14,939 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:14,939 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:14,939 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:14,940 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:14,940 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:14,940 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:54:17,243 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 202502201554176034947290bCZRcgJ)', 'type': 'new_api_error'}}
+2025-02-20 15:54:17,496 - lightrag - ERROR - Failed to extract entities and relationships
+2025-02-20 15:54:17,500 - lightrag - ERROR - Failed to process document doc-c20d32510e761e496939ddd8f2fc62f0: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 202502201554176034947290bCZRcgJ)', 'type': 'new_api_error'}}
+2025-02-20 15:54:17,500 - lightrag - INFO - Inserting 1 to doc_status
+2025-02-20 15:54:17,502 - lightrag - INFO - Completed batch 1 of 1.
+2025-02-20 15:54:17,503 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 20250220155417704561217bCXb5yUa)', 'type': 'new_api_error'}}
+2025-02-20 15:54:17,503 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 20250220155417724521539agHz5lYJ)', 'type': 'new_api_error'}}
+2025-02-20 15:54:17,503 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 20250220155417809940029EL6O36tX)', 'type': 'new_api_error'}}
+2025-02-20 15:54:17,504 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 202502201554178046555636IxxZolB)', 'type': 'new_api_error'}}
+2025-02-20 15:54:18,522 - lightrag - INFO - Writing graph with 0 nodes, 0 edges
+2025-02-20 15:54:18,537 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 20250220155418121510722FZqI7YJa)', 'type': 'new_api_error'}}
+2025-02-20 15:54:18,538 - lightrag - INFO - All Insert done
+2025-02-20 15:54:18,538 - lightrag - INFO - Non-embedding cached missed(mode:local type:query)
+2025-02-20 15:54:18,538 - lightrag - INFO - Non-embedding cached missed(mode:local type:keywords)
+2025-02-20 15:54:18,940 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 20250220155419152526929bbOEFTQn)', 'type': 'new_api_error'}}
+2025-02-20 15:54:18,940 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 20250220155419155473704aFLeCUGt)', 'type': 'new_api_error'}}
+2025-02-20 15:54:18,940 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 20250220155419171067802SpMFSvgd)', 'type': 'new_api_error'}}
+2025-02-20 15:54:18,941 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 20250220155419153937327lrR7EO3w)', 'type': 'new_api_error'}}
+2025-02-20 15:54:18,941 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 20250220155419156882038dzliRqCK)', 'type': 'new_api_error'}}
+2025-02-20 15:54:18,941 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 20250220155419163592755FsXaqbmH)', 'type': 'new_api_error'}}
+2025-02-20 15:54:18,941 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 20250220155419245832073PBpx6V6q)', 'type': 'new_api_error'}}
+2025-02-20 15:54:18,942 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 20250220155419281230186e6u13ecG)', 'type': 'new_api_error'}}
+2025-02-20 15:54:20,963 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 20250220155419579880840EqmdfmlA)', 'type': 'new_api_error'}}
+2025-02-20 15:54:23,249 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 202502201554236171344587JpsqUUz)', 'type': 'new_api_error'}}
+2025-02-20 15:54:23,505 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 20250220155423675021039C1iUmek2)', 'type': 'new_api_error'}}
+2025-02-20 15:54:23,508 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 20250220155423765557121PSwWre3e)', 'type': 'new_api_error'}}
+2025-02-20 15:54:24,022 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 20250220155423953289600sQVs4JNe)', 'type': 'new_api_error'}}
+2025-02-20 15:54:24,022 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 20250220155423950546761Zj3sLAO4)', 'type': 'new_api_error'}}
+2025-02-20 15:54:24,541 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 20250220155424636992084rBGfrw7e)', 'type': 'new_api_error'}}
+2025-02-20 15:54:24,542 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 20250220155424639772477Wau19Jsw)', 'type': 'new_api_error'}}
+2025-02-20 15:54:24,542 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 20250220155424762011015MedcfRvD)', 'type': 'new_api_error'}}
+2025-02-20 15:54:25,735 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 20250220155425161559400W0azD3TY)', 'type': 'new_api_error'}}
+2025-02-20 15:54:25,735 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 20250220155425164325571pkpFdLP9)', 'type': 'new_api_error'}}
+2025-02-20 15:54:25,736 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 20250220155425219266214v5zx6Q3P)', 'type': 'new_api_error'}}
+2025-02-20 15:54:25,736 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 202502201554252163327206F8xUo1P)', 'type': 'new_api_error'}}
+2025-02-20 15:54:25,736 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 20250220155425283137981RSMHNep7)', 'type': 'new_api_error'}}
+2025-02-20 15:54:25,736 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 20250220155425287143679FZiIPhz0)', 'type': 'new_api_error'}}
+2025-02-20 15:54:25,737 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 20250220155425319825132HanVNtaL)', 'type': 'new_api_error'}}
+2025-02-20 15:54:28,953 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 20250220155429322701170v4r7qjZg)', 'type': 'new_api_error'}}
+2025-02-20 15:54:28,954 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 20250220155429326620211GiIrsHz7)', 'type': 'new_api_error'}}
+2025-02-20 15:54:28,962 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 20250220155429330780663yuntFiZt)', 'type': 'new_api_error'}}
+2025-02-20 15:54:29,005 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 20250220155429378667189N9mAWiLi)', 'type': 'new_api_error'}}
+2025-02-20 15:54:29,039 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 20250220155429405907968prUzrFSm)', 'type': 'new_api_error'}}
+2025-02-20 15:54:29,041 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 20250220155429405975798VXDtplY4)', 'type': 'new_api_error'}}
+2025-02-20 15:54:29,231 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 20250220155429602102344yAO68AJh)', 'type': 'new_api_error'}}
+2025-02-20 15:54:29,252 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 20250220155429628030799LwO1xr74)', 'type': 'new_api_error'}}
+2025-02-20 15:54:29,364 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 20250220155429727079157jbicUy6g)', 'type': 'new_api_error'}}
+2025-02-20 15:54:29,393 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 20250220155429761745982iXz6dPcv)', 'type': 'new_api_error'}}
+2025-02-20 15:54:29,529 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 503 - {'error': {'message': '当前分组 GPT3常规 下对于模型 gpt-4 无可用渠道 (request id: 20250220155429888159998HmsiGwYs)', 'type': 'new_api_error'}}
+2025-02-20 15:56:40,045 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-20 15:56:40,047 - lightrag - INFO - No new unique documents were found.
+2025-02-20 15:56:40,048 - lightrag - INFO - Number of batches to process: 1.
+2025-02-20 15:56:40,048 - lightrag - INFO - Start processing batch 1 of 1.
+2025-02-20 15:56:40,329 - lightrag - INFO - Inserting 1 to doc_status
+2025-02-20 15:56:40,331 - lightrag - INFO - Inserting 42 to chunks
+2025-02-20 15:56:40,332 - lightrag - INFO - Inserting 1 to full_docs
+2025-02-20 15:56:40,333 - lightrag - INFO - Inserting 42 to text_chunks
+2025-02-20 15:56:40,838 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:41,090 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:41,343 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:41,595 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:41,844 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:42,098 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:42,351 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:42,603 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:42,857 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:43,109 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:43,363 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:43,614 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:43,869 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:44,122 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:44,371 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:44,624 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:44,876 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:44,876 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:44,876 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:44,877 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:44,877 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:44,877 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:44,877 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:44,877 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:44,877 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:44,878 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:44,878 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:44,878 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:44,878 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:44,878 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:44,878 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:44,878 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:44,878 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:44,879 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:44,879 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:44,879 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:44,879 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:44,879 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:44,879 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:44,879 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:44,880 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:44,880 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:56:45,010 - lightrag - ERROR - OpenAI API Call Failed,
+Model: deepseek-reasoner,
+Params: {}, Got: Error code: 401 - {'error': {'message': 'Authentication Fails (no such user)', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-02-20 15:56:45,284 - lightrag - ERROR - Failed to extract entities and relationships
+2025-02-20 15:56:45,293 - lightrag - ERROR - Failed to process document doc-c20d32510e761e496939ddd8f2fc62f0: Error code: 401 - {'error': {'message': 'Authentication Fails (no such user)', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-02-20 15:56:45,293 - lightrag - INFO - Inserting 1 to doc_status
+2025-02-20 15:56:45,296 - lightrag - INFO - Completed batch 1 of 1.
+2025-02-20 15:56:45,297 - lightrag - ERROR - OpenAI API Call Failed,
+Model: deepseek-reasoner,
+Params: {}, Got: Error code: 401 - {'error': {'message': 'Authentication Fails (no such user)', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-02-20 15:56:45,297 - lightrag - ERROR - OpenAI API Call Failed,
+Model: deepseek-reasoner,
+Params: {}, Got: Error code: 401 - {'error': {'message': 'Authentication Fails (no such user)', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-02-20 15:56:45,298 - lightrag - ERROR - OpenAI API Call Failed,
+Model: deepseek-reasoner,
+Params: {}, Got: Error code: 401 - {'error': {'message': 'Authentication Fails (no such user)', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-02-20 15:56:45,298 - lightrag - ERROR - OpenAI API Call Failed,
+Model: deepseek-reasoner,
+Params: {}, Got: Error code: 401 - {'error': {'message': 'Authentication Fails (no such user)', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-02-20 15:56:45,298 - lightrag - ERROR - OpenAI API Call Failed,
+Model: deepseek-reasoner,
+Params: {}, Got: Error code: 401 - {'error': {'message': 'Authentication Fails (no such user)', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-02-20 15:56:45,299 - lightrag - ERROR - OpenAI API Call Failed,
+Model: deepseek-reasoner,
+Params: {}, Got: Error code: 401 - {'error': {'message': 'Authentication Fails (no such user)', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-02-20 15:56:45,299 - lightrag - ERROR - OpenAI API Call Failed,
+Model: deepseek-reasoner,
+Params: {}, Got: Error code: 401 - {'error': {'message': 'Authentication Fails (no such user)', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-02-20 15:56:45,299 - lightrag - ERROR - OpenAI API Call Failed,
+Model: deepseek-reasoner,
+Params: {}, Got: Error code: 401 - {'error': {'message': 'Authentication Fails (no such user)', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-02-20 15:56:45,299 - lightrag - ERROR - OpenAI API Call Failed,
+Model: deepseek-reasoner,
+Params: {}, Got: Error code: 401 - {'error': {'message': 'Authentication Fails (no such user)', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-02-20 15:56:45,300 - lightrag - ERROR - OpenAI API Call Failed,
+Model: deepseek-reasoner,
+Params: {}, Got: Error code: 401 - {'error': {'message': 'Authentication Fails (no such user)', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-02-20 15:56:45,300 - lightrag - ERROR - OpenAI API Call Failed,
+Model: deepseek-reasoner,
+Params: {}, Got: Error code: 401 - {'error': {'message': 'Authentication Fails (no such user)', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-02-20 15:56:45,300 - lightrag - ERROR - OpenAI API Call Failed,
+Model: deepseek-reasoner,
+Params: {}, Got: Error code: 401 - {'error': {'message': 'Authentication Fails (no such user)', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-02-20 15:56:45,300 - lightrag - ERROR - OpenAI API Call Failed,
+Model: deepseek-reasoner,
+Params: {}, Got: Error code: 401 - {'error': {'message': 'Authentication Fails (no such user)', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-02-20 15:56:45,301 - lightrag - ERROR - OpenAI API Call Failed,
+Model: deepseek-reasoner,
+Params: {}, Got: Error code: 401 - {'error': {'message': 'Authentication Fails (no such user)', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-02-20 15:56:45,301 - lightrag - ERROR - OpenAI API Call Failed,
+Model: deepseek-reasoner,
+Params: {}, Got: Error code: 401 - {'error': {'message': 'Authentication Fails (no such user)', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-02-20 15:56:49,068 - lightrag - INFO - Writing graph with 0 nodes, 0 edges
+2025-02-20 15:56:49,087 - lightrag - INFO - All Insert done
+2025-02-20 15:56:49,087 - lightrag - INFO - Non-embedding cached missed(mode:local type:query)
+2025-02-20 15:56:49,087 - lightrag - INFO - Non-embedding cached missed(mode:local type:keywords)
+2025-02-20 15:56:49,414 - lightrag - ERROR - OpenAI API Call Failed,
+Model: deepseek-reasoner,
+Params: {}, Got: Error code: 401 - {'error': {'message': 'Authentication Fails (no such user)', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-02-20 15:56:49,674 - lightrag - ERROR - OpenAI API Call Failed,
+Model: deepseek-reasoner,
+Params: {}, Got: Error code: 401 - {'error': {'message': 'Authentication Fails (no such user)', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-02-20 15:56:49,926 - lightrag - ERROR - OpenAI API Call Failed,
+Model: deepseek-reasoner,
+Params: {}, Got: Error code: 401 - {'error': {'message': 'Authentication Fails (no such user)', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-02-20 15:56:50,183 - lightrag - ERROR - OpenAI API Call Failed,
+Model: deepseek-reasoner,
+Params: {}, Got: Error code: 401 - {'error': {'message': 'Authentication Fails (no such user)', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-02-20 15:56:50,184 - lightrag - ERROR - OpenAI API Call Failed,
+Model: deepseek-reasoner,
+Params: {}, Got: Error code: 401 - {'error': {'message': 'Authentication Fails (no such user)', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-02-20 15:56:50,184 - lightrag - ERROR - OpenAI API Call Failed,
+Model: deepseek-reasoner,
+Params: {}, Got: Error code: 401 - {'error': {'message': 'Authentication Fails (no such user)', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-02-20 15:56:50,184 - lightrag - ERROR - OpenAI API Call Failed,
+Model: deepseek-reasoner,
+Params: {}, Got: Error code: 401 - {'error': {'message': 'Authentication Fails (no such user)', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-02-20 15:56:50,184 - lightrag - ERROR - OpenAI API Call Failed,
+Model: deepseek-reasoner,
+Params: {}, Got: Error code: 401 - {'error': {'message': 'Authentication Fails (no such user)', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-02-20 15:56:50,185 - lightrag - ERROR - OpenAI API Call Failed,
+Model: deepseek-reasoner,
+Params: {}, Got: Error code: 401 - {'error': {'message': 'Authentication Fails (no such user)', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-02-20 15:56:50,185 - lightrag - ERROR - OpenAI API Call Failed,
+Model: deepseek-reasoner,
+Params: {}, Got: Error code: 401 - {'error': {'message': 'Authentication Fails (no such user)', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-02-20 15:56:50,185 - lightrag - ERROR - OpenAI API Call Failed,
+Model: deepseek-reasoner,
+Params: {}, Got: Error code: 401 - {'error': {'message': 'Authentication Fails (no such user)', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-02-20 15:56:50,185 - lightrag - ERROR - OpenAI API Call Failed,
+Model: deepseek-reasoner,
+Params: {}, Got: Error code: 401 - {'error': {'message': 'Authentication Fails (no such user)', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-02-20 15:56:50,186 - lightrag - ERROR - OpenAI API Call Failed,
+Model: deepseek-reasoner,
+Params: {}, Got: Error code: 401 - {'error': {'message': 'Authentication Fails (no such user)', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-02-20 15:56:50,186 - lightrag - ERROR - OpenAI API Call Failed,
+Model: deepseek-reasoner,
+Params: {}, Got: Error code: 401 - {'error': {'message': 'Authentication Fails (no such user)', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-02-20 15:56:50,186 - lightrag - ERROR - OpenAI API Call Failed,
+Model: deepseek-reasoner,
+Params: {}, Got: Error code: 401 - {'error': {'message': 'Authentication Fails (no such user)', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-02-20 15:56:50,186 - lightrag - ERROR - OpenAI API Call Failed,
+Model: deepseek-reasoner,
+Params: {}, Got: Error code: 401 - {'error': {'message': 'Authentication Fails (no such user)', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-02-20 15:56:52,314 - lightrag - ERROR - OpenAI API Call Failed,
+Model: deepseek-reasoner,
+Params: {}, Got: Error code: 401 - {'error': {'message': 'Authentication Fails (no such user)', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-02-20 15:57:50,935 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-20 15:57:50,938 - lightrag - INFO - No new unique documents were found.
+2025-02-20 15:57:50,938 - lightrag - INFO - Number of batches to process: 1.
+2025-02-20 15:57:50,938 - lightrag - INFO - Start processing batch 1 of 1.
+2025-02-20 15:57:51,211 - lightrag - INFO - Inserting 1 to doc_status
+2025-02-20 15:57:51,213 - lightrag - INFO - Inserting 42 to chunks
+2025-02-20 15:57:51,214 - lightrag - INFO - Inserting 1 to full_docs
+2025-02-20 15:57:51,214 - lightrag - INFO - Inserting 42 to text_chunks
+2025-02-20 15:57:51,724 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:51,982 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:52,239 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:52,494 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:52,747 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:53,002 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:53,260 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:53,512 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:53,767 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:54,020 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:54,274 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:54,528 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:54,781 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:55,034 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:55,288 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:55,542 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:55,796 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:55,796 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:55,797 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:55,797 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:55,797 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:55,797 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:55,797 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:55,797 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:55,797 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:55,798 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:55,798 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:55,798 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:55,798 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:55,798 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:55,798 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:55,798 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:55,799 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:55,799 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:55,799 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:55,799 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:55,799 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:55,799 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:55,799 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:55,800 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:55,800 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:55,800 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:59,100 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:57:59,100 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:57:59,507 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:57:59,507 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:00,369 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:00,370 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:00,993 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:00,993 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:01,246 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:01,247 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:01,737 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:01,737 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:02,120 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:02,120 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:02,375 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:02,375 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:02,751 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:02,751 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:03,147 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:03,147 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:03,694 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:03,694 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:04,286 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:04,286 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:04,545 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:04,545 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:04,546 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:04,547 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:05,056 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:05,056 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:05,314 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:05,315 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:05,570 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:05,571 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:06,109 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:06,109 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:06,880 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:06,880 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:07,623 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:07,623 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:08,877 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:08,877 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:08,877 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:08,878 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:09,810 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:09,810 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:10,345 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:10,346 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:10,601 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:10,602 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:10,853 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:10,854 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:11,398 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:11,398 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:11,658 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:11,658 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:12,982 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:12,982 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:13,237 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:13,237 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:13,493 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:13,493 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:13,494 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:13,494 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:13,494 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:13,495 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:14,251 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:14,251 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:14,252 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:14,252 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:15,103 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:15,104 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:15,422 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:15,422 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:15,679 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:15,679 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:16,887 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:16,887 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:17,565 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:17,565 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:18,149 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:18,150 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:18,406 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:19,009 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:19,267 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:19,268 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:19,268 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 15:58:21,216 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:21,475 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:21,874 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:22,131 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:22,409 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:22,665 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:22,949 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:23,415 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:23,674 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:23,675 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:24,264 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:24,883 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:26,748 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:27,944 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:28,207 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:29,256 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:29,513 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:29,770 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:29,771 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:30,325 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:30,586 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:30,849 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:30,850 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:31,369 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:31,369 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:31,418 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:31,627 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:33,602 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:34,102 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:34,521 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:35,657 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:35,868 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:37,623 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:38,214 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:38,630 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:38,970 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:39,030 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:39,384 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:41,192 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:58:43,922 - lightrag - INFO - Inserting 343 to entities
+2025-02-20 15:58:56,839 - lightrag - INFO - Inserting 169 to relationships
+2025-02-20 15:59:07,813 - lightrag - INFO - New entities or relationships extracted.
+2025-02-20 15:59:07,813 - lightrag - INFO - Inserting 1 to doc_status
+2025-02-20 15:59:07,815 - lightrag - INFO - Completed batch 1 of 1.
+2025-02-20 15:59:07,934 - lightrag - INFO - Writing graph with 363 nodes, 169 edges
+2025-02-20 15:59:07,953 - lightrag - INFO - All Insert done
+2025-02-20 15:59:07,953 - lightrag - INFO - Non-embedding cached missed(mode:local type:query)
+2025-02-20 15:59:07,953 - lightrag - INFO - Non-embedding cached missed(mode:local type:keywords)
+2025-02-20 15:59:10,337 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:59:10,338 - lightrag - INFO - Query nodes: Plot, Character development, Symbolism, Mood, Setting, top_k: 60, cosine: 0.2
+2025-02-20 15:59:12,086 - lightrag - INFO - Local query uses 60 entites, 111 relations, 3 chunks
+2025-02-20 15:59:26,281 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:59:26,293 - lightrag - INFO - Non-embedding cached missed(mode:global type:query)
+2025-02-20 15:59:26,293 - lightrag - INFO - Non-embedding cached missed(mode:global type:keywords)
+2025-02-20 15:59:28,573 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:59:28,573 - lightrag - INFO - Query edges: Themes, Story analysis, Major concepts, top_k: 60, cosine: 0.2
+2025-02-20 15:59:30,319 - lightrag - INFO - Global query uses 64 entites, 60 relations, 3 chunks
+2025-02-20 15:59:42,122 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:59:42,134 - lightrag - INFO - Non-embedding cached missed(mode:hybrid type:query)
+2025-02-20 15:59:42,134 - lightrag - INFO - Non-embedding cached missed(mode:hybrid type:keywords)
+2025-02-20 15:59:44,192 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 15:59:44,192 - lightrag - INFO - Query nodes: Plot points, Character development, Symbolism, Setting details, top_k: 60, cosine: 0.2
+2025-02-20 15:59:44,441 - lightrag - INFO - Query edges: Top themes, Story analysis, Narrative overview, top_k: 60, cosine: 0.2
+2025-02-20 15:59:46,312 - lightrag - INFO - Global query uses 64 entites, 60 relations, 3 chunks
+2025-02-20 15:59:46,315 - lightrag - INFO - Local query uses 60 entites, 111 relations, 3 chunks
+2025-02-20 15:59:57,441 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-3.5-turbo,
+Params: {'stream': False}, Got: Error code: 400 - {'error': {'message': "This model's maximum context length is 16385 tokens. However, your messages resulted in 25670 tokens. Please reduce the length of the messages. (request id: 202502201559575487041786O6JiSeZ) (request id: 20250220075957456829169LFC22BEm) (request id: 20250220155948368569192az8Z9M7H)", 'type': 'invalid_request_error', 'param': 'messages', 'code': 'context_length_exceeded'}}
+2025-02-20 16:12:55,895 - lightrag - INFO - Loaded document status storage with 1 records
+2025-02-20 16:12:55,897 - lightrag - INFO - Inserting 1 to doc_status
+2025-02-20 16:12:55,898 - lightrag - INFO - Stored 1 new unique documents
+2025-02-20 16:12:55,899 - lightrag - INFO - Number of batches to process: 1.
+2025-02-20 16:12:55,899 - lightrag - INFO - Start processing batch 1 of 1.
+2025-02-20 16:12:56,154 - lightrag - INFO - Inserting 1 to doc_status
+2025-02-20 16:12:56,156 - lightrag - INFO - Inserting 2 to chunks
+2025-02-20 16:12:56,157 - lightrag - INFO - Inserting 1 to full_docs
+2025-02-20 16:12:56,157 - lightrag - INFO - Inserting 2 to text_chunks
+2025-02-20 16:12:56,415 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 16:12:56,679 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 16:13:05,794 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:13:05,794 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 16:13:11,805 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:13:15,108 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:13:15,108 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 16:13:19,716 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:13:19,720 - lightrag - INFO - Inserting 67 to entities
+2025-02-20 16:13:32,452 - lightrag - INFO - Inserting 12 to relationships
+2025-02-20 16:13:39,779 - lightrag - INFO - New entities or relationships extracted.
+2025-02-20 16:13:39,779 - lightrag - INFO - Inserting 1 to doc_status
+2025-02-20 16:13:39,781 - lightrag - INFO - Completed batch 1 of 1.
+2025-02-20 16:13:39,922 - lightrag - INFO - Writing graph with 430 nodes, 181 edges
+2025-02-20 16:13:39,943 - lightrag - INFO - All Insert done
+2025-02-20 16:13:39,943 - lightrag - INFO - Non-embedding cached missed(mode:naive type:query)
+2025-02-20 16:13:45,369 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:13:45,382 - lightrag - INFO - Non-embedding cached missed(mode:local type:query)
+2025-02-20 16:13:45,382 - lightrag - INFO - Non-embedding cached missed(mode:local type:keywords)
+2025-02-20 16:13:47,482 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:13:47,482 - lightrag - INFO - Query nodes: Weekly sales, Sales target, Performance metrics, top_k: 60, cosine: 0.2
+2025-02-20 16:13:49,425 - lightrag - INFO - Local query uses 47 entites, 9 relations, 3 chunks
+2025-02-20 16:13:55,006 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:13:55,018 - lightrag - INFO - Non-embedding cached missed(mode:global type:query)
+2025-02-20 16:13:55,018 - lightrag - INFO - Non-embedding cached missed(mode:global type:keywords)
+2025-02-20 16:13:56,855 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:13:56,856 - lightrag - INFO - Query edges: Sales performance, Target achievement, top_k: 60, cosine: 0.2
+2025-02-20 16:13:58,707 - lightrag - INFO - Global query uses 18 entites, 10 relations, 3 chunks
+2025-02-20 16:14:02,823 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:14:02,837 - lightrag - INFO - Non-embedding cached missed(mode:hybrid type:query)
+2025-02-20 16:14:02,837 - lightrag - INFO - Non-embedding cached missed(mode:hybrid type:keywords)
+2025-02-20 16:14:05,370 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:14:05,370 - lightrag - INFO - Query nodes: Sales figures, Sales targets, Performance metrics, KPIs, top_k: 60, cosine: 0.2
+2025-02-20 16:14:05,623 - lightrag - INFO - Query edges: Sales performance, Target comparison, Business goals, top_k: 60, cosine: 0.2
+2025-02-20 16:14:07,483 - lightrag - INFO - Global query uses 26 entites, 16 relations, 3 chunks
+2025-02-20 16:14:07,836 - lightrag - INFO - Local query uses 44 entites, 6 relations, 3 chunks
+2025-02-20 16:14:16,417 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:17:03,207 - lightrag - INFO - Loaded document status storage with 2 records
+2025-02-20 16:17:03,209 - lightrag - INFO - No new unique documents were found.
+2025-02-20 16:17:03,209 - lightrag - INFO - All documents have been processed or are duplicates
+2025-02-20 16:17:03,209 - lightrag - INFO - Non-embedding cached missed(mode:naive type:query)
+2025-02-20 16:17:09,319 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:17:09,332 - lightrag - INFO - Non-embedding cached missed(mode:local type:query)
+2025-02-20 16:17:09,332 - lightrag - INFO - Non-embedding cached missed(mode:local type:keywords)
+2025-02-20 16:17:11,782 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:17:11,782 - lightrag - INFO - Query nodes: WTD (Week-to-date) calculation, Sales data analysis, Target setting, SQL query generation, top_k: 60, cosine: 0.2
+2025-02-20 16:17:13,973 - lightrag - INFO - Local query uses 28 entites, 4 relations, 2 chunks
+2025-02-20 16:17:21,553 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:17:21,567 - lightrag - INFO - Non-embedding cached missed(mode:global type:query)
+2025-02-20 16:17:21,567 - lightrag - INFO - Non-embedding cached missed(mode:global type:keywords)
+2025-02-20 16:17:23,951 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:17:23,951 - lightrag - INFO - Query edges: Data analysis, SQL code, Sales analysis, Target comparison, top_k: 60, cosine: 0.2
+2025-02-20 16:17:25,932 - lightrag - INFO - Global query uses 15 entites, 9 relations, 2 chunks
+2025-02-20 16:17:31,145 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:17:31,160 - lightrag - INFO - Non-embedding cached missed(mode:hybrid type:query)
+2025-02-20 16:17:31,160 - lightrag - INFO - Non-embedding cached missed(mode:hybrid type:keywords)
+2025-02-20 16:17:33,457 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:17:33,457 - lightrag - INFO - Query nodes: Data analysis expert, SQL query generation, Sales performance, Target comparison, top_k: 60, cosine: 0.2
+2025-02-20 16:17:33,715 - lightrag - INFO - Query edges: Data analysis, SQL code, WTD Sales vs Target, Data calculation, top_k: 60, cosine: 0.2
+2025-02-20 16:17:35,282 - lightrag - INFO - Global query uses 13 entites, 8 relations, 1 chunks
+2025-02-20 16:17:35,545 - lightrag - INFO - Local query uses 11 entites, 1 relations, 2 chunks
+2025-02-20 16:17:40,311 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:18:41,022 - lightrag - INFO - Loaded document status storage with 2 records
+2025-02-20 16:18:41,024 - lightrag - INFO - Inserting 1 to doc_status
+2025-02-20 16:18:41,026 - lightrag - INFO - Stored 1 new unique documents
+2025-02-20 16:18:41,026 - lightrag - INFO - Number of batches to process: 1.
+2025-02-20 16:18:41,026 - lightrag - INFO - Start processing batch 1 of 1.
+2025-02-20 16:18:41,286 - lightrag - INFO - Inserting 1 to doc_status
+2025-02-20 16:18:41,288 - lightrag - INFO - Inserting 13 to chunks
+2025-02-20 16:18:41,289 - lightrag - INFO - Inserting 1 to full_docs
+2025-02-20 16:18:41,289 - lightrag - INFO - Inserting 13 to text_chunks
+2025-02-20 16:18:41,546 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 16:18:41,806 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 16:18:42,064 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 16:18:42,321 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 16:18:42,579 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 16:18:42,836 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 16:18:43,095 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 16:18:43,352 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 16:18:43,611 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 16:18:43,869 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 16:18:44,127 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 16:18:44,385 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 16:18:44,646 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 16:18:49,345 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:18:49,345 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 16:18:49,609 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:18:49,609 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 16:18:49,869 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:18:49,870 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 16:18:50,127 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:18:50,128 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 16:18:50,387 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:18:50,387 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 16:18:50,717 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:18:50,717 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 16:18:51,027 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:18:51,027 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 16:18:51,374 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:18:51,375 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 16:18:51,636 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:18:51,636 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 16:18:51,954 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:18:51,955 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 16:18:52,542 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:18:52,542 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 16:18:54,688 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:18:54,950 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:18:54,982 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:18:54,982 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 16:18:55,982 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:18:56,773 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:18:57,650 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:18:57,895 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:18:58,019 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:18:58,019 - lightrag - INFO - Non-embedding cached missed(mode:default type:extract)
+2025-02-20 16:18:58,281 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:18:58,282 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:18:58,663 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:18:58,943 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:19:00,632 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:19:00,962 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:19:01,319 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 16:19:01,330 - lightrag - INFO - Inserting 143 to entities
+2025-02-20 16:19:12,998 - lightrag - INFO - Inserting 60 to relationships
+2025-02-20 16:19:22,406 - lightrag - INFO - New entities or relationships extracted.
+2025-02-20 16:19:22,406 - lightrag - INFO - Inserting 1 to doc_status
+2025-02-20 16:19:22,409 - lightrag - INFO - Completed batch 1 of 1.
+2025-02-20 16:19:22,589 - lightrag - INFO - Writing graph with 554 nodes, 236 edges
+2025-02-20 16:19:22,613 - lightrag - INFO - All Insert done
+2025-02-20 16:19:22,614 - lightrag - INFO - Non-embedding cached hit(mode:naive type:query)
+2025-02-20 16:19:22,631 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-02-20 16:19:22,648 - lightrag - INFO - Non-embedding cached hit(mode:global type:query)
+2025-02-20 16:19:22,665 - lightrag - INFO - Non-embedding cached hit(mode:hybrid type:query)
+2025-02-20 16:22:37,714 - lightrag - INFO - Loaded document status storage with 3 records
+2025-02-20 16:22:37,716 - lightrag - INFO - No new unique documents were found.
+2025-02-20 16:22:37,717 - lightrag - INFO - All documents have been processed or are duplicates
+2025-02-20 16:22:37,717 - lightrag - INFO - Non-embedding cached hit(mode:naive type:query)
+2025-02-20 16:23:30,498 - lightrag - INFO - Loaded document status storage with 3 records
+2025-02-20 16:23:30,500 - lightrag - INFO - No new unique documents were found.
+2025-02-20 16:23:30,500 - lightrag - INFO - All documents have been processed or are duplicates
+2025-02-20 16:23:30,500 - lightrag - INFO - Non-embedding cached hit(mode:naive type:query)
+2025-02-20 16:25:50,758 - lightrag - INFO - Loaded document status storage with 3 records
+2025-02-20 16:25:50,761 - lightrag - INFO - No new unique documents were found.
+2025-02-20 16:25:50,761 - lightrag - INFO - All documents have been processed or are duplicates
+2025-02-20 16:25:56,657 - lightrag - INFO - Non-embedding cached hit(mode:naive type:query)
+2025-02-20 16:27:57,877 - lightrag - INFO - Loaded document status storage with 3 records
+2025-02-20 16:27:57,880 - lightrag - INFO - No new unique documents were found.
+2025-02-20 16:27:57,880 - lightrag - INFO - All documents have been processed or are duplicates
+2025-02-20 16:29:39,057 - lightrag - INFO - Loaded document status storage with 3 records
+2025-02-20 16:29:39,059 - lightrag - INFO - No new unique documents were found.
+2025-02-20 16:29:39,059 - lightrag - INFO - All documents have been processed or are duplicates
+2025-02-20 16:30:03,866 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 19:52:42,470 - lightrag - INFO - Loaded document status storage with 3 records
+2025-02-20 19:52:42,485 - lightrag - INFO - No new unique documents were found.
+2025-02-20 19:52:42,485 - lightrag - INFO - All documents have been processed or are duplicates
+2025-02-20 19:53:45,304 - lightrag - INFO - Loaded document status storage with 3 records
+2025-02-20 19:53:45,306 - lightrag - INFO - No new unique documents were found.
+2025-02-20 19:53:45,307 - lightrag - INFO - All documents have been processed or are duplicates
+2025-02-20 19:54:02,880 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 19:56:29,621 - lightrag - INFO - Loaded document status storage with 3 records
+2025-02-20 19:56:29,624 - lightrag - INFO - No new unique documents were found.
+2025-02-20 19:56:29,624 - lightrag - INFO - All documents have been processed or are duplicates
+2025-02-20 19:56:42,409 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 19:58:23,426 - lightrag - INFO - Loaded document status storage with 3 records
+2025-02-20 19:58:23,428 - lightrag - INFO - No new unique documents were found.
+2025-02-20 19:58:23,428 - lightrag - INFO - All documents have been processed or are duplicates
+2025-02-20 19:58:41,704 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 19:59:19,181 - lightrag - INFO - Loaded document status storage with 3 records
+2025-02-20 19:59:19,183 - lightrag - INFO - No new unique documents were found.
+2025-02-20 19:59:19,183 - lightrag - INFO - All documents have been processed or are duplicates
+2025-02-20 19:59:39,620 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 19:59:43,035 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 19:59:43,035 - lightrag - INFO - Query nodes: WTD Sales, Sales Target, Date: 2025/2/20, Day: Thursday, top_k: 60, cosine: 0.2
+2025-02-20 19:59:45,524 - lightrag - INFO - Local query uses 60 entites, 22 relations, 3 chunks
+2025-02-20 20:00:08,599 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 20:00:12,158 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 20:00:12,159 - lightrag - INFO - Query edges: Data Analysis, SQL Code Generation, Sales Performance, Target Comparison, top_k: 60, cosine: 0.2
+2025-02-20 20:00:13,623 - lightrag - INFO - Global query uses 79 entites, 58 relations, 3 chunks
+2025-02-20 20:00:29,257 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 20:00:31,969 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 20:00:31,969 - lightrag - INFO - Query nodes: WTD Sales, Sales Target, Date calculation, 2025/2/20, Thursday, top_k: 60, cosine: 0.2
+2025-02-20 20:00:32,227 - lightrag - INFO - Query edges: Data analysis, SQL code, Sales performance, Target comparison, top_k: 60, cosine: 0.2
+2025-02-20 20:00:33,246 - lightrag - INFO - Local query uses 60 entites, 22 relations, 3 chunks
+2025-02-20 20:00:33,499 - lightrag - INFO - Global query uses 78 entites, 57 relations, 3 chunks
+2025-02-20 20:00:35,042 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {'stream': False}, Got: Error code: 400 - {'error': {'message': "This model's maximum context length is 8192 tokens. However, your messages resulted in 15918 tokens. Please reduce the length of the messages. (request id: 20250220200035161001223umF78heC) (request id: 20250220200035148463024l4GZhD0g) (request id: )", 'type': 'invalid_request_error', 'param': 'messages', 'code': 'context_length_exceeded'}}
+2025-02-20 20:09:39,809 - lightrag - INFO - Loaded document status storage with 3 records
+2025-02-20 20:09:39,811 - lightrag - INFO - No new unique documents were found.
+2025-02-20 20:09:39,811 - lightrag - INFO - All documents have been processed or are duplicates
+2025-02-20 20:09:52,501 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 20:09:55,968 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 20:09:55,968 - lightrag - INFO - Query nodes: WTD Sales, Calculate, 2025/2/20, Thursday, top_k: 60, cosine: 0.2
+2025-02-20 20:09:57,929 - lightrag - INFO - Local query uses 60 entites, 22 relations, 3 chunks
+2025-02-20 20:10:19,579 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 20:10:22,646 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-20 20:10:22,646 - lightrag - INFO - Query edges: Data analysis, SQL code generation, Sales vs Target calculation, Week-to-Date (WTD), top_k: 60, cosine: 0.2
+2025-02-20 20:10:24,249 - lightrag - INFO - Global query uses 78 entites, 56 relations, 3 chunks
+2025-02-20 20:10:25,712 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {'stream': False}, Got: Error code: 400 - {'error': {'message': "This model's maximum context length is 8192 tokens. However, your messages resulted in 11957 tokens. Please reduce the length of the messages. (request id: 20250220201025708179662ULcypRFe) (request id: 20250220201025698057000dnz3JbwC) (request id: )", 'type': 'invalid_request_error', 'param': 'messages', 'code': 'context_length_exceeded'}}
+2025-02-28 16:31:20,261 - lightrag - INFO - Loaded document status storage with 3 records
+2025-02-28 16:31:20,269 - lightrag - INFO - No new unique documents were found.
+2025-02-28 16:31:20,270 - lightrag - INFO - All documents have been processed or are duplicates
+2025-02-28 16:31:44,105 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-28 16:31:52,591 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-28 16:31:52,591 - lightrag - INFO - Query nodes: WTD Sales, SQL code, Sales vs Target, 2025/2/20, Thursday, top_k: 60, cosine: 0.2
+2025-02-28 16:31:56,424 - lightrag - INFO - Local query uses 60 entites, 24 relations, 4 chunks
+2025-02-28 16:32:13,479 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-28 16:32:21,152 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-28 16:32:21,152 - lightrag - INFO - Query edges: Data analysis, SQL, Sales vs Target, WTD (Week-to-Date), top_k: 60, cosine: 0.2
+2025-02-28 16:32:25,422 - lightrag - INFO - Global query uses 78 entites, 56 relations, 3 chunks
+2025-02-28 16:32:55,546 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-28 16:33:01,333 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-28 16:33:01,333 - lightrag - INFO - Query nodes: 2025/2/20, Thursday, Sales target, SQL code, Date calculation, top_k: 60, cosine: 0.2
+2025-02-28 16:33:02,397 - lightrag - INFO - Query edges: Data analysis, SQL, Sales, Target, WTD (Week-To-Date) calculation, top_k: 60, cosine: 0.2
+2025-02-28 16:33:05,514 - lightrag - INFO - Global query uses 76 entites, 55 relations, 3 chunks
+2025-02-28 16:33:06,019 - lightrag - INFO - Local query uses 60 entites, 23 relations, 3 chunks
+2025-02-28 16:33:26,357 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-02-28 17:42:55,752 - lightrag - INFO - Loaded document status storage with 3 records
+2025-02-28 17:42:55,757 - lightrag - INFO - No new unique documents were found.
+2025-02-28 17:42:55,757 - lightrag - INFO - All documents have been processed or are duplicates
+2025-02-28 17:42:55,757 - lightrag - INFO - Inserting 1 to doc_status
+2025-02-28 17:42:55,760 - lightrag - INFO - Stored 1 new unique documents
+2025-02-28 17:42:55,761 - lightrag - INFO - Number of batches to process: 1.
+2025-02-28 17:42:55,761 - lightrag - INFO - Start processing batch 1 of 1.
+2025-02-28 17:42:56,119 - lightrag - INFO - Inserting 1 to doc_status
+2025-02-28 17:42:56,123 - lightrag - INFO - Inserting 46 to chunks
+2025-02-28 17:42:56,124 - lightrag - INFO - Inserting 1 to full_docs
+2025-02-28 17:42:56,124 - lightrag - INFO - Inserting 46 to text_chunks
+2025-02-28 17:43:59,977 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 401 - {'error': {'message': '该令牌额度已用尽 (request id: 20250228094359676363334MK2ML4ZU)', 'type': 'chat_api_error'}}
+2025-02-28 17:44:01,026 - lightrag - ERROR - Failed to extract entities and relationships
+2025-02-28 17:44:01,029 - lightrag - ERROR - Failed to process document doc-5493bf640009df365cc23bc6acfddd99: Error code: 401 - {'error': {'message': '该令牌额度已用尽 (request id: 20250228094359676363334MK2ML4ZU)', 'type': 'chat_api_error'}}
+2025-02-28 17:44:01,029 - lightrag - INFO - Inserting 1 to doc_status
+2025-02-28 17:44:01,032 - lightrag - INFO - Completed batch 1 of 1.
+2025-02-28 17:44:01,033 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 401 - {'error': {'message': '该令牌额度已用尽 (request id: 20250228094359702475369ZH1ZihXi)', 'type': 'chat_api_error'}}
+2025-02-28 17:44:01,033 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 401 - {'error': {'message': '该令牌额度已用尽 (request id: 20250228094359709632708zso795Hs)', 'type': 'chat_api_error'}}
+2025-02-28 17:44:05,399 - lightrag - INFO - Writing graph with 554 nodes, 236 edges
+2025-02-28 17:44:05,430 - lightrag - INFO - All Insert done
+2025-02-28 17:44:09,621 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 401 - {'error': {'message': '该令牌额度已用尽 (request id: 20250228094405337827704uthOhMHI)', 'type': 'chat_api_error'}}
+2025-02-28 17:52:27,666 - lightrag - INFO - Loaded document status storage with 4 records
+2025-02-28 17:52:27,670 - lightrag - INFO - No new unique documents were found.
+2025-02-28 17:52:27,670 - lightrag - INFO - Number of batches to process: 1.
+2025-02-28 17:52:27,670 - lightrag - INFO - Start processing batch 1 of 1.
+2025-02-28 17:52:28,033 - lightrag - INFO - Inserting 1 to doc_status
+2025-02-28 17:52:28,036 - lightrag - INFO - Inserting 46 to chunks
+2025-02-28 17:52:28,037 - lightrag - INFO - Inserting 1 to full_docs
+2025-02-28 17:52:28,037 - lightrag - INFO - Inserting 46 to text_chunks
+2025-02-28 18:00:03,965 - lightrag - INFO - Loaded document status storage with 4 records
+2025-02-28 18:00:03,969 - lightrag - INFO - No new unique documents were found.
+2025-02-28 18:00:03,969 - lightrag - INFO - Number of batches to process: 1.
+2025-02-28 18:00:03,969 - lightrag - INFO - Start processing batch 1 of 1.
+2025-02-28 18:00:04,335 - lightrag - INFO - Inserting 1 to doc_status
+2025-02-28 18:00:04,338 - lightrag - INFO - Inserting 46 to chunks
+2025-02-28 18:00:04,339 - lightrag - INFO - Inserting 1 to full_docs
+2025-02-28 18:00:04,339 - lightrag - INFO - Inserting 46 to text_chunks
+2025-02-28 18:00:46,506 - lightrag - ERROR - Received empty content from OpenAI API
+2025-02-28 18:01:13,368 - lightrag - INFO - Loaded document status storage with 4 records
+2025-02-28 18:01:13,372 - lightrag - INFO - No new unique documents were found.
+2025-02-28 18:01:13,372 - lightrag - INFO - Number of batches to process: 1.
+2025-02-28 18:01:13,372 - lightrag - INFO - Start processing batch 1 of 1.
+2025-02-28 18:01:13,716 - lightrag - INFO - Inserting 1 to doc_status
+2025-02-28 18:01:13,720 - lightrag - INFO - Inserting 46 to chunks
+2025-02-28 18:01:13,720 - lightrag - INFO - Inserting 1 to full_docs
+2025-02-28 18:01:13,720 - lightrag - INFO - Inserting 46 to text_chunks
+2025-02-28 18:03:26,814 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 401 - {'error': {'message': '该令牌额度已用尽 (request id: 20250228100325604048216yrmMgEZO)', 'type': 'chat_api_error'}}
+2025-02-28 18:03:27,896 - lightrag - ERROR - Failed to extract entities and relationships
+2025-02-28 18:03:27,899 - lightrag - ERROR - Failed to process document doc-5493bf640009df365cc23bc6acfddd99: Error code: 401 - {'error': {'message': '该令牌额度已用尽 (request id: 20250228100325604048216yrmMgEZO)', 'type': 'chat_api_error'}}
+2025-02-28 18:03:27,899 - lightrag - INFO - Inserting 1 to doc_status
+2025-02-28 18:03:27,901 - lightrag - INFO - Completed batch 1 of 1.
+2025-02-28 18:03:29,164 - lightrag - INFO - Writing graph with 554 nodes, 236 edges
+2025-02-28 18:03:29,307 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 401 - {'error': {'message': '该令牌额度已用尽 (request id: 20250228100327780550279sjG4dw02)', 'type': 'chat_api_error'}}
+2025-02-28 18:03:29,308 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 401 - {'error': {'message': '该令牌额度已用尽 (request id: 20250228100327808316847UqN7aawD)', 'type': 'chat_api_error'}}
+2025-02-28 18:03:29,308 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 401 - {'error': {'message': '该令牌额度已用尽 (request id: 20250228100327815556779wEEE22qg)', 'type': 'chat_api_error'}}
+2025-02-28 18:03:29,309 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 401 - {'error': {'message': '该令牌额度已用尽 (request id: 20250228100327824070093H7noH5ZW)', 'type': 'chat_api_error'}}
+2025-02-28 18:03:29,545 - lightrag - INFO - All Insert done
+2025-02-28 18:03:29,545 - lightrag - INFO - No new unique documents were found.
+2025-02-28 18:03:30,603 - lightrag - INFO - Number of batches to process: 1.
+2025-02-28 18:03:30,605 - lightrag - INFO - Start processing batch 1 of 1.
+2025-02-28 18:03:30,627 - lightrag - INFO - Inserting 1 to doc_status
+2025-02-28 18:03:30,630 - lightrag - INFO - Inserting 46 to chunks
+2025-02-28 18:03:30,631 - lightrag - INFO - Inserting 1 to full_docs
+2025-02-28 18:03:30,631 - lightrag - INFO - Inserting 46 to text_chunks
+2025-02-28 18:03:43,556 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 401 - {'error': {'message': '该令牌额度已用尽 (request id: 20250228100342382441349ieokn6bF)', 'type': 'chat_api_error'}}
+2025-02-28 18:03:44,801 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 401 - {'error': {'message': '该令牌额度已用尽 (request id: 20250228100344511136895sLUxgndK)', 'type': 'chat_api_error'}}
+2025-02-28 18:03:45,872 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 401 - {'error': {'message': '该令牌额度已用尽 (request id: 202502281003445072845573bvsszYJ)', 'type': 'chat_api_error'}}
+2025-02-28 18:03:46,940 - lightrag - ERROR - Failed to extract entities and relationships
+2025-02-28 18:03:46,940 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 401 - {'error': {'message': '该令牌额度已用尽 (request id: 20250228100344501984900xHSUAHba)', 'type': 'chat_api_error'}}
+2025-02-28 18:03:46,941 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 401 - {'error': {'message': '该令牌额度已用尽 (request id: 20250228100344527278261QsJEIYMz)', 'type': 'chat_api_error'}}
+2025-02-28 18:03:46,941 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 401 - {'error': {'message': '该令牌额度已用尽 (request id: 20250228100344538205552rbUQrbsN)', 'type': 'chat_api_error'}}
+2025-02-28 18:03:46,941 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 401 - {'error': {'message': '该令牌额度已用尽 (request id: 20250228100344549641478A6d1C9og)', 'type': 'chat_api_error'}}
+2025-02-28 18:03:46,942 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 401 - {'error': {'message': '该令牌额度已用尽 (request id: 20250228100344576019554DQLzm5qH)', 'type': 'chat_api_error'}}
+2025-02-28 18:03:46,942 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 401 - {'error': {'message': '该令牌额度已用尽 (request id: 20250228100344907276203bWd1phhw)', 'type': 'chat_api_error'}}
+2025-02-28 18:03:53,565 - lightrag - ERROR - Failed to process document doc-5493bf640009df365cc23bc6acfddd99: Error code: 401 - {'error': {'message': '该令牌额度已用尽 (request id: 202502281003445072845573bvsszYJ)', 'type': 'chat_api_error'}}
+2025-02-28 18:03:53,565 - lightrag - INFO - Inserting 1 to doc_status
+2025-02-28 18:03:53,567 - lightrag - INFO - Completed batch 1 of 1.
+2025-02-28 18:03:53,769 - lightrag - INFO - Writing graph with 554 nodes, 236 edges
+2025-02-28 18:03:53,797 - lightrag - INFO - All Insert done
+2025-02-28 18:03:54,874 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 401 - {'error': {'message': '该令牌额度已用尽 (request id: 202502281003534509404441QJVWx1S)', 'type': 'chat_api_error'}}
+2025-02-28 18:03:54,874 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 401 - {'error': {'message': '该令牌额度已用尽 (request id: 20250228100353455927042xDe3GsSt)', 'type': 'chat_api_error'}}
+2025-02-28 18:03:54,875 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 401 - {'error': {'message': '该令牌额度已用尽 (request id: 20250228100353448126360TU9i4yLJ)', 'type': 'chat_api_error'}}
+2025-02-28 18:03:54,876 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 401 - {'error': {'message': '该令牌额度已用尽 (request id: 2025022810035345840701950zfGRDQ)', 'type': 'chat_api_error'}}
+2025-02-28 18:03:54,876 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 401 - {'error': {'message': '该令牌额度已用尽 (request id: 20250228100353485091984gWhdb2oI)', 'type': 'chat_api_error'}}
+2025-02-28 18:04:00,350 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 401 - {'error': {'message': '该令牌额度已用尽 (request id: 20250228100354124863500f6tBmFhP)', 'type': 'chat_api_error'}}
+2025-02-28 18:04:01,799 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 401 - {'error': {'message': '该令牌额度已用尽 (request id: 20250228100401499216324xfy7dfBv)', 'type': 'chat_api_error'}}
+2025-02-28 18:04:03,091 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 401 - {'error': {'message': '该令牌额度已用尽 (request id: 20250228100402803278078s13F00tt)', 'type': 'chat_api_error'}}
+2025-02-28 18:04:04,199 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 401 - {'error': {'message': '该令牌额度已用尽 (request id: 202502281004028155399968IQn2PBJ)', 'type': 'chat_api_error'}}
+2025-02-28 18:04:04,200 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 401 - {'error': {'message': '该令牌额度已用尽 (request id: 20250228100402833495671qFGzn3vY)', 'type': 'chat_api_error'}}
+2025-02-28 18:04:04,201 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 401 - {'error': {'message': '该令牌额度已用尽 (request id: 20250228100402852443169UgIrWCG9)', 'type': 'chat_api_error'}}
+2025-02-28 18:04:04,201 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 401 - {'error': {'message': '该令牌额度已用尽 (request id: 20250228100402825286293OkUQIv4Q)', 'type': 'chat_api_error'}}
+2025-02-28 18:04:04,201 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 401 - {'error': {'message': '该令牌额度已用尽 (request id: 20250228100402846536675JXCOAX21)', 'type': 'chat_api_error'}}
+2025-02-28 20:08:45,694 - lightrag - INFO - Loaded document status storage with 4 records
+2025-02-28 20:08:45,711 - lightrag - INFO - No new unique documents were found.
+2025-02-28 20:08:45,711 - lightrag - INFO - Number of batches to process: 1.
+2025-02-28 20:08:45,711 - lightrag - INFO - Start processing batch 1 of 1.
+2025-02-28 20:08:46,064 - lightrag - INFO - Inserting 1 to doc_status
+2025-02-28 20:08:46,068 - lightrag - INFO - Inserting 46 to chunks
+2025-02-28 20:08:46,069 - lightrag - INFO - Inserting 1 to full_docs
+2025-02-28 20:08:46,069 - lightrag - INFO - Inserting 46 to text_chunks
+2025-02-28 20:10:29,658 - lightrag - INFO - Loaded document status storage with 4 records
+2025-02-28 20:10:29,662 - lightrag - INFO - No new unique documents were found.
+2025-02-28 20:10:29,663 - lightrag - INFO - Number of batches to process: 1.
+2025-02-28 20:10:29,663 - lightrag - INFO - Start processing batch 1 of 1.
+2025-02-28 20:10:30,008 - lightrag - INFO - Inserting 1 to doc_status
+2025-02-28 20:10:30,012 - lightrag - INFO - Inserting 13 to chunks
+2025-02-28 20:10:30,012 - lightrag - INFO - Inserting 1 to full_docs
+2025-02-28 20:10:30,012 - lightrag - INFO - Inserting 13 to text_chunks
+2025-02-28 20:11:16,304 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 401 - {'error': {'message': '该令牌额度已用尽 (request id: 20250228121115960077044y4cJoKe7)', 'type': 'chat_api_error'}}
+2025-02-28 20:11:16,304 - lightrag - ERROR - Failed to extract entities and relationships
+2025-02-28 20:11:16,305 - lightrag - ERROR - Failed to process document doc-5493bf640009df365cc23bc6acfddd99: Error code: 401 - {'error': {'message': '该令牌额度已用尽 (request id: 20250228121115960077044y4cJoKe7)', 'type': 'chat_api_error'}}
+2025-02-28 20:11:16,305 - lightrag - INFO - Inserting 1 to doc_status
+2025-02-28 20:11:16,308 - lightrag - INFO - Completed batch 1 of 1.
+2025-02-28 20:11:16,503 - lightrag - INFO - Writing graph with 554 nodes, 236 edges
+2025-02-28 20:11:16,526 - lightrag - INFO - All Insert done
+2025-02-28 20:11:17,556 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 401 - {'error': {'message': '该令牌额度已用尽 (request id: 20250228121116182389313u7Z8dfc4)', 'type': 'chat_api_error'}}
+2025-02-28 20:11:17,967 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4,
+Params: {}, Got: Error code: 401 - {'error': {'message': '该令牌额度已用尽 (request id: 20250228121117618376386Qtfzkmvj)', 'type': 'chat_api_error'}}
+2025-03-03 11:32:09,320 - lightrag - INFO - Loaded document status storage with 4 records
+2025-03-03 11:32:09,325 - lightrag - INFO - Inserting 1 to doc_status
+2025-03-03 11:32:09,328 - lightrag - INFO - Stored 1 new unique documents
+2025-03-03 11:32:09,328 - lightrag - INFO - Number of batches to process: 1.
+2025-03-03 11:32:09,328 - lightrag - INFO - Start processing batch 1 of 1.
+2025-03-03 11:32:09,677 - lightrag - INFO - Inserting 1 to doc_status
+2025-03-03 11:32:09,680 - lightrag - INFO - Inserting 13 to chunks
+2025-03-03 11:32:09,681 - lightrag - INFO - Inserting 1 to full_docs
+2025-03-03 11:32:09,681 - lightrag - INFO - Inserting 13 to text_chunks
+2025-03-03 11:32:57,671 - lightrag - INFO - Inserting 141 to entities
+2025-03-03 11:33:10,990 - lightrag - INFO - Inserting 56 to relationships
+2025-03-03 11:33:18,460 - lightrag - INFO - New entities or relationships extracted.
+2025-03-03 11:33:18,461 - lightrag - INFO - Inserting 1 to doc_status
+2025-03-03 11:33:18,487 - lightrag - INFO - Inserting 1 to doc_status
+2025-03-03 11:33:18,490 - lightrag - INFO - Inserting 53 to chunks
+2025-03-03 11:33:18,491 - lightrag - INFO - Inserting 1 to full_docs
+2025-03-03 11:33:18,491 - lightrag - INFO - Inserting 53 to text_chunks
+2025-03-03 11:35:02,185 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4o,
+Params: {}, Got: Error code: 500 - {'error': {'message': ' (request id: )', 'type': 'upstream_error', 'param': '500', 'code': 'bad_response_status_code'}}
+2025-03-03 11:35:08,475 - lightrag - ERROR - Failed to extract entities and relationships
+2025-03-03 11:35:08,482 - lightrag - ERROR - Failed to process document doc-8f85da82acb7e002e60fda5407350f62: Error code: 500 - {'error': {'message': ' (request id: )', 'type': 'upstream_error', 'param': '500', 'code': 'bad_response_status_code'}}
+2025-03-03 11:35:08,482 - lightrag - INFO - Inserting 1 to doc_status
+2025-03-03 11:35:08,485 - lightrag - INFO - Completed batch 1 of 1.
+2025-03-03 11:35:10,848 - lightrag - INFO - Writing graph with 632 nodes, 288 edges
+2025-03-03 11:35:10,880 - lightrag - INFO - All Insert done
+2025-03-03 11:35:14,209 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4o,
+Params: {}, Got: Error code: 500 - {'error': {'message': ' (request id: )', 'type': 'upstream_error', 'param': '500', 'code': 'bad_response_status_code'}}
+2025-03-03 11:35:37,278 - lightrag - ERROR - OpenAI API Call Failed,
+Model: gpt-4o,
+Params: {}, Got: Error code: 500 - {'error': {'message': ' (request id: )', 'type': 'upstream_error', 'param': '500', 'code': 'bad_response_status_code'}}
+2025-03-03 11:35:39,322 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-03-03 11:35:41,913 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-03-03 11:35:41,914 - lightrag - INFO - Query nodes: WTD Sales, Sales target, 2025/2/20, Thursday, top_k: 60, cosine: 0.2
+2025-03-03 11:35:44,402 - lightrag - INFO - Local query uses 60 entites, 32 relations, 3 chunks
+2025-03-03 11:35:51,432 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-03-03 11:35:54,491 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-03-03 11:35:54,491 - lightrag - INFO - Query edges: Data analysis, Sales calculation, SQL code, Performance evaluation, top_k: 60, cosine: 0.2
+2025-03-03 11:35:58,294 - lightrag - INFO - Global query uses 71 entites, 60 relations, 3 chunks
+2025-03-03 11:36:07,901 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-03-03 11:36:10,792 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-03-03 11:36:10,792 - lightrag - INFO - Query nodes: WTD (Week-To-Date), 2025/2/20, Thursday, top_k: 60, cosine: 0.2
+2025-03-03 11:36:11,880 - lightrag - INFO - Query edges: Data analysis, SQL code, Sales vs Target, top_k: 60, cosine: 0.2
+2025-03-03 11:36:14,383 - lightrag - INFO - Global query uses 74 entites, 60 relations, 3 chunks
+2025-03-03 11:36:21,167 - lightrag - INFO - Local query uses 60 entites, 36 relations, 3 chunks
+2025-03-03 11:36:28,850 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-03-03 11:49:19,866 - lightrag - INFO - Loaded document status storage with 5 records
+2025-03-03 11:49:19,870 - lightrag - INFO - No new unique documents were found.
+2025-03-03 11:49:19,870 - lightrag - INFO - Number of batches to process: 1.
+2025-03-03 11:49:19,870 - lightrag - INFO - Start processing batch 1 of 1.
+2025-03-03 11:49:20,241 - lightrag - INFO - Inserting 1 to doc_status
+2025-03-03 11:49:20,246 - lightrag - INFO - Inserting 53 to chunks
+2025-03-03 11:49:20,248 - lightrag - INFO - Inserting 1 to full_docs
+2025-03-03 11:49:20,248 - lightrag - INFO - Inserting 53 to text_chunks
+2025-03-03 11:51:45,488 - lightrag - INFO - Inserting 277 to entities
+2025-03-03 11:52:12,067 - lightrag - INFO - Inserting 159 to relationships
+2025-03-03 11:52:29,562 - lightrag - INFO - New entities or relationships extracted.
+2025-03-03 11:52:29,562 - lightrag - INFO - Inserting 1 to doc_status
+2025-03-03 11:52:29,566 - lightrag - INFO - Completed batch 1 of 1.
+2025-03-03 11:52:29,848 - lightrag - INFO - Writing graph with 788 nodes, 436 edges
+2025-03-03 11:52:29,903 - lightrag - INFO - All Insert done
+2025-03-03 11:52:32,712 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-03-03 11:52:32,712 - lightrag - INFO - Query edges: Data analysis, SQL code, Sales vs Target, top_k: 60, cosine: 0.2
+2025-03-03 11:52:35,142 - lightrag - INFO - Global query uses 41 entites, 60 relations, 14 chunks
+2025-03-03 11:52:45,212 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-03-04 14:13:51,715 - lightrag - INFO - Loaded document status storage with 5 records
+2025-03-04 14:13:51,733 - lightrag - INFO - No new unique documents were found.
+2025-03-04 14:13:51,733 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-04 14:13:55,242 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-03-04 14:13:55,242 - lightrag - INFO - Query edges: Data analysis, SQL code, Sales analysis, top_k: 60, cosine: 0.2
+2025-03-04 14:13:58,033 - lightrag - INFO - Global query uses 40 entites, 60 relations, 14 chunks
+2025-03-04 14:14:14,505 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-03-04 14:15:04,207 - lightrag - INFO - Loaded document status storage with 5 records
+2025-03-04 14:15:04,211 - lightrag - INFO - No new unique documents were found.
+2025-03-04 14:15:04,211 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-04 14:15:08,285 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-03-04 14:15:08,285 - lightrag - INFO - Query nodes: WTD Sales, Sales Target, 2025/2/20, Thursday, top_k: 60, cosine: 0.2
+2025-03-04 14:15:11,142 - lightrag - INFO - Local query uses 60 entites, 59 relations, 13 chunks
+2025-03-04 14:15:24,128 - lightrag - INFO - Inserting 1 to llm_response_cache
