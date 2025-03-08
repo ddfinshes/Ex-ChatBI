@@ -1,3 +1,7 @@
 deepseek-ai/
 node_modules/
+<<<<<<< HEAD
+LightRAG/
+=======
 .idea
+>>>>>>> 406d44e467e6b5432db9142509707772f45a7595
