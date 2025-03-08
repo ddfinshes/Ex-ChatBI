@@ -39,10 +39,10 @@ def gpt(messages):
     GPTSETTING = {
         "model": "gpt-4o-mini", # gpt-3.5-turbo
         "temperature": 0,
-        "max_tokens": 4096,
+        "max_tokens": 5120, #4096+1024
     }
     MODEL_SET = "gpt-4o-mini"
-    MAX_TOKENS = 4096
+    MAX_TOKENS = 5120
 
     client = openai.OpenAI(api_key=APIKEY, base_url=BASEURL)
     i = 0
