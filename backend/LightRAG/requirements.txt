@@ -1,0 +1,19 @@
+aiohttp
+configparser
+
+# database packages
+networkx
+
+# Basic modules
+numpy
+pipmaster
+pydantic
+python-dotenv
+
+setuptools
+tenacity
+
+# LLM packages
+tiktoken
+
+# Extra libraries are installed when needed using pipmaster

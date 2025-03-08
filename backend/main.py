@@ -29,6 +29,9 @@ def get_sql_code(sql_response):
     
     return sql_code_blocks
 
+# 存储对话历史
+conversation_history = []  # 列表存储历史查询
+# model = SentenceTransformer('all-MiniLM-L6-v2')  # 加载预训练模型计算相似度
 
 @app.post("/api/query")
 async def query_handler(request: Dict[str, Any]):
@@ -61,6 +64,34 @@ async def query_handler(request: Dict[str, Any]):
             "code": sql_code,
             "data": excute_sql_output,
         }
+        
+        # 添加当前查询到历史
+        conversation_history.append(user_query)
+
+        # 计算与历史查询的相似度
+        # if len(conversation_history) > 1:
+        #     # 生成当前查询的嵌入
+        #     current_embedding = model.encode(user_query, convert_to_tensor=True)
+        #     # 历史查询嵌入
+        #     history_embeddings = model.encode(conversation_history[:-1], convert_to_tensor=True)
+        #     # 计算余弦相似度
+        #     similarities = util.cos_sim(current_embedding, history_embeddings)[0].tolist()
+        # else:
+        #     similarities = []
+
+        # # 准备返回数据：历史查询和相似度
+        # history_with_similarity = [
+        #     {"query": q, "similarity": sim}
+        #     for q, sim in zip(conversation_history[:-1], similarities)
+        # ] if similarities else []
+        #
+        # # 按相似度降序排序并取 Top K（例如 K=3）
+        # top_k = sorted(history_with_similarity, key=lambda x: x["similarity"], reverse=True)[:3]
+
+        # return {
+        #     "sql_output": excute_sql_output,
+        #     "top_k_similar": top_k  # 返回 Top K 相似历史查询
+        # }
 
         # 4. chart准备数据
         vis_data = {
@@ -74,7 +105,8 @@ async def query_handler(request: Dict[str, Any]):
         }
         final_response['vis_data'] = vis_data
 
-        return {"response": final_response}
+        # 返回标准化响应
+        return {"response": final_response, "top_k_similar": 3} # modified
     
     except Exception as e:
         # 异常处理与日志记录

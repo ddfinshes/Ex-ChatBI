@@ -1182,3 +1182,43 @@ ollama._types.ResponseError: model "glm:9b" not found, try pulling it first (sta
 2025-03-04 19:28:09,200 - lightrag - INFO - Query nodes: WTD Sales, Week-to-date, 2025/2/20, Thursday, top_k: 60, cosine: 0.2
 2025-03-04 19:28:10,244 - lightrag - INFO - Local query uses 60 entites, 47 relations, 8 chunks
 2025-03-04 19:28:34,198 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-03-05 22:20:12,974 - lightrag - INFO - Loaded document status storage with 5 records
+2025-03-05 22:20:12,978 - lightrag - INFO - No new unique documents were found.
+2025-03-05 22:20:12,979 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-05 22:20:12,979 - lightrag - INFO - Inserting 1 to doc_status
+2025-03-05 22:20:12,983 - lightrag - INFO - Stored 1 new unique documents
+2025-03-05 22:20:12,983 - lightrag - INFO - Number of batches to process: 1.
+2025-03-05 22:20:12,983 - lightrag - INFO - Start processing batch 1 of 1.
+2025-03-05 22:20:13,323 - lightrag - INFO - Inserting 1 to doc_status
+2025-03-05 22:20:13,327 - lightrag - INFO - Inserting 8 to chunks
+2025-03-05 22:20:13,328 - lightrag - INFO - Inserting 1 to full_docs
+2025-03-05 22:20:13,328 - lightrag - INFO - Inserting 8 to text_chunks
+2025-03-05 22:23:06,871 - lightrag - INFO - Inserting 296 to entities
+2025-03-05 22:27:33,846 - lightrag - INFO - Inserting 51 to relationships
+2025-03-05 22:31:10,408 - lightrag - INFO - New entities or relationships extracted.
+2025-03-05 22:31:10,412 - lightrag - INFO - Inserting 1 to doc_status
+2025-03-05 22:31:10,419 - lightrag - INFO - Completed batch 1 of 1.
+2025-03-05 22:31:10,901 - lightrag - INFO - Writing graph with 1024 nodes, 483 edges
+2025-03-05 22:31:11,010 - lightrag - INFO - All Insert done
+2025-03-05 22:31:19,707 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-03-05 22:31:19,707 - lightrag - INFO - Query nodes: Sales, Target, 2025/2/20, Thursday, top_k: 60, cosine: 0.2
+2025-03-05 22:31:25,613 - lightrag - INFO - Local query uses 60 entites, 21 relations, 11 chunks
+2025-03-05 22:31:50,506 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-03-05 22:34:06,362 - lightrag - INFO - Loaded document status storage with 6 records
+2025-03-05 22:34:06,367 - lightrag - INFO - No new unique documents were found.
+2025-03-05 22:34:06,367 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-05 22:34:06,367 - lightrag - INFO - No new unique documents were found.
+2025-03-05 22:34:06,368 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-05 22:34:19,587 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-03-05 22:34:19,588 - lightrag - INFO - Query nodes: WTD, Sales, Target, 2025/2/20, Thursday, top_k: 60, cosine: 0.2
+2025-03-05 22:34:28,453 - lightrag - INFO - Local query uses 60 entites, 15 relations, 7 chunks
+2025-03-05 22:34:47,713 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-03-06 15:07:20,264 - lightrag - INFO - Loaded document status storage with 6 records
+2025-03-06 15:07:20,269 - lightrag - INFO - No new unique documents were found.
+2025-03-06 15:07:20,269 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-06 15:07:20,269 - lightrag - INFO - No new unique documents were found.
+2025-03-06 15:07:20,270 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-06 15:07:30,838 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-03-06 15:07:30,839 - lightrag - INFO - Query nodes: Sales, Target, SQL code, 2025/2/20, Thursday, top_k: 60, cosine: 0.2
+2025-03-06 15:07:34,600 - lightrag - INFO - Local query uses 60 entites, 30 relations, 11 chunks
+2025-03-06 15:07:57,330 - lightrag - INFO - Inserting 1 to llm_response_cache

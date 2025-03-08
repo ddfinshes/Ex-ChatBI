@@ -422,8 +422,14 @@ function transformToTree(data) {
       if (section.scratched_content) {
         section.scratched_content.forEach((item) => {
           if (item.column_name) {
-            node.children.push({ name: item.column_name });
+            // 创建 column_name 节点，并添加 column_processing 作为其子节点
+            const columnNode = { 
+              name: item.column_name, 
+              children: item.column_processing ? [{ name: item.column_processing }] : [] 
+            };
+            node.children.push(columnNode);
           } else if (item.table_name) {
+            // table_name 节点保持不变
             node.children.push({ name: item.table_name });
           }
         });
