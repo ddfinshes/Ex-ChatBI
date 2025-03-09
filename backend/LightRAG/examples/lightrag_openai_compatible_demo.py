@@ -35,8 +35,8 @@ async def embedding_func(texts: list[str]) -> np.ndarray:
     return await openai_embed(
         texts,
         model="text-embedding-3-large",
-        api_key='sk-234NEybMLmKyfLjp0bD64709016c4b67B0Cf405a2f90Ba7b',
-        base_url='https://api.mixrai.com/v1',
+        api_key='sk-dHMDhf5KdHlpA0XOE2Bd778f95C84431966d340fFdE56a26',
+        base_url='https://ai-yyds.com/v1',
     )
 
 
