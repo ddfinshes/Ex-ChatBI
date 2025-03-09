@@ -88,7 +88,7 @@
       this.activeCard = null;
     },
     // 你可以在这里定义其他方法
-  },
+
   // async sendQuery() {  // 假设从外部传入输入
   //   this.modelResponse = res.data.response.code || JSON.stringify(res.data.response.data);
   //   this.topKSimilar = res.data.top_k_similar || [];
