@@ -81,7 +81,7 @@
             Model Understanding
           </div>
           <div style="background-color: #ffffff; color: #303133; padding: 10px; text-align: left; border-radius: 0 0 4px 4px; min-height: 40px;">
-            {{ modelResponse }}
+            {{ modelResponse.match(/^[^\n]*/)[0] }}
           </div>
         </el-card>
       </el-col>

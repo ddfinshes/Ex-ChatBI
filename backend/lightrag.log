@@ -1252,3 +1252,24 @@ ollama._types.ResponseError: model "glm:9b" not found, try pulling it first (sta
 2025-03-09 16:52:17,183 - lightrag - INFO - Query nodes: WTD Sales, Sales Target, 2025/2/20, Thursday, SQL code, top_k: 60, cosine: 0.2
 2025-03-09 16:52:20,203 - lightrag - INFO - Local query uses 60 entites, 36 relations, 13 chunks
 2025-03-09 16:52:30,196 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-03-09 19:01:09,098 - lightrag - INFO - Loaded document status storage with 6 records
+2025-03-09 19:01:09,105 - lightrag - INFO - No new unique documents were found.
+2025-03-09 19:01:09,105 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-09 19:01:09,106 - lightrag - INFO - No new unique documents were found.
+2025-03-09 19:01:09,106 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-09 19:01:15,903 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-03-09 19:01:15,904 - lightrag - INFO - Query nodes: 2025/2/20, Thursday, Sales target, Date filtering, top_k: 60, cosine: 0.2
+2025-03-09 19:01:19,271 - lightrag - INFO - Local query uses 60 entites, 33 relations, 11 chunks
+2025-03-09 19:01:32,484 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-03-09 19:21:47,787 - lightrag - INFO - Logger initialized for working directory: E:\Code\Ex-ChatBI\backend\LightRAG\examples\dickens
+2025-03-09 19:21:47,802 - lightrag - INFO - Load KV llm_response_cache with 5 data
+2025-03-09 19:21:47,804 - lightrag - INFO - Load KV full_docs with 6 data
+2025-03-09 19:21:47,806 - lightrag - INFO - Load KV text_chunks with 61 data
+2025-03-09 19:21:48,055 - lightrag - INFO - Loaded graph from E:\Code\Ex-ChatBI\backend\LightRAG\examples\dickens\graph_chunk_entity_relation.graphml with 1024 nodes, 483 edges
+2025-03-09 19:21:48,185 - lightrag - INFO - Loaded document status storage with 6 records
+2025-03-09 19:21:48,192 - lightrag - INFO - No new unique documents were found.
+2025-03-09 19:21:48,192 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-09 19:21:48,192 - lightrag - INFO - No new unique documents were found.
+2025-03-09 19:21:48,193 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-09 19:21:55,392 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-03-09 19:21:55,392 - lightrag - INFO - Query nodes: WTD Sales, Target, 2025/2/20, Thursday, top_k: 60, cosine: 0.2

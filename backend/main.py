@@ -7,6 +7,7 @@ from pydantic import BaseModel, Field
 import re
 import logging
 from db.connect import excute_sql
+from LightRAG.examples.lightrag_openai_compatible_demo import query
 
 app = FastAPI(
     title="NL2BI Backend",
@@ -45,18 +46,7 @@ async def query_handler(request: Dict[str, Any]):
         
         # 2. 知识库检索+生成sql代码
         print("==========================my_lightrag========================================")
-        sql_code = """
-        ```sql
-            SELECT
-            COUNT(*) AS open_stores_count
-            FROM
-            edw_dim_store_prod
-            WHERE
-            date_code BETWEEN '2025-02-10' AND '2025-02-24'
-            AND open_flag = 'open'
-            AND country = 'Mainland';
-        ```
-        """
+        sql_code = await query(user_query)
 
         # 3. 执行生成的sql 代码
         excute_sql_output = excute_sql(sql_code.replace('```sql\n', '').replace('\n```', ''))
