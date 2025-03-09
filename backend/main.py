@@ -4,14 +4,15 @@ from fastapi.middleware.cors import CORSMiddleware
 # lightrag have error for import 
 # from lightrag_deepseek import my_lightrag
 import uvicorn  # FastAPI推荐的生产级服务器
+# from LightRAG.examples.lightrag_openai_compatible_demo import query
+# lightrag have error for import 
+# from lightrag_deepseek import my_lightrag
+import uvicorn  # FastAPI推荐的生产级服务器
 from typing import Dict, Any
 from pydantic import BaseModel, Field
 import re
 import logging
 from db.connect import excute_sql
-<<<<<<< HEAD
-from LightRAG.examples.lightrag_openai_compatible_demo import query
-=======
 # from utils.getVisTag import get_vis_tag
 from decimal import Decimal
 # from sentence_transformers import SentenceTransformer, util
@@ -19,7 +20,6 @@ from decimal import Decimal
 # from utils.get_sql2json import sql2json
 import json
 import LightRAG.examples.lightrag_openai_compatible_demo as rag
->>>>>>> origin/main
 
 # 初始化FastAPI应用
 app = FastAPI(
@@ -31,10 +31,19 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # 生产环境应限制具体域名
+    allow_origins=["*"],  # 生产环境应限制具体域名
     allow_credentials=True,
+    allow_methods=["POST", "GET"],  # 根据实际需求调整
     allow_methods=["POST", "GET"],  # 根据实际需求调整
     allow_headers=["*"],
 )
+
+# 存储对话历史
+conversation_history = []  # 列表存储历史查询
+# model = SentenceTransformer('all-MiniLM-L6-v2')  # 加载预训练模型计算相似度
+user_query = ""
+sql_code = ""
+
 
 # 存储对话历史
 conversation_history = []  # 列表存储历史查询
@@ -76,6 +85,31 @@ def get_extracted_sql(text):
     return extracted_sql
 
 
+
+@app.post("/api/sql2json")
+async def get_sql2json():
+    try:
+        sql_code = "select * from chatbi"
+        sqljson = sql2json(sql_code)
+        print("Response data:", sqljson)
+        return sqljson
+    except Exception as e:
+        import traceback
+        traceback.print_exc() 
+        raise HTTPException(status_code=500, detail=str(e))
+
+def get_extracted_sql(text):
+    # 匹配获取sqlcode
+    sql_code = re.search(r'```sql\n(.*?)\n```', text, re.DOTALL)
+    if sql_code:
+        extracted_sql = sql_code.group(1)
+        print("提取的SQL代码:")
+        print(extracted_sql)
+    else:
+        print("未找到SQL代码块")
+    return extracted_sql
+
+
 @app.post("/api/query")
 async def query_handler(request: Dict[str, Any]):
     try:
@@ -88,9 +122,6 @@ async def query_handler(request: Dict[str, Any]):
         
         # 2. 知识库检索+生成sql代码
         print("==========================my_lightrag========================================")
-<<<<<<< HEAD
-        sql_code = await query(user_query)
-=======
         rag_response = await rag.query(user_query)
         # print("rag_response: ", rag_response)
         sql_code = get_extracted_sql(rag_response)
@@ -107,7 +138,6 @@ async def query_handler(request: Dict[str, Any]):
         #     AND country = 'Mainland';
         # ```
         # """
->>>>>>> origin/main
 
         # 3. 执行生成的sql 代码
         # excute_sql_output = excute_sql(sql_code)
@@ -133,6 +163,7 @@ async def query_handler(request: Dict[str, Any]):
             similarities = util.cos_sim(current_embedding, history_embeddings)[0].tolist()
         else:
             similarities = []
+
 
         # 准备返回数据：历史查询和相似度
         history_with_similarity = [
@@ -160,6 +191,8 @@ async def query_handler(request: Dict[str, Any]):
         final_response['vis_data'] = vis_data
 
         # 返回标准化响应
+        return {"response": final_response, "top_k_similar": top_k}
+        # return final_response
         return {"response": final_response, "top_k_similar": top_k}
         # return final_response
     
