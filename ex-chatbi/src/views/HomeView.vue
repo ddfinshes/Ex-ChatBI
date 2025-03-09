@@ -27,7 +27,7 @@
 
 			<el-aside
 				id="selectPanelContainer"
-				width="905px">
+				width="1205px">
 				<SelectPanelVue/>
 			</el-aside>
 		</el-container>
@@ -37,13 +37,12 @@
 <script>
 import ChatInterfaceVue from '../components/ChatInterface.vue'
 import SelectPanelVue from '../components/SelectPanel.vue'
-
 // @ is an alias to /src
 export default {
 	name: "HomeView",
 	components: {
 		ChatInterfaceVue,
-		SelectPanelVue
+		SelectPanelVue,
 	},
 	data() {
 		return {

@@ -6,59 +6,37 @@
           <!-- 只有当有消息时才显示 message-container -->
           <div class="message-container" v-if="messageHistory.length > 0">
             <!-- 遍历历史消息 -->
-            <div
-              v-for="(message, index) in messageHistory"
-              :key="index"
-              :class="[
-                'message-wrapper',
-                message.type === 'user' ? 'user-message' : 'ai-message',
-              ]"
-            >
+            <div v-for="(message, index) in messageHistory" :key="index" :class="[
+              'message-wrapper',
+              message.type === 'user' ? 'user-message' : 'ai-message',
+            ]">
               <!-- 用户消息 -->
               <div v-if="message.type === 'user'" class="user-content">
-                <img
-                  class="avatar"
-                  src="@/assets/image/human.png"
-                  alt="User Avatar"
-                />
+                <img class="avatar" src="@/assets/image/human.png" alt="User Avatar" />
                 <div class="message-bubble user-bubble">
                   <div class="message-text" v-html="message.text"></div>
                   <span class="timestamp">{{ message.timestamp }}</span>
                 </div>
-                
               </div>
 
               <!-- AI 响应 -->
               <div v-else class="ai-content">
-                <img
-                  class="avatar"
-                  src="@/assets/image/robot.png"
-                  alt="AI Avatar"
-                />
+                <img class="avatar" src="@/assets/image/robot.png" alt="AI Avatar" />
                 <div class="message-bubble ai-bubble">
-                  <el-tabs
-                    v-model="activeName"
-                    type="card"
-                    class="demo-tabs"
-                    @tab-click="handleClick"
-                  >
-                    <el-tab-pane label="data" name="data">
+                  <!-- Data Card -->
+                  <div class="card-section">
+                    <div class="card-title">Data</div>
+                    <div class="card-content">
                       <table v-if="message.data" class="result-table">
                         <thead>
                           <tr>
-                            <th
-                              v-for="(column, idx) in message.data.column"
-                              :key="idx"
-                            >
+                            <th v-for="(column, idx) in message.data.column" :key="idx">
                               {{ column }}
                             </th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr
-                            v-for="(row, rowIdx) in message.data.data"
-                            :key="rowIdx"
-                          >
+                          <tr v-for="(row, rowIdx) in message.data.data" :key="rowIdx">
                             <td v-for="(cell, cellIdx) in row" :key="cellIdx">
                               {{ cell }}
                             </td>
@@ -66,36 +44,37 @@
                         </tbody>
                       </table>
                       <p v-else class="no-data">no data</p>
-                    </el-tab-pane>
-                    <el-tab-pane label="chart" name="chart">
+                    </div>
+                  </div>
+
+                  <!-- Chart Card -->
+                  <div class="card-section">
+                    <div class="card-title">Chart</div>
+                    <div class="card-content">
                       <div id="chart-container">
-                        <div
-                          :id="message.vis_tag_name"
-                          style="width: 600px; height: 400px"
-                        ></div>
+                        <div :id="message.vis_tag_name" style="width: 600px; height: 400px"></div>
                       </div>
-                    </el-tab-pane>
-                    <el-tab-pane label="code" name="code">
-                      <MarkdownRenderer
-                        class="sql-code"
-                        :content="message.code?.text || ''"
-                      />
-                    </el-tab-pane>
-                  </el-tabs>
+                    </div>
+                  </div>
+
+                  <!-- Code Card -->
+                  <div class="card-section">
+                    <div class="card-title">Code</div>
+                    <div class="card-content">
+                      <MarkdownRenderer class="sql-code" :content="message.code?.text || ''" />
+                    </div>
+                  </div>
+
                   <span class="timestamp">{{ message.timestamp }}</span>
                 </div>
               </div>
             </div>
           </div>
           <div class="input-container">
-            <el-input
-              type="textarea"
-              v-model="query"
-              placeholder="Please enter your question"
-              @keydown.enter="handleEnter"
-            ></el-input>
+            <el-input type="textarea" v-model="query" placeholder="Please enter your question"
+              @keydown.enter="handleEnter"></el-input>
             <el-button type="primary" @click="sendQuery">Send</el-button>
-            <SelectPanel ref="selectPanelKey"/>
+            <SelectPanel ref="selectPanelKey" />
           </div>
         </el-main>
       </el-container>
@@ -107,7 +86,6 @@
 import { ref } from "vue";
 import axios from "axios";
 import MarkdownRenderer from "./MarkdownRenderer.vue";
-import SelectPanel from './SelectPanel.vue'
 import { useQueryStore } from '@/stores/query';
 import { chart } from "@/assets/ts/chart.ts";
 import { nextTick } from "vue";
@@ -118,7 +96,6 @@ export default {
   },
   data() {
     return {
-      activeName: "data", // 默认激活的 tab
       query: "", // 输入框的值
       currentQuery: "",
       messageHistory: [], // 存储所有对话历史
@@ -129,32 +106,13 @@ export default {
     return { queryStore };
   },
   methods: {
-    handleClick(tab) {
-      console.log(tab);
-      const tab_name = tab.props.name;
-      if (tab_name === "chart") {
-        // 找到当前激活的消息（假设是最后一条 AI 消息）
-      
-        const lastAiMessage = this.messageHistory
-          .slice()
-          .reverse()
-          .find((msg) => msg.type === "ai");
-        console.log("lastAiMessage: ", lastAiMessage)
-        if (lastAiMessage && lastAiMessage.vis_data) {
-          nextTick(() => {
-            console.log("lastAiMessage.vis_data", lastAiMessage.vis_data)
-            chart(lastAiMessage.vis_tag_name, lastAiMessage.vis_data);
-          });
-        }
-      }
-    },
     extractSQL(text) {
       const sqlRegex = /```sql[\s\S]*?```/gis;
       const matches = text.match(sqlRegex);
       return matches
         ? matches
-            .map((match) => match.replace(/```sql|```/g, "").trim())
-            .join("\n")
+          .map((match) => match.replace(/```sql|```/g, "").trim())
+          .join("\n")
         : "No SQL code found";
     },
     async sendQuery() {
@@ -167,7 +125,6 @@ export default {
         text: formattedText,
         timestamp: new Date().toLocaleTimeString(),
       });
-      console.log(this.messageHistory)
       this.currentQuery = this.query;
 
       this.queryStore.setCurrentQuery(this.query);
@@ -190,7 +147,7 @@ export default {
         console.log('Parent stored response in Pinia:', res.data);
 
         // 将 LLM 响应添加到历史记录
-        this.messageHistory.push({
+        const newMessage = {
           type: "ai",
           code: {
             text: res.data.response.code || "",
@@ -200,19 +157,18 @@ export default {
           data: res.data.response.data,
           vis_data: res.data.response.vis_data,
           vis_tag_name: `chart_${Date.now()}_${this.messageHistory.length}`,
-          //{ 
-            // vis_tag:
-            //   res.data.response.vis_data.vis_tag ||
-            //   `chart_${Date.now()}_${this.messageHistory.length}`,
-          //},
           timestamp: new Date().toLocaleTimeString(),
-        });
+        };
 
+        this.messageHistory.push(newMessage);
 
-        // 处理图表
-        console.log(res.data.response.vis_data);
-        // const vis_id = "vis_tag_"+String(this.messageHistory.length-1)
-        // chart(res.data.response.vis_data, vis_id);
+        // 直接渲染图表（如果有可视化数据）
+        if (newMessage.vis_data) {
+          await nextTick(() => {
+            chart(newMessage.vis_tag_name, newMessage.vis_data);
+          });
+        }
+
       } catch (error) {
         console.error("Error fetching response:", error);
       }
@@ -225,10 +181,8 @@ export default {
         this.sendQuery();
       }
     },
-
     handleSubmitQuery(newQuery) {
       this.currentQuery = newQuery
-      // this.query = newQuery
     }
   },
   mounted() {
@@ -243,7 +197,7 @@ export default {
 <style>
 .common-layout {
   height: 100vh;
-  width: 1300px;
+  width: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -354,7 +308,8 @@ export default {
   justify-content: flex-start;
 }
 
-.user-content, .ai-content {
+.user-content,
+.ai-content {
   display: flex;
   align-items: flex-start;
   max-width: 70%;
@@ -414,13 +369,35 @@ export default {
   width: 100%;
 }
 
-.result-table {
-  width: 100%;
-  border-collapse: collapse;
-}
 
 .no-data {
-  padding: 10px;
-  color: #666;
+  color: #909399;
+  text-align: center;
+  padding: 20px;
 }
+
+.card-section {
+  margin-bottom: 20px;
+  border: 1px solid #dcdfe6;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+.card-title {
+  padding: 10px 15px;
+  border-bottom: 1px solid #dcdfe6;
+  background-color: #f5f7fa;
+  color: #303133;
+  font-weight: bold;
+}
+
+.card-content {
+  padding: 15px;
+}
+
+#chart-container {
+  margin: 0 auto;
+}
+
+
 </style>
