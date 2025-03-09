@@ -3,9 +3,7 @@
     <el-container class="common-container">
       <el-container>
         <el-main id="main">
-          <!-- 只有当有消息时才显示 message-container -->
           <div class="message-container" v-if="messageHistory.length > 0">
-            <!-- 遍历历史消息 -->
             <div v-for="(message, index) in messageHistory" :key="index" :class="[
               'message-wrapper',
               message.type === 'user' ? 'user-message' : 'ai-message',
@@ -20,61 +18,13 @@
               </div>
 
               <!-- AI 响应 -->
-              <div v-else class="ai-content">
-                <img class="avatar" src="@/assets/image/robot.png" alt="AI Avatar" />
-                <div class="message-bubble ai-bubble">
-                  <!-- Data Card -->
-                  <div class="card-section">
-                    <div class="card-title">Data</div>
-                    <div class="card-content">
-                      <table v-if="message.data" class="result-table">
-                        <thead>
-                          <tr>
-                            <th v-for="(column, idx) in message.data.column" :key="idx">
-                              {{ column }}
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr v-for="(row, rowIdx) in message.data.data" :key="rowIdx">
-                            <td v-for="(cell, cellIdx) in row" :key="cellIdx">
-                              {{ cell }}
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <p v-else class="no-data">no data</p>
-                    </div>
-                  </div>
-
-                  <!-- Chart Card -->
-                  <div class="card-section">
-                    <div class="card-title">Chart</div>
-                    <div class="card-content">
-                      <div id="chart-container">
-                        <div :id="message.vis_tag_name" style="width: 600px; height: 400px"></div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Code Card -->
-                  <div class="card-section">
-                    <div class="card-title">Code</div>
-                    <div class="card-content">
-                      <MarkdownRenderer class="sql-code" :content="message.code?.text || ''" />
-                    </div>
-                  </div>
-
-                  <span class="timestamp">{{ message.timestamp }}</span>
-                </div>
-              </div>
+              <AiMessage v-else :message="message" />
             </div>
           </div>
           <div class="input-container">
             <el-input type="textarea" v-model="query" placeholder="Please enter your question"
               @keydown.enter="handleEnter"></el-input>
             <el-button type="primary" @click="sendQuery">Send</el-button>
-            <SelectPanel ref="selectPanelKey" />
           </div>
         </el-main>
       </el-container>
@@ -86,19 +36,19 @@
 import { ref } from "vue";
 import axios from "axios";
 import MarkdownRenderer from "./MarkdownRenderer.vue";
+import AiMessage from "./AiMessage.vue"; // 导入新组件
 import { useQueryStore } from '@/stores/query';
-import { chart } from "@/assets/ts/chart.ts";
-import { nextTick } from "vue";
 
 export default {
   components: {
     MarkdownRenderer,
+    AiMessage, // 注册组件
   },
   data() {
     return {
-      query: "", // 输入框的值
+      query: "",
       currentQuery: "",
-      messageHistory: [], // 存储所有对话历史
+      messageHistory: [],
     };
   },
   setup() {
@@ -118,7 +68,6 @@ export default {
     async sendQuery() {
       if (!this.query) return;
 
-      // 将用户输入添加到历史记录
       const formattedText = this.query.replace(/\n/g, "<br>");
       this.messageHistory.push({
         type: "user",
@@ -128,8 +77,8 @@ export default {
       this.currentQuery = this.query;
 
       this.queryStore.setCurrentQuery(this.query);
-      console.log('Parent sending to Pinia:', this.queryStore.currentQuery);
-      this.query = ""; // 清空输入框
+      console.log("Parent sending to Pinia:", this.queryStore.currentQuery);
+      this.query = "";
 
       try {
         const res = await axios.post(
@@ -144,9 +93,8 @@ export default {
         );
 
         this.queryStore.setResponse(res.data);
-        console.log('Parent stored response in Pinia:', res.data);
+        console.log("Parent stored response in Pinia:", res.data);
 
-        // 将 LLM 响应添加到历史记录
         const newMessage = {
           type: "ai",
           code: {
@@ -155,41 +103,31 @@ export default {
             timestamp: new Date().toLocaleTimeString(),
           },
           data: res.data.response.data,
+          explanation: res.data.response.explanation,
           vis_data: res.data.response.vis_data,
           vis_tag_name: `chart_${Date.now()}_${this.messageHistory.length}`,
           timestamp: new Date().toLocaleTimeString(),
         };
 
         this.messageHistory.push(newMessage);
-
-        // 直接渲染图表（如果有可视化数据）
-        if (newMessage.vis_data) {
-          await nextTick(() => {
-            chart(newMessage.vis_tag_name, newMessage.vis_data);
-          });
-        }
-
       } catch (error) {
         console.error("Error fetching response:", error);
       }
     },
     handleEnter(event) {
       if (event.shiftKey) {
-        return; // Shift + Enter 不触发
+        return;
       } else {
-        event.preventDefault(); // 阻止默认换行
+        event.preventDefault();
         this.sendQuery();
       }
     },
     handleSubmitQuery(newQuery) {
-      this.currentQuery = newQuery
-    }
+      this.currentQuery = newQuery;
+    },
   },
   mounted() {
     console.log("组件已挂载");
-    nextTick(() => {
-      console.log("DOM 已更新");
-    });
   },
 };
 </script>
@@ -398,6 +336,4 @@ export default {
 #chart-container {
   margin: 0 auto;
 }
-
-
 </style>

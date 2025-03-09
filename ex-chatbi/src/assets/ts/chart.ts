@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 
-export function chart(vis_tag:any, vis_data:any) {
+export function chart(vis_tag: any, vis_data: any) {
   // 使用动态传入的 vis_tag，而不是固定的 "vis-tag"
   const container = document.getElementById(vis_tag);
   if (!container) {
@@ -8,7 +8,7 @@ export function chart(vis_tag:any, vis_data:any) {
     return;
   }
 
-  // 清空现有内容
+    // 清空现有内容
   d3.select(`#${vis_tag}`).selectAll("*").remove();
 
   // 设置图表尺寸
@@ -37,6 +37,7 @@ export function chart(vis_tag:any, vis_data:any) {
     default:
       console.error("Unsupported vis_tag:", vis_data["vis_tag"]);
   }
+  
 }
 
 // 绘制柱状图
@@ -113,15 +114,15 @@ function drawBarChart(svg: any, vis_data: any, width: number, height: number, ma
   //   .attr("text-anchor", "end")
   //   .text(vis_data["x-legend"]);
   svg
-  .append("g")
-  .attr("transform", `translate(0, ${y(0)})`) // X轴放在零点位置
-  .call(d3.axisBottom(x))
-  .append("text")
-  .attr("x", width - margin.right) // 将 x 设置为最右端
-  .attr("y", margin.bottom - 5)    // 保持垂直位置不变
-  .attr("fill", "black")
-  .attr("text-anchor", "end")      // 文本右对齐
-  .text(vis_data["x-legend"]);
+    .append("g")
+    .attr("transform", `translate(0, ${y(0)})`) // X轴放在零点位置
+    .call(d3.axisBottom(x))
+    .append("text")
+    .attr("x", width - margin.right) // 将 x 设置为最右端
+    .attr("y", margin.bottom - 5)    // 保持垂直位置不变
+    .attr("fill", "black")
+    .attr("text-anchor", "end")      // 文本右对齐
+    .text(vis_data["x-legend"]);
 
   // 添加Y轴
   // svg
@@ -136,16 +137,16 @@ function drawBarChart(svg: any, vis_data: any, width: number, height: number, ma
   //   .attr("transform", "rotate(-90)")
   //   .text(vis_data["y-legend"]);
   svg
-  .append("g")
-  .attr("transform", `translate(${margin.left}, 0)`)
-  .call(d3.axisLeft(y))
-  .append("text")
-  .attr("x", -margin.top)          // 将标签移到 Y 轴顶部
-  .attr("y", -margin.left + 15)    // 保持水平偏移不变
-  .attr("fill", "black")
-  .attr("text-anchor", "start")    // 文本顶部对齐
-  .attr("transform", "rotate(-90)") // 保持旋转
-  .text(vis_data["y-legend"]);
+    .append("g")
+    .attr("transform", `translate(${margin.left}, 0)`)
+    .call(d3.axisLeft(y))
+    .append("text")
+    .attr("x", -margin.top)          // 将标签移到 Y 轴顶部
+    .attr("y", -margin.left + 15)    // 保持水平偏移不变
+    .attr("fill", "black")
+    .attr("text-anchor", "start")    // 文本顶部对齐
+    .attr("transform", "rotate(-90)") // 保持旋转
+    .text(vis_data["y-legend"]);
   // 添加标题
   svg
     .append("text")
