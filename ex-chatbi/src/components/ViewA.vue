@@ -81,7 +81,7 @@
             Model Understanding
           </div>
           <div style="background-color: #ffffff; color: #303133; padding: 10px; text-align: left; border-radius: 0 0 4px 4px; min-height: 40px;">
-            {{ modelResponse.match(/^[^\n]*/)[0] }}
+            {{ modelResponse}}
           </div>
         </el-card>
       </el-col>
@@ -171,7 +171,7 @@
       response(newVal) {
         console.log('监听到新响应:', newVal);
         if (newVal) {
-          this.modelResponse = newVal.response.code || JSON.stringify(newVal.response.data);
+          this.modelResponse = newVal.response.understanding || JSON.stringify(newVal.response.data);
           this.topKSimilar = newVal.top_k_similar || [];
           this.messageHistory = newVal.message_history || [];
         }

@@ -31,9 +31,7 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # 生产环境应限制具体域名
-    allow_origins=["*"],  # 生产环境应限制具体域名
     allow_credentials=True,
-    allow_methods=["POST", "GET"],  # 根据实际需求调整
     allow_methods=["POST", "GET"],  # 根据实际需求调整
     allow_headers=["*"],
 )
@@ -45,11 +43,6 @@ user_query = ""
 sql_code = ""
 
 
-# 存储对话历史
-conversation_history = []  # 列表存储历史查询
-# model = SentenceTransformer('all-MiniLM-L6-v2')  # 加载预训练模型计算相似度
-user_query = ""
-sql_code = ""
 
 def get_sql_code(sql_response):
     sql_pattern = r"```sql\n(.*?)\n```"
@@ -61,17 +54,17 @@ def get_sql_code(sql_response):
 
 
 
-@app.post("/api/sql2json")
-async def get_sql2json():
-    try:
-        sql_code = "select * from chatbi"
-        sqljson = sql2json(sql_code)
-        print("Response data:", sqljson)
-        return sqljson
-    except Exception as e:
-        import traceback
-        traceback.print_exc() 
-        raise HTTPException(status_code=500, detail=str(e))
+# @app.post("/api/sql2json")
+# async def get_sql2json():
+#     try:
+#         sql_code = "select * from chatbi"
+#         sqljson = sql2json(sql_code)
+#         print("Response data:", sqljson)
+#         return sqljson
+#     except Exception as e:
+#         import traceback
+#         traceback.print_exc()
+#         raise HTTPException(status_code=500, detail=str(e))
 
 def get_extracted_sql(text):
     # 匹配获取sqlcode
@@ -86,28 +79,28 @@ def get_extracted_sql(text):
 
 
 
-@app.post("/api/sql2json")
-async def get_sql2json():
-    try:
-        sql_code = "select * from chatbi"
-        sqljson = sql2json(sql_code)
-        print("Response data:", sqljson)
-        return sqljson
-    except Exception as e:
-        import traceback
-        traceback.print_exc() 
-        raise HTTPException(status_code=500, detail=str(e))
-
-def get_extracted_sql(text):
-    # 匹配获取sqlcode
-    sql_code = re.search(r'```sql\n(.*?)\n```', text, re.DOTALL)
-    if sql_code:
-        extracted_sql = sql_code.group(1)
-        print("提取的SQL代码:")
-        print(extracted_sql)
-    else:
-        print("未找到SQL代码块")
-    return extracted_sql
+# @app.post("/api/sql2json")
+# async def get_sql2json():
+#     try:
+#         sql_code = "select * from chatbi"
+#         sqljson = sql2json(sql_code)
+#         print("Response data:", sqljson)
+#         return sqljson
+#     except Exception as e:
+#         import traceback
+#         traceback.print_exc()
+#         raise HTTPException(status_code=500, detail=str(e))
+#
+# def get_extracted_sql(text):
+#     # 匹配获取sqlcode
+#     sql_code = re.search(r'```sql\n(.*?)\n```', text, re.DOTALL)
+#     if sql_code:
+#         extracted_sql = sql_code.group(1)
+#         print("提取的SQL代码:")
+#         print(extracted_sql)
+#     else:
+#         print("未找到SQL代码块")
+#     return extracted_sql
 
 
 @app.post("/api/query")
@@ -124,6 +117,7 @@ async def query_handler(request: Dict[str, Any]):
         print("==========================my_lightrag========================================")
         rag_response = await rag.query(user_query)
         # print("rag_response: ", rag_response)
+        understanding = rag_response.split('\n')[0]
         sql_code = get_extracted_sql(rag_response)
         explanation = rag_response.split("```")[-1]
         # sql_code = """
@@ -145,6 +139,7 @@ async def query_handler(request: Dict[str, Any]):
         excute_sql_output = {'column': ['month_id', 'sales_amt', 'sales_notax', 'sales_notax_mom_per'], 'data': [(202502, Decimal('-5235'), Decimal('-4634'), Decimal('-1.00029011188026305147'))]}
 
         final_response = {
+            "understanding": understanding,
             "explanation": explanation,
             "code": sql_code,
             "data": excute_sql_output,
@@ -153,26 +148,26 @@ async def query_handler(request: Dict[str, Any]):
         # 添加当前查询到历史
         # conversation_history.append(user_query)
 
-        # 计算与历史查询的相似度
-        if len(conversation_history) > 1:
-            # 生成当前查询的嵌入
-            current_embedding = model.encode(user_query, convert_to_tensor=True)
-            # 历史查询嵌入
-            history_embeddings = model.encode(conversation_history[:-1], convert_to_tensor=True)
-            # 计算余弦相似度
-            similarities = util.cos_sim(current_embedding, history_embeddings)[0].tolist()
-        else:
-            similarities = []
+        # # 计算与历史查询的相似度
+        # if len(conversation_history) > 1:
+        #     # 生成当前查询的嵌入
+        #     current_embedding = model.encode(user_query, convert_to_tensor=True)
+        #     # 历史查询嵌入
+        #     history_embeddings = model.encode(conversation_history[:-1], convert_to_tensor=True)
+        #     # 计算余弦相似度
+        #     similarities = util.cos_sim(current_embedding, history_embeddings)[0].tolist()
+        # else:
+        #     similarities = []
 
 
-        # 准备返回数据：历史查询和相似度
-        history_with_similarity = [
-            {"query": q, "similarity": sim}
-            for q, sim in zip(conversation_history[:-1], similarities)
-        ] if similarities else []
+        # # 准备返回数据：历史查询和相似度
+        # history_with_similarity = [
+        #     {"query": q, "similarity": sim}
+        #     for q, sim in zip(conversation_history[:-1], similarities)
+        # ] if similarities else []
 
         # 按相似度降序排序并取 Top K（例如 K=3）
-        top_k = sorted(history_with_similarity, key=lambda x: x["similarity"], reverse=True)[:3]
+        # top_k = sorted(history_with_similarity, key=lambda x: x["similarity"], reverse=True)[:3]
 
         # 4. chart准备数据
         # 思路：将用户query和查询得到的数据给到LLM，让其推荐可视化的格式（柱状图、折线图、饼状图）
@@ -191,10 +186,9 @@ async def query_handler(request: Dict[str, Any]):
         final_response['vis_data'] = vis_data
 
         # 返回标准化响应
-        return {"response": final_response, "top_k_similar": top_k}
+        return {"response": final_response, "top_k_similar": 3}
         # return final_response
-        return {"response": final_response, "top_k_similar": top_k}
-        # return final_response
+
     
     except Exception as e:
         # 异常处理与日志记录
