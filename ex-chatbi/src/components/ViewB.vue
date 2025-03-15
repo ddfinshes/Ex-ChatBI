@@ -1,84 +1,99 @@
 <!-- ViewB.vue -->
 <template>
-  <div>
-    <!-- 卡片容器 -->
-    <div class="card-container" v-show="!activeCard"  style="margin: 0 50px;">
+  <div class="header">View B</div>
+  <div class="main-container" v-if="!activeCard">
+    <!-- 左侧大卡片 -->
+    <div class="left-carousel">
       <el-carousel 
-        indicator-position="none" 
-        arrow="always" 
+        indicator-position="none"
+        arrow="always"
         :interval="0"
-        :height="carouselHeight"
+        height="carouselHeight"
       >
-        <!-- 第一页：原有两行四列 -->
-  <el-carousel-item>
-    <div class="carousel-page">
-      <!-- 第一行四列 -->
-      <el-row :gutter="60" class="card-row">
-        <el-col
-          v-for="(card, index) in firstRowCards"
-          :key="'first-' + index"
-          :span="6"
-        >
-          <el-card
-            shadow="hover"
-            class="click-card"
-            @click="showExplanation(card)"
-          >
-            <template #header>
-              <div class="card-title">
-              <i :class="card.icon" class="card-icon"></i>
-              {{ card.title }}
-              </div>
-            </template>
-            <div class="card-content">{{ card.content }}</div>
-          </el-card>
-        </el-col>
-      </el-row>
-
-      <!-- 第二行四列 -->
-      <el-row :gutter="60" class="card-row">
-        <el-col
-          v-for="(card, index) in secondRowCards"
-          :key="'second-' + index"
-          :span="6"
-        >
-          <el-card
-            shadow="hover"
-            class="click-card"
-            @click="showExplanation(card)"
-          >
-            <template #header>
-              <div class="card-title">
-              <i :class="card.icon" class="card-icon"></i>
-              {{ card.title }}
-              </div>
-            </template>
-            <div class="card-content">{{ card.content }}</div>
-          </el-card>
-        </el-col>
-      </el-row>
-    </div>
-    </el-carousel-item>
-    <!-- 第二页：新增一行四列 -->
-        <el-carousel-item>
-          <div class="carousel-page">
-            <el-row :gutter="60" class="card-row">
-              <el-col v-for="(card, index) in thirdRowCards" :key="'third-'+index" :span="6">
-                <el-card shadow="hover" class="click-card third-row-card" @click="showExplanation(card)">
-                  <template #header>
-                    <div class="card-title">
-                      <i :class="card.icon" class="card-icon"></i>
-                      {{ card.title }}
-                    </div>
-                  </template>
-                  <div class="card-content">{{ card.content }}</div>
-                </el-card>
-              </el-col>
-            </el-row>
-          </div>
+        <el-carousel-item v-for="(page, index) in bigCardPages" :key="'big-'+index">
+          <el-row :gutter="40">
+            <el-col v-for="(card, i) in page" :key="i" :span="12">
+              <el-card
+                shadow="hover"
+                class="third-row-card"
+                @click="showExplanation(card)"
+              >
+                <template #header>
+                  <div class="card-title">
+                    <i :class="card.icon" class="card-icon"></i>
+                    {{ card.title }}
+                  </div>
+                </template>
+                <div class="card-content">{{ card.content }}</div>
+              </el-card>
+            </el-col>
+          </el-row>
         </el-carousel-item>
       </el-carousel>
     </div>
+
+    <!-- 右侧小卡片 -->
+    <div class="right-carousel">
+      <el-carousel 
+        indicator-position="none"
+        arrow="always"
+        :interval="0"
+        :height="carouselHeight"
+      >
+            <!-- 第一页 -->
+            <el-carousel-item >
+            <el-row :gutter="60" class="card-row">
+              <el-col
+              v-for="(card, index) in firstRowCards"
+              :key="'first-' + index"
+              :span="12"
+            >
+            <el-card
+                shadow="hover"
+                class="click-card"
+                @click="showExplanation(card)"
+                :ref="'card-' + card.id"
+              >
+                <template #header>
+                  <div class="card-title">
+                  <i :class="card.icon" class="card-icon"></i>
+                  {{ card.title }}
+                  </div>
+                </template>
+                <div class="card-content">{{ card.content }}</div>
+              </el-card>
+              </el-col>
+            </el-row>
+          </el-carousel-item>
+
+            <!-- 第二页 -->
+          <el-carousel-item>
+            <el-row :gutter="60" class="card-row">
+            <el-col
+              v-for="(card, index) in secondRowCards"
+              :key="'second-' + index"
+              :span="12"
+            >
+              <el-card
+                shadow="hover"
+                class="click-card"
+                @click="showExplanation(card)"
+                :ref="'card-' + card.id"
+              >
+                <template #header>
+                  <div class="card-title">
+                  <i :class="card.icon" class="card-icon"></i>
+                  {{ card.title }}
+                  </div>
+                </template>
+                <div class="card-content">{{ card.content }}</div>
+              </el-card>
+              </el-col>
+            </el-row>
+          </el-carousel-item>
+      </el-carousel>
+    </div>
+</div>
 
     <!-- 解释视图 -->
     <transition name="explanation-slide">
@@ -107,7 +122,7 @@
         </el-card>
       </div>
     </transition>
-  </div>
+
 </template>
 
 <script>
@@ -119,7 +134,7 @@ export default {
   data() {
     return {
       activeCard: null,
-      carouselHeight: '350px', // 默认两行高度
+      carouselHeight: '400px', // 默认两行高度
       firstRowCards: [
         {
           id: 1,
@@ -228,30 +243,82 @@ export default {
       ],
     };
   },
+  computed: {
+    bigCardPages() {
+      // 每页显示两个大卡片（使用thirdRowCards）
+      return this.chunkArray(this.thirdRowCards, 2);
+    },
+    smallCardPages() {
+    // 正确分页逻辑：每页显示4个，但按2x2排列
+    const allSmall = [...this.firstRowCards, ...this.secondRowCards];
+    return this.chunkArray(allSmall, 4).map(page => ({
+      row1: page.slice(0, 2),
+      row2: page.slice(2, 4)
+    }));
+  }
+  },
   methods: {
+    chunkArray(arr, size) {
+      return arr.reduce((acc, val, i) => {
+        let idx = Math.floor(i / size);
+        acc[idx] = acc[idx] || [];
+        acc[idx].push(val);
+        return acc;
+      }, []);
+    },
     showExplanation(card) {
       this.activeCard = card;
     },
     hideExplanation() {
       this.activeCard = null;
     },
+    // 获取卡片坐标的方法
+    getCardPositions() {
+          const positions = {}
+          
+          // 遍历 ID 1-8
+          for (let id = 1; id <= 8; id++) {
+            const cardRef = this.$refs[`card-${id}`]
+            if (cardRef) {
+              const element = Array.isArray(cardRef) ? cardRef[0].$el : cardRef.$el
+              const rect = element.getBoundingClientRect()
+              
+              positions[id] = {
+                x: rect.left + rect.width / 2,
+                y: rect.top  // 获取顶部中心坐标
+              }
+            }
+          }
+          
+          return positions
+        }
   },
 };
 </script>
 
 <style>
-/* 卡片容器 */
-.card-container {
-  padding: 50px;
-  overflow: visible !important;
-  position: relative;
+.main-container {
+  display: flex;
+  gap: 50px;
+  padding: 20px 40px;
+}
+
+.left-carousel {
+  flex: 1;
+}
+
+
+.right-carousel {
+  flex: 1;
 }
 
 .click-card {
+  flex: 1;
   cursor: pointer;
   transition: all 0.3s;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   min-height: 150px;
+  height: 190px; /* 根据实际需要调整 */
 }
 
 .click-card:hover {
@@ -259,15 +326,23 @@ export default {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
+.el-carousel__container{
+  min-height: 400px !important;
+}
+
 /* 新增第三行专用高度样式 */
 .third-row-card {
-  min-height: 300px !important; /* 覆盖原有高度 */
+  min-height: 400px !important; /* 覆盖原有高度 */
 }
 
 .card-title {
   font-size: 16px;
   font-weight: 600;
   color: #2d3a4b;
+}
+
+.card-content{
+  font-size: 15px;
 }
 
 .card-icon {
@@ -314,7 +389,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center; /* 垂直居中 */
-  min-height: 200px;
+  min-height: 300px;
   flex: 1;
 }
 /*按钮*/ 

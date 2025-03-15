@@ -6,7 +6,7 @@
 <script>
 import { computed } from 'vue';
 import MarkdownIt from 'markdown-it';
-
+import axios from "axios";
 export default {
   props: {
     content: {

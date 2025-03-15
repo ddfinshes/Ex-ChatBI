@@ -1,85 +1,139 @@
 <!-- AiMessage.vue -->
 <template>
-    <div class="ai-content">
-      <img class="avatar" src="@/assets/image/robot.png" alt="AI Avatar" />
-      <div class="message-bubble ai-bubble">
-        <div class="explanation-section">
-          <MarkdownRenderer class="explanation-text" :content="message.explanation"/>
-        </div>
-
-        <!-- Data Card -->
-        <div class="card-section">
-          <div class="card-title">Data</div>
-          <div class="card-content">
-            <table v-if="message.data" class="result-table">
-              <thead>
-                <tr>
-                  <th v-for="(column, idx) in message.data.column" :key="idx">
-                    {{ column }}
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="(row, rowIdx) in message.data.data" :key="rowIdx">
-                  <td v-for="(cell, cellIdx) in row" :key="cellIdx">
-                    {{ cell }}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <p v-else class="no-data">no data</p>
-          </div>
-        </div>
-  
-        <!-- Chart Card -->
-        <div class="card-section">
-          <div class="card-title">Chart</div>
-          <div class="card-content">
-            <div id="chart-container">
-              <div :id="message.vis_tag_name" style="width: 600px; height: 400px"></div>
-            </div>
-          </div>
-        </div>
-  
-        <!-- Code Card -->
-        <div class="card-section">
-          <div class="card-title">Code</div>
-          <div class="card-content">
-            <MarkdownRenderer class="sql-code" :content="message.code?.text || ''" />
-          </div>
-        </div>
-  
-        <span class="timestamp">{{ message.timestamp }}</span>
+  <div class="ai-content">
+    <img class="avatar" src="@/assets/image/robot.png" alt="AI Avatar" />
+    <div class="message-bubble ai-bubble">
+      <div class="explanation-section">
+        <MarkdownRenderer class="explanation-text" :content="message.explanation" />
       </div>
+
+      <!-- Data Card -->
+      <div class="card-section">
+        <div class="card-title">Data</div>
+        <div class="card-content">
+          <table v-if="message.data" class="result-table">
+            <thead>
+              <tr>
+                <th v-for="(column, idx) in message.data.column" :key="idx" @click="handleHeaderClick(column, idx)">
+                  {{ column }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(row, rowIdx) in message.data.data" :key="rowIdx">
+                <td v-for="(cell, cellIdx) in row" :key="cellIdx" @click="handleCellClick(cell, rowIdx, message.data.column[cellIdx])">
+                  {{ cell }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <p v-else class="no-data">no data</p>
+        </div>
+      </div>
+
+      <!-- Chart Card -->
+      <div class="card-section">
+        <div class="card-title">Chart</div>
+        <div class="card-content">
+          <div id="chart-container">
+            <div :id="message.vis_tag_name" style="width: 600px; height: 400px"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Code Card -->
+      <div class="card-section">
+        <div class="card-title">Code</div>
+        <div class="card-content">
+          <MarkdownRenderer class="sql-code" :content="message.code?.text || ''" />
+        </div>
+      </div>
+
+      <span class="timestamp">{{ message.timestamp }}</span>
     </div>
-  </template>
-  
-  <script>
-  import { chart } from "@/assets/ts/chart.ts";
-  import MarkdownRenderer from "./MarkdownRenderer.vue";
-  
-  export default {
-    name: "AiMessage",
-    components: {
-      MarkdownRenderer,
+  </div>
+</template>
+
+<script>
+import { chart } from "@/assets/ts/chart.ts";
+import MarkdownRenderer from "./MarkdownRenderer.vue";
+import axios from "axios";
+
+export default {
+  name: "AiMessage",
+
+  components: {
+    MarkdownRenderer,
+  },
+  data() {
+    return {
+      clickdata: {},
+    }
+  },
+  props: {
+    message: {
+      type: Object,
+      required: true,
     },
-    props: {
-      message: {
-        type: Object,
-        required: true,
-      },
-    },
-    mounted() {
-      const chartElement = document.getElementById(this.message.vis_tag_name);
-      if (chartElement) {
-        console.log(`渲染图表: ${this.message.vis_tag_name}`);
-        chart(this.message.vis_tag_name, this.message.vis_data);
-      } else {
-        console.error(`未找到图表元素: ${this.message.vis_tag_name}`);
+  },
+  mounted() {
+    const chartElement = document.getElementById(this.message.vis_tag_name);
+    if (chartElement) {
+      console.log(`渲染图表: ${this.message.vis_tag_name}`);
+      chart(this.message.vis_tag_name, this.message.vis_data);
+    } else {
+      console.error(`未找到图表元素: ${this.message.vis_tag_name}`);
+    }
+  },
+  methods: {
+    handleHeaderClick(column, columnIndex) {
+      this.clickdata = {
+        columnName: column,
+        columnIndex: columnIndex
       }
+      this.relatSQL()
+      console.log('点击了表头:', this.clickdata);
     },
-  };
-  </script>
+    // handleRowClick(row, rowIndex) {
+    //   this.clickdata = {
+    //     rowData: row,
+    //     rowIndex: rowIndex
+    //   }
+    //   this.relatSQL()
+    //   console.log('点击了行:', 
+    //     this.clickdata
+    //   );
+    // },
+    handleCellClick(cellValue, rowIndex, columnIndex) {
+      this.clickdata = {
+        value: cellValue,
+        rowIndex: rowIndex,
+        columnName: columnIndex
+      }
+      this.relatSQL()
+      console.log('点击了单元格:', this.clickdata);
+    },
+    async relatSQL() {
+      if(!this.clickdata) return;
+      try {
+        const payload = {
+        sql_query: this.message.code,
+        query_out: this.message.data,
+        click_info: this.clickdata
+      };
+      console.log('Request payload:', payload);
+        const res = await axios.post(
+          "/api/relatsql",
+          payload
+        );
+        console.log("res", res)
+      } catch(error) {
+        console.error("Error fetching response:", error);
+      }
+    }
+  }
+};
+</script>
 
 <style>
 .common-layout {

@@ -199,8 +199,8 @@ def sql2json(user_input):
                 ]
             }
             ]
-        }
-        ]
+          }
+          ]
         ```\n
         ### Example2: SQL With CTE
         **Input SQL*
@@ -444,30 +444,30 @@ def sql2json(user_input):
     # response = json.loads(response)
     print("======================SQL2JSON=====================", response)
     return response
-# input_sql = """
-#     SELECT
-#         country,
-#         SUM(amt_notax) AS sales_notax,
-#         SUM(lw_amt_notax) AS sales_notax_LW,
-#         CASE
-#             WHEN SUM(COALESCE(lw_amt_notax, 0)) = 0 THEN 0
-#             ELSE SUM(amt_notax) / SUM(COALESCE(lw_amt_notax, 0)) - 1
-#         END AS sales_notax_wow_per,
-#         SUM(traffic) AS traffic,
-#         SUM(lw_traffic) AS traffic_LW,
-#         CASE
-#             WHEN SUM(COALESCE(lw_traffic, 0)) = 0 THEN 0
-#             ELSE SUM(traffic) / SUM(COALESCE(lw_traffic, 0)) - 1
-#         END AS traffic_wow_per
-#     FROM
-#         dm_fact_sales_chatbi
-#     WHERE
-#         date_code BETWEEN '2025-02-23' AND '2025-02-24'
-#     GROUP BY
-#         country
-#     HAVING
-#         sales_notax_wow_per < 0
-#     ORDER BY
-#         sales_notax_wow_per;
-#     """
-# sql2json(input_sql)
+input_sql = """
+    SELECT
+        country,
+        SUM(amt_notax) AS sales_notax,
+        SUM(lw_amt_notax) AS sales_notax_LW,
+        CASE
+            WHEN SUM(COALESCE(lw_amt_notax, 0)) = 0 THEN 0
+            ELSE SUM(amt_notax) / SUM(COALESCE(lw_amt_notax, 0)) - 1
+        END AS sales_notax_wow_per,
+        SUM(traffic) AS traffic,
+        SUM(lw_traffic) AS traffic_LW,
+        CASE
+            WHEN SUM(COALESCE(lw_traffic, 0)) = 0 THEN 0
+            ELSE SUM(traffic) / SUM(COALESCE(lw_traffic, 0)) - 1
+        END AS traffic_wow_per
+    FROM
+        dm_fact_sales_chatbi
+    WHERE
+        date_code BETWEEN '2025-02-23' AND '2025-02-24'
+    GROUP BY
+        country
+    HAVING
+        sales_notax_wow_per < 0
+    ORDER BY
+        sales_notax_wow_per;
+    """
+sql2json(input_sql)

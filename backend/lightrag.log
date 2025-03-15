@@ -1482,3 +1482,484 @@ ollama._types.ResponseError: model "glm:9b" not found, try pulling it first (sta
 2025-03-09 19:09:01,459 - lightrag - INFO - All documents have been processed or are duplicates
 2025-03-09 19:09:01,459 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
 2025-03-09 19:09:01,468 - lightrag - INFO - Storage Finalization completed!
+2025-03-09 20:25:20,434 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-09 20:25:20,434 - lightrag - INFO - No new unique documents were found.
+2025-03-09 20:25:20,436 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-09 20:25:20,436 - lightrag - INFO - No new unique documents were found.
+2025-03-09 20:25:20,437 - lightrag - INFO - Storage Initialization completed!
+2025-03-09 20:25:20,437 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-09 20:25:20,437 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-09 20:27:01,712 - lightrag - INFO - Logger initialized for working directory: /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens
+2025-03-09 20:27:01,717 - lightrag - INFO - Load KV llm_response_cache with 2 data
+2025-03-09 20:27:01,718 - lightrag - INFO - Load KV full_docs with 2 data
+2025-03-09 20:27:01,719 - lightrag - INFO - Load KV text_chunks with 21 data
+2025-03-09 20:27:01,730 - lightrag - INFO - Loaded graph from /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens/graph_chunk_entity_relation.graphml with 606 nodes, 182 edges
+2025-03-09 20:27:01,816 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-09 20:27:01,817 - lightrag - INFO - No new unique documents were found.
+2025-03-09 20:27:01,817 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-09 20:27:01,817 - lightrag - INFO - No new unique documents were found.
+2025-03-09 20:27:01,817 - lightrag - INFO - Storage Initialization completed!
+2025-03-09 20:27:01,817 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-09 20:27:01,818 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-09 20:27:01,826 - lightrag - INFO - Storage Finalization completed!
+2025-03-09 21:19:41,432 - lightrag - INFO - Logger initialized for working directory: /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens
+2025-03-09 21:19:41,439 - lightrag - INFO - Load KV llm_response_cache with 2 data
+2025-03-09 21:19:41,440 - lightrag - INFO - Load KV full_docs with 2 data
+2025-03-09 21:19:41,440 - lightrag - INFO - Load KV text_chunks with 21 data
+2025-03-09 21:19:41,453 - lightrag - INFO - Loaded graph from /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens/graph_chunk_entity_relation.graphml with 606 nodes, 182 edges
+2025-03-09 21:19:41,533 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-09 21:19:41,534 - lightrag - INFO - No new unique documents were found.
+2025-03-09 21:19:41,535 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-09 21:19:41,535 - lightrag - INFO - No new unique documents were found.
+2025-03-09 21:19:41,536 - lightrag - INFO - Storage Initialization completed!
+2025-03-09 21:19:41,536 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-09 21:19:41,536 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-09 21:19:41,545 - lightrag - INFO - Storage Finalization completed!
+2025-03-13 20:33:09,709 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-13 20:33:09,710 - lightrag - INFO - No new unique documents were found.
+2025-03-13 20:33:09,712 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-13 20:33:09,712 - lightrag - INFO - No new unique documents were found.
+2025-03-13 20:33:09,712 - lightrag - INFO - Storage Initialization completed!
+2025-03-13 20:33:09,712 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-13 20:33:09,713 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-13 21:05:10,318 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-13 21:05:10,319 - lightrag - INFO - No new unique documents were found.
+2025-03-13 21:05:10,322 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-13 21:05:10,323 - lightrag - INFO - No new unique documents were found.
+2025-03-13 21:05:10,323 - lightrag - INFO - Storage Initialization completed!
+2025-03-13 21:05:10,323 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-13 21:05:10,323 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-13 21:07:06,935 - lightrag - INFO - Logger initialized for working directory: /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens
+2025-03-13 21:07:06,941 - lightrag - INFO - Load KV llm_response_cache with 2 data
+2025-03-13 21:07:06,942 - lightrag - INFO - Load KV full_docs with 2 data
+2025-03-13 21:07:06,942 - lightrag - INFO - Load KV text_chunks with 21 data
+2025-03-13 21:07:06,954 - lightrag - INFO - Loaded graph from /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens/graph_chunk_entity_relation.graphml with 606 nodes, 182 edges
+2025-03-13 21:07:07,037 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-13 21:07:07,037 - lightrag - INFO - No new unique documents were found.
+2025-03-13 21:07:07,039 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-13 21:07:07,039 - lightrag - INFO - No new unique documents were found.
+2025-03-13 21:07:07,039 - lightrag - INFO - Storage Initialization completed!
+2025-03-13 21:07:07,039 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-13 21:07:07,040 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-13 21:07:07,048 - lightrag - INFO - Storage Finalization completed!
+2025-03-13 21:07:48,288 - lightrag - INFO - Logger initialized for working directory: /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens
+2025-03-13 21:07:48,293 - lightrag - INFO - Load KV llm_response_cache with 2 data
+2025-03-13 21:07:48,294 - lightrag - INFO - Load KV full_docs with 2 data
+2025-03-13 21:07:48,295 - lightrag - INFO - Load KV text_chunks with 21 data
+2025-03-13 21:07:48,305 - lightrag - INFO - Loaded graph from /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens/graph_chunk_entity_relation.graphml with 606 nodes, 182 edges
+2025-03-13 21:07:48,388 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-13 21:07:48,389 - lightrag - INFO - No new unique documents were found.
+2025-03-13 21:07:48,389 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-13 21:07:48,389 - lightrag - INFO - No new unique documents were found.
+2025-03-13 21:07:48,389 - lightrag - INFO - Storage Initialization completed!
+2025-03-13 21:07:48,389 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-13 21:07:48,390 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-13 21:07:48,398 - lightrag - INFO - Storage Finalization completed!
+2025-03-13 21:10:16,178 - lightrag - INFO - Logger initialized for working directory: /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens
+2025-03-13 21:10:16,183 - lightrag - INFO - Load KV llm_response_cache with 2 data
+2025-03-13 21:10:16,184 - lightrag - INFO - Load KV full_docs with 2 data
+2025-03-13 21:10:16,185 - lightrag - INFO - Load KV text_chunks with 21 data
+2025-03-13 21:10:16,199 - lightrag - INFO - Loaded graph from /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens/graph_chunk_entity_relation.graphml with 606 nodes, 182 edges
+2025-03-13 21:10:16,283 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-13 21:10:16,284 - lightrag - INFO - No new unique documents were found.
+2025-03-13 21:10:16,285 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-13 21:10:16,286 - lightrag - INFO - No new unique documents were found.
+2025-03-13 21:10:16,286 - lightrag - INFO - Storage Initialization completed!
+2025-03-13 21:10:16,286 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-13 21:10:16,286 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-13 21:10:16,295 - lightrag - INFO - Storage Finalization completed!
+2025-03-13 21:11:53,488 - lightrag - INFO - Logger initialized for working directory: /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens
+2025-03-13 21:11:53,494 - lightrag - INFO - Load KV llm_response_cache with 2 data
+2025-03-13 21:11:53,494 - lightrag - INFO - Load KV full_docs with 2 data
+2025-03-13 21:11:53,495 - lightrag - INFO - Load KV text_chunks with 21 data
+2025-03-13 21:11:53,510 - lightrag - INFO - Loaded graph from /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens/graph_chunk_entity_relation.graphml with 606 nodes, 182 edges
+2025-03-13 21:11:53,596 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-13 21:11:53,597 - lightrag - INFO - No new unique documents were found.
+2025-03-13 21:11:53,598 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-13 21:11:53,598 - lightrag - INFO - No new unique documents were found.
+2025-03-13 21:11:53,599 - lightrag - INFO - Storage Initialization completed!
+2025-03-13 21:11:53,599 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-13 21:11:53,599 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-13 21:11:53,607 - lightrag - INFO - Storage Finalization completed!
+2025-03-13 21:18:12,021 - lightrag - INFO - Logger initialized for working directory: /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens
+2025-03-13 21:18:12,027 - lightrag - INFO - Load KV llm_response_cache with 2 data
+2025-03-13 21:18:12,028 - lightrag - INFO - Load KV full_docs with 2 data
+2025-03-13 21:18:12,029 - lightrag - INFO - Load KV text_chunks with 21 data
+2025-03-13 21:18:12,045 - lightrag - INFO - Loaded graph from /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens/graph_chunk_entity_relation.graphml with 606 nodes, 182 edges
+2025-03-13 21:18:12,131 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-13 21:18:12,131 - lightrag - INFO - No new unique documents were found.
+2025-03-13 21:18:12,133 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-13 21:18:12,133 - lightrag - INFO - No new unique documents were found.
+2025-03-13 21:18:12,133 - lightrag - INFO - Storage Initialization completed!
+2025-03-13 21:18:12,133 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-13 21:18:12,133 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-13 21:18:12,142 - lightrag - INFO - Storage Finalization completed!
+2025-03-13 21:18:18,577 - lightrag - INFO - Logger initialized for working directory: /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens
+2025-03-13 21:18:18,583 - lightrag - INFO - Load KV llm_response_cache with 2 data
+2025-03-13 21:18:18,583 - lightrag - INFO - Load KV full_docs with 2 data
+2025-03-13 21:18:18,584 - lightrag - INFO - Load KV text_chunks with 21 data
+2025-03-13 21:18:18,602 - lightrag - INFO - Loaded graph from /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens/graph_chunk_entity_relation.graphml with 606 nodes, 182 edges
+2025-03-13 21:18:18,689 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-13 21:18:18,690 - lightrag - INFO - No new unique documents were found.
+2025-03-13 21:18:18,691 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-13 21:18:18,692 - lightrag - INFO - No new unique documents were found.
+2025-03-13 21:18:18,692 - lightrag - INFO - Storage Initialization completed!
+2025-03-13 21:18:18,692 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-13 21:18:18,692 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-13 21:18:18,701 - lightrag - INFO - Storage Finalization completed!
+2025-03-13 21:18:51,069 - lightrag - INFO - Logger initialized for working directory: /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens
+2025-03-13 21:18:51,074 - lightrag - INFO - Load KV llm_response_cache with 2 data
+2025-03-13 21:18:51,075 - lightrag - INFO - Load KV full_docs with 2 data
+2025-03-13 21:18:51,076 - lightrag - INFO - Load KV text_chunks with 21 data
+2025-03-13 21:18:51,338 - lightrag - INFO - Loaded graph from /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens/graph_chunk_entity_relation.graphml with 606 nodes, 182 edges
+2025-03-13 21:18:51,427 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-13 21:18:51,427 - lightrag - INFO - No new unique documents were found.
+2025-03-13 21:18:51,430 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-13 21:18:51,430 - lightrag - INFO - No new unique documents were found.
+2025-03-13 21:18:51,431 - lightrag - INFO - Storage Initialization completed!
+2025-03-13 21:18:51,431 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-13 21:18:51,431 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-13 21:18:51,439 - lightrag - INFO - Storage Finalization completed!
+2025-03-13 21:22:39,477 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-13 21:22:39,477 - lightrag - INFO - No new unique documents were found.
+2025-03-13 21:22:39,480 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-13 21:22:39,480 - lightrag - INFO - No new unique documents were found.
+2025-03-13 21:22:39,480 - lightrag - INFO - Storage Initialization completed!
+2025-03-13 21:22:39,480 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-13 21:22:39,481 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-13 21:22:54,569 - lightrag - INFO - Logger initialized for working directory: /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens
+2025-03-13 21:22:54,574 - lightrag - INFO - Load KV llm_response_cache with 2 data
+2025-03-13 21:22:54,575 - lightrag - INFO - Load KV full_docs with 2 data
+2025-03-13 21:22:54,576 - lightrag - INFO - Load KV text_chunks with 21 data
+2025-03-13 21:22:54,587 - lightrag - INFO - Loaded graph from /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens/graph_chunk_entity_relation.graphml with 606 nodes, 182 edges
+2025-03-13 21:22:54,669 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-13 21:22:54,670 - lightrag - INFO - No new unique documents were found.
+2025-03-13 21:22:54,671 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-13 21:22:54,672 - lightrag - INFO - No new unique documents were found.
+2025-03-13 21:22:54,672 - lightrag - INFO - Storage Initialization completed!
+2025-03-13 21:22:54,672 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-13 21:22:54,672 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-13 21:22:54,681 - lightrag - INFO - Storage Finalization completed!
+2025-03-13 21:23:49,976 - lightrag - INFO - Logger initialized for working directory: /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens
+2025-03-13 21:23:49,983 - lightrag - INFO - Load KV llm_response_cache with 2 data
+2025-03-13 21:23:49,984 - lightrag - INFO - Load KV full_docs with 2 data
+2025-03-13 21:23:49,985 - lightrag - INFO - Load KV text_chunks with 21 data
+2025-03-13 21:23:49,995 - lightrag - INFO - Loaded graph from /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens/graph_chunk_entity_relation.graphml with 606 nodes, 182 edges
+2025-03-13 21:23:50,081 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-13 21:23:50,081 - lightrag - INFO - No new unique documents were found.
+2025-03-13 21:23:50,081 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-13 21:23:50,082 - lightrag - INFO - No new unique documents were found.
+2025-03-13 21:23:50,082 - lightrag - INFO - Storage Initialization completed!
+2025-03-13 21:23:50,082 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-13 21:23:50,082 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-13 21:23:50,090 - lightrag - INFO - Storage Finalization completed!
+2025-03-13 22:23:13,380 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-13 22:23:13,381 - lightrag - INFO - No new unique documents were found.
+2025-03-13 22:23:13,383 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-13 22:23:13,383 - lightrag - INFO - No new unique documents were found.
+2025-03-13 22:23:13,384 - lightrag - INFO - Storage Initialization completed!
+2025-03-13 22:23:13,384 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-13 22:23:13,384 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-14 00:12:57,992 - lightrag - INFO - Logger initialized for working directory: /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens
+2025-03-14 00:12:57,998 - lightrag - INFO - Load KV llm_response_cache with 2 data
+2025-03-14 00:12:57,999 - lightrag - INFO - Load KV full_docs with 2 data
+2025-03-14 00:12:58,000 - lightrag - INFO - Load KV text_chunks with 21 data
+2025-03-14 00:12:58,012 - lightrag - INFO - Loaded graph from /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens/graph_chunk_entity_relation.graphml with 606 nodes, 182 edges
+2025-03-14 00:12:58,101 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-14 00:12:58,102 - lightrag - INFO - No new unique documents were found.
+2025-03-14 00:12:58,103 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 00:12:58,104 - lightrag - INFO - No new unique documents were found.
+2025-03-14 00:12:58,104 - lightrag - INFO - Storage Initialization completed!
+2025-03-14 00:12:58,104 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 00:12:58,104 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-14 00:12:58,142 - lightrag - INFO - Storage Finalization completed!
+2025-03-14 00:17:09,876 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-14 00:17:09,876 - lightrag - INFO - No new unique documents were found.
+2025-03-14 00:17:09,879 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 00:17:09,880 - lightrag - INFO - No new unique documents were found.
+2025-03-14 00:17:09,880 - lightrag - INFO - Storage Initialization completed!
+2025-03-14 00:17:09,880 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 00:17:09,881 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-14 00:37:00,134 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-14 00:37:00,135 - lightrag - INFO - No new unique documents were found.
+2025-03-14 00:37:00,137 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 00:37:00,138 - lightrag - INFO - No new unique documents were found.
+2025-03-14 00:37:00,138 - lightrag - INFO - Storage Initialization completed!
+2025-03-14 00:37:00,138 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 00:37:00,138 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-14 00:38:14,069 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-14 00:38:14,069 - lightrag - INFO - No new unique documents were found.
+2025-03-14 00:38:14,071 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 00:38:14,072 - lightrag - INFO - No new unique documents were found.
+2025-03-14 00:38:14,072 - lightrag - INFO - Storage Initialization completed!
+2025-03-14 00:38:14,072 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 00:38:14,072 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-14 00:39:34,199 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-14 00:39:34,200 - lightrag - INFO - No new unique documents were found.
+2025-03-14 00:39:34,202 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 00:39:34,203 - lightrag - INFO - No new unique documents were found.
+2025-03-14 00:39:34,203 - lightrag - INFO - Storage Initialization completed!
+2025-03-14 00:39:34,203 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 00:39:34,203 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-14 00:40:45,680 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-14 00:40:45,680 - lightrag - INFO - No new unique documents were found.
+2025-03-14 00:40:45,682 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 00:40:45,683 - lightrag - INFO - No new unique documents were found.
+2025-03-14 00:40:45,683 - lightrag - INFO - Storage Initialization completed!
+2025-03-14 00:40:45,683 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 00:40:45,683 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-14 00:42:49,479 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-14 00:42:49,479 - lightrag - INFO - No new unique documents were found.
+2025-03-14 00:42:49,482 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 00:42:49,482 - lightrag - INFO - No new unique documents were found.
+2025-03-14 00:42:49,483 - lightrag - INFO - Storage Initialization completed!
+2025-03-14 00:42:49,483 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 00:42:49,483 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-14 00:45:32,676 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-14 00:45:32,677 - lightrag - INFO - No new unique documents were found.
+2025-03-14 00:45:32,679 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 00:45:32,679 - lightrag - INFO - No new unique documents were found.
+2025-03-14 00:45:32,680 - lightrag - INFO - Storage Initialization completed!
+2025-03-14 00:45:32,680 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 00:45:32,680 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-14 01:08:16,441 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-14 01:08:16,442 - lightrag - INFO - No new unique documents were found.
+2025-03-14 01:08:16,444 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 01:08:16,445 - lightrag - INFO - No new unique documents were found.
+2025-03-14 01:08:16,445 - lightrag - INFO - Storage Initialization completed!
+2025-03-14 01:08:16,445 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 01:08:16,445 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-14 01:10:08,015 - lightrag - INFO - Logger initialized for working directory: /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens
+2025-03-14 01:10:08,020 - lightrag - INFO - Load KV llm_response_cache with 2 data
+2025-03-14 01:10:08,021 - lightrag - INFO - Load KV full_docs with 2 data
+2025-03-14 01:10:08,022 - lightrag - INFO - Load KV text_chunks with 21 data
+2025-03-14 01:10:08,034 - lightrag - INFO - Loaded graph from /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens/graph_chunk_entity_relation.graphml with 606 nodes, 182 edges
+2025-03-14 01:10:08,119 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-14 01:10:08,120 - lightrag - INFO - No new unique documents were found.
+2025-03-14 01:10:08,121 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 01:10:08,122 - lightrag - INFO - No new unique documents were found.
+2025-03-14 01:10:08,122 - lightrag - INFO - Storage Initialization completed!
+2025-03-14 01:10:08,122 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 01:10:08,122 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-14 01:10:08,159 - lightrag - INFO - Storage Finalization completed!
+2025-03-14 01:11:01,498 - lightrag - INFO - Logger initialized for working directory: /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens
+2025-03-14 01:11:01,504 - lightrag - INFO - Load KV llm_response_cache with 2 data
+2025-03-14 01:11:01,505 - lightrag - INFO - Load KV full_docs with 2 data
+2025-03-14 01:11:01,505 - lightrag - INFO - Load KV text_chunks with 21 data
+2025-03-14 01:11:01,518 - lightrag - INFO - Loaded graph from /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens/graph_chunk_entity_relation.graphml with 606 nodes, 182 edges
+2025-03-14 01:11:01,602 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-14 01:11:01,603 - lightrag - INFO - No new unique documents were found.
+2025-03-14 01:11:01,604 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 01:11:01,605 - lightrag - INFO - No new unique documents were found.
+2025-03-14 01:11:01,605 - lightrag - INFO - Storage Initialization completed!
+2025-03-14 01:11:01,605 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 01:11:01,605 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-14 01:11:01,642 - lightrag - INFO - Storage Finalization completed!
+2025-03-14 01:11:50,799 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-14 01:11:50,800 - lightrag - INFO - No new unique documents were found.
+2025-03-14 01:11:50,803 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 01:11:50,803 - lightrag - INFO - No new unique documents were found.
+2025-03-14 01:11:50,804 - lightrag - INFO - Storage Initialization completed!
+2025-03-14 01:11:50,804 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 01:11:50,804 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-14 01:17:38,065 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-14 01:17:38,066 - lightrag - INFO - No new unique documents were found.
+2025-03-14 01:17:38,069 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 01:17:38,069 - lightrag - INFO - No new unique documents were found.
+2025-03-14 01:17:38,069 - lightrag - INFO - Storage Initialization completed!
+2025-03-14 01:17:38,069 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 01:17:38,070 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-14 01:18:27,861 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-14 01:18:27,862 - lightrag - INFO - No new unique documents were found.
+2025-03-14 01:18:27,865 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 01:18:27,865 - lightrag - INFO - No new unique documents were found.
+2025-03-14 01:18:27,866 - lightrag - INFO - Storage Initialization completed!
+2025-03-14 01:18:27,866 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 01:18:27,866 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-14 01:19:16,035 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-14 01:19:16,036 - lightrag - INFO - No new unique documents were found.
+2025-03-14 01:19:16,039 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 01:19:16,039 - lightrag - INFO - No new unique documents were found.
+2025-03-14 01:19:16,040 - lightrag - INFO - Storage Initialization completed!
+2025-03-14 01:19:16,040 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 01:19:16,040 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-14 01:22:39,041 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-14 01:22:39,042 - lightrag - INFO - No new unique documents were found.
+2025-03-14 01:22:39,044 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 01:22:39,045 - lightrag - INFO - No new unique documents were found.
+2025-03-14 01:22:39,045 - lightrag - INFO - Storage Initialization completed!
+2025-03-14 01:22:39,045 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 01:22:39,045 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-14 01:30:10,103 - lightrag - INFO - Logger initialized for working directory: /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens
+2025-03-14 01:30:10,110 - lightrag - INFO - Load KV llm_response_cache with 2 data
+2025-03-14 01:30:10,111 - lightrag - INFO - Load KV full_docs with 2 data
+2025-03-14 01:30:10,112 - lightrag - INFO - Load KV text_chunks with 21 data
+2025-03-14 01:30:10,124 - lightrag - INFO - Loaded graph from /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens/graph_chunk_entity_relation.graphml with 606 nodes, 182 edges
+2025-03-14 01:30:10,215 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-14 01:30:10,216 - lightrag - INFO - No new unique documents were found.
+2025-03-14 01:30:10,217 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 01:30:10,218 - lightrag - INFO - No new unique documents were found.
+2025-03-14 01:30:10,218 - lightrag - INFO - Storage Initialization completed!
+2025-03-14 01:30:10,218 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 01:30:10,218 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-14 01:30:10,253 - lightrag - INFO - Storage Finalization completed!
+2025-03-14 01:32:09,916 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-14 01:32:09,916 - lightrag - INFO - No new unique documents were found.
+2025-03-14 01:32:09,918 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 01:32:09,919 - lightrag - INFO - No new unique documents were found.
+2025-03-14 01:32:09,919 - lightrag - INFO - Storage Initialization completed!
+2025-03-14 01:32:09,919 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 01:32:09,919 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-14 01:35:23,240 - lightrag - INFO - Logger initialized for working directory: /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens
+2025-03-14 01:35:23,245 - lightrag - INFO - Load KV llm_response_cache with 2 data
+2025-03-14 01:35:23,246 - lightrag - INFO - Load KV full_docs with 2 data
+2025-03-14 01:35:23,247 - lightrag - INFO - Load KV text_chunks with 21 data
+2025-03-14 01:35:23,258 - lightrag - INFO - Loaded graph from /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens/graph_chunk_entity_relation.graphml with 606 nodes, 182 edges
+2025-03-14 01:35:23,345 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-14 01:35:23,346 - lightrag - INFO - No new unique documents were found.
+2025-03-14 01:35:23,347 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 01:35:23,348 - lightrag - INFO - No new unique documents were found.
+2025-03-14 01:35:23,348 - lightrag - INFO - Storage Initialization completed!
+2025-03-14 01:35:23,348 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 01:35:23,348 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-14 01:35:23,385 - lightrag - INFO - Storage Finalization completed!
+2025-03-14 01:39:28,380 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-14 01:39:28,380 - lightrag - INFO - No new unique documents were found.
+2025-03-14 01:39:28,383 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 01:39:28,384 - lightrag - INFO - No new unique documents were found.
+2025-03-14 01:39:28,384 - lightrag - INFO - Storage Initialization completed!
+2025-03-14 01:39:28,384 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 01:39:28,384 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-14 01:40:44,113 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-14 01:40:44,114 - lightrag - INFO - No new unique documents were found.
+2025-03-14 01:40:44,116 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 01:40:44,116 - lightrag - INFO - No new unique documents were found.
+2025-03-14 01:40:44,117 - lightrag - INFO - Storage Initialization completed!
+2025-03-14 01:40:44,117 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 01:40:44,117 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-14 01:41:29,485 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-14 01:41:29,485 - lightrag - INFO - No new unique documents were found.
+2025-03-14 01:41:29,488 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 01:41:29,488 - lightrag - INFO - No new unique documents were found.
+2025-03-14 01:41:29,489 - lightrag - INFO - Storage Initialization completed!
+2025-03-14 01:41:29,489 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 01:41:29,489 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-14 01:44:41,750 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-14 01:44:41,750 - lightrag - INFO - No new unique documents were found.
+2025-03-14 01:44:41,753 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 01:44:41,753 - lightrag - INFO - No new unique documents were found.
+2025-03-14 01:44:41,753 - lightrag - INFO - Storage Initialization completed!
+2025-03-14 01:44:41,753 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 01:44:41,754 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-14 01:45:49,163 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-14 01:45:49,164 - lightrag - INFO - No new unique documents were found.
+2025-03-14 01:45:49,166 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 01:45:49,167 - lightrag - INFO - No new unique documents were found.
+2025-03-14 01:45:49,167 - lightrag - INFO - Storage Initialization completed!
+2025-03-14 01:45:49,167 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 01:45:49,167 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-14 01:46:16,164 - lightrag - INFO - Logger initialized for working directory: /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens
+2025-03-14 01:46:16,169 - lightrag - INFO - Load KV llm_response_cache with 2 data
+2025-03-14 01:46:16,170 - lightrag - INFO - Load KV full_docs with 2 data
+2025-03-14 01:46:16,171 - lightrag - INFO - Load KV text_chunks with 21 data
+2025-03-14 01:46:16,182 - lightrag - INFO - Loaded graph from /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens/graph_chunk_entity_relation.graphml with 606 nodes, 182 edges
+2025-03-14 01:46:16,268 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-14 01:46:16,269 - lightrag - INFO - No new unique documents were found.
+2025-03-14 01:46:16,270 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 01:46:16,271 - lightrag - INFO - No new unique documents were found.
+2025-03-14 01:46:16,271 - lightrag - INFO - Storage Initialization completed!
+2025-03-14 01:46:16,271 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 01:46:16,271 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-14 01:46:16,309 - lightrag - INFO - Storage Finalization completed!
+2025-03-14 01:47:08,541 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-14 01:47:08,541 - lightrag - INFO - No new unique documents were found.
+2025-03-14 01:47:08,543 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 01:47:08,544 - lightrag - INFO - No new unique documents were found.
+2025-03-14 01:47:08,544 - lightrag - INFO - Storage Initialization completed!
+2025-03-14 01:47:08,544 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 01:47:08,544 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-14 20:14:39,296 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-14 20:14:39,297 - lightrag - INFO - No new unique documents were found.
+2025-03-14 20:14:39,299 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 20:14:39,300 - lightrag - INFO - No new unique documents were found.
+2025-03-14 20:14:39,300 - lightrag - INFO - Storage Initialization completed!
+2025-03-14 20:14:39,300 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 20:14:39,300 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-14 20:40:35,543 - lightrag - INFO - Logger initialized for working directory: /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens
+2025-03-14 20:40:35,550 - lightrag - INFO - Load KV llm_response_cache with 2 data
+2025-03-14 20:40:35,550 - lightrag - INFO - Load KV full_docs with 2 data
+2025-03-14 20:40:35,551 - lightrag - INFO - Load KV text_chunks with 21 data
+2025-03-14 20:40:35,564 - lightrag - INFO - Loaded graph from /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens/graph_chunk_entity_relation.graphml with 606 nodes, 182 edges
+2025-03-14 20:40:35,651 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-14 20:40:35,652 - lightrag - INFO - No new unique documents were found.
+2025-03-14 20:40:35,653 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 20:40:35,653 - lightrag - INFO - No new unique documents were found.
+2025-03-14 20:40:35,653 - lightrag - INFO - Storage Initialization completed!
+2025-03-14 20:40:35,654 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 20:40:35,654 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-14 20:40:35,690 - lightrag - INFO - Storage Finalization completed!
+2025-03-14 20:41:57,924 - lightrag - INFO - Logger initialized for working directory: /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens
+2025-03-14 20:41:57,930 - lightrag - INFO - Load KV llm_response_cache with 2 data
+2025-03-14 20:41:57,930 - lightrag - INFO - Load KV full_docs with 2 data
+2025-03-14 20:41:57,931 - lightrag - INFO - Load KV text_chunks with 21 data
+2025-03-14 20:41:57,942 - lightrag - INFO - Loaded graph from /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens/graph_chunk_entity_relation.graphml with 606 nodes, 182 edges
+2025-03-14 20:41:58,016 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-14 20:41:58,016 - lightrag - INFO - No new unique documents were found.
+2025-03-14 20:41:58,018 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 20:41:58,018 - lightrag - INFO - No new unique documents were found.
+2025-03-14 20:41:58,018 - lightrag - INFO - Storage Initialization completed!
+2025-03-14 20:41:58,018 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 20:41:58,018 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-14 20:41:58,056 - lightrag - INFO - Storage Finalization completed!
+2025-03-14 21:27:24,088 - lightrag - INFO - Logger initialized for working directory: /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens
+2025-03-14 21:27:24,095 - lightrag - INFO - Load KV llm_response_cache with 2 data
+2025-03-14 21:27:24,096 - lightrag - INFO - Load KV full_docs with 2 data
+2025-03-14 21:27:24,097 - lightrag - INFO - Load KV text_chunks with 21 data
+2025-03-14 21:27:24,109 - lightrag - INFO - Loaded graph from /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens/graph_chunk_entity_relation.graphml with 606 nodes, 182 edges
+2025-03-14 21:27:24,193 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-14 21:27:24,194 - lightrag - INFO - No new unique documents were found.
+2025-03-14 21:27:24,196 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 21:27:24,196 - lightrag - INFO - No new unique documents were found.
+2025-03-14 21:27:24,196 - lightrag - INFO - Storage Initialization completed!
+2025-03-14 21:27:24,196 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 21:27:24,196 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-14 21:27:24,235 - lightrag - INFO - Storage Finalization completed!
+2025-03-14 21:28:57,589 - lightrag - INFO - Logger initialized for working directory: /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens
+2025-03-14 21:28:57,595 - lightrag - INFO - Load KV llm_response_cache with 2 data
+2025-03-14 21:28:57,596 - lightrag - INFO - Load KV full_docs with 2 data
+2025-03-14 21:28:57,596 - lightrag - INFO - Load KV text_chunks with 21 data
+2025-03-14 21:28:57,608 - lightrag - INFO - Loaded graph from /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens/graph_chunk_entity_relation.graphml with 606 nodes, 182 edges
+2025-03-14 21:28:57,688 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-14 21:28:57,689 - lightrag - INFO - No new unique documents were found.
+2025-03-14 21:28:57,690 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 21:28:57,691 - lightrag - INFO - No new unique documents were found.
+2025-03-14 21:28:57,691 - lightrag - INFO - Storage Initialization completed!
+2025-03-14 21:28:57,691 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 21:28:57,691 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-14 21:28:57,730 - lightrag - INFO - Storage Finalization completed!
+2025-03-14 21:29:15,641 - lightrag - INFO - Logger initialized for working directory: /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens
+2025-03-14 21:29:15,647 - lightrag - INFO - Load KV llm_response_cache with 2 data
+2025-03-14 21:29:15,648 - lightrag - INFO - Load KV full_docs with 2 data
+2025-03-14 21:29:15,648 - lightrag - INFO - Load KV text_chunks with 21 data
+2025-03-14 21:29:15,660 - lightrag - INFO - Loaded graph from /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens/graph_chunk_entity_relation.graphml with 606 nodes, 182 edges
+2025-03-14 21:29:15,752 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-14 21:29:15,752 - lightrag - INFO - No new unique documents were found.
+2025-03-14 21:29:15,754 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 21:29:15,754 - lightrag - INFO - No new unique documents were found.
+2025-03-14 21:29:15,754 - lightrag - INFO - Storage Initialization completed!
+2025-03-14 21:29:15,754 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 21:29:15,755 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-14 21:29:15,791 - lightrag - INFO - Storage Finalization completed!
+2025-03-14 23:05:19,171 - lightrag - INFO - Logger initialized for working directory: /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens
+2025-03-14 23:05:19,178 - lightrag - INFO - Load KV llm_response_cache with 2 data
+2025-03-14 23:05:19,179 - lightrag - INFO - Load KV full_docs with 2 data
+2025-03-14 23:05:19,180 - lightrag - INFO - Load KV text_chunks with 21 data
+2025-03-14 23:05:19,435 - lightrag - INFO - Loaded graph from /root/UIST2025/Ex-ChatBI/backend/LightRAG/examples\dickens/graph_chunk_entity_relation.graphml with 606 nodes, 182 edges
+2025-03-14 23:05:19,514 - lightrag - INFO - Loaded document status storage with 2 records
+2025-03-14 23:05:19,515 - lightrag - INFO - No new unique documents were found.
+2025-03-14 23:05:19,516 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 23:05:19,516 - lightrag - INFO - No new unique documents were found.
+2025-03-14 23:05:19,517 - lightrag - INFO - Storage Initialization completed!
+2025-03-14 23:05:19,517 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-14 23:05:19,517 - lightrag - INFO - Non-embedding cached hit(mode:local type:query)
+2025-03-14 23:05:19,553 - lightrag - INFO - Storage Finalization completed!

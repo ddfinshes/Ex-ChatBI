@@ -34,14 +34,14 @@ def gpt_baicai(messages):
     return data
 
 def gpt(messages):
-    APIKEY = "sk-UnAxAzyzsl06tpp9d9LCi44C7X4IyWg8QU9DQeWI8wKK6"
-    BASEURL = "https://api.baicaigpt.cn/v1"
+    APIKEY = "sk-zRyfr0mCsjr3xuqNHmyNtZBFsilZVpeqm0ELZyDOkKfObOp7"
+    BASEURL = "https://xiaoai.plus/v1"
     GPTSETTING = {
-        "model": "gpt-4o-mini", # gpt-3.5-turbo
+        "model": "o3-mini", # gpt-3.5-turbo
         "temperature": 0,
         "max_tokens": 5120, #4096+1024
     }
-    MODEL_SET = "gpt-4o-mini"
+    MODEL_SET = "o3-mini"
     MAX_TOKENS = 5120
 
     client = openai.OpenAI(api_key=APIKEY, base_url=BASEURL)

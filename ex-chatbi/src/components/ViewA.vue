@@ -8,7 +8,7 @@
           <div style="text-align: left">{{ currentQuery }}</div>
         </el-card> -->
 
-        <el-card 
+        <el-card ref="userInputCard"
           shadow="hover" 
           style="width: 160px; margin-right: 10px; padding: 0; border: none;"
           body-style="padding: 0;"
@@ -72,7 +72,7 @@
 
       <!-- Model Understanding Card -->
       <el-col :span="8">
-        <el-card 
+        <el-card ref="modelUnderstandingCard"
           shadow="hover" 
           style="width: 230px; margin-right: 10px; padding: 0; border: none;"
           body-style="padding: 0;"
@@ -184,6 +184,22 @@
       //   this.modelResponse = res.data.response.code || JSON.stringify(res.data.response.data);
       //   this.topKSimilar = res.data.top_k_similar || [];
       // }
+      // 获取元素底部中心坐标
+    getCardPositions() {
+      return {
+        userInput: this.calcPosition(this.$refs.userInputCard.$el),
+        model: this.calcPosition(this.$refs.modelUnderstandingCard.$el)
+      }
+    },
+    
+    calcPosition(el) {
+      if (!el) return null
+      const rect = el.getBoundingClientRect()
+      return {
+        x: rect.left + rect.width / 2,
+        y: rect.bottom
+      }
+    }
     }
   };
   </script>

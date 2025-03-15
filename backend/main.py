@@ -16,6 +16,8 @@ from decimal import Decimal
 # from utils.get_sql2json import sql2json
 import json
 import LightRAG.examples.lightrag_openai_compatible_demo as rag
+from utils.get_NLExplain import ExplainAgent
+from utils.get_user_sql import SQLExtractAgent
 
 # 初始化FastAPI应用
 app = FastAPI(
@@ -37,28 +39,7 @@ conversation_history = []  # 列表存储历史查询
 # model = SentenceTransformer('all-MiniLM-L6-v2')  # 加载预训练模型计算相似度
 user_query = ""
 sql_code = ""
-
-def get_sql_code(sql_response):
-    sql_pattern = r"```sql\n(.*?)\n```"
-
-    sql_code_blocks = re.findall(sql_pattern, sql_response, re.DOTALL)
-    sql_code_blocks = [f"```sql\n{sql_code}\n```" for sql_code in sql_code_blocks]
-    
-    return sql_code_blocks
-
-
-
-@app.post("/api/sql2json")
-async def get_sql2json():
-    try:
-        sql_code = "select * from chatbi"
-        sqljson = sql2json(sql_code)
-        print("Response data:", sqljson)
-        return sqljson
-    except Exception as e:
-        import traceback
-        traceback.print_exc() 
-        raise HTTPException(status_code=500, detail=str(e))
+excute_sql_output = {}
 
 def get_extracted_sql(text):
     # 匹配获取sqlcode
@@ -72,6 +53,32 @@ def get_extracted_sql(text):
     return extracted_sql
 
 
+
+@app.post("/api/sql2json")
+async def get_sql2json(sql_code):
+    try:
+        explain = ExplainAgent(model_name="o3-mini")
+        explain.run(str(sql_code))
+        report = explain.getLeastAnalysisReport()
+        print(report, type(report))
+        return report
+    except Exception as e:
+        import traceback
+        traceback.print_exc() 
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/relatsql")
+async def get_relatsql(sql_query: Dict[str, Any], query_out: Dict[str, Any], click_info: Dict[str, Any]): # 
+    print("sql_query: ",sql_query['text'])
+    print("query_out: ",query_out)
+    print("click_info: ",click_info)
+    sql_query = sql_query['text']
+    extractagent = SQLExtractAgent()
+    extractagent.run(sql_query, query_out, click_info)
+    report = extractagent.getLeastAnalysisReport()
+    print(report, type(report))
+    return report
+    pass
 @app.post("/api/query")
 async def query_handler(request: Dict[str, Any]):
     try:
@@ -88,23 +95,12 @@ async def query_handler(request: Dict[str, Any]):
         # print("rag_response: ", rag_response)
         sql_code = get_extracted_sql(rag_response)
         explanation = rag_response.split("```")[-1]
-        # sql_code = """
-        # ```sql
-        #     SELECT
-        #     COUNT(*) AS open_stores_count
-        #     FROM
-        #     edw_dim_store_prod
-        #     WHERE
-        #     date_code BETWEEN '2025-02-10' AND '2025-02-24'
-        #     AND open_flag = 'open'
-        #     AND country = 'Mainland';
-        # ```
-        # """
 
         # 3. 执行生成的sql 代码
-        # excute_sql_output = excute_sql(sql_code)
+        excute_sql_output = excute_sql(sql_code)
+        print(excute_sql_output)
 
-        excute_sql_output = {'column': ['month_id', 'sales_amt', 'sales_notax', 'sales_notax_mom_per'], 'data': [(202502, Decimal('-5235'), Decimal('-4634'), Decimal('-1.00029011188026305147'))]}
+        # excute_sql_output = {'column': ['month_id', 'sales_amt', 'sales_notax', 'sales_notax_mom_per'], 'data': [(202502, Decimal('-5235'), Decimal('-4634'), Decimal('-1.00029011188026305147'))]}
 
         final_response = {
             "explanation": explanation,
@@ -136,8 +132,6 @@ async def query_handler(request: Dict[str, Any]):
         top_k = sorted(history_with_similarity, key=lambda x: x["similarity"], reverse=True)[:3]
 
         # 4. chart准备数据
-        # 思路：将用户query和查询得到的数据给到LLM，让其推荐可视化的格式（柱状图、折线图、饼状图）
-        # user_query之后需要改成LLM理解过后的
         # vis_data = get_vis_tag(user_query, excute_sql_output)
         # ===========================================================
         vis_data = {
