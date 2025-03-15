@@ -9,12 +9,12 @@
     </el-aside>
   </div>
 </template>
-  
-  <script>
-import { ref } from "vue";
+
+<script>
+import {ref} from "vue";
 import axios from "axios";
-import { useQueryStore } from "@/stores/query";
-import { nextTick } from "vue";
+import {useQueryStore} from "@/stores/query";
+import {nextTick} from "vue";
 import ViewAVue from "./ViewA.vue";
 import ViewBVue from "./ViewB.vue";
 import ViewCVue from "./ViewC.vue";
@@ -171,7 +171,7 @@ export default {
   // }
 };
 </script>
-  
+
 <style>
 /* 可选：添加特定样式 */
 /* .selectpanel-main {
@@ -189,11 +189,13 @@ export default {
 .connection {
   transition: all 0.3s ease;
 }
+
 #selectPanelContainer {
   position: static !important;
   transform: none !important;
   overflow: visible !important;
 }
+
 .top-buttons {
   border-bottom: 1px solid #ebf4f5;
   padding-bottom: 15px;
