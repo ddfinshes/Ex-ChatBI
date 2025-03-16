@@ -170,8 +170,9 @@
       },
       response(newVal) {
         console.log('监听到新响应:', newVal);
+
         if (newVal) {
-          this.modelResponse = newVal.response.understanding || JSON.stringify(newVal.response.data);
+          this.modelResponse = newVal.understanding || JSON.stringify(newVal.understanding);
           this.topKSimilar = newVal.top_k_similar || [];
           this.messageHistory = newVal.message_history || [];
         }

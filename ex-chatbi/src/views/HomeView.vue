@@ -1,34 +1,27 @@
 <template>
 	<el-container class="home">
-		<el-header
-			id="headerContainer"
-			height="87px">
-			<el-row>
+		<el-header class="header">
+			<el-row type="flex" align="middle">
 				<img
-					style="width: 72px; height: 72px"
+					style="width: 50px; height: 50px"
 					src="@/assets/image/icon.png"
 					alt="..."
 					:fit="`fill`" />
-				<span style="font-weight: bold; padding-left: 10px">TransBI</span>
+					<span class="header-title">TransBI</span>
 			</el-row>
 		</el-header>
 		<el-container class="body">
-			<el-main id="mainContainer">
-				<el-container id="DBPanelContainerFather">
-					<el-main id="mainView">
-						<el-row :gutter="20">
-							<el-col :span="22">
-								<ChatInterfaceVue />
-							</el-col>
-						</el-row>
-					</el-main>
+			<el-main class="main">
+				<el-container id="chat-container">
+					<ChatInterfaceVue/>
 				</el-container>
 			</el-main>
 
-			<el-aside
-				id="selectPanelContainer"
-				width="1205px">
-				<SelectPanelVue/>
+			<el-aside class="aside">
+				<el-container id="select-container">
+					<SelectPanelVue/>
+				</el-container>
+				
 			</el-aside>
 		</el-container>
 	</el-container>
@@ -51,56 +44,84 @@ export default {
 			ActionRecord: {
 				name: "uncreated",
 				action: []
-			}
+			},
+			
 		}
 	},
 	methods: {
-		
+	
 	},
 	mounted() {
 		
 	}
 }
 </script>
-<style>
-#mainView {
-	height: auto;
-	width: auto;
-	padding: 0%;
+<style scoped>
+.home {
+	height: 1351px;
+	width: 2048px;
+	border: 1px solid #dcdfe6;
 }
-#headerContainer {
-	height: 87px;
-	background-color: #515151;
-	font: bold large 94px inter;
-	font-size: 64px;
-	color: white;
+.body {
+height: 100%;
+width: 100%;
+flex: 1;
+display: flex;
+justify-content: center;
+align-items: center;
 }
-#selectPanelContainer {
-	height: 1352px;
-	background-color: #f5f5f5;
-}
-#DBPanelContainer {
-	height: 1352px;
-	background-color: #f3f3f3;
-}
-
-#mainContainer {
-	height: 1352px;
-	width: 2455px;
-	padding: 0px;
-	overflow: clip;
-}
-#DBPanelContainerFather {
-	background-color: #f3f3f3;
-	padding: 0%;
-}
-
-/* .body {
-  flex: 1;
+.header {
+  height: 55px;
+  width: 100%;
+  background-color: #dbf1d5;
+  color: rgb(0, 0, 0);
   display: flex;
-  justify-content: center;
   align-items: center;
-} */
+  padding: 0 20px;
+}
+.main {
+	border: 0px;
+	margin: 0px;
+	margin-top: 0px;
+	height: 100%;
+	width: 40%;
+	
+}
+.aside {
+	/* display: flex; */
+	width: 60%;
+	border: 0px;
+	margin: 0px;
+	margin-top: 40px;
+	height: 100%;
+}
+.header-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+#select-container {
+	height: 99%;
+	width: 100%;
+	padding: 0px;
+	margin-bottom: 20px;
+	margin-top: 0px;
+	background-color: #ffffff;
+	overflow: clip;
+	display: flex;
+}
+
+#chat-container {
+	width: 100%;
+	height: 99%;
+	padding: 0px;
+	margin: 2px;
+	/* margin-bottom: 50px; */
+	background-color: #ffffff;
+	overflow: clip;
+	display: flex;
+}
 
 
 </style>

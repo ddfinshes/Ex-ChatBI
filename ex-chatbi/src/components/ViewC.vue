@@ -10,153 +10,156 @@
       </el-card>
     </div>
   </div>
-  
+
 </template>
 
 <script setup>
-import { ref, onMounted, nextTick } from "vue";
+import { ref, onMounted, nextTick, watch, computed, onUnmounted, watchEffect } from "vue";
 import * as d3 from "d3";
+import { useQueryStore } from '@/stores/query';
+import { emitter } from '@/assets/ts/eventBus.js';
 
+const store = useQueryStore();
+console.log(store.response);
 
 const explanation = "这个 SQL 查询使用了索引扫描，提高了查询效率，但可能还可以优化为覆盖索引..."
 
 const chart = ref(null);
 const nodes = ref([]);
 const nodeCards = ref([]);
-
 const res = {
   content: [
     {
-        "created_virtual_table": "False",
-        "sql_content": [
+      "created_virtual_table": "False",
+      "sql_content": [
         {
-            "keywords": "From",
-            "scratched_content": [
-            {"table_name": "Monthly_Growth", "is_virtual_table": "True"}
-            ]
+          "keywords": "From",
+          "scratched_content": [
+            { "table_name": "Monthly_Growth", "is_virtual_table": "True" }
+          ]
         },
         {
-            "keywords": "Select",
-            "scratched_content": [
-            {"column_name": "month_id", "column_processing": ""},
-            {"column_name": "Current_Month_Effi", "column_processing": "TO_CHAR (Current_Month_Effi, 'FM999,999,999.00') AS Current_Month_Effi"},
-            {"column_name": "Previous_Month_Effi", "column_processing": "TO_CHAR (Previous_Month_Effi, 'FM999,999,999.00') AS Previous_Month_Effi"},
-            {"column_name": "Growth_Percentage", "column_processing": "TO_CHAR (Growth_Percentage, 'FM999,999,999.00') || '%' AS Growth_Percentage"}
-            ]
+          "keywords": "Select",
+          "scratched_content": [
+            { "column_name": "month_id", "column_processing": "" },
+            { "column_name": "Current_Month_Effi", "column_processing": "TO_CHAR (Current_Month_Effi, 'FM999,999,999.00') AS Current_Month_Effi" },
+            { "column_name": "Previous_Month_Effi", "column_processing": "TO_CHAR (Previous_Month_Effi, 'FM999,999,999.00') AS Previous_Month_Effi" },
+            { "column_name": "Growth_Percentage", "column_processing": "TO_CHAR (Growth_Percentage, 'FM999,999,999.00') || '%' AS Growth_Percentage" }
+          ]
         },
         {
-            "keywords": "Join",
-            "scratched_content": [
-            {"content": "JOIN Effi_Comparison p ON c.month_id = TO_CHAR (DATEADD (month, 1, TO_DATE (p.month_id, 'YYYYMM')), 'YYYYMM')"}
-            ]
+          "keywords": "Join",
+          "scratched_content": [
+            { "content": "JOIN Effi_Comparison p ON c.month_id = TO_CHAR (DATEADD (month, 1, TO_DATE (p.month_id, 'YYYYMM')), 'YYYYMM')" }
+          ]
         },
         {
-            "keywords": "Where",
-            "scratched_content": [
-            {"content": "c.month_id = '202410'"}
-            ]
+          "keywords": "Where",
+          "scratched_content": [
+            { "content": "c.month_id = '202410'" }
+          ]
         }
-        ]
+      ]
     },
     {
-        "created_virtual_table": "True",
-        "virtual_table_name": "Monthly_Growth",
-        "sql_content": [
+      "created_virtual_table": "True",
+      "virtual_table_name": "Monthly_Growth",
+      "sql_content": [
         {
-            "keywords": "Select",
-            "scratched_content": [
-            {"column_name": "c.month_id", "column_processing": ""},
-            {"column_name": "Current_Month_Effi", "column_processing": "c.Avg_effi AS Current_Month_Effi"},
-            {"column_name": "Previous_Month_Effi", "column_processing": "p.Avg_effi AS Previous_Month_Effi"},
-            {"column_name": "Growth_Percentage", "column_processing": "(c.Avg_effi / p.Avg_effi - 1) * 100 AS Growth_Percentage"}
-            ]
+          "keywords": "Select",
+          "scratched_content": [
+            { "column_name": "c.month_id", "column_processing": "" },
+            { "column_name": "Current_Month_Effi", "column_processing": "c.Avg_effi AS Current_Month_Effi" },
+            { "column_name": "Previous_Month_Effi", "column_processing": "p.Avg_effi AS Previous_Month_Effi" },
+            { "column_name": "Growth_Percentage", "column_processing": "(c.Avg_effi / p.Avg_effi - 1) * 100 AS Growth_Percentage" }
+          ]
         },
         {
-            "keywords": "From",
-            "scratched_content": [
-            {"table_name": "Effi_Comparison c", "is_virtual_table": "True"}
-            ]
+          "keywords": "From",
+          "scratched_content": [
+            { "table_name": "Effi_Comparison c", "is_virtual_table": "True" }
+          ]
         },
         {
-            "keywords": "Join",
-            "scratched_content": [
-            {"content": "JOIN Effi_Comparison p ON c.month_id = TO_CHAR (DATEADD (month, 1, TO_DATE (p.month_id, 'YYYYMM')), 'YYYYMM')"}
-            ]
+          "keywords": "Join",
+          "scratched_content": [
+            { "content": "JOIN Effi_Comparison p ON c.month_id = TO_CHAR (DATEADD (month, 1, TO_DATE (p.month_id, 'YYYYMM')), 'YYYYMM')" }
+          ]
         },
         {
-            "keywords": "Where",
-            "scratched_content": [
-            {"content": "c.month_id = '202410'"}
-            ]
+          "keywords": "Where",
+          "scratched_content": [
+            { "content": "c.month_id = '202410'" }
+          ]
         }
-        ]
+      ]
     },
     {
-        "created_virtual_table": "True",
-        "virtual_table_name": "Effi_Comparison",
-        "sql_content": [
+      "created_virtual_table": "True",
+      "virtual_table_name": "Effi_Comparison",
+      "sql_content": [
         {
-            "keywords": "Select",
-            "scratched_content": [
-            {"column_name": "month_id", "column_processing": ""},
-            {"column_name": "Avg_effi", "column_processing": "AVG(effi) AS Avg_effi"}
-            ]
+          "keywords": "Select",
+          "scratched_content": [
+            { "column_name": "month_id", "column_processing": "" },
+            { "column_name": "Avg_effi", "column_processing": "AVG(effi) AS Avg_effi" }
+          ]
         },
         {
-            "keywords": "From",
-            "scratched_content": [
-            {"table_name": "Store_effi", "is_virtual_table": "True"}
-            ]
+          "keywords": "From",
+          "scratched_content": [
+            { "table_name": "Store_effi", "is_virtual_table": "True" }
+          ]
         },
         {
-            "keywords": "Group By",
-            "scratched_content": [
-            {"content": "month_id"}
-            ]
+          "keywords": "Group By",
+          "scratched_content": [
+            { "content": "month_id" }
+          ]
         }
-        ]
+      ]
     },
     {
-        "created_virtual_table": "True",
-        "virtual_table_name": "Store_effi",
-        "sql_content": [
+      "created_virtual_table": "True",
+      "virtual_table_name": "Store_effi",
+      "sql_content": [
         {
-            "keywords": "Select",
-            "scratched_content": [
-            {"column_name": "country", "column_processing": ""},
-            {"column_name": "channel", "column_processing": ""},
-            {"column_name": "store_type", "column_processing": ""},
-            {"column_name": "area", "column_processing": ""},
+          "keywords": "Select",
+          "scratched_content": [
+            { "column_name": "country", "column_processing": "" },
+            { "column_name": "channel", "column_processing": "" },
+            { "column_name": "store_type", "column_processing": "" },
+            { "column_name": "area", "column_processing": "" },
             {
-                "column_name": "effi",
-                "column_processing": "CASE WHEN (COALESCE(area, '') = '' OR CAST(area AS DECIMAL(18, 2)) = 0) THEN 0 ELSE AVG(COALESCE(amt_usd_notax, 0)) * 365 / CAST(area AS DECIMAL(18, 2)) * 10.7639104 END AS effi"
+              "column_name": "effi",
+              "column_processing": "CASE WHEN (COALESCE(area, '') = '' OR CAST(area AS DECIMAL(18, 2)) = 0) THEN 0 ELSE AVG(COALESCE(amt_usd_notax, 0)) * 365 / CAST(area AS DECIMAL(18, 2)) * 10.7639104 END AS effi"
             },
-            {"column_name": "month_id", "column_processing": ""}
-            ]
+            { "column_name": "month_id", "column_processing": "" }
+          ]
         },
         {
-            "keywords": "From",
-            "scratched_content": [
-            {"table_name": "dm_fact_sales_chatbi", "is_virtual_table": "False"}
-            ]
+          "keywords": "From",
+          "scratched_content": [
+            { "table_name": "dm_fact_sales_chatbi", "is_virtual_table": "False" }
+          ]
         },
         {
-            "keywords": "Where",
-            "scratched_content": [
+          "keywords": "Where",
+          "scratched_content": [
             {
-                "content": "date_code <= '2024-10-31' AND country = 'Mainland' AND channel = 'O&O' AND store_type = 'BH' AND comp_flag = 'Y'"
+              "content": "date_code <= '2024-10-31' AND country = 'Mainland' AND channel = 'O&O' AND store_type = 'BH' AND comp_flag = 'Y'"
             }
-            ]
+          ]
         },
         {
-            "keywords": "Group By",
-            "scratched_content": [
-            {"content": "country, channel, store_type, store_code, area, month_id"}
-            ]
+          "keywords": "Group By",
+          "scratched_content": [
+            { "content": "country, channel, store_type, store_code, area, month_id" }
+          ]
         }
-        ]
+      ]
     }
-    ]
+  ]
 };
 // const res = {
 //   content: [
@@ -439,36 +442,40 @@ function transformToTree(data) {
   // 第一步：处理所有虚拟表，构建子树
   data.content.forEach((contentItem) => {
     if (contentItem.created_virtual_table === "True") {
-      const virtualTableNode = { 
-        name: contentItem.virtual_table_name, 
+      const virtualTableNode = {
+        name: contentItem.virtual_table_name,
         children: [],
         isVirtual: true // 标记为虚拟表
       };
-      
+
       contentItem.sql_content.forEach((section) => {
         const sectionNode = { name: section.keywords, children: [] };
 
         if (section.scratched_content) {
           section.scratched_content.forEach((item) => {
-            if (item.column_name) {
-              const columnNode = { 
-                name: item.column_name, 
-                children: []
-              };
-              if (item.column_processing !== undefined) {
-                columnNode.children.push({ name: item.column_processing });
+            let nodeName = item.column_name || item.table_name || item.content || "";
+            let newNode;
+
+            // 检查 nodeName 是否包含某个虚拟表名
+            let matchedVirtualTable = null;
+            for (const [virtualName, virtualNode] of virtualTables) {
+              if (nodeName.includes(virtualName)) {
+                matchedVirtualTable = virtualNode;
+                break; // 找到第一个匹配的虚拟表后退出
               }
-              sectionNode.children.push(columnNode);
-            } else if (item.table_name) {
-              const tableName = item.table_name;
-              if (item.is_virtual_table === "True" && virtualTables.has(tableName)) {
-                sectionNode.children.push(virtualTables.get(tableName));
-              } else {
-                sectionNode.children.push({ name: tableName });
-              }
-            } else if (item.content) {
-              sectionNode.children.push({ name: item.content });
             }
+
+            if (matchedVirtualTable) {
+              newNode = matchedVirtualTable; // 嵌套匹配的虚拟表
+            } else {
+              newNode = { name: nodeName, children: [] };
+              // 如果是 column_name 且有 column_processing，添加子节点
+              if (item.column_name && item.column_processing !== undefined) {
+                newNode.children.push({ name: item.column_processing });
+              }
+            }
+
+            sectionNode.children.push(newNode);
           });
         }
 
@@ -486,41 +493,35 @@ function transformToTree(data) {
 
       if (section.scratched_content) {
         section.scratched_content.forEach((item) => {
-          if (item.column_name) {
-            const columnNode = { 
-              name: item.column_name, 
-              children: []
-            };
-            if (item.column_processing !== undefined) {
-              columnNode.children.push({ name: item.column_processing });
+          let nodeName = item.column_name || item.table_name || item.content || "";
+          let newNode;
+
+          // 检查 nodeName 是否包含某个虚拟表名
+          let matchedVirtualTable = null;
+          for (const [virtualName, virtualNode] of virtualTables) {
+            if (nodeName.includes(virtualName)) {
+              matchedVirtualTable = virtualNode;
+              break; // 找到第一个匹配的虚拟表后退出
             }
-            sectionNode.children.push(columnNode);
-          } else if (item.table_name) {
-            const tableName = item.table_name;
-            if (item.is_virtual_table === "True" && virtualTables.has(tableName)) {
-              sectionNode.children.push(virtualTables.get(tableName));
-            } else {
-              sectionNode.children.push({ name: tableName });
-            }
-          } else if (item.content) {
-            sectionNode.children.push({ name: item.content });
           }
+
+          if (matchedVirtualTable) {
+            newNode = matchedVirtualTable; // 嵌套匹配的虚拟表
+          } else {
+            newNode = { name: nodeName, children: [] };
+            // 如果是 column_name 且有 column_processing，添加子节点
+            if (item.column_name && item.column_processing !== undefined) {
+              newNode.children.push({ name: item.column_processing });
+            }
+          }
+
+          sectionNode.children.push(newNode);
         });
       }
 
       root.children.push(sectionNode);
     });
   }
-
-  // 第三步：将所有虚拟表添加到根节点（避免重复）
-  // virtualTables.forEach((virtualTableNode) => {
-  //   const isAlreadyNested = root.children.some((section) =>
-  //     section.children.some((child) => child.name === virtualTableNode.name && child.isVirtual)
-  //   );
-  //   if (!isAlreadyNested) {
-  //     root.children.push(virtualTableNode);
-  //   }
-  // });
 
   return root;
 }
@@ -533,6 +534,10 @@ onMounted(() => {
   const height = 630;
   const rectHeight = 40; // 矩形高度
   const padding = 20; // 矩形两侧的额外间距
+
+  
+
+
 
   // 创建 SVG 画布
   const svgContainer = d3
@@ -839,7 +844,7 @@ onMounted(() => {
         .style("font-size", "14px")
         .text(processingText);
 
-      
+
       // 检查文本宽度并换行
       const textWidth = textElement.node().getBBox().width;
       let adjustedHeight = rowHeight;
@@ -990,633 +995,946 @@ onMounted(() => {
     }
   })
 
-// 检测重叠并调整树高度
-function checkOverlap(bounds) {
-  for (let i = 0; i < bounds.length - 1; i++) {
-    for (let j = i + 1; j < bounds.length; j++) {
-      const b1 = bounds[i];
-      const b2 = bounds[j];
-      if (
-        b1.x < b2.x + b2.width &&
-        b1.x + b1.width > b2.x &&
-        b1.y < b2.y + b2.height &&
-        b1.y + b1.height > b2.y
-      ) {
-        return true; // 检测到重叠
-      }
-    }
-  }
-  return false;
-}
-
-if (checkOverlap(tableBounds)) {
-  // 如果有重叠，增加树的高度
-  treeHeight += 200; // 每次增加 200px，可调整
-  treeLayout.size([treeHeight, treeWidth]);
-  treeLayout(root);
-
-  // 更新所有节点位置（depth=0 和 depth=1）
-  nodes.attr("transform", (d) => `translate(${d.y},${d.x})`);
-
-  // 移除所有旧的连接线
-  svg.selectAll("path.link").remove();       // 移除 depth=0 到 depth=1 的连接线
-  svg.selectAll("path.table-link").remove(); // 移除 depth=1 到 depth=2 的连接线
-
-  // 重新绘制 depth=0 到 depth=1 的连接线
-  svg
-    .selectAll("path.link")
-    .data(root.links().filter((d) => d.target.depth === 1 && !d.target.data.isVirtual)) // 只绘制 depth=0 到 depth=1
-    .enter()
-    .append("path")
-    .attr("class", "link")
-    .attr("fill", "none")
-    .attr("stroke", "#aaa")
-    .attr("stroke-width", 2)
-    .attr("d", (d) => `M${d.source.y + 50},${d.source.x} L${d.target.y - 50},${d.target.x}`);
-
-  // 更新表格位置
-  tableBounds.length = 0; // 清空旧边界框
-  svg.selectAll("g.table-group").remove(); // 移除所有旧表格
-  redrawTables(svg, root, tableOffset, headerHeight, rowHeight, tablePadding, fixedTableWidth);
-}
-  // 将文本移回中心
-  texts.attr("text-anchor", "middle");
-
- // 辅助函数：重绘表格
- function redrawTables(svg, root, tableOffset, headerHeight, rowHeight, tablePadding, fixedTableWidth) {
-  const level1Nodes = root.descendants().filter((d) => d.depth === 1 && !d.data.isVirtual);
-  const selectNodes = root.descendants().filter((d) => d.depth === 2 && d.parent && d.parent.data.name === "Select");
-  const fromNodes = root.descendants().filter((d) => d.depth === 2 && d.parent && d.parent.data.name === "From");
-  const others = level1Nodes.filter((d) => d.data.name !== "Select" && d.data.name !== "From");
-
-  if (selectNodes.length > 0) {
-    const selectParent = selectNodes[0].parent;
-    const selectTableX = selectParent.y + tableOffset;
-    const selectTableY = selectParent.x - selectHeight / 2;
-    const selectGroup = svg.append("g").attr("class", "table-group").attr("transform", `translate(${selectTableX},${selectTableY})`);
-    drawTable(selectGroup, "Column Name", selectNodes, "#FFD700", fixedTableWidth, headerHeight, rowHeight, tablePadding, selectParent);
-
-    const processingTableX = selectTableX + fixedTableWidth + 100;
-    const processingTableY = selectTableY - 50;
-    const processingGroup = svg.append("g").attr("class", "table-group").attr("transform", `translate(${processingTableX},${processingTableY})`);
-    drawProcessingTable(processingGroup, selectNodes, "#87CEEB", fixedTableWidth, headerHeight, rowHeight, tablePadding, processingTableX);
-
-    // 添加 Column Processing 的 NL Explain 表格
-    const processingHeight = headerHeight + selectNodes.reduce((acc, d) => {
-      const text = d.data.children && d.data.children.length > 0 ? d.data.children[0].name : "";
-      const lineCount = wrapText(text, fixedTableWidth - 20).length;
-      return acc + (lineCount > 1 ? rowHeight * lineCount / 2 : rowHeight);
-    }, 0);
-    const explainTableX = processingTableX + fixedTableWidth + 5;
-    const explainTableY = processingTableY;
-    const explainGroup = svg.append("g").attr("class", "explain-group").attr("transform", `translate(${explainTableX},${explainTableY})`);
-    drawNLExplainTable(explainGroup, selectNodes, "#F5F5F5", fixedTableWidth, headerHeight, rowHeight, tablePadding);
-
-    tableBounds.push(selectGroup.node().getBBox());
-    tableBounds.push(processingGroup.node().getBBox());
-    tableBounds.push(explainGroup.node().getBBox());
-  }
-
-  if (fromNodes.length > 0) {
-    const fromParent = fromNodes[0].parent;
-    const fromTableX = fromParent.y + tableOffset;
-    const fromTableY = fromParent.x - fromHeight / 2;
-    const fromGroup = svg.append("g").attr("class", "table-group").attr("transform", `translate(${fromTableX},${fromTableY})`);
-    drawTable(fromGroup, "Table Name", fromNodes, "#FFD700", fixedTableWidth, headerHeight, rowHeight, tablePadding, fromParent);
-
-    // 添加 Table Name 的 NL Explain 表格
-    const fromHeightCalc = headerHeight + fromNodes.length * rowHeight;
-    const fromExplainTableX = fromTableX + fixedTableWidth + 5;
-    const fromExplainTableY = fromTableY;
-    const fromExplainGroup = svg.append("g").attr("class", "explain-group").attr("transform", `translate(${fromExplainTableX},${fromExplainTableY})`);
-    drawNLExplainTable(fromExplainGroup, fromNodes, "#F5F5F5", fixedTableWidth, headerHeight, rowHeight, tablePadding);
-
-    // 绘制 From 后面的虚拟表结构并添加连接线
-    let lastTableX = fromExplainTableX + fixedTableWidth + 50; // 从 NL Explain 右侧开始
-
-    console.log(fromNodes)
-    fromNodes.forEach((node) => {
-      if (node.data.isVirtual && node.children && node.children.length > 0) {
-        const virtualTableX = lastTableX;
-        const virtualTableY = fromTableY; // 与 From 对齐
-        const virtualGroup = svg.append("g").attr("class", "virtual-table-group").attr("transform", `translate(${virtualTableX},${virtualTableY})`);
-        drawVirtualTable(virtualGroup, node, "#D3D3D3", fixedTableWidth, headerHeight, rowHeight, tablePadding);
-
-        // 绘制从 Table Name 到虚拟表的连接线
-        const sourceX = fromTableX + fixedTableWidth / 2; // Table Name 的右侧中心
-        const sourceY = node.x; // 使用 node 的 x 坐标（Table Name 中的位置）
-        const targetX = virtualTableX - 50; // 虚拟表的左侧
-        const targetY = virtualTableY + headerHeight / 2; // 虚拟表表头的中心
-        svg.append("path")
-          .attr("class", "table-link")
-          .attr("fill", "none")
-          .attr("stroke", "#aaa")
-          .attr("stroke-width", 2)
-          .attr("stroke-opacity", 0.5)
-          .attr("d", `M${sourceX},${sourceY} L${targetX},${targetY}`);
-
-        tableBounds.push(virtualGroup.node().getBBox());
-        lastTableX = virtualTableX + fixedTableWidth + 50; // 更新下一个表格的 X 坐标
-      }
-    });
-
-    tableBounds.push(fromGroup.node().getBBox());
-    tableBounds.push(fromExplainGroup.node().getBBox());
-  }
-
-  let lastTableBottom = -Infinity;
-  const tableSpacing = 20;
-
-  others.forEach((parentNode) => {
-    const childNodes = root.descendants().filter((d) => d.depth === 2 && d.parent && d.parent.data.name === parentNode.data.name);
-    if (childNodes.length > 0) {
-      const tableHeight = headerHeight + childNodes.length * rowHeight + tablePadding * 2;
-      const tableX = parentNode.y + tableOffset;
-      const tableY = Math.max(parentNode.x - tableHeight / 2, lastTableBottom + tableSpacing);
-      const tableGroup = svg.append("g").attr("class", "table-group").attr("transform", `translate(${tableX},${tableY})`);
-      drawTable(tableGroup, parentNode.data.name, childNodes, "#FFD700", fixedTableWidth, headerHeight, rowHeight, tablePadding, parentNode);
-      tableBounds.push(tableGroup.node().getBBox());
-      lastTableBottom = tableY + tableHeight;
-    }
-  });
-}
-
-// 绘制普通表格
-function drawTable(group, headerText, nodes, headerFill, fixedTableWidth, headerHeight, rowHeight, tablePadding, parentNode) {
-  group.append("rect").attr("x", -fixedTableWidth / 2).attr("y", 0).attr("width", fixedTableWidth).attr("height", headerHeight).attr("fill", headerFill).attr("stroke", "#333");
-  group.append("text").attr("x", 0).attr("y", headerHeight / 2).attr("dy", "0.35em").attr("text-anchor", "middle").attr("fill", "black").style("font-size", "16px").style("font-weight", "bold").text(headerText);
-
-  let currentYOffset = headerHeight;
-  nodes.forEach((d, i) => {
-    const textContent = d.data.name || d.data.column_name || d.data.table_name || d.data.condition || "";
-    const textElement = group.append("text").attr("x", 0).attr("y", currentYOffset + rowHeight / 2).attr("dy", "0.35em").attr("text-anchor", "middle").attr("fill", "#333").style("font-size", "14px").text(textContent);
-
-    const textWidth = textElement.node().getBBox().width;
-    let adjustedHeight = rowHeight;
-    if (textWidth > fixedTableWidth - 20) {
-      textElement.text("").selectAll("tspan").data(wrapText(textContent, fixedTableWidth - 20)).enter().append("tspan").attr("x", 0).attr("dy", (t, j) => (j === 0 ? "0.35em" : "1.2em")).text((t) => t);
-      const lineCount = wrapText(textContent, fixedTableWidth - 20).length;
-      adjustedHeight = rowHeight * lineCount; // 与初始绘制一致
-    }
-
-    group.insert("rect", "text").attr("x", -fixedTableWidth / 2).attr("y", currentYOffset).attr("width", fixedTableWidth).attr("height", adjustedHeight).attr("fill", "#FFFFFF").attr("stroke", "#333");
-
-    d.y = group.attr("transform").match(/translate\(([^,]+),([^)]+)\)/)[1];
-    d.x = parseFloat(group.attr("transform").match(/translate\(([^,]+),([^)]+)\)/)[2]) + currentYOffset + adjustedHeight / 2;
-
-    svg.append("path").attr("class", "table-link").attr("fill", "none").attr("stroke", "#aaa").attr("stroke-width", 2).attr("stroke-opacity", "0.5").attr("d", `M${parentNode.y + 50},${parentNode.x} L${d.y - 50},${d.x}`);
-
-    currentYOffset += adjustedHeight;
-  });
-}
-
-function drawProcessingTable(group, nodes, headerFill, fixedTableWidth, headerHeight, rowHeight, tablePadding, processingTableX) {
-  group.append("rect")
-    .attr("x", -fixedTableWidth / 2)
-    .attr("y", 0)
-    .attr("width", fixedTableWidth)
-    .attr("height", headerHeight)
-    .attr("fill", headerFill)
-    .attr("stroke", "#333");
-  group.append("text")
-    .attr("x", 0)
-    .attr("y", headerHeight / 2)
-    .attr("dy", "0.35em")
-    .attr("text-anchor", "middle")
-    .attr("fill", "black")
-    .style("font-size", "16px")
-    .style("font-weight", "bold")
-    .text("Column Processing");
-
-  let currentYOffset = headerHeight;
-  nodes.forEach((d, i) => {
-    const processingText = d.data.children && d.data.children.length > 0 ? d.data.children[0].name : "";
-    const textElement = group.append("text")
-      .attr("x", 0)
-      .attr("y", currentYOffset + rowHeight / 2)
-      .attr("dy", "0.35em")
-      .attr("text-anchor", "middle")
-      .attr("fill", "#333")
-      .style("font-size", "14px")
-      .text(processingText);
-
-    const textWidth = textElement.node().getBBox().width;
-    let adjustedHeight = rowHeight;
-    if (textWidth > fixedTableWidth - 20) {
-      textElement.text("")
-        .selectAll("tspan")
-        .data(wrapText(processingText, fixedTableWidth - 20))
-        .enter()
-        .append("tspan")
-        .attr("x", 0)
-        .attr("dy", (t, j) => (j === 0 ? "0.35em" : "1.2em"))
-        .text((t) => t);
-      const lineCount = wrapText(processingText, fixedTableWidth - 20).length;
-      adjustedHeight = rowHeight * lineCount / 2;
-    }
-
-    group.insert("rect", "text")
-      .attr("x", -fixedTableWidth / 2)
-      .attr("y", currentYOffset)
-      .attr("width", fixedTableWidth)
-      .attr("height", adjustedHeight)
-      .attr("fill", "#FFFFFF")
-      .attr("stroke", "#333");
-
-    // 更新子节点坐标
-    if (d.data.children && d.data.children.length > 0) {
-      const groupTransform = group.attr("transform").match(/translate\(([^,]+),([^)]+)\)/);
-      d.data.children[0].y = parseFloat(groupTransform[1]);
-      d.data.children[0].x = parseFloat(groupTransform[2]) + currentYOffset + adjustedHeight / 2;
-    }
-
-    // 绘制从 Column Name (parent) 到 Column Processing 子节点 (node) 的连接线
-    if (d.data.children && d.data.children.length > 0) {
-      const parentY = parseFloat(d.y); // Column Name 的 y 坐标
-      const parentX = parseFloat(d.x); // Column Name 的 x 坐标
-      const childY = parseFloat(d.data.children[0].y); // 子节点的 y 坐标
-      const childX = parseFloat(d.data.children[0].x); // 子节点的 x 坐标
-      if (
-        !isNaN(parentY) &&
-        !isNaN(parentX) &&
-        !isNaN(childY) &&
-        !isNaN(childX)
-      ) {
-        svg.append("path")
-          .attr("class", "table-link")
-          .attr("fill", "none")
-          .attr("stroke", "#666")
-          .attr("stroke-width", 2)
-          .attr("stroke-opacity", "0.5")
-          .attr("d", `M${parentY + fixedTableWidth / 2},${parentX} L${childY - 50},${childX}`);
-      } else {
-        console.warn(`Cannot draw connection from ${d.data.name} to ${d.data.children[0].name}:`, {
-          parent_y: d.y,
-          parent_x: d.x,
-          child_y: d.data.children[0].y,
-          child_x: d.data.children[0].x
-        });
-      }
-    }
-    currentYOffset += adjustedHeight;
-  });
-}
-
-function drawNLExplainTable(group, nodes, headerFill, fixedTableWidth, headerHeight, rowHeight, tablePadding) {
-  // 表头
-  group.append("rect")
-    .attr("x", -fixedTableWidth / 2)
-    .attr("y", 0)
-    .attr("width", fixedTableWidth)
-    .attr("height", headerHeight)
-    .attr("fill", headerFill)
-    .attr("stroke", "#333");
-
-  group.append("text")
-    .attr("x", 0)
-    .attr("y", headerHeight / 2)
-    .attr("dy", "0.35em")
-    .attr("text-anchor", "middle")
-    .attr("fill", "#333")
-    .style("font-size", "16px")
-    .style("font-weight", "bold")
-    .text("NL Explain");
-
-  // 内容区域
-  let currentYOffset = headerHeight;
-  nodes.forEach((d, i) => {
-    // 这里假设每个节点有一个自然语言解释，暂时用占位文本
-    const explainText = `Explanation for ${d.data.name}`; // 替换为实际的解释内容
-    const textElement = group.append("text")
-      .attr("x", 0)
-      .attr("y", currentYOffset + rowHeight / 2)
-      .attr("dy", "0.35em")
-      .attr("text-anchor", "middle")
-      .attr("fill", "#333")
-      .style("font-size", "14px")
-      .text(explainText);
-
-    const textWidth = textElement.node().getBBox().width;
-    let adjustedHeight = rowHeight;
-    if (textWidth > fixedTableWidth - 20) {
-      textElement.text("")
-        .selectAll("tspan")
-        .data(wrapText(explainText, fixedTableWidth - 20))
-        .enter()
-        .append("tspan")
-        .attr("x", 0)
-        .attr("dy", (t, j) => (j === 0 ? "0.35em" : "1.2em"))
-        .text((t) => t);
-      const lineCount = wrapText(explainText, fixedTableWidth - 20).length;
-      adjustedHeight = rowHeight * lineCount;
-    }
-
-    group.insert("rect", "text")
-      .attr("x", -fixedTableWidth / 2)
-      .attr("y", currentYOffset)
-      .attr("width", fixedTableWidth)
-      .attr("height", adjustedHeight)
-      .attr("fill", "#FFFFFF")
-      .attr("stroke", "#333");
-
-    currentYOffset += adjustedHeight;
-  });
-}
-
-function drawVirtualTable(group, virtualNode, headerFill, fixedTableWidth, headerHeight, rowHeight, tablePadding) {
-  // 绘制虚拟表表头
-  const headerRect = group.append("rect")
-    .attr("x", -fixedTableWidth / 2)
-    .attr("y", 0)
-    .attr("width", fixedTableWidth)
-    .attr("height", headerHeight)
-    .attr("fill", headerFill)
-    .attr("stroke", "#333")
-    .attr("fill-opacity", 0.5); // 表头半透明
-
-  const headerText = group.append("text")
-    .attr("x", 0)
-    .attr("y", headerHeight / 2)
-    .attr("dy", "0.35em")
-    .attr("text-anchor", "middle")
-    .attr("fill", "#333")
-    .style("font-size", "16px")
-    .style("font-weight", "bold")
-    .text(virtualNode.data.name);
-
-  let currentYOffset = headerHeight;
-  let isTreeView = false; // 初始为 SQL 视图
-
-  // 生成层级化的 SQL 字符串
-  function generateSQLString(node) {
-    let sqlLines = [];
-    if (node.data.isVirtual && node.children && node.children.length > 0) {
-      node.children.forEach((section) => {
-        const sectionKeyword = section.data.name;
-        sqlLines.push(sectionKeyword);
-        console.log(section)
-        if (section.children && section.children.length > 0) {
-          section.children.forEach((child) => {
-            let childText = `  ${child.data.name}`; // 缩进表示层级
-            if (child.children && child.children.length > 0) {
-              child.children.forEach((subChild) => {
-                
-                childText += ` AS ${subChild.data.name}`; // 处理 column_processing
-              });
-            }
-            sqlLines.push(childText);
-          });
+  // 检测重叠并调整树高度
+  function checkOverlap(bounds) {
+    for (let i = 0; i < bounds.length - 1; i++) {
+      for (let j = i + 1; j < bounds.length; j++) {
+        const b1 = bounds[i];
+        const b2 = bounds[j];
+        if (
+          b1.x < b2.x + b2.width &&
+          b1.x + b1.width > b2.x &&
+          b1.y < b2.y + b2.height &&
+          b1.y + b1.height > b2.y
+        ) {
+          return true; // 检测到重叠
         }
-      });
+      }
     }
-    return sqlLines.join("\n");
+    return false;
   }
 
-  // 绘制 SQL 视图
-  function drawSQLView() {
-    group.selectAll(".tree-content").remove(); // 移除树状内容
-    group.selectAll(".sql-content").remove(); // 移除旧的 SQL 内容
-    group.selectAll(".sql-content-bg").remove(); // 移除旧的背景矩形
-
-    const sqlText = generateSQLString(virtualNode);
-    const padding = 10; // 内容周围的内边距
-
-    if (sqlText) {
-      const sqlElement = group.append("text")
-        .attr("class", "sql-content")
-        .attr("x", -fixedTableWidth / 2 + padding) // 左边留 padding
-        .attr("y", currentYOffset + rowHeight / 2)
-        .attr("dy", "0.35em")
-        .attr("text-anchor", "start")
-        .attr("fill", "#333")
-        .style("font-size", "14px")
-        .style("font-family", "monospace"); // 使用等宽字体
-
-      const lines = wrapText(sqlText, fixedTableWidth - 2 * padding, "\n"); // 考虑两侧 padding
-      sqlElement.selectAll("tspan")
-        .data(lines)
-        .enter()
-        .append("tspan")
-        .attr("x", -fixedTableWidth / 2 + padding)
-        .attr("dy", (d, i) => (i === 0 ? "0.35em" : "1.2em"))
-        .text((d) => d);
-
-      // 计算内容的实际边界
-      const textBBox = sqlElement.node().getBBox();
-      const contentWidth = textBBox.width + 2 * padding; // 左右 padding
-      const contentHeight = textBBox.height + padding; // 上方 padding + 文本高度
-
-      // 绘制背景矩形，匹配内容尺寸
-      group.insert("rect", ".sql-content")
-        .attr("class", "sql-content-bg")
-        .attr("x", -fixedTableWidth / 2)
-        .attr("y", currentYOffset)
-        .attr("width", contentWidth)
-        .attr("height", contentHeight)
-        .attr("fill", "#FFFFFF")
-        .attr("stroke", "#333")
-        .attr("fill-opacity", 0.5);
-    } else {
-      const placeholderText = "Virtual table definition not found";
-      const placeholderElement = group.append("text")
-        .attr("class", "sql-content")
-        .attr("x", -fixedTableWidth / 2 + padding)
-        .attr("y", currentYOffset + rowHeight / 2)
-        .attr("dy", "0.35em")
-        .attr("text-anchor", "start")
-        .attr("fill", "#999")
-        .style("font-size", "14px")
-        .text(placeholderText);
-
-      // 计算占位符的实际边界
-      const textBBox = placeholderElement.node().getBBox();
-      const contentWidth = textBBox.width + 2 * padding;
-      const contentHeight = textBBox.height + padding;
-
-      group.insert("rect", ".sql-content")
-        .attr("class", "sql-content-bg")
-        .attr("x", -fixedTableWidth / 2)
-        .attr("y", currentYOffset)
-        .attr("width", contentWidth)
-        .attr("height", contentHeight)
-        .attr("fill", "#FFFFFF")
-        .attr("stroke", "#333")
-        .attr("fill-opacity", 0.5);
-    }
-  }
-
-  // 绘制树状视图（原表格形式）
-  function drawTreeView() {
-  group.selectAll(".sql-content").remove(); // 移除 SQL 内容
-  group.selectAll(".sql-content-bg").remove();
-
-  // 点击时创建弹窗视图
-  group.on("click", function () {
-    // 移除旧弹窗（防止重复创建）
-    d3.select("#virtual-table-modal").remove();
-
-    // 创建弹窗容器
-    const modalWidth = window.innerWidth * 0.8; // 80% 屏幕宽度
-    const modalHeight = window.innerHeight * 0.8; // 80% 屏幕高度
-    const modal = d3.select("body")
-      .append("div")
-      .attr("id", "virtual-table-modal")
-      .style("position", "fixed")
-      .style("top", "10%")
-      .style("left", "10%")
-      .style("width", `${modalWidth}px`)
-      .style("height", `${modalHeight}px`)
-      .style("background", "#fff")
-      .style("border", "1px solid #333")
-      .style("box-shadow", "0 0 10px rgba(0,0,0,0.5)")
-      .style("z-index", "1000");
-
-    // 创建 SVG 画布
-    const svgContainer = modal.append("svg")
-      .attr("width", modalWidth)
-      .attr("height", modalHeight);
-
-    const svg = svgContainer.append("g")
-      .attr("transform", "translate(50,50)");
-
-    // 添加缩放功能
-    const zoom = d3.zoom()
-      .scaleExtent([0.5, 2])
-      .on("zoom", (event) => {
-        svg.attr("transform", event.transform);
-      });
-    svgContainer.call(zoom);
-
-    // 树布局
-    const treeHeight = modalHeight - 100;
-    const treeWidth = modalWidth - 200;
-    const treeLayout = d3.tree().size([treeHeight, treeWidth]);
-    const root = d3.hierarchy(virtualNode.data); // 使用 virtualNode.data 作为根节点
+  if (checkOverlap(tableBounds)) {
+    // 如果有重叠，增加树的高度
+    treeHeight += 200; // 每次增加 200px，可调整
+    treeLayout.size([treeHeight, treeWidth]);
     treeLayout(root);
 
-    // 绘制连接线
-    svg.selectAll("path.link")
-      .data(root.links())
+    // 更新所有节点位置（depth=0 和 depth=1）
+    nodes.attr("transform", (d) => `translate(${d.y},${d.x})`);
+
+    // 移除所有旧的连接线
+    svg.selectAll("path.link").remove();       // 移除 depth=0 到 depth=1 的连接线
+    svg.selectAll("path.table-link").remove(); // 移除 depth=1 到 depth=2 的连接线
+
+    // 重新绘制 depth=0 到 depth=1 的连接线
+    svg
+      .selectAll("path.link")
+      .data(root.links().filter((d) => d.target.depth === 1 && !d.target.data.isVirtual)) // 只绘制 depth=0 到 depth=1
       .enter()
       .append("path")
-      .attr("class", "table-link")
+      .attr("class", "link")
       .attr("fill", "none")
       .attr("stroke", "#aaa")
       .attr("stroke-width", 2)
-      .attr("d", (d) => `M${d.source.y},${d.source.x} H${d.target.y},${d.target.x}`);
+      .attr("d", (d) => `M${d.source.y + 50},${d.source.x} L${d.target.y - 50},${d.target.x}`);
 
-    // 绘制节点
-    const padding = 10;
-    const rectHeight = 30; // 节点矩形高度
-    const nodes = svg.selectAll("g.node")
-      .data(root.descendants())
-      .enter()
-      .append("g")
-      .attr("class", "node")
-      .attr("transform", (d) => `translate(${d.y},${d.x})`);
+    // 更新表格位置
+    tableBounds.length = 0; // 清空旧边界框
+    svg.selectAll("g.table-group").remove(); // 移除所有旧表格
+    redrawTables(svg, root, tableOffset, headerHeight, rowHeight, tablePadding, fixedTableWidth);
+  }
+  // 将文本移回中心
+  texts.attr("text-anchor", "middle");
 
-    // 添加文本
-    const texts = nodes.append("text")
-      .attr("dy", 5)
+  // 辅助函数：重绘表格
+  function redrawTables(svg, root, tableOffset, headerHeight, rowHeight, tablePadding, fixedTableWidth) {
+    const level1Nodes = root.descendants().filter((d) => d.depth === 1 && !d.data.isVirtual);
+    const selectNodes = root.descendants().filter((d) => d.depth === 2 && d.parent && d.parent.data.name === "Select");
+    const fromNodes = root.descendants().filter((d) => d.depth === 2 && d.parent && d.parent.data.name === "From");
+    const others = level1Nodes.filter((d) => d.data.name !== "Select" && d.data.name !== "From");
+
+    if (selectNodes.length > 0) {
+      const selectParent = selectNodes[0].parent;
+      const selectTableX = selectParent.y + tableOffset;
+      const selectTableY = selectParent.x - selectHeight / 2;
+      const selectGroup = svg.append("g").attr("class", "table-group").attr("transform", `translate(${selectTableX},${selectTableY})`);
+      drawTable(selectGroup, "Column Name", selectNodes, "#FFD700", fixedTableWidth, headerHeight, rowHeight, tablePadding, selectParent);
+
+      const processingTableX = selectTableX + fixedTableWidth + 100;
+      const processingTableY = selectTableY - 50;
+      const processingGroup = svg.append("g").attr("class", "table-group").attr("transform", `translate(${processingTableX},${processingTableY})`);
+      drawProcessingTable(processingGroup, selectNodes, "#87CEEB", fixedTableWidth, headerHeight, rowHeight, tablePadding, processingTableX);
+
+      // 添加 Column Processing 的 NL Explain 表格
+      const processingHeight = headerHeight + selectNodes.reduce((acc, d) => {
+        const text = d.data.children && d.data.children.length > 0 ? d.data.children[0].name : "";
+        const lineCount = wrapText(text, fixedTableWidth - 20).length;
+        return acc + (lineCount > 1 ? rowHeight * lineCount / 2 : rowHeight);
+      }, 0);
+      const explainTableX = processingTableX + fixedTableWidth + 5;
+      const explainTableY = processingTableY;
+      const explainGroup = svg.append("g").attr("class", "explain-group").attr("transform", `translate(${explainTableX},${explainTableY})`);
+      drawNLExplainTable(explainGroup, selectNodes, "#90EE90", fixedTableWidth, headerHeight, rowHeight, tablePadding);
+
+      // 检查并绘制虚拟表
+      let lastTableX = explainTableX + fixedTableWidth; // 从 NL Explain 右侧开始
+      selectNodes.forEach((node) => {
+        if (node.data.isVirtual && node.children && node.children.length > 0) {
+          const virtualTableX = lastTableX + 50; // 在 NL Explain 后偏移
+          const virtualTableY = selectTableY; // 与 Select 对齐
+          const virtualGroup = svg.append("g")
+            .attr("class", "virtual-table-group")
+            .attr("transform", `translate(${virtualTableX},${virtualTableY})`);
+          drawVirtualTable(virtualGroup, node, "#FFD700", fixedTableWidth, headerHeight, rowHeight, tablePadding);
+
+          // 绘制从 Column Name 到虚拟表的连接线
+          const sourceX = selectTableX + fixedTableWidth / 2; // Column Name 的右侧中心
+          const sourceY = node.x; // node 在 Column Name 中的 Y 坐标
+          const targetX = virtualTableX - 50; // 虚拟表左侧
+          const targetY = virtualTableY + headerHeight / 2; // 虚拟表表头中心
+          svg.append("path")
+            .attr("class", "table-link")
+            .attr("fill", "none")
+            .attr("stroke", "#aaa")
+            .attr("stroke-width", 2)
+            .attr("stroke-opacity", 0.5)
+            .attr("d", `M${sourceX},${sourceY} L${targetX},${targetY}`);
+
+          tableBounds.push(virtualGroup.node().getBBox());
+          lastTableX = virtualTableX + fixedTableWidth; // 更新 X 坐标
+        }
+      });
+
+      tableBounds.push(selectGroup.node().getBBox());
+      tableBounds.push(processingGroup.node().getBBox());
+      tableBounds.push(explainGroup.node().getBBox());
+    }
+
+    if (fromNodes.length > 0) {
+      const fromParent = fromNodes[0].parent;
+      const fromTableX = fromParent.y + tableOffset;
+      const fromTableY = fromParent.x - fromHeight / 2;
+      const fromGroup = svg.append("g").attr("class", "table-group").attr("transform", `translate(${fromTableX},${fromTableY})`);
+      drawTable(fromGroup, "Table Name", fromNodes, "#FFD700", fixedTableWidth, headerHeight, rowHeight, tablePadding, fromParent);
+
+      // 添加 Table Name 的 NL Explain 表格
+      const fromExplainTableX = fromTableX + fixedTableWidth + 5;
+      const fromExplainTableY = fromTableY;
+      const fromExplainGroup = svg.append("g").attr("class", "explain-group").attr("transform", `translate(${fromExplainTableX},${fromExplainTableY})`);
+      drawNLExplainTable(fromExplainGroup, fromNodes, "#90EE90", fixedTableWidth, headerHeight, rowHeight, tablePadding);
+
+      // 绘制 From 后面的虚拟表结构并添加连接线
+      let lastTableX = fromExplainTableX + fixedTableWidth + 50; // 从 NL Explain 右侧开始
+
+      fromNodes.forEach((node) => {
+        if (node.data.isVirtual && node.children && node.children.length > 0) {
+          const virtualTableX = lastTableX;
+          const virtualTableY = fromTableY; // 与 From 对齐
+          const virtualGroup = svg.append("g").attr("class", "virtual-table-group").attr("transform", `translate(${virtualTableX},${virtualTableY})`);
+          drawVirtualTable(virtualGroup, node, "#ffd700", fixedTableWidth, headerHeight, rowHeight, tablePadding);
+
+          // 绘制从 Table Name 到虚拟表的连接线
+          const sourceX = fromTableX + fixedTableWidth / 2; // Table Name 的右侧中心
+          const sourceY = node.x; // 使用 node 的 x 坐标（Table Name 中的位置）
+          const targetX = virtualTableX - 50; // 虚拟表的左侧
+          const targetY = virtualTableY + headerHeight / 2; // 虚拟表表头的中心
+          svg.append("path")
+            .attr("class", "table-link")
+            .attr("fill", "none")
+            .attr("stroke", "#aaa")
+            .attr("stroke-width", 2)
+            .attr("stroke-opacity", 0.5)
+            .attr("d", `M${sourceX},${sourceY} L${targetX},${targetY}`);
+
+          tableBounds.push(virtualGroup.node().getBBox());
+          lastTableX = virtualTableX + fixedTableWidth + 50; // 更新下一个表格的 X 坐标
+        }
+      });
+
+      tableBounds.push(fromGroup.node().getBBox());
+      tableBounds.push(fromExplainGroup.node().getBBox());
+    }
+
+    let lastTableBottom = -Infinity;
+    const tableSpacing = 20;
+
+    others.forEach((parentNode) => {
+      const childNodes = root.descendants().filter((d) => d.depth === 2 && d.parent && d.parent.data.name === parentNode.data.name);
+      if (childNodes.length > 0) {
+        const tableHeight = headerHeight + childNodes.length * rowHeight + tablePadding * 2;
+        const tableX = parentNode.y + tableOffset;
+        const tableY = Math.max(parentNode.x - tableHeight / 2, lastTableBottom + tableSpacing);
+        const tableGroup = svg.append("g").attr("class", "table-group").attr("transform", `translate(${tableX},${tableY})`);
+        drawTable(tableGroup, parentNode.data.name, childNodes, "#FFD700", fixedTableWidth, headerHeight, rowHeight, tablePadding, parentNode);
+
+        // 添加 NL Explain 表格（在虚拟表之前）
+        let lastTableX = tableX; // 从主表格右侧开始
+        const explainTableX = lastTableX + fixedTableWidth + 5; // 在主表格右侧偏移
+        const explainTableY = tableY; // 与主表格对齐
+        const explainGroup = svg.append("g")
+          .attr("class", "explain-group")
+          .attr("transform", `translate(${explainTableX},${explainTableY})`);
+        drawNLExplainTable(explainGroup, childNodes, "#90EE90", fixedTableWidth, headerHeight, rowHeight, tablePadding);
+
+        // 更新 lastTableX
+        lastTableX = explainTableX + fixedTableWidth;
+
+        // 检查并绘制虚拟表
+        childNodes.forEach((node) => {
+          if (node.data.isVirtual && node.children && node.children.length > 0) {
+            const virtualTableX = lastTableX + 50; // 在 NL Explain 后偏移
+            const virtualTableY = tableY; // 与主表格对齐
+            const virtualGroup = svg.append("g")
+              .attr("class", "virtual-table-group")
+              .attr("transform", `translate(${virtualTableX},${virtualTableY})`);
+            drawVirtualTable(virtualGroup, node, "#FFD700", fixedTableWidth, headerHeight, rowHeight, tablePadding);
+
+            // 绘制从表格行到虚拟表的连接线
+            const sourceX = tableX + fixedTableWidth / 2; // 主表格右侧中心
+            const sourceY = node.x; // node 在主表格中的 Y 坐标
+            const targetX = virtualTableX - 50; // 虚拟表左侧
+            const targetY = virtualTableY + headerHeight / 2; // 虚拟表表头中心
+            svg.append("path")
+              .attr("class", "table-link")
+              .attr("fill", "none")
+              .attr("stroke", "#aaa")
+              .attr("stroke-width", 2)
+              .attr("stroke-opacity", 0.5)
+              .attr("d", `M${sourceX},${sourceY} L${targetX},${targetY}`);
+
+            tableBounds.push(virtualGroup.node().getBBox());
+            lastTableX = virtualTableX + fixedTableWidth; // 更新 X 坐标
+          }
+        });
+        tableBounds.push(tableGroup.node().getBBox());
+        lastTableBottom = tableY + tableHeight;
+      }
+    });
+  }
+
+  // 绘制普通表格
+  function drawTable(group, headerText, nodes, headerFill, fixedTableWidth, headerHeight, rowHeight, tablePadding, parentNode) {
+    group.append("rect").attr("x", -fixedTableWidth / 2).attr("y", 0).attr("width", fixedTableWidth).attr("height", headerHeight).attr("fill", headerFill).attr("stroke", "#333");
+    group.append("text").attr("x", 0).attr("y", headerHeight / 2).attr("dy", "0.35em").attr("text-anchor", "middle").attr("fill", "black").style("font-size", "16px").style("font-weight", "bold").text(headerText);
+
+    let currentYOffset = headerHeight;
+    nodes.forEach((d, i) => {
+      const textContent = d.data.name || d.data.column_name || d.data.table_name || d.data.condition || "";
+      const textElement = group.append("text").attr("x", 0).attr("y", currentYOffset + rowHeight / 2).attr("dy", "0.35em").attr("text-anchor", "middle").attr("fill", "#333").style("font-size", "14px").text(textContent);
+
+      const textWidth = textElement.node().getBBox().width;
+      let adjustedHeight = rowHeight;
+      if (textWidth > fixedTableWidth - 20) {
+        textElement.text("").selectAll("tspan").data(wrapText(textContent, fixedTableWidth - 20)).enter().append("tspan").attr("x", 0).attr("dy", (t, j) => (j === 0 ? "0.35em" : "1.2em")).text((t) => t);
+        const lineCount = wrapText(textContent, fixedTableWidth - 20).length;
+        adjustedHeight = rowHeight * lineCount; // 与初始绘制一致
+      }
+
+      group.insert("rect", "text").attr("x", -fixedTableWidth / 2).attr("y", currentYOffset).attr("width", fixedTableWidth).attr("height", adjustedHeight).attr("fill", "#FFFFFF").attr("stroke", "#333");
+
+      d.y = group.attr("transform").match(/translate\(([^,]+),([^)]+)\)/)[1];
+      d.x = parseFloat(group.attr("transform").match(/translate\(([^,]+),([^)]+)\)/)[2]) + currentYOffset + adjustedHeight / 2;
+
+      svg.append("path").attr("class", "table-link").attr("fill", "none").attr("stroke", "#aaa").attr("stroke-width", 2).attr("stroke-opacity", "0.5").attr("d", `M${parentNode.y + 50},${parentNode.x} L${d.y - 50},${d.x}`);
+
+      currentYOffset += adjustedHeight;
+    });
+  }
+
+  function drawProcessingTable(group, nodes, headerFill, fixedTableWidth, headerHeight, rowHeight, tablePadding, processingTableX) {
+    group.append("rect")
+      .attr("x", -fixedTableWidth / 2)
+      .attr("y", 0)
+      .attr("width", fixedTableWidth)
+      .attr("height", headerHeight)
+      .attr("fill", headerFill)
+      .attr("stroke", "#333");
+    group.append("text")
+      .attr("x", 0)
+      .attr("y", headerHeight / 2)
+      .attr("dy", "0.35em")
       .attr("text-anchor", "middle")
       .attr("fill", "black")
-      .style("font-size", "14px")
-      .text((d) => d.data.name);
+      .style("font-size", "16px")
+      .style("font-weight", "bold")
+      .text("Column Processing");
 
-    // 计算文本宽度，动态调整矩形
-    texts.each(function (d) {
-      const textWidth = this.getBBox().width + padding * 2;
-      d.rectWidth = textWidth;
+    let currentYOffset = headerHeight;
+    nodes.forEach((d, i) => {
+      const processingText = d.data.children && d.data.children.length > 0 ? d.data.children[0].name : "";
+      const textElement = group.append("text")
+        .attr("x", 0)
+        .attr("y", currentYOffset + rowHeight / 2)
+        .attr("dy", "0.35em")
+        .attr("text-anchor", "middle")
+        .attr("fill", "#333")
+        .style("font-size", "14px")
+        .text(processingText);
+
+      const textWidth = textElement.node().getBBox().width;
+      let adjustedHeight = rowHeight;
+      if (textWidth > fixedTableWidth - 20) {
+        textElement.text("")
+          .selectAll("tspan")
+          .data(wrapText(processingText, fixedTableWidth - 20))
+          .enter()
+          .append("tspan")
+          .attr("x", 0)
+          .attr("dy", (t, j) => (j === 0 ? "0.35em" : "1.2em"))
+          .text((t) => t);
+        const lineCount = wrapText(processingText, fixedTableWidth - 20).length;
+        adjustedHeight = rowHeight * lineCount / 2;
+      }
+
+      group.insert("rect", "text")
+        .attr("x", -fixedTableWidth / 2)
+        .attr("y", currentYOffset)
+        .attr("width", fixedTableWidth)
+        .attr("height", adjustedHeight)
+        .attr("fill", "#FFFFFF")
+        .attr("stroke", "#333");
+
+      // 更新子节点坐标
+      if (d.data.children && d.data.children.length > 0) {
+        const groupTransform = group.attr("transform").match(/translate\(([^,]+),([^)]+)\)/);
+        d.data.children[0].y = parseFloat(groupTransform[1]);
+        d.data.children[0].x = parseFloat(groupTransform[2]) + currentYOffset + adjustedHeight / 2;
+      }
+
+      // 绘制从 Column Name (parent) 到 Column Processing 子节点 (node) 的连接线
+      if (d.data.children && d.data.children.length > 0) {
+        const parentY = parseFloat(d.y); // Column Name 的 y 坐标
+        const parentX = parseFloat(d.x); // Column Name 的 x 坐标
+        const childY = parseFloat(d.data.children[0].y); // 子节点的 y 坐标
+        const childX = parseFloat(d.data.children[0].x); // 子节点的 x 坐标
+        if (
+          !isNaN(parentY) &&
+          !isNaN(parentX) &&
+          !isNaN(childY) &&
+          !isNaN(childX)
+        ) {
+          svg.append("path")
+            .attr("class", "table-link")
+            .attr("fill", "none")
+            .attr("stroke", "#666")
+            .attr("stroke-width", 2)
+            .attr("stroke-opacity", "0.5")
+            .attr("d", `M${parentY + fixedTableWidth / 2},${parentX} L${childY - 50},${childX}`);
+        } else {
+          console.warn(`Cannot draw connection from ${d.data.name} to ${d.data.children[0].name}:`, {
+            parent_y: d.y,
+            parent_x: d.x,
+            child_y: d.data.children[0].y,
+            child_x: d.data.children[0].x
+          });
+        }
+      }
+      currentYOffset += adjustedHeight;
     });
-
-    // 绘制矩形
-    nodes.insert("rect", "text")
-      .attr("x", (d) => -d.rectWidth / 2)
-      .attr("y", -rectHeight / 2)
-      .attr("width", (d) => d.rectWidth)
-      .attr("height", rectHeight)
-      .attr("rx", 8)
-      .attr("ry", 8)
-      .attr("fill", (d) => (d.depth === 0 ? "#D3D3D3" : d.depth === 1 ? "#FFFFFF" : "#F9F9F9"))
-      .attr("stroke", "#333")
-      .attr("fill-opacity", 0.5);
-
-    // 添加关闭按钮
-    modal.append("button")
-      .text("Close")
-      .style("position", "absolute")
-      .style("top", "10px")
-      .style("right", "10px")
-      .style("padding", "5px 10px")
-      .style("font-size", "14px")
-      .style("cursor", "pointer")
-      .on("click", () => {
-        modal.remove();
-      });
-  });
-
-  // 点击时不再直接绘制树状结构，仅显示提示
-  let treeYOffset = headerHeight;
-  const promptText = "Click to view detailed tree structure";
-  const promptElement = group.append("text")
-    .attr("class", "tree-content")
-    .attr("x", -fixedTableWidth / 2 + 10)
-    .attr("y", treeYOffset + rowHeight / 2)
-    .attr("dy", "0.35em")
-    .attr("text-anchor", "start")
-    .attr("fill", "#333")
-    .style("font-size", "14px")
-    .text(promptText);
-
-  const promptBBox = promptElement.node().getBBox();
-  const promptWidth = promptBBox.width + 20;
-  const promptHeight = promptBBox.height + 10;
-
-  group.insert("rect", ".tree-content")
-    .attr("class", "tree-content-bg")
-    .attr("x", -fixedTableWidth / 2)
-    .attr("y", treeYOffset)
-    .attr("width", promptWidth)
-    .attr("height", promptHeight)
-    .attr("fill", "#FFFFFF")
-    .attr("stroke", "#333")
-    .attr("fill-opacity", 0.5);
-}
-
-  // 初始绘制 SQL 视图
-  drawSQLView();
-
-  // 点击切换视图
-  group.on("click", function () {
-    isTreeView = !isTreeView;
-    if (isTreeView) {
-      drawTreeView();
-    } else {
-      drawSQLView();
-    }
-  });
-}
-
-// 辅助函数：将长文本拆分为多行
-function wrapText(text, maxWidth) {
-  const words = text.split(" ");
-  const lines = [];
-  let currentLine = words[0];
-
-  const tempText = svg.append("text").attr("visibility", "hidden").style("font-size", "14px");
-  for (let i = 1; i < words.length; i++) {
-    tempText.text(currentLine + " " + words[i]);
-    if (tempText.node().getBBox().width < maxWidth) {
-      currentLine += " " + words[i];
-    } else {
-      lines.push(currentLine);
-      currentLine = words[i];
-    }
   }
-  lines.push(currentLine);
-  tempText.remove();
-  return lines;
-}
+
+  function drawNLExplainTable(group, nodes, headerFill, fixedTableWidth, headerHeight, rowHeight, tablePadding) {
+    // 表头
+    group.append("rect")
+      .attr("x", -fixedTableWidth / 2)
+      .attr("y", 0)
+      .attr("width", fixedTableWidth)
+      .attr("height", headerHeight)
+      .attr("fill", headerFill)
+      .attr("stroke", "#333");
+
+    group.append("text")
+      .attr("x", 0)
+      .attr("y", headerHeight / 2)
+      .attr("dy", "0.35em")
+      .attr("text-anchor", "middle")
+      .attr("fill", "#333")
+      .style("font-size", "16px")
+      .style("font-weight", "bold")
+      .text("NL Explain");
+
+    // 内容区域
+    let currentYOffset = headerHeight;
+    nodes.forEach((d, i) => {
+      // 这里假设每个节点有一个自然语言解释，暂时用占位文本
+      const explainText = `Explanation for ${d.data.name}`; // 替换为实际的解释内容
+      const textElement = group.append("text")
+        .attr("x", 0)
+        .attr("y", currentYOffset + rowHeight / 2)
+        .attr("dy", "0.35em")
+        .attr("text-anchor", "middle")
+        .attr("fill", "#333")
+        .style("font-size", "14px")
+        .text(explainText);
+
+      const textWidth = textElement.node().getBBox().width;
+      let adjustedHeight = rowHeight;
+      if (textWidth > fixedTableWidth - 20) {
+        textElement.text("")
+          .selectAll("tspan")
+          .data(wrapText(explainText, fixedTableWidth - 20))
+          .enter()
+          .append("tspan")
+          .attr("x", 0)
+          .attr("dy", (t, j) => (j === 0 ? "0.35em" : "1.2em"))
+          .text((t) => t);
+        const lineCount = wrapText(explainText, fixedTableWidth - 20).length;
+        adjustedHeight = rowHeight * lineCount;
+      }
+
+      group.insert("rect", "text")
+        .attr("x", -fixedTableWidth / 2)
+        .attr("y", currentYOffset)
+        .attr("width", fixedTableWidth)
+        .attr("height", adjustedHeight)
+        .attr("fill", "#FFFFFF")
+        .attr("stroke", "#333");
+
+      currentYOffset += adjustedHeight;
+    });
+  }
+
+  function drawVirtualTable(group, virtualNode, headerFill, fixedTableWidth, headerHeight, rowHeight, tablePadding) {
+    // 绘制虚拟表表头
+    const headerRect = group.append("rect")
+      .attr("x", -fixedTableWidth / 2)
+      .attr("y", 0)
+      .attr("width", fixedTableWidth)
+      .attr("height", headerHeight)
+      .attr("fill", headerFill)
+      .attr("stroke", "#333")
+      .style("cursor", "pointer"); // 表头半透明
+
+    const headerText = group.append("text")
+      .attr("x", 0)
+      .attr("y", headerHeight / 2)
+      .attr("dy", "0.35em")
+      .attr("text-anchor", "middle")
+      .attr("fill", "#333")
+      .style("font-size", "16px")
+      .style("font-weight", "bold")
+      .text(virtualNode.data.name);
+
+    let currentYOffset = headerHeight;
+    let isTreeView = false; // 初始为 SQL 视图
+
+    // 生成层级化的 SQL 字符串
+    function generateSQLString(node) {
+      let sqlLines = [];
+      if (node.data.isVirtual && node.children && node.children.length > 0) {
+        node.children.forEach((section) => {
+          const sectionKeyword = section.data.name;
+          sqlLines.push(sectionKeyword);
+
+          if (section.children && section.children.length > 0) {
+            section.children.forEach((child) => {
+              let childText = `  ${child.data.name}`; // 缩进表示层级
+              if (child.children && child.children.length > 0) {
+                child.children.forEach((subChild) => {
+
+                  childText += ` AS ${subChild.data.name}`; // 处理 column_processing
+                });
+              }
+              sqlLines.push(childText);
+            });
+          }
+        });
+      }
+      return sqlLines.join("\n");
+    }
+
+    // 绘制 SQL 视图
+    function drawSQLView() {
+      group.selectAll(".tree-content").remove(); // 移除树状内容
+      group.selectAll(".sql-content").remove(); // 移除旧的 SQL 内容
+      group.selectAll(".sql-content-bg").remove(); // 移除旧的背景矩形
+
+      const padding = 10; // 内容周围的内边距
+      // const sqlText = generateSQLString(virtualNode);
+
+      const placeholderText = "Click to view details";
+
+      // 添加占位符文本
+      const placeholderElement = group.append("text")
+        .attr("class", "sql-content")
+        .attr("x", 0)
+        .attr("y", currentYOffset + rowHeight / 2)
+        .attr("dy", "0.35em")
+        .attr("text-anchor", "middle")
+        .attr("fill", "#333") // 改为深色，与普通文本一致
+        .style("font-size", "14px")
+        .text(placeholderText);
+
+      // 计算边界并绘制背景矩形
+      const textBBox = placeholderElement.node().getBBox();
+      const contentHeight = textBBox.height + 2 * padding;
+
+      group.insert("rect", ".sql-content")
+        .attr("class", "sql-content-bg")
+        .attr("x", -fixedTableWidth / 2)
+        .attr("y", currentYOffset)
+        .attr("width", fixedTableWidth)
+        .attr("height", contentHeight)
+        .attr("fill", "#FFFFFF")
+        .attr("stroke", "#333")
+        .attr("fill-opacity", 0.5);
+      // if (sqlText) {
+      //   const sqlElement = group.append("text")
+      //     .attr("class", "sql-content")
+      //     .attr("x", -fixedTableWidth / 2 + padding) // 左边留 padding
+      //     .attr("y", currentYOffset + rowHeight / 2)
+      //     .attr("dy", "0.35em")
+      //     .attr("text-anchor", "start")
+      //     .attr("fill", "#333")
+      //     .style("font-size", "14px")
+      //     .style("font-family", "monospace"); // 使用等宽字体
+
+      //   // 先尝试绘制完整文本，检查宽度
+      // sqlElement.text(sqlText);
+      // const textBBox = sqlElement.node().getBBox();
+      // let lines = [sqlText];
+      // let contentHeight = textBBox.height + padding;
+
+      // // 如果文本超出宽度，则换行
+      // if (textBBox.width > fixedTableWidth - 2 * padding) {
+      //   lines = wrapText(sqlText, fixedTableWidth - 2 * padding - 10);
+      //   sqlElement.text(""); // 清空单行文本
+      //   sqlElement.selectAll("tspan")
+      //     .data(lines)
+      //     .enter()
+      //     .append("tspan")
+      //     .attr("x", -fixedTableWidth / 2 + padding)
+      //     .attr("dy", (d, i) => (i === 0 ? "0.35em" : "1.2em"))
+      //     .text((d) => d);
+
+      //   // 重新计算高度
+      //   const newTextBBox = sqlElement.node().getBBox();
+      //   contentHeight = newTextBBox.height + padding;
+      // }
+
+      //   // 绘制背景矩形，匹配内容尺寸
+      //   group.insert("rect", ".sql-content")
+      //     .attr("class", "sql-content-bg")
+      //     .attr("x", -fixedTableWidth / 2)
+      //     .attr("y", currentYOffset)
+      //     .attr("width", fixedTableWidth)
+      //     .attr("height", contentHeight)
+      //     .attr("fill", "#FFFFFF")
+      //     .attr("stroke", "#333")
+      //     .attr("fill-opacity", 0.5);
+      // } else {
+      //   const placeholderText = "Virtual table definition not found";
+      //   const placeholderElement = group.append("text")
+      //     .attr("class", "sql-content")
+      //     .attr("x", -fixedTableWidth / 2 + padding)
+      //     .attr("y", currentYOffset + rowHeight / 2)
+      //     .attr("dy", "0.35em")
+      //     .attr("text-anchor", "start")
+      //     .attr("fill", "#999")
+      //     .style("font-size", "14px")
+      //     .text(placeholderText);
+
+      //   // 计算占位符的实际边界
+      //   const textBBox = placeholderElement.node().getBBox();
+      //   const contentWidth = textBBox.width + 2 * padding;
+      //   const contentHeight = textBBox.height + padding;
+
+      //   group.insert("rect", ".sql-content")
+      //     .attr("class", "sql-content-bg")
+      //     .attr("x", -fixedTableWidth / 2)
+      //     .attr("y", currentYOffset)
+      //     .attr("width", fixedTableWidth)
+      //     .attr("height", contentHeight)
+      //     .attr("fill", "#FFFFFF")
+      //     .attr("stroke", "#333")
+      //     .attr("fill-opacity", 0.5);
+      // }
+    }
+
+    // 绘制树状视图
+    function drawTreeView() {
+      // 清理旧内容
+      group.selectAll(".sql-content").remove();
+      group.selectAll(".sql-content-bg").remove();
+      group.selectAll(".tree-content").remove();
+      group.selectAll(".tree-content-bg").remove();
+
+      // 移除旧弹窗
+      d3.select("#virtual-table-modal").remove();
+
+      // 创建弹窗容器
+      const modalWidth = window.innerWidth * 0.8;
+      const modalHeight = window.innerHeight * 0.8;
+      const modal = d3.select("body")
+        .append("div")
+        .attr("id", "virtual-table-modal")
+        .style("position", "fixed")
+        .style("top", "10%")
+        .style("left", "10%")
+        .style("width", `${modalWidth}px`)
+        .style("height", `${modalHeight}px`)
+        .style("background", "#fff")
+        .style("border", "1px solid #333")
+        .style("box-shadow", "0 0 10px rgba(0,0,0,0.5)")
+        .style("z-index", 1000);
+
+      // 创建 SVG 画布
+      const svgContainer = modal.append("svg")
+        .attr("width", modalWidth)
+        .attr("height", modalHeight);
+
+      const svg = svgContainer.append("g")
+        .attr("transform", "translate(50,50)");
+
+      // 添加缩放功能
+      const zoom = d3.zoom()
+        .scaleExtent([0.5, 2])
+        .on("zoom", (event) => {
+          svg.attr("transform", event.transform);
+        });
+      svgContainer.call(zoom);
+
+      // 树布局
+      const treeHeight = modalHeight - 100;
+      const treeWidth = modalWidth - 200;
+      const treeLayout = d3.tree().size([treeHeight, treeWidth]);
+      const root = d3.hierarchy(virtualNode.data);
+      treeLayout(root);
+
+      // 常量定义
+      const rectHeight = 40; // 矩形高度（第一层）
+      const padding = 20;    // 矩形两侧额外间距
+      const tableWidth = 250; // 表格宽度
+      const rowHeight = 40;   // 表格行高
+      const headerHeight = 50;// 表格表头高度
+      const tableOffset = 300;// 表格相对于父节点的水平偏移量
+
+      // **绘制第一层节点（depth === 0）**
+      const level0Nodes = svg.selectAll("g.level0-node")
+        .data(root.descendants().filter(d => d.depth === 0))
+        .enter()
+        .append("g")
+        .attr("class", "level0-node")
+        .attr("transform", (d) => `translate(${d.y},${d.x})`);
+
+      const level0Texts = level0Nodes.append("text")
+        .attr("dy", 5)
+        .attr("text-anchor", "middle")
+        .attr("fill", "black")
+        .style("font-size", "14px")
+        .text((d) => d.data.name);
+
+      level0Texts.each(function (d) {
+        const textWidth = this.getBBox().width + padding * 2;
+        d.rectWidth = textWidth;
+      });
+
+      level0Nodes.insert("rect", "text")
+        .attr("x", (d) => -d.rectWidth / 2)
+        .attr("y", -rectHeight / 2)
+        .attr("width", (d) => d.rectWidth)
+        .attr("height", rectHeight)
+        .attr("rx", 8)
+        .attr("ry", 8)
+        .attr("fill", "#D3D3D3") // 第一层灰色
+        .attr("stroke", "#333")
+        .attr("fill-opacity", 0.5);
+
+      // **绘制连接线（第一层到第二层）**
+      svg.selectAll("path.level1-link")
+        .data(root.links().filter(d => d.target.depth === 1))
+        .enter()
+        .append("path")
+        .attr("class", "level1-link")
+        .attr("fill", "none")
+        .attr("stroke", "#aaa")
+        .attr("stroke-width", 2)
+        .attr("d", (d) => `M${d.source.y + (d.source.rectWidth || 0) / 2},${d.source.x} L${d.target.y - 50},${d.target.x}`);
+
+      // **绘制第二层节点（depth === 1）**
+      const level1Nodes = svg.selectAll("g.level1-node")
+        .data(root.descendants().filter(d => d.depth === 1))
+        .enter()
+        .append("g")
+        .attr("class", "level1-node")
+        .attr("transform", (d) => `translate(${d.y},${d.x})`);
+
+      const level1Texts = level1Nodes.append("text")
+        .attr("dy", 5)
+        .attr("text-anchor", "middle")
+        .attr("fill", "black")
+        .style("font-size", "14px")
+        .text((d) => d.data.name);
+
+      level1Texts.each(function (d) {
+        const textWidth = this.getBBox().width + padding * 2;
+        d.rectWidth = textWidth;
+      });
+
+      level1Nodes.insert("rect", "text")
+        .attr("x", (d) => -d.rectWidth / 2)
+        .attr("y", -rectHeight / 2)
+        .attr("width", (d) => d.rectWidth)
+        .attr("height", rectHeight)
+        .attr("rx", 8)
+        .attr("ry", 8)
+        .attr("fill", "#FFFFFF") // 第二层白色
+        .attr("stroke", "#333")
+        .attr("fill-opacity", 0.5);
+
+      // **处理表格样式节点（depth >= 1）**
+      const level1Nodes_parent = root.descendants().filter(d => d.depth === 1);
+
+      level1Nodes_parent.forEach((parentNode) => {
+        const childNodes = root.descendants().filter(d => d.depth === 2 && d.parent === parentNode);
+        if (childNodes.length === 0) return;
+
+        // 计算表格高度
+        const tableHeight = headerHeight + childNodes.length * rowHeight + padding * 2;
+        const tableX = parentNode.y + tableOffset;
+        const tableY = parentNode.x - tableHeight / 2;
+
+        const tableGroup = svg.append("g")
+          .attr("class", "table-group")
+          .attr("transform", `translate(${tableX},${tableY})`);
+
+        // 绘制表头
+        tableGroup.append("rect")
+          .attr("x", -tableWidth / 2)
+          .attr("y", 0)
+          .attr("width", tableWidth)
+          .attr("height", headerHeight)
+          .attr("fill", "#FFD700")
+          .attr("stroke", "#333");
+
+        tableGroup.append("text")
+          .attr("x", 0)
+          .attr("y", headerHeight / 2)
+          .attr("dy", "0.35em")
+          .attr("text-anchor", "middle")
+          .attr("fill", "black")
+          .style("font-size", "16px")
+          .style("font-weight", "bold")
+          .text(parentNode.data.name === "Select" ? "Column Name" : parentNode.data.name);
+
+        // 绘制表格行
+        let currentYOffset = headerHeight;
+        childNodes.forEach((d, i) => {
+          const textContent = d.data.name || "";
+          const textElement = tableGroup.append("text")
+            .attr("x", 0)
+            .attr("y", currentYOffset + rowHeight / 2)
+            .attr("dy", "0.35em")
+            .attr("text-anchor", "middle")
+            .attr("fill", "#333")
+            .style("font-size", "14px")
+            .text(textContent);
+
+          const textWidth = textElement.node().getBBox().width;
+          let adjustedHeight = rowHeight;
+          if (textWidth > tableWidth - 20) {
+            textElement.text("")
+              .selectAll("tspan")
+              .data(wrapText(textContent, tableWidth - 20))
+              .enter()
+              .append("tspan")
+              .attr("x", 0)
+              .attr("dy", (t, j) => j === 0 ? "0.35em" : "1.2em")
+              .text(t => t);
+            const lineCount = wrapText(textContent, tableWidth - 20).length;
+            adjustedHeight = rowHeight * lineCount;
+          }
+
+          tableGroup.insert("rect", "text")
+            .attr("x", -tableWidth / 2)
+            .attr("y", currentYOffset)
+            .attr("width", tableWidth)
+            .attr("height", adjustedHeight)
+            .attr("fill", "#FFFFFF")
+            .attr("stroke", "#333");
+
+          d.y = tableX;
+          d.x = tableY + currentYOffset + adjustedHeight / 2;
+          currentYOffset += adjustedHeight;
+        });
+
+        // 绘制从父节点到表格的连接线
+        childNodes.forEach((d) => {
+          svg.append("path")
+            .attr("fill", "none")
+            .attr("class", "table-link")
+            .attr("stroke", "#aaa")
+            .attr("stroke-width", 2)
+            .attr("stroke-opacity", 0.5)
+            .attr("d", `M${parentNode.y + (parentNode.rectWidth || 0) / 2},${parentNode.x} L${d.y - 50},${d.x}`);
+        });
+
+        let lastTableX = tableX; // 记录最后一个表格的 X 坐标
+        let lastTableY = tableY; // 记录最后一个表格的 Y 坐标
+
+        // 处理 Column Processing 表格（仅针对 Select）
+        if (parentNode.data.name === "Select" && childNodes.some(d => d.children && d.children.length > 0)) {
+          const processingTableX = tableX + tableWidth + 100;
+          const processingTableY = tableY;
+          console.log(processingTableY)
+          const processingGroup = svg.append("g")
+            .attr("class", "table-group")
+            .attr("transform", `translate(${processingTableX},${processingTableY})`);
+
+          processingGroup.append("rect")
+            .attr("x", -tableWidth / 2)
+            .attr("y", 0)
+            .attr("width", tableWidth)
+            .attr("height", headerHeight)
+            .attr("fill", "#87CEEB")
+            .attr("stroke", "#333");
+
+          processingGroup.append("text")
+            .attr("x", 0)
+            .attr("y", headerHeight / 2)
+            .attr("dy", "0.35em")
+            .attr("text-anchor", "middle")
+            .attr("fill", "black")
+            .style("font-size", "16px")
+            .style("font-weight", "bold")
+            .text("Column Processing");
+
+          currentYOffset = headerHeight;
+          childNodes.forEach((d, i) => {
+            const processingText = d.data.children && d.data.children.length > 0 ? d.data.children[0].name : "";
+            const textElement = processingGroup.append("text")
+              .attr("x", 0)
+              .attr("y", currentYOffset + rowHeight / 2)
+              .attr("dy", "0.35em")
+              .attr("text-anchor", "middle")
+              .attr("fill", "#333")
+              .style("font-size", "14px")
+              .text(processingText);
+
+            const textWidth = textElement.node().getBBox().width;
+            let adjustedHeight = rowHeight;
+            if (textWidth > tableWidth - 20) {
+              textElement.text("")
+                .selectAll("tspan")
+                .data(wrapText(processingText, tableWidth - 20))
+                .enter()
+                .append("tspan")
+                .attr("x", 0)
+                .attr("dy", (t, j) => j === 0 ? "0.35em" : "1.2em")
+                .text(t => t);
+              const lineCount = wrapText(processingText, tableWidth - 20).length;
+              adjustedHeight = rowHeight * lineCount;
+            }
+
+            processingGroup.insert("rect", "text")
+              .attr("x", -tableWidth / 2)
+              .attr("y", currentYOffset)
+              .attr("width", tableWidth)
+              .attr("height", adjustedHeight)
+              .attr("fill", "#FFFFFF")
+              .attr("stroke", "#333");
+
+            if (d.data.children && d.data.children.length > 0) {
+              d.data.children[0].y = processingTableX;
+              d.data.children[0].x = processingTableY + currentYOffset + adjustedHeight / 2;
+            }
+
+            svg.append("path")
+              .attr("fill", "none")
+              .attr("class", "table-link")
+              .attr("stroke", "#666")
+              .attr("stroke-width", 2)
+              .attr("stroke-opacity", 0.5)
+              .attr("d", `M${d.y + tableWidth / 2},${d.x} L${processingTableX - 50},${d.x}`);
+
+            currentYOffset += adjustedHeight;
+          });
+          // 更新最后一个表格的坐标
+          lastTableX = processingTableX;
+          lastTableY = processingTableY;
+        }
+
+        // 添加 NL Explain 表格（为每个 parentNode 绘制）
+        const nlExplainX = lastTableX + tableOffset;
+        const nlExplainY = lastTableY;
+        const nlExplainGroup = svg.append("g")
+          .attr("class", "nl-explain-group")
+          .attr("transform", `translate(${nlExplainX},${nlExplainY})`);
+
+        drawNLExplainTable(
+          nlExplainGroup,
+          childNodes, // 当前 parentNode 的子节点（depth === 2）
+          "#90EE90", // 浅绿色表头
+          tableWidth,
+          headerHeight,
+          rowHeight,
+          padding
+        );
+
+        childNodes.forEach((d, i) => {
+          const nlExplainRowY = nlExplainY + headerHeight + (i + 0.5) * rowHeight; // 假设每行高度固定为 rowHeight
+          svg.append("path")
+            .attr("fill", "none")
+            .attr("class", "nl-explain-link")
+            .attr("stroke", "#aaa")
+            .attr("stroke-width", 2)
+            .attr("stroke-opacity", 0.5)
+            .attr("d", `M${d.y + tableWidth / 2},${d.x} L${nlExplainX - 50},${nlExplainRowY}`);
+        });
+      });
+
+      // 添加关闭按钮
+      modal.append("div")
+        .style("position", "absolute")
+        .style("top", "10px")
+        .style("right", "10px")
+        .style("cursor", "pointer")
+        .append("img")
+        .attr("src", "src/assets/image/close.png")
+        .attr("width", "30")
+        .attr("height", "30")
+        .attr("alt", "Close")
+        .on("click", () => {
+          modal.remove();
+          drawSQLView();
+        });
+    }
+
+    // 初始绘制 SQL 视图
+    drawSQLView();
+
+    // 点击切换视图
+    group.on("click", function () {
+      isTreeView = !isTreeView;
+      if (isTreeView) {
+        drawTreeView();
+      } else {
+        drawSQLView();
+      }
+    });
+  }
+
+  // 辅助函数：将长文本拆分为多行
+  function wrapText(text, maxWidth) {
+    const words = text.split(" ");
+    const lines = [];
+    let currentLine = words[0];
+
+    const tempText = svg.append("text").attr("visibility", "hidden").style("font-size", "14px");
+    for (let i = 1; i < words.length; i++) {
+      tempText.text(currentLine + " " + words[i]);
+      if (tempText.node().getBBox().width < maxWidth) {
+        currentLine += " " + words[i];
+      } else {
+        lines.push(currentLine);
+        currentLine = words[i];
+      }
+    }
+    lines.push(currentLine);
+    tempText.remove();
+    return lines;
+  }
 
   // **将文本移回中心**
   texts.attr("text-anchor", "middle");
@@ -1633,7 +1951,8 @@ svg {
 }
 
 .header {
-  background-color: #AEC6EA; /* 设置背景颜色 */
+  background-color: #AEC6EA;
+  /* 设置背景颜色 */
   padding: 10px;
   text-align: center;
   font-size: 18px;
@@ -1651,15 +1970,17 @@ svg {
 /* 🌟 让 el-card 绝对定位，避免从上到下堆叠 */
 .node-card {
   position: absolute;
-  min-width: 180px; /* 避免过窄 */
-  max-width: 250px; /* 限制最大宽度 */
+  min-width: 180px;
+  /* 避免过窄 */
+  max-width: 250px;
+  /* 限制最大宽度 */
   padding: 8px;
   background-color: #fff;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   transition: transform 0.3s ease-in-out;
   text-align: center;
-  
+
   /* 🌟 让节点中心对齐，而不是左上角对齐 */
   transform: translate(-50%, -50%);
 }

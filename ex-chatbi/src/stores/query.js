@@ -3,7 +3,9 @@ import { defineStore } from 'pinia';
 export const useQueryStore = defineStore('query', {
     state: () => ({
         currentQuery: '', // 初始值为空字符串
-        response: null
+        response: null,
+        sqlcode: "",
+        isReady: false
     }),
     actions: {
         setCurrentQuery(query) {
@@ -11,6 +13,10 @@ export const useQueryStore = defineStore('query', {
         },
         setResponse(response) {
             this.response = response; // 更新响应数据
+        },
+        async setCurrentSQL(code) {
+            this.sqlcode = code;
+            this.isReady = true;
         }
     }
 });

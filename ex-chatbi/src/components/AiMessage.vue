@@ -1,11 +1,20 @@
-<!-- AiMessage.vue -->
 <template>
   <div class="ai-content">
     <img class="avatar" src="@/assets/image/robot.png" alt="AI Avatar" />
     <div class="message-bubble ai-bubble">
       <div class="explanation-section">
-        <MarkdownRenderer class="explanation-text" :content="message.explanation" />
+        <MarkdownRenderer class="explanation-text" :content="message.understanding" />
       </div>
+
+      <!-- Code Card -->
+      <div class="card-section">
+        <div class="card-title">Code</div>
+        <div class="card-content">
+          <MarkdownRenderer class="sql-code" :content="message.code?.text || ''" />
+        </div>
+      </div>
+
+      
 
       <!-- Data Card -->
       <div class="card-section">
@@ -41,15 +50,17 @@
         </div>
       </div>
 
-      <!-- Code Card -->
-      <div class="card-section">
-        <div class="card-title">Code</div>
-        <div class="card-content">
-          <MarkdownRenderer class="sql-code" :content="message.code?.text || ''" />
-        </div>
+      <div class="explanation-section">
+        <MarkdownRenderer class="explanation-text" :content="message.explanation" />
       </div>
+      
 
-      <span class="timestamp">{{ message.timestamp }}</span>
+      <div class="bottom-section">
+        <span class="timestamp">{{ message.timestamp }}</span>
+        <button class="icon-button" @click="handleIconClick">
+          <img class="userIconClass" src="@/assets/image/detail.png"/>
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -58,7 +69,7 @@
 import { chart } from "@/assets/ts/chart.ts";
 import MarkdownRenderer from "./MarkdownRenderer.vue";
 import axios from "axios";
-
+import { useQueryStore } from '@/stores/query';
 export default {
   name: "AiMessage",
 
@@ -69,6 +80,10 @@ export default {
     return {
       clickdata: {},
     }
+  },
+  setup() {
+    const queryStore = useQueryStore();
+    return { queryStore };
   },
   props: {
     message: {
@@ -130,7 +145,12 @@ export default {
       } catch(error) {
         console.error("Error fetching response:", error);
       }
-    }
+    },
+    handleIconClick() {
+      console.log("点击了图标");
+      console.log(this.message);
+      this.queryStore.setResponse(this.message);
+    },
   }
 };
 </script>
@@ -338,5 +358,27 @@ export default {
 
 #chart-container {
   margin: 0 auto;
+}
+
+.bottom-section{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.icon-button i {
+  font-size: 16px;
+  color: #007bff;
+}
+.userIconClass {
+  width: 30px;
+  height: 30px;
 }
 </style>

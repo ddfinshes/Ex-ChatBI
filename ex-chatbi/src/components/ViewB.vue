@@ -434,7 +434,7 @@ export default {
   background: rgba(184, 208, 232, 0.8) !important;
   border-radius: 50%;
   transition: all 0.3s !important;
-  z-index: 9999 !important; /* 确保在最顶层 */
+  z-index: 10 !important; /* 确保在最顶层 */
 }
 
 .el-carousel__arrow--left.el-carousel__arrow {

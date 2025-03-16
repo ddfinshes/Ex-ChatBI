@@ -1,12 +1,11 @@
 <template>
   <div class="selectpanel-main">
     <div ref="d3Canvas" class="d3-canvas"></div>
-
-    <el-aside id="selectPanelContainer" width="100%">
-    <ViewAVue ref="viewA" style="flex: 1;"/>
-    <ViewBVue ref="viewB" style="flex: 1;" @card-hover="handleCardHover"/>
-    <ViewCVue style="flex: 1;"/>
-    </el-aside>
+      <div id="selectPanelContainer" width="100%">
+        <ViewAVue ref="viewA" style="flex: 1;"/>
+        <ViewBVue ref="viewB" style="flex: 1;" @card-hover="handleCardHover"/>
+        <ViewCVue style="flex: 1;" v-if="isDataReady"/>
+      </div>    
   </div>
 </template>
 
@@ -19,6 +18,7 @@ import ViewAVue from "./ViewA.vue";
 import ViewBVue from "./ViewB.vue";
 import ViewCVue from "./ViewC.vue";
 import * as d3 from 'd3';
+import { tr } from "element-plus/es/locales.mjs";
 
 export default {
   components: {
@@ -32,6 +32,19 @@ export default {
     direction: String,
     saveLog: Function,
   },
+  setup() {
+    const queryStore = useQueryStore();
+    return {queryStore};
+  },
+  computed: {
+    currentQuery() {
+      return this.queryStore.currentQuery;
+    },
+    response() {
+      return this.queryStore.response;
+    }
+  },
+
   data() {
     return {
       viewAPositions: null, // 新增坐标存储
@@ -39,6 +52,7 @@ export default {
       d3SVG: null,
       updateInterval: null,
       currentHoveredId: null,
+      isDataReady: false,
     };
   },
   mounted() {
@@ -67,7 +81,6 @@ export default {
         .style('width', '100%')
         .style('height', '100%')
         .style('pointer-events', 'none')
-        .style('z-index', 9999);
     },
 
     initConnectionUpdate() {
@@ -121,8 +134,8 @@ export default {
           connections.push({
             source: this.viewAPositions.userInput,
             target: this.viewBPositions[id],
-            color: '#5ce9ff',
-            opacity: 0.4
+            color: '#bdf9d6',
+            opacity: 1
           });
         }
         // ModelUnderstanding到当前ID的连线
@@ -130,8 +143,8 @@ export default {
           connections.push({
             source: this.viewAPositions.model,
             target: this.viewBPositions[id],
-            color: '#5ce9ff',
-            opacity: 0.4
+            color: '#bdf9d6',
+            opacity: 1
           });
         }
       }
@@ -172,11 +185,17 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 /* 可选：添加特定样式 */
-/* .selectpanel-main {
-  height: 100vh;
-} */
+.selectpanel-main {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #f0f0f0;
+  border: 1px solid #dcdfe6;
+
+}
 .d3-canvas {
   position: fixed;
   top: 0;
@@ -184,17 +203,17 @@ export default {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 9999;
+  z-index: 200;
 }
 .connection {
   transition: all 0.3s ease;
 }
 
-#selectPanelContainer {
+/* #selectPanelContainer {
   position: static !important;
   transform: none !important;
   overflow: visible !important;
-}
+} */
 
 .top-buttons {
   border-bottom: 1px solid #ebf4f5;

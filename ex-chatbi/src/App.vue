@@ -22,7 +22,7 @@ import { RouterLink, RouterView } from 'vue-router'
   <RouterView />
 </template>
 
-<style scoped>
+<style>
 header {
   /*line-height: 0.5;
   max-height: 100vh;*/ 
@@ -39,7 +39,7 @@ header {
   margin: 0 auto 2rem;
 }
 
-nav {
+/* nav {
   width: 100%;
   font-size: 12px;
   text-align: center;
@@ -62,7 +62,7 @@ nav a {
 
 nav a:first-of-type {
   border: 0;
-}
+} */
 
 
 </style>

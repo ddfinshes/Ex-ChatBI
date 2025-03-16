@@ -1,34 +1,32 @@
 <template>
-  <div class="common-layout">
-    <el-container class="common-container">
-      <el-container>
-        <el-main id="main">
-          <div class="message-container" v-if="messageHistory.length > 0">
-            <div v-for="(message, index) in messageHistory" :key="index" :class="[
-              'message-wrapper',
-              message.type === 'user' ? 'user-message' : 'ai-message',
-            ]">
-              <!-- 用户消息 -->
-              <div v-if="message.type === 'user'" class="user-content">
-                <img class="avatar" src="@/assets/image/human.png" alt="User Avatar" />
-                <div class="message-bubble user-bubble">
-                  <div class="message-text" v-html="message.text"></div>
-                  <span class="timestamp">{{ message.timestamp }}</span>
-                </div>
-              </div>
-
-              <!-- AI 响应 -->
-              <AiMessage v-else :message="message" />
+  <div class="chat-layout">
+    <div class="message-container">
+      <div class="messages-wrapper" v-if="messageHistory.length > 0">
+        <div v-for="(message, index) in messageHistory" :key="index" :class="[
+          'message-wrapper',
+          message.type === 'user' ? 'user-message' : 'ai-message',
+        ]">
+          <div v-if="message.type === 'user'" class="user-content">
+            <img class="avatar" src="@/assets/image/human.png" alt="User Avatar" />
+            <div class="message-bubble user-bubble">
+              <div class="message-text" v-html="message.text"></div>
+              <span class="timestamp">{{ message.timestamp }}</span>
             </div>
           </div>
-          <div class="input-container">
-            <el-input type="textarea" v-model="query" placeholder="Please enter your question"
-              @keydown.enter="handleEnter"></el-input>
-            <el-button type="primary" @click="sendQuery">Send</el-button>
-          </div>
-        </el-main>
-      </el-container>
-    </el-container>
+          <AiMessage v-else :message="message" />
+        </div>
+      </div>
+    </div>
+    <div class="input-container">
+      <el-input 
+        type="textarea" 
+        v-model="query" 
+        placeholder="Please enter your question"
+        :autosize="{ minRows: 2, maxRows: 4 }"
+        @keydown.enter="handleEnter"
+      />
+      <el-button type="primary" @click="sendQuery">Send</el-button>
+    </div>
   </div>
 </template>
 
@@ -38,6 +36,7 @@ import axios from "axios";
 import MarkdownRenderer from "./MarkdownRenderer.vue";
 import AiMessage from "./AiMessage.vue"; // 导入新组件
 import { useQueryStore } from '@/stores/query';
+import { emitter } from '@/assets/ts/eventBus.js';
 
 export default {
   components: {
@@ -49,6 +48,7 @@ export default {
       query: "",
       currentQuery: "",
       messageHistory: [],
+      currentMessage: {},
     };
   },
   setup() {
@@ -92,8 +92,7 @@ export default {
           }
         );
 
-        this.queryStore.setResponse(res.data);
-        console.log("Parent stored response in Pinia:", res.data);
+        // this.queryStore.setResponse(res.data);
 
         const newMessage = {
           type: "ai",
@@ -103,11 +102,13 @@ export default {
             timestamp: new Date().toLocaleTimeString(),
           },
           data: res.data.response.data,
+          understanding: res.data.response.understanding,
           explanation: res.data.response.explanation,
           vis_data: res.data.response.vis_data,
           vis_tag_name: `chart_${Date.now()}_${this.messageHistory.length}`,
           timestamp: new Date().toLocaleTimeString(),
         };
+        this.currentMessage = newMessage;
 
         this.messageHistory.push(newMessage);
       } catch (error) {
@@ -132,104 +133,50 @@ export default {
 };
 </script>
 
-<style>
-.common-layout {
-  height: 100vh;
-  width: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.common-container {
+<style scoped>
+.chat-layout {
+  /* height: 100vh;
+  width: 100vh; */
   height: 100%;
   width: 100%;
-  background-color: #f0f0f0;
-  display: flex;
-}
-
-#main {
-  background-color: #ffffff;
-  height: 100%;
-  width: 70%;
-  border: 1px solid #afafaf;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  background-color: #f0f0f0;
+  border: 1px solid #dcdfe6;
 }
-
-/* .message-container {
+.message-container {
   flex: 1;
   overflow-y: auto;
-  max-width: 100%;
-} */
-
-.user {
-  border-bottom: 3px solid #a5a5a5;
-  padding: 10px;
-  margin-bottom: 1rem;
-  text-align: left;
-  position: relative;
+  /* padding-left: 10px;
+  padding-right: 10px; */
+  /* min-height: 90%; */
+  /* margin-bottom: 20px; */
 }
 
-.ai {
-  border-bottom: 3px solid #a5a5a5;
-  padding: 10px;
-  margin-bottom: 1rem;
-  text-align: left;
-}
-
-.timestamp {
-  font-size: 0.8rem;
-  color: gray;
-  display: block;
-  margin-top: 5px;
+.messages-wrapper {
+  /* max-height: 100%; */
+  overflow-y: auto;
+  padding-bottom: 20px;
 }
 
 .input-container {
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
   border-top: 2px solid #a5a5a5;
+  margin-bottom: 17px;
+  /* margin-top: 1000px; */
+  height: 15px;
 }
 
-.result-table {
-  width: 100%;
-  border-collapse: collapse;
+.el-textarea {
+  flex: 1;
+  margin-right: 10px;
 }
 
-.result-table th,
-.result-table td {
-  border: 1px solid #dcdcdc;
-  padding: 8px;
-  text-align: left;
-}
-
-.result-table th {
-  background-color: #f5f5f5;
-  font-weight: bold;
-}
-
-.result-table tbody tr:hover {
-  background-color: #fafafa;
-}
-
-.sql-code {
-  background-color: #dadada;
-  border-radius: 5px;
-  padding: 10px;
-  font-family: monospace;
-  white-space: pre-wrap;
-}
-
-.message-text {
-  white-space: pre-line;
-}
-
-/* --- */
-.message-container {
-  padding: 20px;
-  max-width: 800px;
-  margin: 0 auto;
+.el-button {
+  height: 35px;
 }
 
 .message-wrapper {
@@ -255,6 +202,8 @@ export default {
 
 .user-content {
   flex-direction: row-reverse;
+  margin-right: 10px;
+  display: flex;
 }
 
 .ai-content {
@@ -266,7 +215,6 @@ export default {
   height: 40px;
   border-radius: 50%;
   margin: 0 10px;
-  object-fit: cover;
 }
 
 .message-bubble {
@@ -278,13 +226,11 @@ export default {
 .user-bubble {
   background-color: #409EFF;
   color: white;
-  margin-left: 10px;
 }
 
 .ai-bubble {
   background-color: #f5f5f5;
   color: #333;
-  margin-right: 10px;
 }
 
 .timestamp {
@@ -301,39 +247,5 @@ export default {
 .ai-bubble .timestamp {
   color: #666;
   text-align: left;
-}
-
-.demo-tabs {
-  width: 100%;
-}
-
-
-.no-data {
-  color: #909399;
-  text-align: center;
-  padding: 20px;
-}
-
-.card-section {
-  margin-bottom: 20px;
-  border: 1px solid #dcdfe6;
-  border-radius: 4px;
-  background-color: #fff;
-}
-
-.card-title {
-  padding: 10px 15px;
-  border-bottom: 1px solid #dcdfe6;
-  background-color: #f5f7fa;
-  color: #303133;
-  font-weight: bold;
-}
-
-.card-content {
-  padding: 15px;
-}
-
-#chart-container {
-  margin: 0 auto;
 }
 </style>
