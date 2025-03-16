@@ -107,6 +107,8 @@ export default {
           vis_data: res.data.response.vis_data,
           vis_tag_name: `chart_${Date.now()}_${this.messageHistory.length}`,
           timestamp: new Date().toLocaleTimeString(),
+          top_k_similar: res.data.top_k_similar,
+          message_history: res.data.message_history,
         };
         this.currentMessage = newMessage;
 

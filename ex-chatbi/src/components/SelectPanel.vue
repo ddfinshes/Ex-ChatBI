@@ -4,7 +4,7 @@
       <div id="selectPanelContainer" width="100%">
         <ViewAVue ref="viewA" style="flex: 1;"/>
         <ViewBVue ref="viewB" style="flex: 1;" @card-hover="handleCardHover"/>
-        <ViewCVue style="flex: 1;" v-if="isDataReady"/>
+        <ViewCVue style="flex: 1;" />
       </div>    
   </div>
 </template>
@@ -32,19 +32,8 @@ export default {
     direction: String,
     saveLog: Function,
   },
-  setup() {
-    const queryStore = useQueryStore();
-    return {queryStore};
-  },
-  computed: {
-    currentQuery() {
-      return this.queryStore.currentQuery;
-    },
-    response() {
-      return this.queryStore.response;
-    }
-  },
 
+  
   data() {
     return {
       viewAPositions: null, // 新增坐标存储
@@ -52,7 +41,7 @@ export default {
       d3SVG: null,
       updateInterval: null,
       currentHoveredId: null,
-      isDataReady: false,
+      
     };
   },
   mounted() {

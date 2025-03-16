@@ -5,7 +5,8 @@ export const useQueryStore = defineStore('query', {
         currentQuery: '', // 初始值为空字符串
         response: null,
         sqlcode: "",
-        isReady: false
+        isReady: false,
+        isDataReady: false
     }),
     actions: {
         setCurrentQuery(query) {
@@ -17,6 +18,9 @@ export const useQueryStore = defineStore('query', {
         async setCurrentSQL(code) {
             this.sqlcode = code;
             this.isReady = true;
+        },
+        setIsDataReady(value) {
+            this.isDataReady = value;
         }
     }
 });

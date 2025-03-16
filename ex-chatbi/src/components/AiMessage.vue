@@ -147,9 +147,12 @@ export default {
       }
     },
     handleIconClick() {
-      console.log("点击了图标");
-      console.log(this.message);
-      this.queryStore.setResponse(this.message);
+      // 右边内容显示
+      this.queryStore.setIsDataReady(!this.queryStore.isDataReady);
+      // 延迟执行
+      setTimeout(() => {
+        this.queryStore.setResponse(this.message);
+      }, 1000);
     },
   }
 };
