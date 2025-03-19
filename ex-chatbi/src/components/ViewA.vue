@@ -80,8 +80,10 @@
           <div slot="header" style="background-color: #909aa3; color: white; padding: 10px; border-radius: 4px 4px 0 0; text-transform: uppercase; text-align: center;">
             Model Understanding
           </div>
-          <div style="background-color: #ffffff; color: #303133; padding: 10px; text-align: left; border-radius: 0 0 4px 4px; min-height: 40px;">
-            {{ modelResponse}}
+          <div
+            style="background-color: #ffffff; color: #303133; padding: 10px; text-align: left; border-radius: 0 0 4px 4px; min-height: 40px;"
+          >
+            <p v-html="highlightText(modelResponse, searchtext)"></p>
           </div>
         </el-card>
       </el-col>
@@ -159,6 +161,8 @@
         messageHistory: [],
         modelResponse: '',
         topKSimilar: [],
+        highlight: [],
+        searchtext:[],
       };
     },
     watch: {
@@ -171,9 +175,11 @@
       response(newVal) {
         console.log('监听到新响应:', newVal);
         if (newVal) {
-          this.modelResponse = newVal.response.understanding || JSON.stringify(newVal.response.data);
+          this.modelResponse = newVal.response.understanding;
           this.topKSimilar = newVal.top_k_similar || [];
           this.messageHistory = newVal.message_history || [];
+          this.highlight = newVal.response.pair_relevance;
+          this.searchtext = newVal.response.highlight_words;
         }
       }
     },
@@ -185,6 +191,18 @@
       //   this.topKSimilar = res.data.top_k_similar || [];
       // }
       // 获取元素底部中心坐标
+      highlightText(text, searchTextArray) {
+      if (!searchTextArray || searchTextArray.length === 0) return text;
+
+      // 遍历数组中的每个关键词
+      searchTextArray.forEach(searchText => {
+        const regex = new RegExp(`(${searchText})`, 'gi');
+        text = text.replace(regex, '<span class="highlight">$1</span>');
+      });
+
+      return text;
+    },
+
     getCardPositions() {
       return {
         userInput: this.calcPosition(this.$refs.userInputCard.$el),
@@ -212,4 +230,12 @@
     height: 2px;
     background-color: #000;
   }
+
+  .highlight {
+
+
+  background-color: yellow;
+
+
+}
   </style>

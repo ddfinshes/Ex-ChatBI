@@ -24,7 +24,7 @@
                     {{ card.title }}
                   </div>
                 </template>
-                <div class="card-content">{{ card.content }}</div>
+                <div class="card-content">{{ modelResponse }}</div>
               </el-card>
             </el-col>
           </el-row>
@@ -126,13 +126,19 @@
 </template>
 
 <script>
+import { useQueryStore } from '@/stores/query';
 
 export default {
   name: "ViewB",
   components: {
   },
+    setup() {
+      const queryStore = useQueryStore();
+      return { queryStore };
+    },
   data() {
     return {
+      modelResponse: null,
       activeCard: null,
       carouselHeight: '400px', // 默认两行高度
       firstRowCards: [
@@ -244,6 +250,9 @@ export default {
     };
   },
   computed: {
+    response() {
+        return this.queryStore.response;
+      },
     bigCardPages() {
       // 每页显示两个大卡片（使用thirdRowCards）
       return this.chunkArray(this.thirdRowCards, 2);
@@ -293,6 +302,18 @@ export default {
           return positions
         }
   },
+  watch: {
+    response(newVal) {
+        console.log('监听到新响应1111:', newVal);
+        if (newVal) {
+          this.modelResponse = newVal.response.list_of_lists[0][1];
+          this.thirdRowCards[0].content = newVal.response.list_of_lists[0][1]
+          this.firstRowCards[0].content = newVal.response.list_of_lists[0][0]
+          console.log(newVal.response)
+          console.log(this.modelResponse)
+        }
+      }
+  }
 };
 </script>
 
