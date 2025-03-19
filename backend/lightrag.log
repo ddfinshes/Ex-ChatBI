@@ -3041,3 +3041,10 @@ Params: {'stream': False}, Got: Error code: 524 - {'error': {'message': ' (reque
 2025-03-19 20:39:38,023 - lightrag - INFO - Query edges: Data analysis, SQL code, Sales performance, top_k: 60, cosine: 0.2
 2025-03-19 20:39:40,164 - lightrag - INFO - Global query uses 67 entites, 60 relations, 14 chunks
 2025-03-19 20:39:47,485 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-03-19 22:01:30,648 - lightrag - INFO - Loaded document status storage with 1 records
+2025-03-19 22:01:30,661 - lightrag - INFO - No new unique documents were found.
+2025-03-19 22:01:30,661 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-19 22:01:33,326 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-03-19 22:01:33,327 - lightrag - INFO - Query edges: Data analysis, SQL code, Sales analysis, top_k: 60, cosine: 0.2
+2025-03-19 22:01:35,054 - lightrag - INFO - Global query uses 67 entites, 60 relations, 14 chunks
+2025-03-19 22:01:41,875 - lightrag - INFO - Inserting 1 to llm_response_cache
