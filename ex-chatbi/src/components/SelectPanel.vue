@@ -31,10 +31,10 @@ export default {
     direction: String,
     saveLog: Function,
   },
-      setup() {
-      const queryStore = useQueryStore();
-      return { queryStore };
-    },
+  setup() {
+  const queryStore = useQueryStore();
+  return { queryStore };
+},
   data() {
     return {
       viewAPositions: null, // 新增坐标存储
@@ -181,7 +181,7 @@ export default {
   watch: {
     response(newVal) {
         if (newVal) {
-
+          console.log('select', newVal);
           this.liners = newVal.response.liners;
         }
       }

@@ -110,7 +110,7 @@
             Confirm
           </el-button>
 
-        </el-card>
+        </div></el-card>
       </el-col>
 
       <!-- SVG 连接线 -->
@@ -139,7 +139,7 @@
           :key="'unlink-' + index"
           v-show="activeLine === index"
           type="danger"
-          size="mini"
+          size="default"
           style="position: absolute;"
           :style="getButtonPosition(index)"
           @click="handleUnlink(index)"
