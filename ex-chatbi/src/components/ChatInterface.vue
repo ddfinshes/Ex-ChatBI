@@ -92,7 +92,7 @@ export default {
           }
         );
 
-        // this.queryStore.setResponse(res.data);
+        this.queryStore.setResponse(res.data);
 
         const newMessage = {
           type: "ai",

@@ -1,5 +1,5 @@
 deepseek-ai/
 node_modules/
-LightRAG/
 .idea
+*.pyc
 __pycache__/

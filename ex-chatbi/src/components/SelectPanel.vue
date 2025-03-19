@@ -5,7 +5,7 @@
         <ViewAVue ref="viewA" style="flex: 1;"/>
         <ViewBVue ref="viewB" style="flex: 1;" @card-hover="handleCardHover"/>
         <ViewCVue style="flex: 1;" />
-      </div>    
+      </div>
   </div>
 </template>
 
@@ -18,7 +18,6 @@ import ViewAVue from "./ViewA.vue";
 import ViewBVue from "./ViewB.vue";
 import ViewCVue from "./ViewC.vue";
 import * as d3 from 'd3';
-import { tr } from "element-plus/es/locales.mjs";
 
 export default {
   components: {
@@ -32,8 +31,10 @@ export default {
     direction: String,
     saveLog: Function,
   },
-
-  
+  setup() {
+  const queryStore = useQueryStore();
+  return { queryStore };
+},
   data() {
     return {
       viewAPositions: null, // 新增坐标存储
@@ -41,7 +42,7 @@ export default {
       d3SVG: null,
       updateInterval: null,
       currentHoveredId: null,
-      
+      liners: [1, 2],
     };
   },
   mounted() {
@@ -70,6 +71,7 @@ export default {
         .style('width', '100%')
         .style('height', '100%')
         .style('pointer-events', 'none')
+        .style('z-index', 9999);
     },
 
     initConnectionUpdate() {
@@ -117,7 +119,7 @@ export default {
 
       // 生成所有连接：每个ID生成两条线
       const connections = [];
-      for(let id = 1; id <= 8; id++) {
+      for(let id of this.liners) {
         // UserInput到当前ID的连线
         if(this.viewAPositions?.userInput && this.viewBPositions?.[id]) {
           connections.push({
@@ -171,6 +173,19 @@ export default {
   //   this.modelResponse = res.data.response.code || JSON.stringify(res.data.response.data);
   //   this.topKSimilar = res.data.top_k_similar || [];
   // }
+  computed: {
+    response() {
+        return this.queryStore.response;
+    }
+  },
+  watch: {
+    response(newVal) {
+        if (newVal) {
+          console.log('select', newVal);
+          this.liners = newVal.response.liners;
+        }
+      }
+  }
 };
 </script>
 

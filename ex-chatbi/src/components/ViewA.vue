@@ -94,6 +94,10 @@
               :rows="5"
               style="width: 100%; max-width: 200px; height: 100%; max-height: 130px;"
             ></el-input>
+          <div
+            style="background-color: #ffffff; color: #303133; padding: 10px; text-align: left; border-radius: 0 0 4px 4px; min-height: 40px;"
+          >
+            <p v-html="highlightText(modelResponse, searchtext)"></p>
           </div>
 
           <!-- Confirm 按钮 -->
@@ -105,7 +109,8 @@
           >
             Confirm
           </el-button>
-        </el-card>
+
+        </div></el-card>
       </el-col>
 
       <!-- SVG 连接线 -->
@@ -134,7 +139,7 @@
           :key="'unlink-' + index"
           v-show="activeLine === index"
           type="danger"
-          size="mini"
+          size="default"
           style="position: absolute;"
           :style="getButtonPosition(index)"
           @click="handleUnlink(index)"
@@ -249,6 +254,8 @@
         query: '',
         messageHistory: [],
         modelResponse: '',
+        highlight: [],
+        searchtext:[],
         topKSimilar: [{ similarity: 0.95, query: "What is AI?" },
             { similarity: 0.85, query: "How does AI work?" },
             { similarity: 0.65, query: "AI applications" },
@@ -293,13 +300,15 @@
         console.log('监听到新响应:', newVal);
 
         if (newVal) {
-          this.modelResponse = newVal.understanding || JSON.stringify(newVal.understanding);
+          this.modelResponse = newVal.response.understanding;
           // this.topKSimilar = newVal.top_k_similar || [];
           this.topKSimilar = [{ similarity: 0.95, query: "What is AI?" },
             { similarity: 0.85, query: "How does AI work?" },
             { similarity: 0.65, query: "AI applications" },
             { similarity: 0.40, query: "Machine learning basics" }]
           this.messageHistory = newVal.message_history || [];
+          this.highlight = newVal.response.pair_relevance;
+          this.searchtext = newVal.response.highlight_words;
         }
       }
     },
@@ -311,13 +320,24 @@
       //   this.topKSimilar = res.data.top_k_similar || [];
       // }
       //获取元素底部中心坐标
+            highlightText(text, searchTextArray) {
+      if (!searchTextArray || searchTextArray.length === 0) return text;
+
+      // 遍历数组中的每个关键词
+      searchTextArray.forEach(searchText => {
+        const regex = new RegExp(`(${searchText})`, 'gi');
+        text = text.replace(regex, '<span class="highlight">$1</span>');
+      });
+
+      return text;
+    },
       getCardPositions() {
         return {
           userInput: this.calcPosition(this.$refs.userInputCard.$el),
           model: this.calcPosition(this.$refs.modelUnderstandingCard.$el)
         }
       },
-      
+
       calcPosition(el) {
         if (!el) return null
         const rect = el.getBoundingClientRect()
@@ -401,7 +421,7 @@
         clearTimeout(this.addTimeout); // 清除之前的隐藏定时器
         this.showAdd = true;
         const svgRect = this.$refs.svgContainer.getBoundingClientRect();
-        
+
         this.addButtonPosition = {
           left: '80px', // 居中调整
           top: '220px'
@@ -473,4 +493,17 @@
     display: table;
     clear: both;
   }
+div[contenteditable] {
+border: 1px solid #ccc;
+padding: 8px;
+min-height: 40px;
+}
+
+  .highlight {
+
+
+  background-color: yellow;
+
+
+}
   </style>

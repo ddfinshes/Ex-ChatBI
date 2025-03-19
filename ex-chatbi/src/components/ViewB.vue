@@ -158,8 +158,8 @@
               resize="none"
               class="explanation-input"
             ></el-input>
-            <el-button 
-              type="primary" 
+            <el-button
+              type="primary"
               class="save-btn"
               style="margin-left: auto;"
             >
@@ -173,13 +173,19 @@
 </template>
 
 <script>
+import { useQueryStore } from '@/stores/query';
 
 export default {
   name: "ViewB",
   components: {
   },
+    setup() {
+      const queryStore = useQueryStore();
+      return { queryStore };
+    },
   data() {
     return {
+      modelResponse: null,
       activeCard: null,
       carouselHeight: '400px', // 默认两行高度
       firstRowCards: [
@@ -320,6 +326,23 @@ export default {
       ],
     };
   },
+  computed: {
+    response() {
+        return this.queryStore.response;
+      },
+    bigCardPages() {
+      // 每页显示两个大卡片（使用thirdRowCards）
+      return this.chunkArray(this.thirdRowCards, 2);
+    },
+    smallCardPages() {
+    // 正确分页逻辑：每页显示4个，但按2x2排列
+    const allSmall = [...this.firstRowCards, ...this.secondRowCards];
+    return this.chunkArray(allSmall, 4).map(page => ({
+      row1: page.slice(0, 2),
+      row2: page.slice(2, 4)
+    }));
+    }
+  },
   methods: {
     showExplanation(card) {
       this.activeCard = card;
@@ -330,35 +353,35 @@ export default {
     // 获取卡片坐标的方法
     getCardPositions() {
       const positions = {};
-      
+
       // 获取轮播容器元素
       const container = this.$refs.rightCarouselContainer;
       if (!container) return positions;
-      
+
       // 获取容器的可视区域边界
       const containerRect = container.getBoundingClientRect();
-      
+
       // 遍历所有卡片（ID 1-8）
       for (let id = 1; id <= 8; id++) {
         const cardRef = this.$refs[`card-${id}`];
         if (!cardRef) continue;
 
         // 获取卡片元素（处理数组引用）
-        const element = Array.isArray(cardRef) 
-          ? cardRef[0]?.$el 
+        const element = Array.isArray(cardRef)
+          ? cardRef[0]?.$el
           : cardRef?.$el;
         if (!element) continue;
 
         // 获取卡片边界
         const cardRect = element.getBoundingClientRect();
-        
+
         // 判断卡片是否在可视区域内
         const isVisible = (
           cardRect.top >= containerRect.top - 20 && // 允许顶部溢出20px
           cardRect.bottom <= containerRect.bottom + 40 && // 允许底部溢出40px
           cardRect.left >= containerRect.left - 10 && // 允许左侧溢出10px
           cardRect.right <= containerRect.right + 10 // 允许右侧溢出10px
-        );  
+        );
 
         if (isVisible) {
           positions[id] = {
@@ -367,10 +390,22 @@ export default {
           };
         }
       }
-      
+
       return positions;
     }
   },
+  watch: {
+    response(newVal) {
+        console.log('监听到新响应1111:', newVal);
+        if (newVal) {
+          this.modelResponse = newVal.response.list_of_lists[0][1];
+          this.thirdRowCards[0].content = newVal.response.list_of_lists[0][1]
+          this.firstRowCards[0].content = newVal.response.list_of_lists[0][0]
+          console.log(newVal.response)
+          console.log(this.modelResponse)
+        }
+      }
+  }
 };
 </script>
 
@@ -424,7 +459,7 @@ export default {
 }
 
 
-/* 解释视图 */
+/* 全屏解释视图 */
 .header {
   display: flex;
   align-items: center;
@@ -482,7 +517,7 @@ export default {
 }
 
 
-/*按钮*/ 
+/*按钮*/
 .back-btn.el-button {
   padding: 8px;
   width: 32px;
