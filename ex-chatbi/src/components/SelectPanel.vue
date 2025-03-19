@@ -97,7 +97,7 @@ export default {
         Number.isFinite(pos.y);
 
       // 新增曲度控制参数（可调整该值改变弯曲程度）
-      const CURVATURE = 60;
+      const CURVATURE = 80;
 
     // 自定义曲线生成器（使用三次贝塞尔曲线）
       const linkGenerator = (d) => {
@@ -124,7 +124,7 @@ export default {
             source: this.viewAPositions.userInput,
             target: this.viewBPositions[id],
             color: '#bdf9d6',
-            opacity: 1
+            opacity: 0.7
           });
         }
         // ModelUnderstanding到当前ID的连线
@@ -133,7 +133,7 @@ export default {
             source: this.viewAPositions.model,
             target: this.viewBPositions[id],
             color: '#bdf9d6',
-            opacity: 1
+            opacity: 0.7
           });
         }
       }

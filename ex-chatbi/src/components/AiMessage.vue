@@ -79,10 +79,13 @@ export default {
   data() {
     return {
       clickdata: {},
+      isMounted: false,
+      timeoutId: null,
     }
   },
   setup() {
     const queryStore = useQueryStore();
+    
     return { queryStore };
   },
   props: {
@@ -98,6 +101,11 @@ export default {
       chart(this.message.vis_tag_name, this.message.vis_data);
     } else {
       console.error(`未找到图表元素: ${this.message.vis_tag_name}`);
+    }
+  },
+  beforeUnmount() {
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId); // 卸载时清除定时器
     }
   },
   methods: {
@@ -136,22 +144,19 @@ export default {
         query_out: this.message.data,
         click_info: this.clickdata
       };
+      this.queryStore.setSubSQLJson(subsqljson);
       console.log('Request payload:', payload);
-        const res = await axios.post(
-          "/api/relatsql",
-          payload
-        );
-        console.log("res", res)
+        
       } catch(error) {
         console.error("Error fetching response:", error);
       }
     },
-    handleIconClick() {
-      // 右边内容显示
+    async handleIconClick() {
       this.queryStore.setIsDataReady(!this.queryStore.isDataReady);
-      // 延迟执行
-      setTimeout(() => {
+
+      this.timeoutId = setTimeout(() => {
         this.queryStore.setResponse(this.message);
+        this.timeoutId = null;
       }, 1000);
     },
   }

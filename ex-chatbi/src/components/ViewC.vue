@@ -18,10 +18,63 @@ import { ref, onMounted, nextTick, watch, computed, onUnmounted, watchEffect } f
 import * as d3 from "d3";
 import { useQueryStore } from '@/stores/query';
 import { emitter } from '@/assets/ts/eventBus.js';
-
+import axios from "axios";
+import { ca } from "element-plus/es/locales.mjs";
+// ------------------------------------------------
 const store = useQueryStore();
-console.log(store.response);
+const sqlcode = ref(''); // sql代码
+const sqljson = '';
+const subsql = ref('');
+const subsqljson = '';
+watchEffect(() => {
+  setTimeout(() => {
+    if (store.response) {
+      sqlcode.value = store.response.code
+      console.log('store.response updated:', sqlcode.value);
+      if (store.response.code) {
+        getSQL2JSON(store.response.code).then(res => {
+          sqljson = res.content;
+        })
+      }
+    }
 
+  }, 1000);
+  setTimeout(() => {
+    console.log(store.subsqljson)
+    if (store.subsqljson) {
+      subsql = store.subsqljson;
+      console.log('subsqljson', subsqljson);
+      getSubsqljson(subsqljson).then(res => {
+        subsqljson = res.content;
+        console.log('subsqljson', subsqljson);
+      })
+    }
+  }, 1000);
+})
+
+async function getSubsqljson(payload) {
+  const res = await axios.post(
+          "/api/relatsql",
+          payload
+        );
+  return res.data;
+}
+
+async function getSQL2JSON(sql) {
+  const res = await axios.post(
+    "/api/sql2json",
+    { data: sql },
+    { headers: { "Content-Type": "application/json" } }
+  );
+  return res.data;
+}
+
+if (sqljson) {
+  console.log('sqljson', sqljson)
+}
+
+
+//--------------------------------------------------------
 const explanation = "这个 SQL 查询使用了索引扫描，提高了查询效率，但可能还可以优化为覆盖索引..."
 
 const chart = ref(null);
@@ -535,7 +588,7 @@ onMounted(() => {
   const rectHeight = 40; // 矩形高度
   const padding = 20; // 矩形两侧的额外间距
 
-  
+
 
 
 
@@ -570,7 +623,7 @@ onMounted(() => {
     .attr("class", "table-link")
     .attr("fill", "none")
     .attr("stroke", "#aaa")
-    .attr("stroke-width", 2)
+    .attr("stroke-width", 4)
     .attr("d", (d) => `M${d.source.y + 50},${d.source.x} L${d.target.y - 50},${d.target.x}`);
 
   // **绘制节点**
@@ -605,7 +658,7 @@ onMounted(() => {
     .attr("height", rectHeight)
     .attr("rx", 8)
     .attr("ry", 8)
-    .attr("fill", (d) => (d.depth === 0 || d.depth === 1 ? "#B0B0B0" : "#4CAF50")) // 根节点和第一层灰色
+    .attr("fill", (d) => (d.depth === 0 || d.depth === 1 ? "#A0D5D0" : "#4CAF50")) // 根节点和第一层灰色
     .attr("stroke", "#333");
 
   // **处理表格样式的节点**
@@ -709,8 +762,8 @@ onMounted(() => {
         .attr("fill", "none")
         .attr("class", "table-link")
         .attr("stroke", "#aaa")
-        .attr("stroke-width", 2)
-        .attr("stroke-opacity", 0.5)
+        .attr("stroke-width", 4)
+        .attr("stroke-opacity", 0.8)
         .attr("d", `M${fromParent.y + 50},${fromParent.x} L${d.y - 50},${d.x}`);
     });
     tableBounds.push(fromGroup.node().getBBox());
@@ -799,8 +852,8 @@ onMounted(() => {
         .attr("fill", "none")
         .attr("class", "table-link")
         .attr("stroke", "#aaa")
-        .attr("stroke-width", 2)
-        .attr("stroke-opacity", 0.5)
+        .attr("stroke-width", 4)
+        .attr("stroke-opacity", 0.8)
         .attr("d", `M${selectParent.y + 50},${selectParent.x} L${d.y - 50},${d.x}`);
     });
 
@@ -883,8 +936,8 @@ onMounted(() => {
         .attr("fill", "none")
         .attr("class", "table-link")
         .attr("stroke", "#666")
-        .attr("stroke-width", 2)
-        .attr("stroke-opacity", 0.5)
+        .attr("stroke-width", 4)
+        .attr("stroke-opacity", 0.8)
         .attr("d", `M${d.y + fixedTableWidth / 2},${d.x} L${processingTableX - 50},${d.x}`);
 
       currentYOffset += adjustedHeight;
@@ -987,8 +1040,8 @@ onMounted(() => {
           .attr("fill", "none")
           .attr("class", "table-link")
           .attr("stroke", "#aaa")
-          .attr("stroke-width", 2)
-          .attr("stroke-opacity", 0.5)
+          .attr("stroke-width", 4)
+          .attr("stroke-opacity", 0.8)
           .attr("d", `M${parentNode.y + 50},${parentNode.x} L${d.y - 50},${d.x}`);
       });
       tableBounds.push(tableGroup.node().getBBox());
@@ -1029,15 +1082,22 @@ onMounted(() => {
 
     // 重新绘制 depth=0 到 depth=1 的连接线
     svg
-      .selectAll("path.link")
-      .data(root.links().filter((d) => d.target.depth === 1 && !d.target.data.isVirtual)) // 只绘制 depth=0 到 depth=1
-      .enter()
-      .append("path")
-      .attr("class", "link")
-      .attr("fill", "none")
-      .attr("stroke", "#aaa")
-      .attr("stroke-width", 2)
-      .attr("d", (d) => `M${d.source.y + 50},${d.source.x} L${d.target.y - 50},${d.target.x}`);
+    .selectAll("path.link")
+    .data(root.links().filter((d) => d.target.depth === 1 && !d.target.data.isVirtual))
+    .enter()
+    .append("path")
+    .attr("class", "link")
+    .attr("fill", "none")
+    .attr("stroke", "#B0ACAC")
+    .attr("stroke-opacity", 0.8)
+    .attr("stroke-width", 4)
+    .attr("d", (d) => {
+      const control1Y = d.source.y + 50;                   // 第一个控制点 Y 与起点 Y 相同
+      const control1X = (d.source.x + d.target.x) / 2;     // 第一个控制点 X 在中点
+      const control2Y = d.target.y - 50;                   // 第二个控制点 Y 与终点 Y 相同
+      const control2X = (d.source.x + d.target.x) / 2;     // 第二个控制点 X 在中点
+      return `M${d.source.y + 50},${d.source.x} C${control1Y},${control1X} ${control2Y},${control2X} ${d.target.y - 50},${d.target.x}`;
+    });
 
     // 更新表格位置
     tableBounds.length = 0; // 清空旧边界框
@@ -1096,10 +1156,16 @@ onMounted(() => {
           svg.append("path")
             .attr("class", "table-link")
             .attr("fill", "none")
-            .attr("stroke", "#aaa")
-            .attr("stroke-width", 2)
-            .attr("stroke-opacity", 0.5)
-            .attr("d", `M${sourceX},${sourceY} L${targetX},${targetY}`);
+            .attr("stroke", "#B0ACAC")
+            .attr("stroke-width", 4)
+            .attr("stroke-opacity", 0.8)
+            .attr("d", (d) => {
+            const control1Y = d.source.y + 50;                   // 第一个控制点 Y 与起点 Y 相同
+            const control1X = (d.source.x + d.target.x) / 2;     // 第一个控制点 X 在中点
+            const control2Y = d.target.y - 50;                   // 第二个控制点 Y 与终点 Y 相同
+            const control2X = (d.source.x + d.target.x) / 2;     // 第二个控制点 X 在中点
+            return `M${d.source.y + 50},${d.source.x} C${control1Y},${control1X} ${control2Y},${control2X} ${d.target.y - 50},${d.target.x}`;
+          });
 
           tableBounds.push(virtualGroup.node().getBBox());
           lastTableX = virtualTableX + fixedTableWidth; // 更新 X 坐标
@@ -1137,15 +1203,21 @@ onMounted(() => {
           // 绘制从 Table Name 到虚拟表的连接线
           const sourceX = fromTableX + fixedTableWidth / 2; // Table Name 的右侧中心
           const sourceY = node.x; // 使用 node 的 x 坐标（Table Name 中的位置）
-          const targetX = virtualTableX - 50; // 虚拟表的左侧
+          const targetX = virtualTableX - 125; // 虚拟表的左侧
           const targetY = virtualTableY + headerHeight / 2; // 虚拟表表头的中心
+          // 计算控制点
+          const control1X = sourceX + (targetX - sourceX) / 2; // 第一个控制点 X：起点向终点方向偏移 1/4
+          const control1Y = sourceY; // 第一个控制点 Y：与起点 Y 相同，水平延伸
+          const control2X = targetX - (targetX - sourceX) / 2; // 第二个控制点 X：终点向起点方向偏移 1/4
+          const control2Y = targetY; // 第二个控制点 Y：与终点 Y 相同，水平延伸
+
           svg.append("path")
             .attr("class", "table-link")
             .attr("fill", "none")
-            .attr("stroke", "#aaa")
-            .attr("stroke-width", 2)
-            .attr("stroke-opacity", 0.5)
-            .attr("d", `M${sourceX},${sourceY} L${targetX},${targetY}`);
+            .attr("stroke", "#B0ACAC")
+            .attr("stroke-width", 4)
+            .attr("stroke-opacity", 0.8)
+            .attr("d", `M${sourceX},${sourceY} C${control1X},${control1Y} ${control2X},${control2Y} ${targetX},${targetY}`);
 
           tableBounds.push(virtualGroup.node().getBBox());
           lastTableX = virtualTableX + fixedTableWidth + 50; // 更新下一个表格的 X 坐标
@@ -1193,15 +1265,21 @@ onMounted(() => {
             // 绘制从表格行到虚拟表的连接线
             const sourceX = tableX + fixedTableWidth / 2; // 主表格右侧中心
             const sourceY = node.x; // node 在主表格中的 Y 坐标
-            const targetX = virtualTableX - 50; // 虚拟表左侧
+            const targetX = virtualTableX - 125; // 虚拟表左侧
             const targetY = virtualTableY + headerHeight / 2; // 虚拟表表头中心
+            // 计算控制点
+            const control1X = sourceX + (targetX - sourceX) / 2; // 第一个控制点 X：起点向终点方向偏移 1/4
+            const control1Y = sourceY; // 第一个控制点 Y：与起点 Y 相同，水平延伸
+            const control2X = targetX - (targetX - sourceX) / 2; // 第二个控制点 X：终点向起点方向偏移 1/4
+            const control2Y = targetY; // 第二个控制点 Y：与终点 Y 相同，水平延伸
+
             svg.append("path")
               .attr("class", "table-link")
               .attr("fill", "none")
-              .attr("stroke", "#aaa")
-              .attr("stroke-width", 2)
-              .attr("stroke-opacity", 0.5)
-              .attr("d", `M${sourceX},${sourceY} L${targetX},${targetY}`);
+              .attr("stroke", "#B0ACAC")
+              .attr("stroke-width", 4)
+              .attr("stroke-opacity", 0.8)
+              .attr("d", `M${sourceX},${sourceY} C${control1X},${control1Y} ${control2X},${control2Y} ${targetX},${targetY}`);
 
             tableBounds.push(virtualGroup.node().getBBox());
             lastTableX = virtualTableX + fixedTableWidth; // 更新 X 坐标
@@ -1236,7 +1314,26 @@ onMounted(() => {
       d.y = group.attr("transform").match(/translate\(([^,]+),([^)]+)\)/)[1];
       d.x = parseFloat(group.attr("transform").match(/translate\(([^,]+),([^)]+)\)/)[2]) + currentYOffset + adjustedHeight / 2;
 
-      svg.append("path").attr("class", "table-link").attr("fill", "none").attr("stroke", "#aaa").attr("stroke-width", 2).attr("stroke-opacity", "0.5").attr("d", `M${parentNode.y + 50},${parentNode.x} L${d.y - 50},${d.x}`);
+      svg.append("path")
+      .attr("class", "table-link")
+      .attr("fill", "none")
+      .attr("stroke", "#B0ACAC")
+      .attr("stroke-width", 4)
+      .attr("stroke-opacity", "0.8")
+      .attr("d", () => {
+        const sourceX = parentNode.y + 50; // 起点 X
+        const sourceY = parentNode.x;      // 起点 Y
+        const targetX = d.y - 125;          // 终点 X
+        const targetY = d.x;               // 终点 Y
+
+        // 计算控制点
+        const control1X = sourceX + (targetX - sourceX) / 2;
+        const control1Y = sourceY;                          
+        const control2X = targetX - (targetX - sourceX) / 2;
+        const control2Y = targetY;                          
+
+        return `M${sourceX},${sourceY} C${control1X},${control1Y} ${control2X},${control2Y} ${targetX},${targetY}`;
+      });
 
       currentYOffset += adjustedHeight;
     });
@@ -1308,19 +1405,26 @@ onMounted(() => {
         const parentX = parseFloat(d.x); // Column Name 的 x 坐标
         const childY = parseFloat(d.data.children[0].y); // 子节点的 y 坐标
         const childX = parseFloat(d.data.children[0].x); // 子节点的 x 坐标
-        if (
-          !isNaN(parentY) &&
-          !isNaN(parentX) &&
-          !isNaN(childY) &&
-          !isNaN(childX)
-        ) {
+        if (!isNaN(parentY) && !isNaN(parentX) && !isNaN(childY) && !isNaN(childX)) {
           svg.append("path")
-            .attr("class", "table-link")
-            .attr("fill", "none")
-            .attr("stroke", "#666")
-            .attr("stroke-width", 2)
-            .attr("stroke-opacity", "0.5")
-            .attr("d", `M${parentY + fixedTableWidth / 2},${parentX} L${childY - 50},${childX}`);
+          .attr("class", "table-link")
+          .attr("fill", "none")
+          .attr("stroke", "#B0ACAC")
+          .attr("stroke-width", 4)
+          .attr("stroke-opacity", "0.8")
+          .attr("d", () => {
+            const sourceX = parentY + fixedTableWidth / 2; // 起点 X
+            const sourceY = parentX;                       // 起点 Y
+            const targetX = childY - 125;                   // 终点 X
+            const targetY = childX;                        // 终点 Y
+
+            // 计算控制点
+            const control1X = sourceX + (targetX - sourceX) / 2;
+            const control1Y = sourceY;                         
+            const control2X = targetX - (targetX - sourceX) / 2;
+            const control2Y = targetY;                          
+            return `M${sourceX},${sourceY} C${control1X},${control1Y} ${control2X},${control2Y} ${targetX},${targetY}`;
+          });
         } else {
           console.warn(`Cannot draw connection from ${d.data.name} to ${d.data.children[0].name}:`, {
             parent_y: d.y,
@@ -1643,14 +1747,27 @@ onMounted(() => {
 
       // **绘制连接线（第一层到第二层）**
       svg.selectAll("path.level1-link")
-        .data(root.links().filter(d => d.target.depth === 1))
-        .enter()
-        .append("path")
-        .attr("class", "level1-link")
-        .attr("fill", "none")
-        .attr("stroke", "#aaa")
-        .attr("stroke-width", 2)
-        .attr("d", (d) => `M${d.source.y + (d.source.rectWidth || 0) / 2},${d.source.x} L${d.target.y - 50},${d.target.x}`);
+      .data(root.links().filter(d => d.target.depth === 1))
+      .enter()
+      .append("path")
+      .attr("class", "level1-link")
+      .attr("fill", "none")
+      .attr("stroke", "#aaa")
+      .attr("stroke-width", 4)
+      .attr("d", (d) => {
+        const sourceX = d.source.y + (d.source.rectWidth || 0) / 2; // 起点 X
+        const sourceY = d.source.x;                                 // 起点 Y
+        const targetX = d.target.y - 50;                            // 终点 X
+        const targetY = d.target.x;                                 // 终点 Y
+
+        // 计算控制点
+        const control1X = sourceX + (targetX - sourceX) / 2;
+        const control1Y = sourceY;                          
+        const control2X = targetX - (targetX - sourceX) / 2; 
+        const control2Y = targetY;                          
+
+        return `M${sourceX},${sourceY} C${control1X},${control1Y} ${control2X},${control2Y} ${targetX},${targetY}`;
+      });
 
       // **绘制第二层节点（depth === 1）**
       const level1Nodes = svg.selectAll("g.level1-node")
@@ -1765,9 +1882,22 @@ onMounted(() => {
             .attr("fill", "none")
             .attr("class", "table-link")
             .attr("stroke", "#aaa")
-            .attr("stroke-width", 2)
-            .attr("stroke-opacity", 0.5)
-            .attr("d", `M${parentNode.y + (parentNode.rectWidth || 0) / 2},${parentNode.x} L${d.y - 50},${d.x}`);
+            .attr("stroke-width", 4)
+            .attr("stroke-opacity", 0.8)
+            .attr("d", () => {
+              const sourceX = parentNode.y + (parentNode.rectWidth || 0) / 2; // 起点 X
+              const sourceY = parentNode.x;                                   // 起点 Y
+              const targetX = d.y - 125;                                       // 终点 X
+              const targetY = d.x;                                            // 终点 Y
+
+              // 计算控制点
+              const control1X = sourceX + (targetX - sourceX) / 4; // 第一个控制点 X：起点向终点偏移 1/4
+              const control1Y = sourceY;                          // 第一个控制点 Y：与起点 Y 相同
+              const control2X = targetX - (targetX - sourceX) / 4; // 第二个控制点 X：终点向起点偏移 1/4
+              const control2Y = targetY;                          // 第二个控制点 Y：与终点 Y 相同
+
+              return `M${sourceX},${sourceY} C${control1X},${control1Y} ${control2X},${control2Y} ${targetX},${targetY}`;
+            });
         });
 
         let lastTableX = tableX; // 记录最后一个表格的 X 坐标
@@ -1841,12 +1971,25 @@ onMounted(() => {
             }
 
             svg.append("path")
-              .attr("fill", "none")
-              .attr("class", "table-link")
-              .attr("stroke", "#666")
-              .attr("stroke-width", 2)
-              .attr("stroke-opacity", 0.5)
-              .attr("d", `M${d.y + tableWidth / 2},${d.x} L${processingTableX - 50},${d.x}`);
+            .attr("fill", "none")
+            .attr("class", "table-link")
+            .attr("stroke", "#666")
+            .attr("stroke-width", 4)
+            .attr("stroke-opacity", 0.8)
+            .attr("d", () => {
+              const sourceX = d.y + tableWidth / 2;      // 起点 X
+              const sourceY = d.x;                       // 起点 Y
+              const targetX = processingTableX - 125;    // 终点 X
+              const targetY = d.x;                       // 终点 Y
+
+              // 计算控制点
+              const control1X = sourceX + (targetX - sourceX) / 2; // 第一个控制点 X：起点向终点偏移 1/4
+              const control1Y = sourceY;                          // 第一个控制点 Y：与起点 Y 相同
+              const control2X = targetX - (targetX - sourceX) / 2; // 第二个控制点 X：终点向起点偏移 1/4
+              const control2Y = targetY;                          // 第二个控制点 Y：与终点 Y 相同
+
+              return `M${sourceX},${sourceY} C${control1X},${control1Y} ${control2X},${control2Y} ${targetX},${targetY}`;
+            });
 
             currentYOffset += adjustedHeight;
           });
@@ -1878,9 +2021,9 @@ onMounted(() => {
             .attr("fill", "none")
             .attr("class", "nl-explain-link")
             .attr("stroke", "#aaa")
-            .attr("stroke-width", 2)
-            .attr("stroke-opacity", 0.5)
-            .attr("d", `M${d.y + tableWidth / 2},${d.x} L${nlExplainX - 50},${nlExplainRowY}`);
+            .attr("stroke-width", 4)
+            .attr("stroke-opacity", 0.8)
+            .attr("d", `M${d.y + tableWidth / 2},${d.x} L${nlExplainX - 125},${nlExplainRowY}`);
         });
       });
 
@@ -1942,9 +2085,6 @@ onMounted(() => {
 </script>
 
 <style>
-.link {
-  stroke-width: 2px;
-}
 
 svg {
   border: 1px solid #ccc;

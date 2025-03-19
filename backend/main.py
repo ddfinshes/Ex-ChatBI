@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Body, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 # from LightRAG.examples.lightrag_openai_compatible_demo import query
 # lightrag have error for import 
 # from lightrag_deepseek import my_lightrag
@@ -15,6 +16,7 @@ import logging
 from db.connect import excute_sql
 # from utils.getVisTag import get_vis_tag
 from decimal import Decimal
+from fastapi import Body 
 # from sentence_transformers import SentenceTransformer, util
 # from db.connect import excute_sql
 # from utils.get_sql2json import sql2json
@@ -82,20 +84,27 @@ def get_extracted_sql(text):
 #     return extracted_sql
 
 
-
 @app.post("/api/sql2json")
-async def get_sql2json(sql_code):
+async def get_sql2json(data: dict = Body(...)):
+    # 检查是否存在 'data' 字段
+    sql_code = data.get("data")
+    if not sql_code:
+        raise HTTPException(status_code=400, detail="Missing 'data' field")
+    sql_code = sql_code['text']
+    print("Processing SQL code:", sql_code)
     try:
         explain = ExplainAgent(model_name="o3-mini")
-        explain.run(str(sql_code))
+        explain.run(sql_code)  # 无需 str()，因为 request.sql 已保证是字符串
         report = explain.getLeastAnalysisReport()
         print(report, type(report))
         return report
     except Exception as e:
         import traceback
-        traceback.print_exc() 
+        traceback.print_exc()
         raise HTTPException(status_code=500, detail=str(e))
+    return {"response": "error"}
 
+    
 @app.post("/api/relatsql")
 async def get_relatsql(sql_query: Dict[str, Any], query_out: Dict[str, Any], click_info: Dict[str, Any]): # 
     print("sql_query: ",sql_query['text'])
@@ -104,10 +113,24 @@ async def get_relatsql(sql_query: Dict[str, Any], query_out: Dict[str, Any], cli
     sql_query = sql_query['text']
     extractagent = SQLExtractAgent()
     extractagent.run(sql_query, query_out, click_info)
-    report = extractagent.getLeastAnalysisReport()
-    print(report, type(report))
-    return report
-    pass
+    sql_code = extractagent.getLeastAnalysisReport()
+    print('---------------------sql_code------------------\n', sql_code)
+    # to json
+    try:
+        explain = ExplainAgent(model_name="o3-mini")
+        explain.run(sql_code)  # 无需 str()，因为 request.sql 已保证是字符串
+        report = explain.getLeastAnalysisReport()
+        print('------------------sql to json----------------\n', report)
+        return report
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=str(e))
+    return {"response": "error"}
+
+    
+
+
 @app.post("/api/query")
 async def query_handler(request: Dict[str, Any]):
     try:

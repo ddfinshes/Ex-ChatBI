@@ -6,7 +6,8 @@ export const useQueryStore = defineStore('query', {
         response: null,
         sqlcode: "",
         isReady: false,
-        isDataReady: false
+        isDataReady: false,
+        subsqljson: false
     }),
     actions: {
         setCurrentQuery(query) {
@@ -21,6 +22,9 @@ export const useQueryStore = defineStore('query', {
         },
         setIsDataReady(value) {
             this.isDataReady = value;
+        },
+        setSubSQLJson(value) {
+            this.subsqljson = value;
         }
     }
 });

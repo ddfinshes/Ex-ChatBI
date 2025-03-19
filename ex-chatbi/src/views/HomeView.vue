@@ -15,7 +15,7 @@
 
 			<el-aside class="aside">
 				<el-container id="select-container">
-					<SelectPanelVue v-if="isDataReady" />
+					<SelectPanelVue v-if="isDataReady && isDataReady !== null" />
 				</el-container>
 
 			</el-aside>
@@ -43,7 +43,7 @@ export default {
 				name: "uncreated",
 				action: []
 			},
-			isDataReady: false,
+			isDataReady: true, // false
 
 		}
 	},
@@ -58,15 +58,16 @@ export default {
 	},
 	watch: {
 		setIsDataReady(newVal) {
-			console.log('监听到新数据:', newVal);
-			this.isDataReady = newVal;
+			console.log('监听到新数据:', { newVal,  timestamp: Date.now() });
+			// this.isDataReady = newVal;
+			this.isDataReady = true;
 		}
 	},
 	methods: {
 
 	},
 	mounted() {
-
+		
 	}
 }
 </script>
