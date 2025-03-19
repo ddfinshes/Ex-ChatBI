@@ -9,36 +9,69 @@
         arrow="always"
         :interval="0"
         height="carouselHeight"
+        :loop="false"
       >
-        <el-carousel-item v-for="(page, index) in bigCardPages" :key="'big-'+index">
-          <el-row :gutter="40">
-            <el-col v-for="(card, i) in page" :key="i" :span="12">
-              <el-card
+        <!-- 第一页 -->
+        <el-carousel-item >
+            <el-row :gutter="60" class="card-row">
+              <el-col
+              v-for="(card, index) in thirdRowCards"
+              :key="'first-' + index"
+              :span="12"
+            >
+            <el-card
                 shadow="hover"
-                class="third-row-card"
+                class="click-card"
                 @click="showExplanation(card)"
               >
                 <template #header>
                   <div class="card-title">
-                    <i :class="card.icon" class="card-icon"></i>
-                    {{ card.title }}
+                  <i :class="card.icon" class="card-icon"></i>
+                  {{ card.title }}
                   </div>
                 </template>
-                <div class="card-content">{{ modelResponse }}</div>
+                <div class="card-content">{{ card.content }}</div>
               </el-card>
-            </el-col>
-          </el-row>
-        </el-carousel-item>
+              </el-col>
+            </el-row>
+          </el-carousel-item>
+
+            <!-- 第二页 -->
+          <el-carousel-item>
+            <el-row :gutter="60" class="card-row">
+            <el-col
+              v-for="(card, index) in fourthRowCards"
+              :key="'second-' + index"
+              :span="12"
+            >
+              <el-card
+                shadow="hover"
+                class="click-card"
+                @click="showExplanation(card)"
+              >
+                <template #header>
+                  <div class="card-title">
+                  <i :class="card.icon" class="card-icon"></i>
+                  {{ card.title }}
+                  </div>
+                </template>
+                <div class="card-content">{{ card.content }}</div>
+              </el-card>
+              </el-col>
+            </el-row>
+          </el-carousel-item>
       </el-carousel>
     </div>
 
     <!-- 右侧小卡片 -->
-    <div class="right-carousel">
+    <div class="right-carousel"  ref="rightCarouselContainer">
       <el-carousel 
+        ref="rightCarousel"
         indicator-position="none"
         arrow="always"
         :interval="0"
         :height="carouselHeight"
+        :loop="false"
       >
             <!-- 第一页 -->
             <el-carousel-item >
@@ -117,7 +150,21 @@
 
 
           <div class="content">
-            {{ activeCard.explanation }}
+            <el-input
+              type="textarea"
+              :autosize="{ minRows: 10, maxRows: 20 }"
+              v-model="activeCard.explanation"
+              placeholder="请输入解释内容"
+              resize="none"
+              class="explanation-input"
+            ></el-input>
+            <el-button
+              type="primary"
+              class="save-btn"
+              style="margin-left: auto;"
+            >
+              Save
+            </el-button>
           </div>
         </el-card>
       </div>
@@ -247,6 +294,36 @@ export default {
           explanation: "SQL4说明..."
         }
       ],
+      fourthRowCards: [ // 新增的第三行卡片
+        {
+          id: 13,
+          title: "SQL5",
+          icon: "el-icon-pie-chart",
+          content: "SQL5",
+          explanation: "SQL5说明..."
+        },
+        {
+          id: 14,
+          title: "SQL6",
+          icon: "el-icon-map-location",
+          content: "SQL6",
+          explanation: "SQL6说明..."
+        },
+        {
+          id: 15,
+          title: "SQL7",
+          icon: "el-icon-alarm-clock",
+          content: "SQL7",
+          explanation: "SQL7说明..."
+        },
+        {
+          id: 16,
+          title: "SQL8",
+          icon: "el-icon-coin",
+          content: "SQL8",
+          explanation: "SQL8说明..."
+        }
+      ],
     };
   },
   computed: {
@@ -264,17 +341,9 @@ export default {
       row1: page.slice(0, 2),
       row2: page.slice(2, 4)
     }));
-  }
+    }
   },
   methods: {
-    chunkArray(arr, size) {
-      return arr.reduce((acc, val, i) => {
-        let idx = Math.floor(i / size);
-        acc[idx] = acc[idx] || [];
-        acc[idx].push(val);
-        return acc;
-      }, []);
-    },
     showExplanation(card) {
       this.activeCard = card;
     },
@@ -283,24 +352,47 @@ export default {
     },
     // 获取卡片坐标的方法
     getCardPositions() {
-          const positions = {}
-          
-          // 遍历 ID 1-8
-          for (let id = 1; id <= 8; id++) {
-            const cardRef = this.$refs[`card-${id}`]
-            if (cardRef) {
-              const element = Array.isArray(cardRef) ? cardRef[0].$el : cardRef.$el
-              const rect = element.getBoundingClientRect()
-              
-              positions[id] = {
-                x: rect.left + rect.width / 2,
-                y: rect.top  // 获取顶部中心坐标
-              }
-            }
-          }
-          
-          return positions
+      const positions = {};
+
+      // 获取轮播容器元素
+      const container = this.$refs.rightCarouselContainer;
+      if (!container) return positions;
+
+      // 获取容器的可视区域边界
+      const containerRect = container.getBoundingClientRect();
+
+      // 遍历所有卡片（ID 1-8）
+      for (let id = 1; id <= 8; id++) {
+        const cardRef = this.$refs[`card-${id}`];
+        if (!cardRef) continue;
+
+        // 获取卡片元素（处理数组引用）
+        const element = Array.isArray(cardRef)
+          ? cardRef[0]?.$el
+          : cardRef?.$el;
+        if (!element) continue;
+
+        // 获取卡片边界
+        const cardRect = element.getBoundingClientRect();
+
+        // 判断卡片是否在可视区域内
+        const isVisible = (
+          cardRect.top >= containerRect.top - 20 && // 允许顶部溢出20px
+          cardRect.bottom <= containerRect.bottom + 40 && // 允许底部溢出40px
+          cardRect.left >= containerRect.left - 10 && // 允许左侧溢出10px
+          cardRect.right <= containerRect.right + 10 // 允许右侧溢出10px
+        );
+
+        if (isVisible) {
+          positions[id] = {
+            x: cardRect.left + cardRect.width / 2,
+            y: cardRect.top
+          };
         }
+      }
+
+      return positions;
+    }
   },
   watch: {
     response(newVal) {
@@ -351,11 +443,6 @@ export default {
   min-height: 400px !important;
 }
 
-/* 新增第三行专用高度样式 */
-.third-row-card {
-  min-height: 400px !important; /* 覆盖原有高度 */
-}
-
 .card-title {
   font-size: 16px;
   font-weight: 600;
@@ -394,26 +481,43 @@ export default {
     font-weight: 600;
 }
 
-.content {
-  border-top: 1px solid #dcdfe6; /* 上边框 */
-  border-bottom: 1px solid #dcdfe6; /* 下边框 */
-  border-left: 1px solid #dcdfe6; /* 左边框 */
-  border-right: 1px solid #dcdfe6; /* 右边框 */
-  white-space: pre-wrap;
+
+.explanation-input textarea {
+  font-family: monospace;
   line-height: 1.8;
   font-size: 16px;
-  padding: 20px;
-  background: #ffffff; /* 背景色 */
-  border-radius: 0; /* 清除圆角 */
-  max-height: calc(100vh - 200px);
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* 垂直居中 */
-  min-height: 300px;
-  flex: 1;
+  white-space: pre-wrap;
+  border: none;
+  background: transparent;
 }
-/*按钮*/ 
+.explanation-input .el-textarea__inner:focus {
+  box-shadow: none;
+}
+.content {
+  padding: 0px;
+  background: #ffffff;
+  border-radius: 4px;
+  height: 300px;
+  display: block !important; /* 禁用 flex 布局 */
+  flex-direction: column;
+  position: relative; /* 为按钮定位提供参考 */
+}
+.el-textarea {
+  width: 90% !important;
+  margin: 0 auto; /* 居中对齐 */
+  height: 90% !important;
+}
+.save-btn {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  padding: 12px 24px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+
+/*按钮*/
 .back-btn.el-button {
   padding: 8px;
   width: 32px;
@@ -455,7 +559,7 @@ export default {
   background: rgba(184, 208, 232, 0.8) !important;
   border-radius: 50%;
   transition: all 0.3s !important;
-  z-index: 9999 !important; /* 确保在最顶层 */
+  z-index: 10 !important; /* 确保在最顶层 */
 }
 
 .el-carousel__arrow--left.el-carousel__arrow {

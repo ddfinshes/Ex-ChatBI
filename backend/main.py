@@ -15,13 +15,14 @@ import logging
 from db.connect import excute_sql
 # from utils.getVisTag import get_vis_tag
 from decimal import Decimal
+from fastapi import Body
 # from sentence_transformers import SentenceTransformer, util
 # from db.connect import excute_sql
 # from utils.get_sql2json import sql2json
 import json
 import LightRAG.examples.lightrag_openai_compatible_demo as rag
-# from utils.get_NLExplain import ExplainAgent
-# from utils.get_user_sql import SQLExtractAgent
+from utils.get_NLExplain import ExplainAgent
+from utils.get_user_sql import SQLExtractAgent
 from openai import OpenAI
 import csv
 from io import StringIO
@@ -123,32 +124,53 @@ def analyze_relation(understanding : str, knowledge_base : list):
 #     return extracted_sql
 
 
+@app.post("/api/sql2json")
+async def get_sql2json(data: dict = Body(...)):
+    # 检查是否存在 'data' 字段
+    sql_code = data.get("data")
+    if not sql_code:
+        raise HTTPException(status_code=400, detail="Missing 'data' field")
+    sql_code = sql_code['text']
+    print("Processing SQL code:", sql_code)
+    try:
+        explain = ExplainAgent(model_name="o3-mini")
+        explain.run(sql_code)  # 无需 str()，因为 request.sql 已保证是字符串
+        report = explain.getLeastAnalysisReport()
+        print(report, type(report))
+        return report
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=str(e))
+    return {"response": "error"}
 
-# @app.post("/api/sql2json")
-# async def get_sql2json(sql_code):
-#     try:
-#         explain = ExplainAgent(model_name="o3-mini")
-#         explain.run(str(sql_code))
-#         report = explain.getLeastAnalysisReport()
-#         print(report, type(report))
-#         return report
-#     except Exception as e:
-#         import traceback
-#         traceback.print_exc()
-#         raise HTTPException(status_code=500, detail=str(e))
 
-# @app.post("/api/relatsql")
-# async def get_relatsql(sql_query: Dict[str, Any], query_out: Dict[str, Any], click_info: Dict[str, Any]): #
-#     print("sql_query: ",sql_query['text'])
-#     print("query_out: ",query_out)
-#     print("click_info: ",click_info)
-#     sql_query = sql_query['text']
-#     extractagent = SQLExtractAgent()
-#     extractagent.run(sql_query, query_out, click_info)
-#     report = extractagent.getLeastAnalysisReport()
-#     print(report, type(report))
-#     return report
-#     pass
+@app.post("/api/relatsql")
+async def get_relatsql(sql_query: Dict[str, Any], query_out: Dict[str, Any], click_info: Dict[str, Any]): #
+    print("sql_query: ",sql_query['text'])
+    print("query_out: ",query_out)
+    print("click_info: ",click_info)
+    sql_query = sql_query['text']
+    extractagent = SQLExtractAgent()
+    extractagent.run(sql_query, query_out, click_info)
+    sql_code = extractagent.getLeastAnalysisReport()
+    print('---------------------sql_code------------------\n', sql_code)
+    # to json
+    try:
+        explain = ExplainAgent(model_name="o3-mini")
+        explain.run(sql_code)  # 无需 str()，因为 request.sql 已保证是字符串
+        report = explain.getLeastAnalysisReport()
+        print('------------------sql to json----------------\n', report)
+        return report
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=str(e))
+    return {"response": "error"}
+
+
+
+
 @app.post("/api/query")
 async def query_handler(request: Dict[str, Any]):
     try:

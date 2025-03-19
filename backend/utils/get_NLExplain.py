@@ -405,35 +405,35 @@ class ExplainAgent:
                 if i == max_attempts:
                     raise Exception("Failed after maximum attempts")  # 重试次数用尽，抛出异常
         return report
-if __name__ == "__main__":
+# if __name__ == "__main__":
     # print(get_file_info("test.json"))
-    usr_input = """
-    SELECT
-        country,
-        SUM(amt_notax) AS sales_notax,
-        SUM(lw_amt_notax) AS sales_notax_LW,
-        CASE
-            WHEN SUM(COALESCE(lw_amt_notax, 0)) = 0 THEN 0
-            ELSE SUM(amt_notax) / SUM(COALESCE(lw_amt_notax, 0)) - 1
-        END AS sales_notax_wow_per,
-        SUM(traffic) AS traffic,
-        SUM(lw_traffic) AS traffic_LW,
-        CASE
-            WHEN SUM(COALESCE(lw_traffic, 0)) = 0 THEN 0
-            ELSE SUM(traffic) / SUM(COALESCE(lw_traffic, 0)) - 1
-        END AS traffic_wow_per
-    FROM
-        dm_fact_sales_chatbi
-    WHERE
-        date_code BETWEEN '2025-02-23' AND '2025-02-24'
-    GROUP BY
-        country
-    HAVING
-        sales_notax_wow_per < 0
-    ORDER BY
-        sales_notax_wow_per;
-    """
-    explain = ExplainAgent(model_name="o3-mini")
-    explain.run(usr_input)
-    report = explain.getLeastAnalysisReport()
-    print(report, type(report))
+    # usr_input = """
+    # SELECT
+    #     country,
+    #     SUM(amt_notax) AS sales_notax,
+    #     SUM(lw_amt_notax) AS sales_notax_LW,
+    #     CASE
+    #         WHEN SUM(COALESCE(lw_amt_notax, 0)) = 0 THEN 0
+    #         ELSE SUM(amt_notax) / SUM(COALESCE(lw_amt_notax, 0)) - 1
+    #     END AS sales_notax_wow_per,
+    #     SUM(traffic) AS traffic,
+    #     SUM(lw_traffic) AS traffic_LW,
+    #     CASE
+    #         WHEN SUM(COALESCE(lw_traffic, 0)) = 0 THEN 0
+    #         ELSE SUM(traffic) / SUM(COALESCE(lw_traffic, 0)) - 1
+    #     END AS traffic_wow_per
+    # FROM
+    #     dm_fact_sales_chatbi
+    # WHERE
+    #     date_code BETWEEN '2025-02-23' AND '2025-02-24'
+    # GROUP BY
+    #     country
+    # HAVING
+    #     sales_notax_wow_per < 0
+    # ORDER BY
+    #     sales_notax_wow_per;
+    # """
+    # explain = ExplainAgent(model_name="o3-mini")
+    # explain.run(usr_input)
+    # report = explain.getLeastAnalysisReport()
+    # print(report, type(report))

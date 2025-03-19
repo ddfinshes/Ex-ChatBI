@@ -1,11 +1,20 @@
-<!-- AiMessage.vue -->
 <template>
   <div class="ai-content">
     <img class="avatar" src="@/assets/image/robot.png" alt="AI Avatar" />
     <div class="message-bubble ai-bubble">
       <div class="explanation-section">
-        <MarkdownRenderer class="explanation-text" :content="message.explanation" />
+        <MarkdownRenderer class="explanation-text" :content="message.understanding" />
       </div>
+
+      <!-- Code Card -->
+      <div class="card-section">
+        <div class="card-title">Code</div>
+        <div class="card-content">
+          <MarkdownRenderer class="sql-code" :content="message.code?.text || ''" />
+        </div>
+      </div>
+
+      
 
       <!-- Data Card -->
       <div class="card-section">
@@ -41,15 +50,17 @@
         </div>
       </div>
 
-      <!-- Code Card -->
-      <div class="card-section">
-        <div class="card-title">Code</div>
-        <div class="card-content">
-          <MarkdownRenderer class="sql-code" :content="message.code?.text || ''" />
-        </div>
+      <div class="explanation-section">
+        <MarkdownRenderer class="explanation-text" :content="message.explanation" />
       </div>
+      
 
-      <span class="timestamp">{{ message.timestamp }}</span>
+      <div class="bottom-section">
+        <span class="timestamp">{{ message.timestamp }}</span>
+        <button class="icon-button" @click="handleIconClick">
+          <img class="userIconClass" src="@/assets/image/detail.png"/>
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -58,7 +69,7 @@
 import { chart } from "@/assets/ts/chart.ts";
 import MarkdownRenderer from "./MarkdownRenderer.vue";
 import axios from "axios";
-
+import { useQueryStore } from '@/stores/query';
 export default {
   name: "AiMessage",
 
@@ -68,7 +79,14 @@ export default {
   data() {
     return {
       clickdata: {},
+      isMounted: false,
+      timeoutId: null,
     }
+  },
+  setup() {
+    const queryStore = useQueryStore();
+    
+    return { queryStore };
   },
   props: {
     message: {
@@ -83,6 +101,11 @@ export default {
       chart(this.message.vis_tag_name, this.message.vis_data);
     } else {
       console.error(`未找到图表元素: ${this.message.vis_tag_name}`);
+    }
+  },
+  beforeUnmount() {
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId); // 卸载时清除定时器
     }
   },
   methods: {
@@ -121,16 +144,21 @@ export default {
         query_out: this.message.data,
         click_info: this.clickdata
       };
+      this.queryStore.setSubSQLJson(subsqljson);
       console.log('Request payload:', payload);
-        const res = await axios.post(
-          "/api/relatsql",
-          payload
-        );
-        console.log("res", res)
+        
       } catch(error) {
         console.error("Error fetching response:", error);
       }
-    }
+    },
+    async handleIconClick() {
+      this.queryStore.setIsDataReady(!this.queryStore.isDataReady);
+
+      this.timeoutId = setTimeout(() => {
+        this.queryStore.setResponse(this.message);
+        this.timeoutId = null;
+      }, 1000);
+    },
   }
 };
 </script>
@@ -338,5 +366,27 @@ export default {
 
 #chart-container {
   margin: 0 auto;
+}
+
+.bottom-section{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.icon-button i {
+  font-size: 16px;
+  color: #007bff;
+}
+.userIconClass {
+  width: 30px;
+  height: 30px;
 }
 </style>

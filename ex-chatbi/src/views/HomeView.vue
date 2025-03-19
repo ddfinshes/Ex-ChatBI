@@ -1,34 +1,23 @@
 <template>
 	<el-container class="home">
-		<el-header
-			id="headerContainer"
-			height="87px">
-			<el-row>
-				<img
-					style="width: 72px; height: 72px"
-					src="@/assets/image/icon.png"
-					alt="..."
-					:fit="`fill`" />
-				<span style="font-weight: bold; padding-left: 10px">TransBI</span>
+		<el-header class="header">
+			<el-row type="flex" align="middle">
+				<img style="width: 50px; height: 50px" src="@/assets/image/icon.png" alt="..." :fit="`fill`" />
+				<span class="header-title">TransBI</span>
 			</el-row>
 		</el-header>
 		<el-container class="body">
-			<el-main id="mainContainer">
-				<el-container id="DBPanelContainerFather">
-					<el-main id="mainView">
-						<el-row :gutter="20">
-							<el-col :span="22">
-								<ChatInterfaceVue />
-							</el-col>
-						</el-row>
-					</el-main>
+			<el-main class="main">
+				<el-container id="chat-container">
+					<ChatInterfaceVue />
 				</el-container>
 			</el-main>
 
-			<el-aside
-				id="selectPanelContainer"
-				width="1205px">
-				<SelectPanelVue/>
+			<el-aside class="aside">
+				<el-container id="select-container">
+					<SelectPanelVue v-if="isDataReady && isDataReady !== null" />
+				</el-container>
+
 			</el-aside>
 		</el-container>
 	</el-container>
@@ -37,6 +26,7 @@
 <script>
 import ChatInterfaceVue from '../components/ChatInterface.vue'
 import SelectPanelVue from '../components/SelectPanel.vue'
+import { useQueryStore } from "@/stores/query";
 // @ is an alias to /src
 export default {
 	name: "HomeView",
@@ -44,6 +34,7 @@ export default {
 		ChatInterfaceVue,
 		SelectPanelVue,
 	},
+	
 	data() {
 		return {
 			drawer: false,
@@ -51,56 +42,104 @@ export default {
 			ActionRecord: {
 				name: "uncreated",
 				action: []
-			}
+			},
+			isDataReady: true, // false
+
+		}
+	},
+	setup() {
+		const queryStore = useQueryStore();
+		return { queryStore };
+	},
+	computed: {
+		setIsDataReady() {
+			return this.queryStore.isDataReady;
+		}
+	},
+	watch: {
+		setIsDataReady(newVal) {
+			console.log('监听到新数据:', { newVal,  timestamp: Date.now() });
+			// this.isDataReady = newVal;
+			this.isDataReady = true;
 		}
 	},
 	methods: {
-		
+
 	},
 	mounted() {
 		
 	}
 }
 </script>
-<style>
-#mainView {
-	height: auto;
-	width: auto;
-	padding: 0%;
-}
-#headerContainer {
-	height: 87px;
-	background-color: #515151;
-	font: bold large 94px inter;
-	font-size: 64px;
-	color: white;
-}
-#selectPanelContainer {
-	height: 1352px;
-	background-color: #f5f5f5;
-}
-#DBPanelContainer {
-	height: 1352px;
-	background-color: #f3f3f3;
+<style scoped>
+.home {
+	height: 1351px;
+	width: 2048px;
+	border: 1px solid #dcdfe6;
 }
 
-#mainContainer {
-	height: 1352px;
-	width: 2455px;
+.body {
+	height: 100%;
+	width: 100%;
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.header {
+	height: 55px;
+	width: 100%;
+	background-color: #dbf1d5;
+	color: rgb(0, 0, 0);
+	display: flex;
+	align-items: center;
+	padding: 0 20px;
+}
+
+.main {
+	border: 0px;
+	margin: 0px;
+	margin-top: 0px;
+	height: 100%;
+	width: 40%;
+
+}
+
+.aside {
+	/* display: flex; */
+	width: 60%;
+	border: 0px;
+	margin: 0px;
+	margin-top: 40px;
+	height: 100%;
+}
+
+.header-title {
+	font-size: 24px;
+	font-weight: bold;
+	margin-left: 10px;
+}
+
+#select-container {
+	height: 99%;
+	width: 100%;
 	padding: 0px;
+	margin-bottom: 20px;
+	margin-top: 0px;
+	background-color: #ffffff;
 	overflow: clip;
-}
-#DBPanelContainerFather {
-	background-color: #f3f3f3;
-	padding: 0%;
+	display: flex;
 }
 
-/* .body {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
-
-
+#chat-container {
+	width: 100%;
+	height: 99%;
+	padding: 0px;
+	margin: 2px;
+	/* margin-bottom: 50px; */
+	background-color: #ffffff;
+	overflow: clip;
+	display: flex;
+}
 </style>
