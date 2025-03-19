@@ -6,20 +6,20 @@ from psycopg2 import OperationalError
 
 
 def excute_sql(query):
-#     query = """
-#       SELECT 
-#  month_id,
-#     SUM(amt) as sales_amt,  
-#  SUM(amt_notax) as Sales_notax , 
-#  SUM(amt_notax)/SUM(lm_amt_notax)-1 as sales_notax_mom_per   
-#  FROM 
-#     dm_fact_sales_chatbi 
-#  WHERE 
-#     date_code Between '2025-02-01' AND '2025-02-10'  
-#  GROUP BY 
-#     month_id
-# ;
-# """
+    query = """
+      SELECT 
+ month_id,
+    SUM(amt) as sales_amt,  
+ SUM(amt_notax) as Sales_notax , 
+ SUM(amt_notax)/SUM(lm_amt_notax)-1 as sales_notax_mom_per   
+ FROM 
+    dm_fact_sales_chatbi 
+ WHERE 
+    date_code Between '2025-02-01' AND '2025-02-10'  
+ GROUP BY 
+    month_id
+;
+"""
     try:
         conn = psycopg2.connect(database="chatbi", user="postgres", password="123456", host="127.0.0.1", port="5432")
         cursor = conn.cursor()

@@ -43,7 +43,7 @@ export default {
 				name: "uncreated",
 				action: []
 			},
-			isDataReady: true, // false
+			isDataReady: false, // false
 
 		}
 	},
@@ -59,8 +59,8 @@ export default {
 	watch: {
 		setIsDataReady(newVal) {
 			console.log('监听到新数据:', { newVal,  timestamp: Date.now() });
-			// this.isDataReady = newVal;
-			this.isDataReady = true;
+			this.isDataReady = newVal;
+			// this.isDataReady = true;
 		}
 	},
 	methods: {

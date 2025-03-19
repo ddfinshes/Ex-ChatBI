@@ -23,7 +23,7 @@ import { ca } from "element-plus/es/locales.mjs";
 // ------------------------------------------------
 const store = useQueryStore();
 const sqlcode = ref(''); // sql代码
-const sqljson = '';
+let sqljson = '';
 const subsql = ref('');
 const subsqljson = '';
 watchEffect(() => {
@@ -33,7 +33,8 @@ watchEffect(() => {
       console.log('store.response updated:', sqlcode.value);
       if (store.response.code) {
         getSQL2JSON(store.response.code).then(res => {
-          sqljson = res.content;
+          sqljson = res;
+          console.log('---------------sqljson----------------------', res)
         })
       }
     }
@@ -80,140 +81,147 @@ const explanation = "这个 SQL 查询使用了索引扫描，提高了查询效
 const chart = ref(null);
 const nodes = ref([]);
 const nodeCards = ref([]);
-const res = {
-  content: [
-    {
-      "created_virtual_table": "False",
-      "sql_content": [
-        {
-          "keywords": "From",
-          "scratched_content": [
-            { "table_name": "Monthly_Growth", "is_virtual_table": "True" }
-          ]
-        },
-        {
-          "keywords": "Select",
-          "scratched_content": [
-            { "column_name": "month_id", "column_processing": "" },
-            { "column_name": "Current_Month_Effi", "column_processing": "TO_CHAR (Current_Month_Effi, 'FM999,999,999.00') AS Current_Month_Effi" },
-            { "column_name": "Previous_Month_Effi", "column_processing": "TO_CHAR (Previous_Month_Effi, 'FM999,999,999.00') AS Previous_Month_Effi" },
-            { "column_name": "Growth_Percentage", "column_processing": "TO_CHAR (Growth_Percentage, 'FM999,999,999.00') || '%' AS Growth_Percentage" }
-          ]
-        },
-        {
-          "keywords": "Join",
-          "scratched_content": [
-            { "content": "JOIN Effi_Comparison p ON c.month_id = TO_CHAR (DATEADD (month, 1, TO_DATE (p.month_id, 'YYYYMM')), 'YYYYMM')" }
-          ]
-        },
-        {
-          "keywords": "Where",
-          "scratched_content": [
-            { "content": "c.month_id = '202410'" }
-          ]
-        }
-      ]
-    },
-    {
-      "created_virtual_table": "True",
-      "virtual_table_name": "Monthly_Growth",
-      "sql_content": [
-        {
-          "keywords": "Select",
-          "scratched_content": [
-            { "column_name": "c.month_id", "column_processing": "" },
-            { "column_name": "Current_Month_Effi", "column_processing": "c.Avg_effi AS Current_Month_Effi" },
-            { "column_name": "Previous_Month_Effi", "column_processing": "p.Avg_effi AS Previous_Month_Effi" },
-            { "column_name": "Growth_Percentage", "column_processing": "(c.Avg_effi / p.Avg_effi - 1) * 100 AS Growth_Percentage" }
-          ]
-        },
-        {
-          "keywords": "From",
-          "scratched_content": [
-            { "table_name": "Effi_Comparison c", "is_virtual_table": "True" }
-          ]
-        },
-        {
-          "keywords": "Join",
-          "scratched_content": [
-            { "content": "JOIN Effi_Comparison p ON c.month_id = TO_CHAR (DATEADD (month, 1, TO_DATE (p.month_id, 'YYYYMM')), 'YYYYMM')" }
-          ]
-        },
-        {
-          "keywords": "Where",
-          "scratched_content": [
-            { "content": "c.month_id = '202410'" }
-          ]
-        }
-      ]
-    },
-    {
-      "created_virtual_table": "True",
-      "virtual_table_name": "Effi_Comparison",
-      "sql_content": [
-        {
-          "keywords": "Select",
-          "scratched_content": [
-            { "column_name": "month_id", "column_processing": "" },
-            { "column_name": "Avg_effi", "column_processing": "AVG(effi) AS Avg_effi" }
-          ]
-        },
-        {
-          "keywords": "From",
-          "scratched_content": [
-            { "table_name": "Store_effi", "is_virtual_table": "True" }
-          ]
-        },
-        {
-          "keywords": "Group By",
-          "scratched_content": [
-            { "content": "month_id" }
-          ]
-        }
-      ]
-    },
-    {
-      "created_virtual_table": "True",
-      "virtual_table_name": "Store_effi",
-      "sql_content": [
-        {
-          "keywords": "Select",
-          "scratched_content": [
-            { "column_name": "country", "column_processing": "" },
-            { "column_name": "channel", "column_processing": "" },
-            { "column_name": "store_type", "column_processing": "" },
-            { "column_name": "area", "column_processing": "" },
-            {
-              "column_name": "effi",
-              "column_processing": "CASE WHEN (COALESCE(area, '') = '' OR CAST(area AS DECIMAL(18, 2)) = 0) THEN 0 ELSE AVG(COALESCE(amt_usd_notax, 0)) * 365 / CAST(area AS DECIMAL(18, 2)) * 10.7639104 END AS effi"
-            },
-            { "column_name": "month_id", "column_processing": "" }
-          ]
-        },
-        {
-          "keywords": "From",
-          "scratched_content": [
-            { "table_name": "dm_fact_sales_chatbi", "is_virtual_table": "False" }
-          ]
-        },
-        {
-          "keywords": "Where",
-          "scratched_content": [
-            {
-              "content": "date_code <= '2024-10-31' AND country = 'Mainland' AND channel = 'O&O' AND store_type = 'BH' AND comp_flag = 'Y'"
-            }
-          ]
-        },
-        {
-          "keywords": "Group By",
-          "scratched_content": [
-            { "content": "country, channel, store_type, store_code, area, month_id" }
-          ]
-        }
-      ]
-    }
-  ]
-};
+// const res = {
+//   content: [
+//     {
+//       "created_virtual_table": "False",
+//       "sql_content": [
+//         {
+//           "keywords": "From",
+//           "scratched_content": [
+//             { "table_name": "Monthly_Growth", "is_virtual_table": "True" }
+//           ]
+//         },
+//         {
+//           "keywords": "Select",
+//           "scratched_content": [
+//             { "column_name": "month_id", "column_processing": "" },
+//             { "column_name": "Current_Month_Effi", "column_processing": "TO_CHAR (Current_Month_Effi, 'FM999,999,999.00') AS Current_Month_Effi" },
+//             { "column_name": "Previous_Month_Effi", "column_processing": "TO_CHAR (Previous_Month_Effi, 'FM999,999,999.00') AS Previous_Month_Effi" },
+//             { "column_name": "Growth_Percentage", "column_processing": "TO_CHAR (Growth_Percentage, 'FM999,999,999.00') || '%' AS Growth_Percentage" }
+//           ]
+//         },
+//         {
+//           "keywords": "Join",
+//           "scratched_content": [
+//             { "content": "JOIN Effi_Comparison p ON c.month_id = TO_CHAR (DATEADD (month, 1, TO_DATE (p.month_id, 'YYYYMM')), 'YYYYMM')" }
+//           ]
+//         },
+//         {
+//           "keywords": "Where",
+//           "scratched_content": [
+//             { "content": "c.month_id = '202410'" }
+//           ]
+//         }
+//       ]
+//     },
+//     {
+//       "created_virtual_table": "True",
+//       "virtual_table_name": "Monthly_Growth",
+//       "sql_content": [
+//         {
+//           "keywords": "Select",
+//           "scratched_content": [
+//             { "column_name": "c.month_id", "column_processing": "" },
+//             { "column_name": "Current_Month_Effi", "column_processing": "c.Avg_effi AS Current_Month_Effi" },
+//             { "column_name": "Previous_Month_Effi", "column_processing": "p.Avg_effi AS Previous_Month_Effi" },
+//             { "column_name": "Growth_Percentage", "column_processing": "(c.Avg_effi / p.Avg_effi - 1) * 100 AS Growth_Percentage" }
+//           ]
+//         },
+//         {
+//           "keywords": "From",
+//           "scratched_content": [
+//             { "table_name": "Effi_Comparison c", "is_virtual_table": "True" }
+//           ]
+//         },
+//         {
+//           "keywords": "Join",
+//           "scratched_content": [
+//             { "content": "JOIN Effi_Comparison p ON c.month_id = TO_CHAR (DATEADD (month, 1, TO_DATE (p.month_id, 'YYYYMM')), 'YYYYMM')" }
+//           ]
+//         },
+//         {
+//           "keywords": "Where",
+//           "scratched_content": [
+//             { "content": "c.month_id = '202410'" }
+//           ]
+//         }
+//       ]
+//     },
+//     {
+//       "created_virtual_table": "True",
+//       "virtual_table_name": "Effi_Comparison",
+//       "sql_content": [
+//         {
+//           "keywords": "Select",
+//           "scratched_content": [
+//             { "column_name": "month_id", "column_processing": "" },
+//             { "column_name": "Avg_effi", "column_processing": "AVG(effi) AS Avg_effi" }
+//           ]
+//         },
+//         {
+//           "keywords": "From",
+//           "scratched_content": [
+//             { "table_name": "Store_effi", "is_virtual_table": "True" }
+//           ]
+//         },
+//         {
+//           "keywords": "Group By",
+//           "scratched_content": [
+//             { "content": "month_id" }
+//           ]
+//         }
+//       ]
+//     },
+//     {
+//       "created_virtual_table": "True",
+//       "virtual_table_name": "Store_effi",
+//       "sql_content": [
+//         {
+//           "keywords": "Select",
+//           "scratched_content": [
+//             { "column_name": "country", "column_processing": "" },
+//             { "column_name": "channel", "column_processing": "" },
+//             { "column_name": "store_type", "column_processing": "" },
+//             { "column_name": "area", "column_processing": "" },
+//             {
+//               "column_name": "effi",
+//               "column_processing": "CASE WHEN (COALESCE(area, '') = '' OR CAST(area AS DECIMAL(18, 2)) = 0) THEN 0 ELSE AVG(COALESCE(amt_usd_notax, 0)) * 365 / CAST(area AS DECIMAL(18, 2)) * 10.7639104 END AS effi"
+//             },
+//             { "column_name": "month_id", "column_processing": "" }
+//           ]
+//         },
+//         {
+//           "keywords": "From",
+//           "scratched_content": [
+//             { "table_name": "dm_fact_sales_chatbi", "is_virtual_table": "False" }
+//           ]
+//         },
+//         {
+//           "keywords": "Where",
+//           "scratched_content": [
+//             {
+//               "content": "date_code <= '2024-10-31' AND country = 'Mainland' AND channel = 'O&O' AND store_type = 'BH' AND comp_flag = 'Y'"
+//             }
+//           ]
+//         },
+//         {
+//           "keywords": "Group By",
+//           "scratched_content": [
+//             { "content": "country, channel, store_type, store_code, area, month_id" }
+//           ]
+//         }
+//       ]
+//     }
+//   ]
+
+// };
+let res = '';
+if (sqljson) {
+  res = sqljson;
+  console.log('-------res-------', res)
+}
+
 // const res = {
 //   content: [
 //     {
@@ -2082,6 +2090,7 @@ onMounted(() => {
   // **将文本移回中心**
   texts.attr("text-anchor", "middle");
 });
+
 </script>
 
 <style>

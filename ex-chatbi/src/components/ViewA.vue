@@ -267,7 +267,8 @@
         addTimeout: null,
         showHistoryWindow: false,
         historyWindowPosition: { left: '60px', top: '60px' },
-        selectedHistory: []
+        selectedHistory: [],
+        activeNames: []
       };
     },
     mounted() {
