@@ -184,6 +184,8 @@ async def query_handler(request: Dict[str, Any]):
         # 2. 知识库检索+生成sql代码
         print("==========================my_lightrag========================================")
         rag_response, context = await rag.query(user_query)
+        rag_response = await rag.query(user_query)
+
 
         print("---------------context----------------\n")
         print(context)
