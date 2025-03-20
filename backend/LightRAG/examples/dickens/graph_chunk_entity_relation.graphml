@@ -1,0 +1,1110 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d6" for="edge" attr.name="source_id" attr.type="string" />
+  <key id="d5" for="edge" attr.name="keywords" attr.type="string" />
+  <key id="d4" for="edge" attr.name="description" attr.type="string" />
+  <key id="d3" for="edge" attr.name="weight" attr.type="double" />
+  <key id="d2" for="node" attr.name="source_id" attr.type="string" />
+  <key id="d1" for="node" attr.name="description" attr.type="string" />
+  <key id="d0" for="node" attr.name="entity_type" attr.type="string" />
+  <graph edgedefault="undirected">
+    <node id="&quot;WTD&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"WTD refers to 'Week-to-Date', a time period from last Sunday to yesterday for querying sales achievement rates."</data>
+      <data key="d2">chunk-44a4d13fd2fa5168f043e8cd0f9cbceb</data>
+    </node>
+    <node id="&quot;MTD&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"MTD stands for 'Month-to-Date', covering sales data from the first day of the current month to yesterday."</data>
+      <data key="d2">chunk-44a4d13fd2fa5168f043e8cd0f9cbceb</data>
+    </node>
+    <node id="&quot;QTD&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"QTD is 'Quarter-to-Date', capturing sales performance from the beginning of the current quarter to yesterday."</data>
+      <data key="d2">chunk-44a4d13fd2fa5168f043e8cd0f9cbceb</data>
+    </node>
+    <node id="&quot;YTD&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"YTD indicates 'Year-to-Date', assessing sales figures from the start of the current year to yesterday."</data>
+      <data key="d2">chunk-44a4d13fd2fa5168f043e8cd0f9cbceb</data>
+    </node>
+    <node id="&quot;F1 TARGET&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"F1 target refers to a specific set of sales goals defined as amt_notax_target_f1 for comparison against actual sales."</data>
+      <data key="d2">chunk-44a4d13fd2fa5168f043e8cd0f9cbceb</data>
+    </node>
+    <node id="&quot;F2 TARGET&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"F2 target is a category of sales objectives described by amt_notax_target_f2 used in performance assessment."</data>
+      <data key="d2">chunk-44a4d13fd2fa5168f043e8cd0f9cbceb</data>
+    </node>
+    <node id="&quot;F3 TARGET&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"F3 target represents defined sales targets identified by amt_notax_target_f3 for analyzing sales achievement."</data>
+      <data key="d2">chunk-44a4d13fd2fa5168f043e8cd0f9cbceb</data>
+    </node>
+    <node id="&quot;F4 TARGET&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"F4 target constitutes the sales benchmarks set as amt_notax_target_f4 for evaluating sales performance."</data>
+      <data key="d2">chunk-44a4d13fd2fa5168f043e8cd0f9cbceb</data>
+    </node>
+    <node id="&quot;CHINA FP&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"China FP refers to a geographical focus for querying sales achievement, specific to any queries mentioning MTD."</data>
+      <data key="d2">chunk-44a4d13fd2fa5168f043e8cd0f9cbceb</data>
+    </node>
+    <node id="&quot;SALES ACHIEVEMENT RATE&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Sales Achievement Rate is a calculated metric using the formula sales amount / target sales amount - 1, represented as a percentage to evaluate performance."&lt;SEP&gt;"Sales Achievement Rate measures how successfully a store meets its sales target, with a rate above zero indicating success."&lt;SEP&gt;"Sales Achievement Rate refers to the percentage calculation of sales amount over target sales amount minus one, providing a measure of performance over a specified period."&lt;SEP&gt;"The Sales Achievement Rate is a metric calculated by the formula: sales amount divided by target sales amount minus 1, displayed as a percentage with two decimal places."</data>
+      <data key="d2">chunk-323320f36bc5fcbd343c99b79167f2cb&lt;SEP&gt;chunk-44a4d13fd2fa5168f043e8cd0f9cbceb&lt;SEP&gt;chunk-7acc96b4208534be2573509b9b3acb9f&lt;SEP&gt;chunk-657ec00766b920c166780b3c3e32b930</data>
+    </node>
+    <node id="&quot;DM_FACT_SALES_CHATBI&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"Dm_fact_sales_chatbi is a database table used for storing and querying sales data."&lt;SEP&gt;"Dm_fact_sales_chatbi is the database table from which sales data is queried for performance analysis."&lt;SEP&gt;"dm_fact_sales_chatbi is a database or dataset used for analyzing sales-related metrics, providing a foundation for SQL queries."&lt;SEP&gt;"dm_fact_sales_chatbi is a database table or data source where sales data is stored, which is queried to analyze sales performance for stores."&lt;SEP&gt;"dm_fact_sales_chatbi is likely a database table or system that contains sales data, which is queried for analysis."&lt;SEP&gt;"dm_fact_sales_chatbi is the database or dataset used to store and query detailed sales data, presumably for analysis."&lt;SEP&gt;"dm_fact_sales_chatbi is the database table storing the relevant sales data used in the SQL query calculation."&lt;SEP&gt;"dm_fact_sales_chatbi is the database table used in the SQL query segments to aggregate sales data and calculate discount levels."&lt;SEP&gt;"dm_fact_sales_chatbi refers to a database or table within a data warehouse where sales data used in SQL queries is stored and accessed."</data>
+      <data key="d2">chunk-6c676d02a46f0ee58a25585c6cf4e752&lt;SEP&gt;chunk-ece6d710fb043d84588d12b74234dcac&lt;SEP&gt;chunk-28da327421b6cfdbcddb10d800dc8c4c&lt;SEP&gt;chunk-7acc96b4208534be2573509b9b3acb9f&lt;SEP&gt;chunk-87c4c7bd85742058d4fb3fb7368545c6&lt;SEP&gt;chunk-44a4d13fd2fa5168f043e8cd0f9cbceb&lt;SEP&gt;chunk-6ccc3dc49eff6478f996913190bc209f&lt;SEP&gt;chunk-323320f36bc5fcbd343c99b79167f2cb&lt;SEP&gt;chunk-8e77a76cc3f467a9c7ea017a9a605d32</data>
+    </node>
+    <node id="&quot;SQL QUERY&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"SQL Query is a sample code provided to extract and calculate sales performance metrics for stores."&lt;SEP&gt;"SQL Query is a set of structured queries designed to retrieve and calculate sales data achievement rates across various time periods."&lt;SEP&gt;"SQL Query is the structured query language code provided to calculate the number and percentage of stores reaching their sales targets."&lt;SEP&gt;"SQL Query is used to retrieve and calculate sales data from a database, particularly aimed at assessing performance against targets."&lt;SEP&gt;"SQL Query refers to a structured query language statement used to retrieve and analyze data, in this case, from a sales database to calculate various performance metrics."&lt;SEP&gt;"SQL Query refers to a structured set of commands used to extract average store size data for the specified conditions."&lt;SEP&gt;"SQL Query refers to the structured language command used to retrieve and analyze data related to comp stores from the relevant datasets."&lt;SEP&gt;"SQL Query refers to the structured query language command used to extract and analyze sales data from a database."&lt;SEP&gt;"SQL query is a script used to retrieve and calculate sales data by division from the database."&lt;SEP&gt;"The SQL Query is a code snippet used to calculate the sales achievement rate, sum of sales amounts, and related metrics over a specific timeframe."&lt;SEP&gt;"The SQL Query is a specified command to extract data regarding sales growth metrics, including calculations for month-over-month growth percentages and other sales indicators."&lt;SEP&gt;"The SQL query is used to extract data about store sales performance, specifically to identify those with the worst week-over-week sales growth percentage."&lt;SEP&gt;"The SQL query provided is used to calculate and display the discount levels for current, previous week, previous month and previous year."</data>
+      <data key="d2">chunk-6c676d02a46f0ee58a25585c6cf4e752&lt;SEP&gt;chunk-3eba47b965db367686d4c29b285e7b7d&lt;SEP&gt;chunk-ece6d710fb043d84588d12b74234dcac&lt;SEP&gt;chunk-28da327421b6cfdbcddb10d800dc8c4c&lt;SEP&gt;chunk-657ec00766b920c166780b3c3e32b930&lt;SEP&gt;chunk-46717d23ed24c265e22997d8c86bc689&lt;SEP&gt;chunk-8544c4710e38a3bd8900e1e5e55008c1&lt;SEP&gt;chunk-87c4c7bd85742058d4fb3fb7368545c6&lt;SEP&gt;chunk-84e6029b32df619a952ad30929d009a2&lt;SEP&gt;chunk-44a4d13fd2fa5168f043e8cd0f9cbceb&lt;SEP&gt;chunk-323320f36bc5fcbd343c99b79167f2cb&lt;SEP&gt;chunk-215015657fed07b0b7cb11691f789f0e&lt;SEP&gt;chunk-4c7d700fc24244d8591243053236229d</data>
+    </node>
+    <node id="&quot;AMOUNT WITHOUT TAX&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Amount Without Tax refers to the sales total excluding taxes, used in calculations to determine achievement rates in sales analysis."</data>
+      <data key="d2">chunk-44a4d13fd2fa5168f043e8cd0f9cbceb</data>
+    </node>
+    <node id="&quot;TARGET AMOUNT WITHOUT TAX&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Target Amount Without Tax represents the goal sales figure before taxes, forming part of the comparison for achievement calculations."</data>
+      <data key="d2">chunk-44a4d13fd2fa5168f043e8cd0f9cbceb</data>
+    </node>
+    <node id="&quot;SALES GROWTH INDICATORS&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Sales Growth Indicators include metrics such as sales amount, traffic, CR (Conversion Rate), AOV (Average Order Value), ASP (Average Selling Price), and UPT (Units Per Transaction) used to measure the month-over-month growth of sales."&lt;SEP&gt;"Sales Growth Indicators include metrics such as sales amount, traffic, CR (Conversion Rate), AOV (Average Order Value), ASP (Average Selling Price), and UPT (Units Per Transaction). These are used to measure and analyze sales growth."</data>
+      <data key="d2">chunk-46717d23ed24c265e22997d8c86bc689&lt;SEP&gt;chunk-8e77a76cc3f467a9c7ea017a9a605d32</data>
+    </node>
+    <node id="&quot;WEEKLY COMP GROWTH&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"Weekly Comp Growth is an analysis event where the growth percentage for various sales metrics is calculated compared to the previous week, providing insights into sales trends."</data>
+      <data key="d2">chunk-8e77a76cc3f467a9c7ea017a9a605d32</data>
+    </node>
+    <node id="&quot;CR (CONVERSION RATE)&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"CR (Conversion Rate) is a metric that measures the percentage of visitors who take a desired action, such as making a purchase, out of the total number of visitors."</data>
+      <data key="d2">chunk-8e77a76cc3f467a9c7ea017a9a605d32</data>
+    </node>
+    <node id="&quot;AOV (AVERAGE ORDER VALUE)&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"AOV (Average Order Value) is a metric that calculates the average amount spent each time a customer places an order on a website or mobile app."</data>
+      <data key="d2">chunk-8e77a76cc3f467a9c7ea017a9a605d32</data>
+    </node>
+    <node id="&quot;ASP (AVERAGE SELLING PRICE)&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"ASP (Average Selling Price) is a metric that represents the average selling price of units sold and is used to evaluate pricing strategies."</data>
+      <data key="d2">chunk-8e77a76cc3f467a9c7ea017a9a605d32</data>
+    </node>
+    <node id="&quot;UPT (UNITS PER TRANSACTION)&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"UPT (Units Per Transaction) is a metric that shows the average number of units purchased per transaction, useful for analyzing buying behavior."</data>
+      <data key="d2">chunk-8e77a76cc3f467a9c7ea017a9a605d32</data>
+    </node>
+    <node id="&quot;TEST WEEK DATA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"Test Week Data refers to the sales data collected over a specific week (week 34 in the example), used to calculate various sales growth metrics for analysis."</data>
+      <data key="d2">chunk-8e77a76cc3f467a9c7ea017a9a605d32</data>
+    </node>
+    <node id="&quot;COMPARISON FORMULA&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Comparison Formula is a calculation used to compare sales metrics between weeks, expressed as a percentage change."</data>
+      <data key="d2">chunk-8e77a76cc3f467a9c7ea017a9a605d32</data>
+    </node>
+    <node id="&quot;LAST WEEK DATA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"Last Week Data refers to the sales data from the preceding week, used as a baseline to calculate growth metrics for comparison."</data>
+      <data key="d2">chunk-8e77a76cc3f467a9c7ea017a9a605d32</data>
+    </node>
+    <node id="&quot;COMP STORE&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Comp Store is a category of stores that participate in a comparison, relevant in the analysis of store sizes for FY24."&lt;SEP&gt;"Comp Store is a classification for stores participating in the comparison analysis to track sales and performance metrics."</data>
+      <data key="d2">chunk-3eba47b965db367686d4c29b285e7b7d&lt;SEP&gt;chunk-8e77a76cc3f467a9c7ea017a9a605d32</data>
+    </node>
+    <node id="&quot;APAC&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"APAC refers to the Asia-Pacific region, which is specified as a geographical area for sales growth analysis."</data>
+      <data key="d2">chunk-6ccc3dc49eff6478f996913190bc209f</data>
+    </node>
+    <node id="&quot;EC&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"EC likely refers to the e-commerce channels used for sales, specified in the sales query."</data>
+      <data key="d2">chunk-6ccc3dc49eff6478f996913190bc209f</data>
+    </node>
+    <node id="&quot;SALES MOM%&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Sales MOM% stands for Month-over-Month percentage growth in sales, used to compare current and previous month's sales data."</data>
+      <data key="d2">chunk-6ccc3dc49eff6478f996913190bc209f</data>
+    </node>
+    <node id="&quot;SALES GROWTH SITUATION&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Sales Growth Situation refers to the analysis of sales performance over a specific period, commonly assessed using MOM% change."</data>
+      <data key="d2">chunk-6ccc3dc49eff6478f996913190bc209f</data>
+    </node>
+    <node id="&quot;MONTH_ID&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Month_id represents a unique identifier for each month used in the data grouping process of the SQL query."</data>
+      <data key="d2">chunk-6ccc3dc49eff6478f996913190bc209f</data>
+    </node>
+    <node id="&quot;SALES_AMT&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Sales_amt refers to the total sales amount calculated in the SQL query."&lt;SEP&gt;"Sales_amt refers to the total sales amount tallied over a specified timeframe, including tax if applicable."</data>
+      <data key="d2">chunk-6c676d02a46f0ee58a25585c6cf4e752&lt;SEP&gt;chunk-6ccc3dc49eff6478f996913190bc209f</data>
+    </node>
+    <node id="&quot;SALES_NOTAX&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Sales_notax refers to the sales amount excluding taxes, calculated within the SQL query."&lt;SEP&gt;"Sales_notax refers to the total sales amount calculated without including taxes, providing baseline revenue figures."</data>
+      <data key="d2">chunk-6c676d02a46f0ee58a25585c6cf4e752&lt;SEP&gt;chunk-6ccc3dc49eff6478f996913190bc209f</data>
+    </node>
+    <node id="&quot;SALES_NOTAX_MOM_PER&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Sales_notax_mom_per is the percentage change in no-tax sales from the previous month, specifically calculated in the SQL query."</data>
+      <data key="d2">chunk-6ccc3dc49eff6478f996913190bc209f</data>
+    </node>
+    <node id="&quot;CURRENT DATE&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Current Date is used in the SQL query to determine the time frame for analyzing weekly sales."&lt;SEP&gt;"Current Date refers to the date at which the sales data is being analyzed, formatted in 'YYYY-MM' within the SQL query."&lt;SEP&gt;"The current date is referenced in the SQL query to determine the end date of current time frames for calculations."</data>
+      <data key="d2">chunk-323320f36bc5fcbd343c99b79167f2cb&lt;SEP&gt;chunk-28da327421b6cfdbcddb10d800dc8c4c&lt;SEP&gt;chunk-8544c4710e38a3bd8900e1e5e55008c1</data>
+    </node>
+    <node id="&quot;AMOUNT&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Amount represents the total sales achieved during the specific period being analyzed, inclusive of taxes."</data>
+      <data key="d2">chunk-323320f36bc5fcbd343c99b79167f2cb</data>
+    </node>
+    <node id="&quot;AMOUNT_NO_TAX&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Amount_no_tax represents the total sales achieved during the specific period being analyzed, excluding taxes."</data>
+      <data key="d2">chunk-323320f36bc5fcbd343c99b79167f2cb</data>
+    </node>
+    <node id="&quot;AMOUNT_NO_TAX_TARGET&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Amount_no_tax_target is the target sales figure set for the period, excluding taxes."</data>
+      <data key="d2">chunk-323320f36bc5fcbd343c99b79167f2cb</data>
+    </node>
+    <node id="&quot;SALES AMOUNT&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Sales Amount refers to the total dollar value of products sold in a given month, used as a key indicator of overall sales performance."&lt;SEP&gt;"Sales Amount refers to the total revenue generated from sales in a given period, often analyzed for growth and performance metrics."&lt;SEP&gt;"Sales Amount represents the total monetary value of sales transactions up to the current date."&lt;SEP&gt;"Sales Amount represents the total monetary value of sales, used as a metric for comparing current and past sales performance."&lt;SEP&gt;"The Sales Amount is the total revenue generated by the store, which is calculated and analyzed to assess performance."</data>
+      <data key="d2">chunk-ece6d710fb043d84588d12b74234dcac&lt;SEP&gt;chunk-657ec00766b920c166780b3c3e32b930&lt;SEP&gt;chunk-46717d23ed24c265e22997d8c86bc689&lt;SEP&gt;chunk-a7c59845f68cba3f6c7aa283a00c6151&lt;SEP&gt;chunk-84e6029b32df619a952ad30929d009a2</data>
+    </node>
+    <node id="&quot;TRAFFIC&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Traffic indicates the number of visitors or interactions with a platform, often used to measure engagement and potential conversions."&lt;SEP&gt;"Traffic refers to the number of visitors or interactions with the sales platform, used to assess the level of consumer interest."</data>
+      <data key="d2">chunk-46717d23ed24c265e22997d8c86bc689&lt;SEP&gt;chunk-ece6d710fb043d84588d12b74234dcac</data>
+    </node>
+    <node id="&quot;CONVERSION RATE (CR)&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Conversion Rate is the percentage of visitors who complete a desired action, such as making a purchase, indicating sales effectiveness."&lt;SEP&gt;"Conversion Rate represents the percentage of visitors that complete a desired action, essential for understanding marketing effectiveness."</data>
+      <data key="d2">chunk-46717d23ed24c265e22997d8c86bc689&lt;SEP&gt;chunk-ece6d710fb043d84588d12b74234dcac</data>
+    </node>
+    <node id="&quot;AVERAGE ORDER VALUE (AOV)&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Average Order Value is the average amount spent by customers per transaction, providing insights into consumer purchasing behavior."&lt;SEP&gt;"Average Order Value is the average amount spent by customers per transaction, used to assess sales strategies and customer behavior."</data>
+      <data key="d2">chunk-46717d23ed24c265e22997d8c86bc689&lt;SEP&gt;chunk-ece6d710fb043d84588d12b74234dcac</data>
+    </node>
+    <node id="&quot;AVERAGE SELLING PRICE (ASP)&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Average Selling Price is the average price at which products are sold, important for pricing strategies and revenue generation."&lt;SEP&gt;"Average Selling Price is the average price at which products are sold, reflecting pricing strategies and market demand."</data>
+      <data key="d2">chunk-46717d23ed24c265e22997d8c86bc689&lt;SEP&gt;chunk-ece6d710fb043d84588d12b74234dcac</data>
+    </node>
+    <node id="&quot;UNITS PER TRANSACTION (UPT)&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Units Per Transaction is the average number of items purchased in a single transaction, indicating sales volume per customer."&lt;SEP&gt;"Units Per Transaction measures the average number of items purchased in a single transaction, offering insights into consumer purchasing habits."</data>
+      <data key="d2">chunk-46717d23ed24c265e22997d8c86bc689&lt;SEP&gt;chunk-ece6d710fb043d84588d12b74234dcac</data>
+    </node>
+    <node id="&quot;WEEK-OVER-WEEK GROWTH%&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Week-over-Week Growth Percentage measures the change in key metrics such as sales, traffic, CR, AOV, ASP, and UPT from one week to the next, presented as a percentage."</data>
+      <data key="d2">chunk-ece6d710fb043d84588d12b74234dcac</data>
+    </node>
+    <node id="&quot;DATE CODE&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Date Code refers to specific date parameters used in the SQL query to define the time frame for data analysis, such as identifying 'this week' or 'Today'."&lt;SEP&gt;"Date Code signifies the time frame used in the SQL query to filter sales data, crucial for accurate temporal analysis."</data>
+      <data key="d2">chunk-a7c59845f68cba3f6c7aa283a00c6151&lt;SEP&gt;chunk-ece6d710fb043d84588d12b74234dcac</data>
+    </node>
+    <node id="&quot;DIVISIONSALES&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"DivisionSales is a SQL query component used to calculate the total sales amount and last week's sales amount by division for the given date range."</data>
+      <data key="d2">chunk-215015657fed07b0b7cb11691f789f0e</data>
+    </node>
+    <node id="&quot;TOTALSALES&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"TotalSales is a SQL query component that aggregates the total sales amount and last week's total sales amount across all divisions."</data>
+      <data key="d2">chunk-215015657fed07b0b7cb11691f789f0e</data>
+    </node>
+    <node id="&quot;APP&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"APP refers to the Apparel division of products for which sales proportions are calculated."</data>
+      <data key="d2">chunk-215015657fed07b0b7cb11691f789f0e</data>
+    </node>
+    <node id="&quot;FTW&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"FTW refers to the Footwear division of products for which sales proportions are calculated."</data>
+      <data key="d2">chunk-215015657fed07b0b7cb11691f789f0e</data>
+    </node>
+    <node id="&quot;ACCS&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"ACCS refers to the Accessories division of products for which sales proportions are calculated."</data>
+      <data key="d2">chunk-215015657fed07b0b7cb11691f789f0e</data>
+    </node>
+    <node id="&quot;DM_FACT_SALES_SKU_CHATBI&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"dm_fact_sales_sku_chatbi is a database table that contains sales data used for calculating sales proportions."&lt;SEP&gt;"dm_fact_sales_sku_chatbi is a database table used to record detailed sales data for various stock-keeping units."&lt;SEP&gt;"dm_fact_sales_sku_chatbi is likely a database or dataset containing detailed sales information, which is used for analysis and querying."&lt;SEP&gt;"dm_fact_sales_sku_chatbi is the database table where sales data are stored and queried for analysis."</data>
+      <data key="d2">chunk-34bd968ebf3c5c6de3ec30724f3c540c&lt;SEP&gt;chunk-318e05213fba67f7b6a114f0cdca5a84&lt;SEP&gt;chunk-215015657fed07b0b7cb11691f789f0e&lt;SEP&gt;chunk-fe1b6dd1169eb6721eead80e97431213</data>
+    </node>
+    <node id="&quot;SOB&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"SOB stands for Share of Business, indicating the sales proportion of each division being analyzed."</data>
+      <data key="d2">chunk-215015657fed07b0b7cb11691f789f0e</data>
+    </node>
+    <node id="&quot;SALES PROPORTION ANALYSIS&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Sales Proportion Analysis involves calculating the sales proportion according to key product attributes and comparing it with previous sales data."</data>
+      <data key="d2">chunk-a7c59845f68cba3f6c7aa283a00c6151</data>
+    </node>
+    <node id="&quot;KEY CATEGORY SALES SOB&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Key Category Sales SOB refers to the performance measurement of sales based on key categories, specifically assessing the proportion of sales and its comparison with the previous week."</data>
+      <data key="d2">chunk-a7c59845f68cba3f6c7aa283a00c6151</data>
+    </node>
+    <node id="&quot;SQL QUERY SAMPLE&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"SQL Query Sample is an example of a SQL query used to calculate sales proportions and compare them with previous week's data, showcasing the technical approach to data analysis."</data>
+      <data key="d2">chunk-a7c59845f68cba3f6c7aa283a00c6151</data>
+    </node>
+    <node id="&quot;PRODUCT ATTRIBUTES&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Product Attributes refer to key characteristics of products that are used to calculate sales proportions and performance metrics."</data>
+      <data key="d2">chunk-a7c59845f68cba3f6c7aa283a00c6151</data>
+    </node>
+    <node id="&quot;SALES QUANTITY&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Sales Quantity refers to the total number of units sold, providing a metric for analyzing sales performance over time."</data>
+      <data key="d2">chunk-a7c59845f68cba3f6c7aa283a00c6151</data>
+    </node>
+    <node id="&quot;LAST WEEK'S SALES PERFORMANCE&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Last Week's Sales Performance is used as a baseline for comparing current sales data to understand changes and trends."</data>
+      <data key="d2">chunk-a7c59845f68cba3f6c7aa283a00c6151</data>
+    </node>
+    <node id="&quot;MFO&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"MFO refers to a product line whose sales proportion is being queried and analyzed in terms of percentage over different time periods."</data>
+      <data key="d2">chunk-fe1b6dd1169eb6721eead80e97431213</data>
+    </node>
+    <node id="&quot;WEEK 27&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"Week 27 is the specific time period for which the sales proportion of MFO products is queried and compared."</data>
+      <data key="d2">chunk-fe1b6dd1169eb6721eead80e97431213</data>
+    </node>
+    <node id="&quot;LAST WEEK&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"Last Week pertains to the most recent seven-day period considered for evaluating store openings and performance."&lt;SEP&gt;"Last Week refers to the time frame (Week 26) immediately preceding Week 27, used for sales proportion comparison."&lt;SEP&gt;"Last Week refers to the time period from last Sunday to last Saturday, during which sales performance is evaluated."</data>
+      <data key="d2">chunk-84e6029b32df619a952ad30929d009a2&lt;SEP&gt;chunk-7acc96b4208534be2573509b9b3acb9f&lt;SEP&gt;chunk-fe1b6dd1169eb6721eead80e97431213</data>
+    </node>
+    <node id="&quot;LAST YEAR&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"Last Year is the reference time frame (Year 2024) for comparing the average sales proportion of MFO products."</data>
+      <data key="d2">chunk-fe1b6dd1169eb6721eead80e97431213</data>
+    </node>
+    <node id="&quot;STORE&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"A Store refers to a retail location that can be identified by a store code or store name for querying sales data and targets."&lt;SEP&gt;"A store refers to a retail location included in the analysis of sales performance, particularly focusing on its week-over-week sales growth."&lt;SEP&gt;"Store represents a retail or sales establishment that is evaluated for its sales performance."&lt;SEP&gt;"Stores are retail locations whose statuses are being queried, specifically focusing on those that are open as of a particular date."</data>
+      <data key="d2">chunk-6c676d02a46f0ee58a25585c6cf4e752&lt;SEP&gt;chunk-87c4c7bd85742058d4fb3fb7368545c6&lt;SEP&gt;chunk-2b96f8a403e0c1eff91d73c4ba2f3852&lt;SEP&gt;chunk-657ec00766b920c166780b3c3e32b930</data>
+    </node>
+    <node id="&quot;YESTERDAY'S SALES&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"Yesterday's Sales refers to the total sales amount achieved by a store on the previous day, which can be queried and analyzed for performance."</data>
+      <data key="d2">chunk-657ec00766b920c166780b3c3e32b930</data>
+    </node>
+    <node id="&quot;TARGET SALES AMOUNT&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"The Target Sales Amount is the projected revenue goal set for the store, against which actual sales performance is measured."</data>
+      <data key="d2">chunk-657ec00766b920c166780b3c3e32b930</data>
+    </node>
+    <node id="&quot;STORE CODE&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Store Code is a unique identifier for each store used in the SQL query to count the number of open stores."&lt;SEP&gt;"Store Code is a unique identifier used to specify and query sales data for a specific retail location."</data>
+      <data key="d2">chunk-2b96f8a403e0c1eff91d73c4ba2f3852&lt;SEP&gt;chunk-657ec00766b920c166780b3c3e32b930</data>
+    </node>
+    <node id="&quot;STORE NAME&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Store Name is the name of a retail location used to identify and query sales data for reporting purposes."</data>
+      <data key="d2">chunk-657ec00766b920c166780b3c3e32b930</data>
+    </node>
+    <node id="&quot;DATEADD FUNCTION&quot;">
+      <data key="d0">"TECHNOLOGY"</data>
+      <data key="d1">"The DATEADD Function is a SQL function used to calculate dates, such as determining the previous day's date for querying data."</data>
+      <data key="d2">chunk-657ec00766b920c166780b3c3e32b930</data>
+    </node>
+    <node id="&quot;CURRENT_DATE FUNCTION&quot;">
+      <data key="d0">"TECHNOLOGY"</data>
+      <data key="d1">"The CURRENT_DATE Function is a SQL function that returns the current date, used in calculations for data queries."</data>
+      <data key="d2">chunk-657ec00766b920c166780b3c3e32b930</data>
+    </node>
+    <node id="&quot;SALES QUERY&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Sales Query refers to a database search process focused on identifying stores with the highest week-over-week sales growth percentages."</data>
+      <data key="d2">chunk-87c4c7bd85742058d4fb3fb7368545c6</data>
+    </node>
+    <node id="&quot;WOW SALES GROWTH PERCENTAGE&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"WOW Sales Growth Percentage is a metric used to measure the week-over-week increase in sales for a particular store."</data>
+      <data key="d2">chunk-87c4c7bd85742058d4fb3fb7368545c6</data>
+    </node>
+    <node id="&quot;DATABASE&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Database refers to the structured collection of data, like the dm_fact_sales_chatbi, where sales records are stored and queried."</data>
+      <data key="d2">chunk-87c4c7bd85742058d4fb3fb7368545c6</data>
+    </node>
+    <node id="&quot;WORST WOW SALES GROWTH%&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"The worst week-over-week sales growth percentage is a measure used to identify stores with the lowest performance in terms of sales growth compared to the previous week."</data>
+      <data key="d2">chunk-6c676d02a46f0ee58a25585c6cf4e752</data>
+    </node>
+    <node id="&quot;WEEK_ID&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"The week_id represents a unique identifier for each week, used to group sales data into weekly segments for analysis."&lt;SEP&gt;"Week_id is used to identify the specific week for which the discount levels are being calculated in the twdis segment."</data>
+      <data key="d2">chunk-6c676d02a46f0ee58a25585c6cf4e752&lt;SEP&gt;chunk-28da327421b6cfdbcddb10d800dc8c4c</data>
+    </node>
+    <node id="&quot;STORE_CODE&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Store_code is a unique identifier for each store, used for organization and data retrieval."&lt;SEP&gt;"The store_code is a unique identifier for each store, used to differentiate and track store-specific sales data in the database."</data>
+      <data key="d2">chunk-6c676d02a46f0ee58a25585c6cf4e752&lt;SEP&gt;chunk-7acc96b4208534be2573509b9b3acb9f</data>
+    </node>
+    <node id="&quot;STORE_NAME&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Store_name refers to the actual name or label of the store being evaluated."&lt;SEP&gt;"The store_name is the name of the retail store, used for identifying stores when analyzing sales data."</data>
+      <data key="d2">chunk-6c676d02a46f0ee58a25585c6cf4e752&lt;SEP&gt;chunk-7acc96b4208534be2573509b9b3acb9f</data>
+    </node>
+    <node id="&quot;LW_SALES_NOTAX&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"LW_sales_notax signifies the total sales amount from the previous week, calculated without taxes, used for comparison with current week sales."</data>
+      <data key="d2">chunk-6c676d02a46f0ee58a25585c6cf4e752</data>
+    </node>
+    <node id="&quot;SALES_NOTAX_WOW_PER&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Sales_notax_wow_per is the calculated percentage change in sales, excluding taxes, from the previous week to the current week."</data>
+      <data key="d2">chunk-6c676d02a46f0ee58a25585c6cf4e752</data>
+    </node>
+    <node id="&quot;DATE_CODE&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Date_code is a parameter used in filtering sales data based on specific time frames in the SQL query."&lt;SEP&gt;"Date_code specifies the range of dates used to filter sales data, ensuring that only relevant sales periods are included in the analysis."</data>
+      <data key="d2">chunk-6c676d02a46f0ee58a25585c6cf4e752&lt;SEP&gt;chunk-28da327421b6cfdbcddb10d800dc8c4c</data>
+    </node>
+    <node id="&quot;1ST OF THIS WEEK&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"1st of this week is a placeholder for the beginning date of the current week, used in the SQL query to set the timeframe for analysis."</data>
+      <data key="d2">chunk-6c676d02a46f0ee58a25585c6cf4e752</data>
+    </node>
+    <node id="&quot;TODAY&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"Today is a placeholder indicating the current date, used in the query to mark the endpoint of the sales data evaluation period."</data>
+      <data key="d2">chunk-6c676d02a46f0ee58a25585c6cf4e752</data>
+    </node>
+    <node id="&quot;CHINA BH&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"China BH refers to a specific geographical region, 'Mainland China,' within which the BH store type operates."</data>
+      <data key="d2">chunk-34bd968ebf3c5c6de3ec30724f3c540c</data>
+    </node>
+    <node id="&quot;WEEKLY SALES&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"Weekly Sales refers to the periodic financial activity related to product categories and their contribution to sales."</data>
+      <data key="d2">chunk-34bd968ebf3c5c6de3ec30724f3c540c</data>
+    </node>
+    <node id="&quot;PRODUCT CATEGORIES&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Product Categories are the classifications of products that significantly contribute to sales revenue within a specified timeframe."</data>
+      <data key="d2">chunk-34bd968ebf3c5c6de3ec30724f3c540c</data>
+    </node>
+    <node id="&quot;CURRY&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"CURRY refers to a product attribute that can be the product's name, division, category, or material, used in sales and inventory queries."</data>
+      <data key="d2">chunk-318e05213fba67f7b6a114f0cdca5a84</data>
+    </node>
+    <node id="&quot;SELL-THROUGH&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Sell-through is the percentage indicating the proportion of inventory sold, calculated as sales units from the last Sunday to today over the sum of onhand inventory from last Saturday and sales units."</data>
+      <data key="d2">chunk-318e05213fba67f7b6a114f0cdca5a84</data>
+    </node>
+    <node id="&quot;QUERY&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Query involves retrieving information, such as the sell-through rate, using specific conditions and structured language like SQL."&lt;SEP&gt;"Query refers to the process of fetching data to assess how many stores have reached their weekly sales targets."&lt;SEP&gt;"The Query is the act of retrieving data from the database to determine the number of stores open on a specific date."</data>
+      <data key="d2">chunk-318e05213fba67f7b6a114f0cdca5a84&lt;SEP&gt;chunk-8544c4710e38a3bd8900e1e5e55008c1&lt;SEP&gt;chunk-2b96f8a403e0c1eff91d73c4ba2f3852</data>
+    </node>
+    <node id="&quot;SALESQTY&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"salesQty is a temporary dataset in SQL that holds the aggregate sales units of products over a defined period."</data>
+      <data key="d2">chunk-318e05213fba67f7b6a114f0cdca5a84</data>
+    </node>
+    <node id="&quot;INVOFLASTSATURDAY&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"InvOfLastSaturday refers to a temporary dataset in SQL containing the onhand inventory stock as of the most recent Saturday."</data>
+      <data key="d2">chunk-318e05213fba67f7b6a114f0cdca5a84</data>
+    </node>
+    <node id="&quot;DM_FACT_ONHAND_CHATBI&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"dm_fact_onhand_chatbi is a database table tracking onhand inventory stock levels for products."</data>
+      <data key="d2">chunk-318e05213fba67f7b6a114f0cdca5a84</data>
+    </node>
+    <node id="&quot;EDW_DIM_CALENDAR&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"EDW_DIM_CALENDAR is the data source providing date-related information in the SQL query."&lt;SEP&gt;"edw_dim_calendar is a calendar dimension table that holds dates and related attributes to assist in date computations in queries."&lt;SEP&gt;"edw_dim_calendar is a database table used for date management, facilitating operations based on specific date criteria."&lt;SEP&gt;"edw_dim_calendar is a dataset or database entity containing calendar information used in the SQL query."&lt;SEP&gt;"edw_dim_calendar is a dataset used in the SQL query to store calendar information, used for joining with the store data to filter by specific dates."</data>
+      <data key="d2">chunk-3eba47b965db367686d4c29b285e7b7d&lt;SEP&gt;chunk-80feb7f9baa0e4d493fb4e9c682b6822&lt;SEP&gt;chunk-2b96f8a403e0c1eff91d73c4ba2f3852&lt;SEP&gt;chunk-318e05213fba67f7b6a114f0cdca5a84&lt;SEP&gt;chunk-4c7d700fc24244d8591243053236229d</data>
+    </node>
+    <node id="&quot;PRODUCT_NAME&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"product_name is a field used to identify and group specific products in database queries."</data>
+      <data key="d2">chunk-318e05213fba67f7b6a114f0cdca5a84</data>
+    </node>
+    <node id="&quot;DIVISION&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"division refers to an organizational or product attribute used as a parameter in SQL querying."</data>
+      <data key="d2">chunk-318e05213fba67f7b6a114f0cdca5a84</data>
+    </node>
+    <node id="&quot;KEY_STORIES&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"key_stories represent significant product attributes or narratives that are part of SQL query conditions."</data>
+      <data key="d2">chunk-318e05213fba67f7b6a114f0cdca5a84</data>
+    </node>
+    <node id="&quot;MATERIAL&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"material denotes the type of product composition used in sales and inventory queries as a condition."</data>
+      <data key="d2">chunk-318e05213fba67f7b6a114f0cdca5a84</data>
+    </node>
+    <node id="&quot;COUNTRY&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"Countries are geographical entities used to categorize and group the stores in the SQL query."&lt;SEP&gt;"Country is a geographic entity representing the nations where the comp stores are located, used as a grouping parameter in the SQL query."&lt;SEP&gt;"country refers to the geographic location context within the inventory dataset, used in SQL grouping."</data>
+      <data key="d2">chunk-318e05213fba67f7b6a114f0cdca5a84&lt;SEP&gt;chunk-4c7d700fc24244d8591243053236229d&lt;SEP&gt;chunk-2b96f8a403e0c1eff91d73c4ba2f3852</data>
+    </node>
+    <node id="&quot;STORESALES&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"StoreSales refers to the calculated data of total sales amount and targets for different stores in a specific timeframe."</data>
+      <data key="d2">chunk-8544c4710e38a3bd8900e1e5e55008c1</data>
+    </node>
+    <node id="&quot;REACHSTORE&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"ReachStore denotes the stores that have achieved their weekly sales targets, identified through sales data analysis."</data>
+      <data key="d2">chunk-8544c4710e38a3bd8900e1e5e55008c1</data>
+    </node>
+    <node id="&quot;ALLSTORE&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"ALLStore represents the total count of distinct stores included in the sales analysis."</data>
+      <data key="d2">chunk-8544c4710e38a3bd8900e1e5e55008c1</data>
+    </node>
+    <node id="&quot;WEEKLY SALES TARGET&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"The Weekly Sales Target is the goal amount of sales each store aims to achieve within a week."</data>
+      <data key="d2">chunk-8544c4710e38a3bd8900e1e5e55008c1</data>
+    </node>
+    <node id="&quot;TWDIS&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"twdis is a SQL query segment that calculates the discount level for the current week based on sales data."</data>
+      <data key="d2">chunk-28da327421b6cfdbcddb10d800dc8c4c</data>
+    </node>
+    <node id="&quot;LWDIS&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"lwdis is a SQL query segment that calculates the discount level for the previous week based on sales data."</data>
+      <data key="d2">chunk-28da327421b6cfdbcddb10d800dc8c4c</data>
+    </node>
+    <node id="&quot;LMDIS&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"lmdis is a SQL query segment that calculates the discount level for the previous month based on sales data."</data>
+      <data key="d2">chunk-28da327421b6cfdbcddb10d800dc8c4c</data>
+    </node>
+    <node id="&quot;LYDIS&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"lydis is a SQL query segment that calculates the discount level for the previous year based on sales data."</data>
+      <data key="d2">chunk-28da327421b6cfdbcddb10d800dc8c4c</data>
+    </node>
+    <node id="&quot;CURRENT WEEK&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"The current week is the time period for which the discount levels are being calculated in the twdis segment of the SQL query."</data>
+      <data key="d2">chunk-28da327421b6cfdbcddb10d800dc8c4c</data>
+    </node>
+    <node id="&quot;PREVIOUS WEEK&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"The previous week is the time frame for calculating discount levels in the lwdis segment of the SQL query."</data>
+      <data key="d2">chunk-28da327421b6cfdbcddb10d800dc8c4c</data>
+    </node>
+    <node id="&quot;PREVIOUS MONTH&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"The previous month refers to the time frame used in the lmdis segment of the SQL query for discount calculation."</data>
+      <data key="d2">chunk-28da327421b6cfdbcddb10d800dc8c4c</data>
+    </node>
+    <node id="&quot;PREVIOUS YEAR&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"The previous year is the time frame used in the lydis segment of the SQL query to calculate discount levels."</data>
+      <data key="d2">chunk-28da327421b6cfdbcddb10d800dc8c4c</data>
+    </node>
+    <node id="&quot;CHANNEL&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Channel refers to the distribution channels through which sales are made and analyzed in the SQL query segments."</data>
+      <data key="d2">chunk-28da327421b6cfdbcddb10d800dc8c4c</data>
+    </node>
+    <node id="&quot;AMT&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Amt refers to the sales amount used in the SQL query to calculate discount levels."&lt;SEP&gt;"Amt represents the total sales amount generated by the stores within the specified period."</data>
+      <data key="d2">chunk-28da327421b6cfdbcddb10d800dc8c4c&lt;SEP&gt;chunk-7acc96b4208534be2573509b9b3acb9f</data>
+    </node>
+    <node id="&quot;ORIG_PRICE&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Orig_price refers to the original price of products used in the calculation of discounts in the SQL query."</data>
+      <data key="d2">chunk-28da327421b6cfdbcddb10d800dc8c4c</data>
+    </node>
+    <node id="&quot;SUM&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"SUM is an SQL function used to aggregate sales amounts and original prices for discount calculations in the query."</data>
+      <data key="d2">chunk-28da327421b6cfdbcddb10d800dc8c4c</data>
+    </node>
+    <node id="&quot;TO_CHAR&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"TO_CHAR is an SQL function used to format dates in the query for precise time frame calculations."</data>
+      <data key="d2">chunk-28da327421b6cfdbcddb10d800dc8c4c</data>
+    </node>
+    <node id="&quot;DATEADD&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"DATEADD is an SQL function used to compute dates relative to the current date to determine time frames."</data>
+      <data key="d2">chunk-28da327421b6cfdbcddb10d800dc8c4c</data>
+    </node>
+    <node id="&quot;DATE&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Dates are temporal markers used in the query to determine the number of stores open as of a specific date."</data>
+      <data key="d2">chunk-2b96f8a403e0c1eff91d73c4ba2f3852</data>
+    </node>
+    <node id="&quot;EDW_DIM_STORE_PROD&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"EDW_DIM_STORE_PROD is the data source in the SQL query that contains information about stores."&lt;SEP&gt;"edw_dim_store_prod is a database table that contains store information at a daily granularity."&lt;SEP&gt;"edw_dim_store_prod is a dataset or database entity containing store information used in the SQL query."&lt;SEP&gt;"edw_dim_store_prod is a dataset used in the SQL query to store information about retail stores, including whether they participate in comparable sales evaluations."</data>
+      <data key="d2">chunk-3eba47b965db367686d4c29b285e7b7d&lt;SEP&gt;chunk-80feb7f9baa0e4d493fb4e9c682b6822&lt;SEP&gt;chunk-4c7d700fc24244d8591243053236229d&lt;SEP&gt;chunk-2b96f8a403e0c1eff91d73c4ba2f3852</data>
+    </node>
+    <node id="&quot;OPENING STORES&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Opening Stores refers to the subset of stores that are currently open and being queried based on their 'open' status flag."</data>
+      <data key="d2">chunk-2b96f8a403e0c1eff91d73c4ba2f3852</data>
+    </node>
+    <node id="&quot;OPEN FLAG&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Open Flag is a status indicator used to determine whether a store is counted as open or not in the query."</data>
+      <data key="d2">chunk-2b96f8a403e0c1eff91d73c4ba2f3852</data>
+    </node>
+    <node id="&quot;CALENDAR DATE CODE&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Calendar Date Code represents the specific format of the date being queried for open stores, used in the SQL query's WHERE clause."</data>
+      <data key="d2">chunk-2b96f8a403e0c1eff91d73c4ba2f3852</data>
+    </node>
+    <node id="&quot;COMP STORES&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Comp Stores refers to the category of retail stores that participate in the company's comparable store sales evaluation as of a specified date."</data>
+      <data key="d2">chunk-4c7d700fc24244d8591243053236229d</data>
+    </node>
+    <node id="&quot;CALENDAR.DATE_CODE&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"calendar.date_code is a specific date used in the SQL query to filter and retrieve comp stores data for comparable sales analysis."</data>
+      <data key="d2">chunk-4c7d700fc24244d8591243053236229d</data>
+    </node>
+    <node id="&quot;CHINA&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"China is a country mentioned in the context of querying average store sizes for a specific fiscal year."</data>
+      <data key="d2">chunk-3eba47b965db367686d4c29b285e7b7d</data>
+    </node>
+    <node id="&quot;BH STORE&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"BH Store refers to a type of store for which the average size is being queried, specifically in the context of FY24 in China."</data>
+      <data key="d2">chunk-3eba47b965db367686d4c29b285e7b7d</data>
+    </node>
+    <node id="&quot;FY24&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"FY24 refers to the fiscal year 2024, a period used for financial and reporting purposes."&lt;SEP&gt;"FY24 refers to the fiscal year from 2023-04-01 to 2024-03-31, during which the store size data is analyzed."</data>
+      <data key="d2">chunk-3eba47b965db367686d4c29b285e7b7d&lt;SEP&gt;chunk-80feb7f9baa0e4d493fb4e9c682b6822</data>
+    </node>
+    <node id="&quot;AVERAGE STORE SIZE&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Average Store Size is the metric being calculated in the query for both BH Stores and Comp Stores in FY24."</data>
+      <data key="d2">chunk-3eba47b965db367686d4c29b285e7b7d</data>
+    </node>
+    <node id="&quot;OPENSTORE&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"openstore is a SQL Common Table Expression (CTE) that calculates the minimum open dates for new stores."</data>
+      <data key="d2">chunk-80feb7f9baa0e4d493fb4e9c682b6822</data>
+    </node>
+    <node id="&quot;NEW STORES&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"New stores refer to the retail outlets opened within a specified time period, often tracked for growth and reporting purposes."</data>
+      <data key="d2">chunk-80feb7f9baa0e4d493fb4e9c682b6822</data>
+    </node>
+    <node id="&quot;STORES&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"Stores are retail locations which are evaluated based on their sales performance and opening dates."&lt;SEP&gt;"Stores refer to the retail locations that are being evaluated for their sales performance against targets."</data>
+      <data key="d2">chunk-84e6029b32df619a952ad30929d009a2&lt;SEP&gt;chunk-7acc96b4208534be2573509b9b3acb9f</data>
+    </node>
+    <node id="&quot;SALES TARGET&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Sales Target is the predetermined sales goal that stores aim to achieve within a specified time frame."</data>
+      <data key="d2">chunk-7acc96b4208534be2573509b9b3acb9f</data>
+    </node>
+    <node id="&quot;SALES DATA QUERY&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"Sales Data Query is the process of retrieving and analyzing sales data to determine achievement rates for stores."</data>
+      <data key="d2">chunk-7acc96b4208534be2573509b9b3acb9f</data>
+    </node>
+    <node id="&quot;AMT_ACH&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Amt_ach refers to the calculated metric indicating whether the sales target was achieved, with positive values representing achievement and negative values indicating a shortfall."</data>
+      <data key="d2">chunk-7acc96b4208534be2573509b9b3acb9f</data>
+    </node>
+    <node id="&quot;AMT_NOTAX&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Amt_notax refers to the sales amount excluding taxes, providing a net sales figure for evaluation."</data>
+      <data key="d2">chunk-7acc96b4208534be2573509b9b3acb9f</data>
+    </node>
+    <node id="&quot;AMT_NOTAX_TARGET&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Amt_notax_target is the target amount for sales excluding taxes that stores aim to achieve."</data>
+      <data key="d2">chunk-7acc96b4208534be2573509b9b3acb9f</data>
+    </node>
+    <node id="&quot;SALES PERFORMANCE&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Sales Performance refers to the evaluation of a store's sales metrics such as total sales amount and achievement rate against targets."</data>
+      <data key="d2">chunk-84e6029b32df619a952ad30929d009a2</data>
+    </node>
+    <node id="&quot;ACHIEVEMENT RATE&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Achievement Rate is a calculated metric indicating performance by comparing actual sales to sales targets."</data>
+      <data key="d2">chunk-84e6029b32df619a952ad30929d009a2</data>
+    </node>
+    <node id="&quot;OPEN DATE&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"Open Date refers to the specific date on which a store commenced operations."</data>
+      <data key="d2">chunk-84e6029b32df619a952ad30929d009a2</data>
+    </node>
+    <node id="&quot;TARGET&quot;">
+      <data key="d0">"CATEGORY"</data>
+      <data key="d1">"Target refers to the predefined sales objectives that stores aim to achieve."</data>
+      <data key="d2">chunk-84e6029b32df619a952ad30929d009a2</data>
+    </node>
+    <node id="&quot;SUNDAY&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"Sunday is used in the query as a reference point for determining the temporal range for data extraction."</data>
+      <data key="d2">chunk-84e6029b32df619a952ad30929d009a2</data>
+    </node>
+    <node id="&quot;SATURDAY&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"Saturday is the endpoint in the query defining when the evaluation and data collection period for new store openings concludes."</data>
+      <data key="d2">chunk-84e6029b32df619a952ad30929d009a2</data>
+    </node>
+    <edge source="&quot;WTD&quot;" target="&quot;SQL QUERY&quot;">
+      <data key="d3">8.0</data>
+      <data key="d4">"WTD is used as a period in the SQL query for calculating and retrieving sales achievement data."</data>
+      <data key="d5">"sales analysis, data retrieval"</data>
+      <data key="d6">chunk-44a4d13fd2fa5168f043e8cd0f9cbceb</data>
+    </edge>
+    <edge source="&quot;MTD&quot;" target="&quot;SQL QUERY&quot;">
+      <data key="d3">8.0</data>
+      <data key="d4">"MTD appears as a period in the SQL query to assess sales achievements for the current month-to-date."</data>
+      <data key="d5">"monthly analysis, sales tracking"</data>
+      <data key="d6">chunk-44a4d13fd2fa5168f043e8cd0f9cbceb</data>
+    </edge>
+    <edge source="&quot;QTD&quot;" target="&quot;SQL QUERY&quot;">
+      <data key="d3">8.0</data>
+      <data key="d4">"QTD serves as a period in SQL queries to determine sales achievements for the present quarter-to-date."</data>
+      <data key="d5">"quarterly performance, sales reporting"</data>
+      <data key="d6">chunk-44a4d13fd2fa5168f043e8cd0f9cbceb</data>
+    </edge>
+    <edge source="&quot;YTD&quot;" target="&quot;SQL QUERY&quot;">
+      <data key="d3">8.0</data>
+      <data key="d4">"YTD is applied in SQL queries to evaluate sales achievements for the year-to-date period."</data>
+      <data key="d5">"yearly analysis, business assessment"</data>
+      <data key="d6">chunk-44a4d13fd2fa5168f043e8cd0f9cbceb</data>
+    </edge>
+    <edge source="&quot;F1 TARGET&quot;" target="&quot;SQL QUERY&quot;">
+      <data key="d3">7.0</data>
+      <data key="d4">"F1 target can be selected in queries to set specific target benchmarks for sales comparisons."</data>
+      <data key="d5">"target setting, performance evaluation"</data>
+      <data key="d6">chunk-44a4d13fd2fa5168f043e8cd0f9cbceb</data>
+    </edge>
+    <edge source="&quot;F2 TARGET&quot;" target="&quot;SQL QUERY&quot;">
+      <data key="d3">7.0</data>
+      <data key="d4">"F2 target is an option in the SQL query for setting sales targets used in achievement assessments."</data>
+      <data key="d5">"benchmarking, sales target"</data>
+      <data key="d6">chunk-44a4d13fd2fa5168f043e8cd0f9cbceb</data>
+    </edge>
+    <edge source="&quot;F3 TARGET&quot;" target="&quot;SQL QUERY&quot;">
+      <data key="d3">7.0</data>
+      <data key="d4">"F3 target is another option in SQL queries to determine specific sales benchmarks for analysis."</data>
+      <data key="d5">"goal alignment, performance check"</data>
+      <data key="d6">chunk-44a4d13fd2fa5168f043e8cd0f9cbceb</data>
+    </edge>
+    <edge source="&quot;F4 TARGET&quot;" target="&quot;SQL QUERY&quot;">
+      <data key="d3">7.0</data>
+      <data key="d4">"F4 target can be used in SQL queries for setting the final tier of sales targets for analysis."</data>
+      <data key="d5">"performance metrics, target alignment"</data>
+      <data key="d6">chunk-44a4d13fd2fa5168f043e8cd0f9cbceb</data>
+    </edge>
+    <edge source="&quot;CHINA FP&quot;" target="&quot;SQL QUERY&quot;">
+      <data key="d3">6.0</data>
+      <data key="d4">"China FP is a geographical reference for contextual sales achievement queries in the SQL samples."</data>
+      <data key="d5">"regional focus, sales evaluation"</data>
+      <data key="d6">chunk-44a4d13fd2fa5168f043e8cd0f9cbceb</data>
+    </edge>
+    <edge source="&quot;SALES ACHIEVEMENT RATE&quot;" target="&quot;SQL QUERY&quot;">
+      <data key="d3">18.0</data>
+      <data key="d4">"The SQL Query is used to calculate the Sales Achievement Rate, providing the necessary data and computation for this metric."&lt;SEP&gt;"The Sales Achievement Rate is calculated using an SQL Query which retrieves sales and target data."</data>
+      <data key="d5">"data calculation, performance analysis"&lt;SEP&gt;"data retrieval, performance assessment"</data>
+      <data key="d6">chunk-323320f36bc5fcbd343c99b79167f2cb&lt;SEP&gt;chunk-657ec00766b920c166780b3c3e32b930</data>
+    </edge>
+    <edge source="&quot;SALES ACHIEVEMENT RATE&quot;" target="&quot;SALES AMOUNT&quot;">
+      <data key="d3">9.0</data>
+      <data key="d4">"Sales Amount is used in the calculation of the Sales Achievement Rate to assess performance against targets."</data>
+      <data key="d5">"performance calculation, financial analysis"</data>
+      <data key="d6">chunk-657ec00766b920c166780b3c3e32b930</data>
+    </edge>
+    <edge source="&quot;SALES ACHIEVEMENT RATE&quot;" target="&quot;TARGET SALES AMOUNT&quot;">
+      <data key="d3">9.0</data>
+      <data key="d4">"Target Sales Amount is a component in calculating the Sales Achievement Rate, determining performance success."</data>
+      <data key="d5">"target assessment, goal analysis"</data>
+      <data key="d6">chunk-657ec00766b920c166780b3c3e32b930</data>
+    </edge>
+    <edge source="&quot;SALES ACHIEVEMENT RATE&quot;" target="&quot;STORES&quot;">
+      <data key="d3">8.0</data>
+      <data key="d4">"Stores are assessed using the Sales Achievement Rate to determine if they meet or exceed their sales targets."</data>
+      <data key="d5">"performance measurement, success criteria"</data>
+      <data key="d6">chunk-7acc96b4208534be2573509b9b3acb9f</data>
+    </edge>
+    <edge source="&quot;DM_FACT_SALES_CHATBI&quot;" target="&quot;SALES_AMT&quot;">
+      <data key="d3">6.0</data>
+      <data key="d4">"Dm_fact_sales_chatbi contains the data from which Sales_amt is computed."</data>
+      <data key="d5">"data source, calculation"</data>
+      <data key="d6">chunk-6ccc3dc49eff6478f996913190bc209f</data>
+    </edge>
+    <edge source="&quot;DM_FACT_SALES_CHATBI&quot;" target="&quot;SQL QUERY&quot;">
+      <data key="d3">16.0</data>
+      <data key="d4">"The SQL Query accesses dm_fact_sales_chatbi to obtain the necessary sales figures and perform calculations."&lt;SEP&gt;"The SQL query is run on the dm_fact_sales_chatbi table to gather sales information necessary for analysis."</data>
+      <data key="d5">"data source, database access"&lt;SEP&gt;"database query, data collection"</data>
+      <data key="d6">chunk-323320f36bc5fcbd343c99b79167f2cb&lt;SEP&gt;chunk-6c676d02a46f0ee58a25585c6cf4e752</data>
+    </edge>
+    <edge source="&quot;DM_FACT_SALES_CHATBI&quot;" target="&quot;DATABASE&quot;">
+      <data key="d3">7.0</data>
+      <data key="d4">"dm_fact_sales_chatbi is a part of the Database where sales data is stored for querying."</data>
+      <data key="d5">"data storage, organizational structure"</data>
+      <data key="d6">chunk-87c4c7bd85742058d4fb3fb7368545c6</data>
+    </edge>
+    <edge source="&quot;DM_FACT_SALES_CHATBI&quot;" target="&quot;STORE&quot;">
+      <data key="d3">7.0</data>
+      <data key="d4">"Stores' sales data is retrieved from the dm_fact_sales_chatbi table to assess their sales performance."</data>
+      <data key="d5">"data retrieval, sales analysis"</data>
+      <data key="d6">chunk-6c676d02a46f0ee58a25585c6cf4e752</data>
+    </edge>
+    <edge source="&quot;DM_FACT_SALES_CHATBI&quot;" target="&quot;TWDIS&quot;">
+      <data key="d3">9.0</data>
+      <data key="d4">"twdis uses the dm_fact_sales_chatbi database table to calculate the current week's discount level."</data>
+      <data key="d5">"data source, sales analysis"</data>
+      <data key="d6">chunk-28da327421b6cfdbcddb10d800dc8c4c</data>
+    </edge>
+    <edge source="&quot;DM_FACT_SALES_CHATBI&quot;" target="&quot;LWDIS&quot;">
+      <data key="d3">9.0</data>
+      <data key="d4">"lwdis uses the dm_fact_sales_chatbi database table to calculate the previous week's discount level."</data>
+      <data key="d5">"data source, sales analysis"</data>
+      <data key="d6">chunk-28da327421b6cfdbcddb10d800dc8c4c</data>
+    </edge>
+    <edge source="&quot;DM_FACT_SALES_CHATBI&quot;" target="&quot;LMDIS&quot;">
+      <data key="d3">9.0</data>
+      <data key="d4">"lmdis uses the dm_fact_sales_chatbi database table to calculate the previous month's discount level."</data>
+      <data key="d5">"data source, sales analysis"</data>
+      <data key="d6">chunk-28da327421b6cfdbcddb10d800dc8c4c</data>
+    </edge>
+    <edge source="&quot;DM_FACT_SALES_CHATBI&quot;" target="&quot;LYDIS&quot;">
+      <data key="d3">9.0</data>
+      <data key="d4">"lydis uses the dm_fact_sales_chatbi database table to calculate the previous year's discount level."</data>
+      <data key="d5">"data source, sales analysis"</data>
+      <data key="d6">chunk-28da327421b6cfdbcddb10d800dc8c4c</data>
+    </edge>
+    <edge source="&quot;SQL QUERY&quot;" target="&quot;CURRENT DATE&quot;">
+      <data key="d3">8.0</data>
+      <data key="d4">"Current Date is used within the SQL Query to define the time range for data extraction and analysis."</data>
+      <data key="d5">"date specification, time frame"</data>
+      <data key="d6">chunk-323320f36bc5fcbd343c99b79167f2cb</data>
+    </edge>
+    <edge source="&quot;SQL QUERY&quot;" target="&quot;AMOUNT&quot;">
+      <data key="d3">9.0</data>
+      <data key="d4">"The SQL Query calculates and retrieves the Amount from the database to measure sales performance."</data>
+      <data key="d5">"data retrieval, sales calculation"</data>
+      <data key="d6">chunk-323320f36bc5fcbd343c99b79167f2cb</data>
+    </edge>
+    <edge source="&quot;SQL QUERY&quot;" target="&quot;AMOUNT_NO_TAX&quot;">
+      <data key="d3">9.0</data>
+      <data key="d4">"The SQL Query calculates and retrieves the Amount_no_tax to analyze untaxed sales performance during the period."</data>
+      <data key="d5">"untaxed calculation, sales analysis"</data>
+      <data key="d6">chunk-323320f36bc5fcbd343c99b79167f2cb</data>
+    </edge>
+    <edge source="&quot;SQL QUERY&quot;" target="&quot;AMOUNT_NO_TAX_TARGET&quot;">
+      <data key="d3">9.0</data>
+      <data key="d4">"The SQL Query uses Amount_no_tax_target to compute the sales achievement rate by comparing target and actual sales without tax."</data>
+      <data key="d5">"target comparison, goal setting"</data>
+      <data key="d6">chunk-323320f36bc5fcbd343c99b79167f2cb</data>
+    </edge>
+    <edge source="&quot;SQL QUERY&quot;" target="&quot;SALES GROWTH INDICATORS&quot;">
+      <data key="d3">9.0</data>
+      <data key="d4">"The SQL Query is designed to calculate and present the Sales Growth Indicators such as sales amount, traffic, and others for analysis."</data>
+      <data key="d5">"data analysis, performance measurement"</data>
+      <data key="d6">chunk-46717d23ed24c265e22997d8c86bc689</data>
+    </edge>
+    <edge source="&quot;SQL QUERY&quot;" target="&quot;DATEADD FUNCTION&quot;">
+      <data key="d3">8.0</data>
+      <data key="d4">"The DATEADD Function is utilized in the SQL Query to determine the date for retrieving previous day's sales data."</data>
+      <data key="d5">"date calculation, query execution"</data>
+      <data key="d6">chunk-657ec00766b920c166780b3c3e32b930</data>
+    </edge>
+    <edge source="&quot;SQL QUERY&quot;" target="&quot;WOW SALES GROWTH PERCENTAGE&quot;">
+      <data key="d3">8.0</data>
+      <data key="d4">"The SQL Query is used to calculate the WOW Sales Growth Percentage for stores."</data>
+      <data key="d5">"data analysis, metric calculation"</data>
+      <data key="d6">chunk-87c4c7bd85742058d4fb3fb7368545c6</data>
+    </edge>
+    <edge source="&quot;SQL QUERY&quot;" target="&quot;DATABASE&quot;">
+      <data key="d3">9.0</data>
+      <data key="d4">"The SQL Query is executed on the Database to retrieve and analyze sales data."</data>
+      <data key="d5">"data retrieval, analysis operation"</data>
+      <data key="d6">chunk-87c4c7bd85742058d4fb3fb7368545c6</data>
+    </edge>
+    <edge source="&quot;SQL QUERY&quot;" target="&quot;WORST WOW SALES GROWTH%&quot;">
+      <data key="d3">9.0</data>
+      <data key="d4">"The SQL query is used to calculate and identify the worst week-over-week sales growth percentage for stores."</data>
+      <data key="d5">"data analysis, sales performance"</data>
+      <data key="d6">chunk-6c676d02a46f0ee58a25585c6cf4e752</data>
+    </edge>
+    <edge source="&quot;COMP STORE&quot;" target="&quot;FY24&quot;">
+      <data key="d3">7.0</data>
+      <data key="d4">"Comp Stores are analyzed for average size during the fiscal year FY24, indicating temporal relevance."</data>
+      <data key="d5">"temporal analysis, comparative assessment"</data>
+      <data key="d6">chunk-3eba47b965db367686d4c29b285e7b7d</data>
+    </edge>
+    <edge source="&quot;APAC&quot;" target="&quot;EC&quot;">
+      <data key="d3">7.0</data>
+      <data key="d4">"The sales analysis query is focused on the e-commerce channels within the APAC region."</data>
+      <data key="d5">"sales analysis, regional focus"</data>
+      <data key="d6">chunk-6ccc3dc49eff6478f996913190bc209f</data>
+    </edge>
+    <edge source="&quot;SALES MOM%&quot;" target="&quot;SALES GROWTH SITUATION&quot;">
+      <data key="d3">8.0</data>
+      <data key="d4">"The sales growth situation is assessed using the Sales MOM% metric, which compares month-to-month sales."</data>
+      <data key="d5">"sales performance, comparison"</data>
+      <data key="d6">chunk-6ccc3dc49eff6478f996913190bc209f</data>
+    </edge>
+    <edge source="&quot;MONTH_ID&quot;" target="&quot;SALES_AMT&quot;">
+      <data key="d3">7.0</data>
+      <data key="d4">"Month_id is used to group Sales_amt in order to evaluate monthly sales performance."</data>
+      <data key="d5">"data grouping, performance evaluation"</data>
+      <data key="d6">chunk-6ccc3dc49eff6478f996913190bc209f</data>
+    </edge>
+    <edge source="&quot;SALES_AMT&quot;" target="&quot;SALES_NOTAX&quot;">
+      <data key="d3">6.0</data>
+      <data key="d4">"Sales_amt includes the taxed sales amount, while Sales_notax excludes taxes in the calculation."</data>
+      <data key="d5">"tax calculation, data relationship"</data>
+      <data key="d6">chunk-6ccc3dc49eff6478f996913190bc209f</data>
+    </edge>
+    <edge source="&quot;SALES_NOTAX&quot;" target="&quot;SALES_NOTAX_MOM_PER&quot;">
+      <data key="d3">7.0</data>
+      <data key="d4">"Sales_notax is utilized to calculate the Sales_notax_mom_per, showing the MOM% change without tax."</data>
+      <data key="d5">"calculation, performance metric"</data>
+      <data key="d6">chunk-6ccc3dc49eff6478f996913190bc209f</data>
+    </edge>
+    <edge source="&quot;DM_FACT_SALES_SKU_CHATBI&quot;" target="&quot;SALESQTY&quot;">
+      <data key="d3">7.0</data>
+      <data key="d4">"The dm_fact_sales_sku_chatbi table provides the sales data that is aggregated in the salesQty CTE for analysis."</data>
+      <data key="d5">"data source, aggregation"</data>
+      <data key="d6">chunk-318e05213fba67f7b6a114f0cdca5a84</data>
+    </edge>
+    <edge source="&quot;SALES PROPORTION ANALYSIS&quot;" target="&quot;SQL QUERY SAMPLE&quot;">
+      <data key="d3">8.0</data>
+      <data key="d4">"The SQL Query Sample is the method used to perform the Sales Proportion Analysis."</data>
+      <data key="d5">"data analysis, technical implementation"</data>
+      <data key="d6">chunk-a7c59845f68cba3f6c7aa283a00c6151</data>
+    </edge>
+    <edge source="&quot;SALES PROPORTION ANALYSIS&quot;" target="&quot;KEY CATEGORY SALES SOB&quot;">
+      <data key="d3">9.0</data>
+      <data key="d4">"Key Category Sales SOB is a specific focus within Sales Proportion Analysis, providing insights into category performance."</data>
+      <data key="d5">"performance measurement, sales analysis"</data>
+      <data key="d6">chunk-a7c59845f68cba3f6c7aa283a00c6151</data>
+    </edge>
+    <edge source="&quot;LAST WEEK&quot;" target="&quot;SALES DATA QUERY&quot;">
+      <data key="d3">7.0</data>
+      <data key="d4">"The Sales Data Query focuses on data from Last Week to evaluate sales performance."</data>
+      <data key="d5">"temporal analysis, data evaluation"</data>
+      <data key="d6">chunk-7acc96b4208534be2573509b9b3acb9f</data>
+    </edge>
+    <edge source="&quot;STORE&quot;" target="&quot;YESTERDAY'S SALES&quot;">
+      <data key="d3">8.0</data>
+      <data key="d4">"Yesterday's Sales data is specific to an individual Store, identified by a code or name."</data>
+      <data key="d5">"daily performance, store-specific"</data>
+      <data key="d6">chunk-657ec00766b920c166780b3c3e32b930</data>
+    </edge>
+    <edge source="&quot;STORE&quot;" target="&quot;SALES QUERY&quot;">
+      <data key="d3">9.0</data>
+      <data key="d4">"The Sales Query is used to determine which Store has achieved the best week-over-week sales growth percentage."</data>
+      <data key="d5">"sales performance analysis, database query"</data>
+      <data key="d6">chunk-87c4c7bd85742058d4fb3fb7368545c6</data>
+    </edge>
+    <edge source="&quot;STORE&quot;" target="&quot;WORST WOW SALES GROWTH%&quot;">
+      <data key="d3">8.0</data>
+      <data key="d4">"Each store is evaluated based on its week-over-week sales growth, aiming to identify those with the worst performance."</data>
+      <data key="d5">"performance evaluation, sales metric"</data>
+      <data key="d6">chunk-6c676d02a46f0ee58a25585c6cf4e752</data>
+    </edge>
+    <edge source="&quot;STORE&quot;" target="&quot;COUNTRY&quot;">
+      <data key="d3">8.0</data>
+      <data key="d4">"The Stores are categorized by Country to group and count the number of stores open as of a specific date."</data>
+      <data key="d5">"categorization, geographic grouping"</data>
+      <data key="d6">chunk-2b96f8a403e0c1eff91d73c4ba2f3852</data>
+    </edge>
+    <edge source="&quot;STORE&quot;" target="&quot;DATE&quot;">
+      <data key="d3">9.0</data>
+      <data key="d4">"Dates are used to filter the Stores that are open, focusing on a specific given date."</data>
+      <data key="d5">"temporal filtering, status check"</data>
+      <data key="d6">chunk-2b96f8a403e0c1eff91d73c4ba2f3852</data>
+    </edge>
+    <edge source="&quot;STORE&quot;" target="&quot;EDW_DIM_STORE_PROD&quot;">
+      <data key="d3">9.0</data>
+      <data key="d4">"The EDW_DIM_STORE_PROD is the database table containing Store information used in the query."</data>
+      <data key="d5">"data source, information retrieval"</data>
+      <data key="d6">chunk-2b96f8a403e0c1eff91d73c4ba2f3852</data>
+    </edge>
+    <edge source="&quot;DATEADD FUNCTION&quot;" target="&quot;CURRENT_DATE FUNCTION&quot;">
+      <data key="d3">8.0</data>
+      <data key="d4">"CURRENT_DATE Function works in conjunction with DATEADD Function to accurately calculate the previous day for queries."</data>
+      <data key="d5">"date manipulation, query preparation"</data>
+      <data key="d6">chunk-657ec00766b920c166780b3c3e32b930</data>
+    </edge>
+    <edge source="&quot;CHINA BH&quot;" target="&quot;WEEKLY SALES&quot;">
+      <data key="d3">8.0</data>
+      <data key="d4">"The geographical region of China BH is specifically analyzed in the context of weekly sales activity and revenue generation."</data>
+      <data key="d5">"regional analysis, sales performance"</data>
+      <data key="d6">chunk-34bd968ebf3c5c6de3ec30724f3c540c</data>
+    </edge>
+    <edge source="&quot;WEEKLY SALES&quot;" target="&quot;PRODUCT CATEGORIES&quot;">
+      <data key="d3">9.0</data>
+      <data key="d4">"The event of Weekly Sales is significantly impacted by various Product Categories, as they drive the sales revenue."</data>
+      <data key="d5">"financial impact, sales categories"</data>
+      <data key="d6">chunk-34bd968ebf3c5c6de3ec30724f3c540c</data>
+    </edge>
+    <edge source="&quot;CURRY&quot;" target="&quot;SELL-THROUGH&quot;">
+      <data key="d3">8.0</data>
+      <data key="d4">"CURRY is part of the query parameters used in calculating the sell-through rate for products that match certain criteria related to CURRY."</data>
+      <data key="d5">"product analysis, query parameter"</data>
+      <data key="d6">chunk-318e05213fba67f7b6a114f0cdca5a84</data>
+    </edge>
+    <edge source="&quot;SELL-THROUGH&quot;" target="&quot;QUERY&quot;">
+      <data key="d3">9.0</data>
+      <data key="d4">"A Query is used to calculate the sell-through rate by retrieving necessary sales and inventory data."</data>
+      <data key="d5">"data retrieval, metric calculation"</data>
+      <data key="d6">chunk-318e05213fba67f7b6a114f0cdca5a84</data>
+    </edge>
+    <edge source="&quot;SALESQTY&quot;" target="&quot;INVOFLASTSATURDAY&quot;">
+      <data key="d3">8.0</data>
+      <data key="d4">"Both salesQty and InvOfLastSaturday datasets are used together to calculate the sell-through percentage in SQL queries."</data>
+      <data key="d5">"data aggregation, inventory management"</data>
+      <data key="d6">chunk-318e05213fba67f7b6a114f0cdca5a84</data>
+    </edge>
+    <edge source="&quot;INVOFLASTSATURDAY&quot;" target="&quot;DM_FACT_ONHAND_CHATBI&quot;">
+      <data key="d3">7.0</data>
+      <data key="d4">"The dm_fact_onhand_chatbi table is the source of inventory data aggregated in the InvOfLastSaturday CTE."</data>
+      <data key="d5">"data source, inventory tracking"</data>
+      <data key="d6">chunk-318e05213fba67f7b6a114f0cdca5a84</data>
+    </edge>
+    <edge source="&quot;INVOFLASTSATURDAY&quot;" target="&quot;EDW_DIM_CALENDAR&quot;">
+      <data key="d3">6.0</data>
+      <data key="d4">"The edw_dim_calendar table is used to determine the correct date for selecting inventory in InvOfLastSaturday."</data>
+      <data key="d5">"date calculation, data filtering"</data>
+      <data key="d6">chunk-318e05213fba67f7b6a114f0cdca5a84</data>
+    </edge>
+    <edge source="&quot;EDW_DIM_CALENDAR&quot;" target="&quot;DATE&quot;">
+      <data key="d3">8.0</data>
+      <data key="d4">"The EDW_DIM_CALENDAR table is used to provide Date-related information for the query."</data>
+      <data key="d5">"data source, temporal classification"</data>
+      <data key="d6">chunk-2b96f8a403e0c1eff91d73c4ba2f3852</data>
+    </edge>
+    <edge source="&quot;EDW_DIM_CALENDAR&quot;" target="&quot;COMP STORES&quot;">
+      <data key="d3">7.0</data>
+      <data key="d4">"The category of Comp Stores is related to the edw_dim_calendar dataset for date filtering to ensure accurate store count as of a specified date."</data>
+      <data key="d5">"date filtering, accuracy"</data>
+      <data key="d6">chunk-4c7d700fc24244d8591243053236229d</data>
+    </edge>
+    <edge source="&quot;EDW_DIM_CALENDAR&quot;" target="&quot;EDW_DIM_STORE_PROD&quot;">
+      <data key="d3">8.0</data>
+      <data key="d4">"edw_dim_store_prod and edw_dim_calendar tables are joined to filter store data based on specific date criteria."</data>
+      <data key="d5">"data management, date filtering"</data>
+      <data key="d6">chunk-80feb7f9baa0e4d493fb4e9c682b6822</data>
+    </edge>
+    <edge source="&quot;STORESALES&quot;" target="&quot;REACHSTORE&quot;">
+      <data key="d3">9.0</data>
+      <data key="d4">"ReachStore is derived from StoreSales, identifying stores that have met or exceeded their sales targets."</data>
+      <data key="d5">"sales analysis, target achievement"</data>
+      <data key="d6">chunk-8544c4710e38a3bd8900e1e5e55008c1</data>
+    </edge>
+    <edge source="&quot;STORESALES&quot;" target="&quot;ALLSTORE&quot;">
+      <data key="d3">8.0</data>
+      <data key="d4">"ALLStore is a subset of StoreSales, encompassing all stores considered in the sales analysis."</data>
+      <data key="d5">"data aggregation, comprehensive count"</data>
+      <data key="d6">chunk-8544c4710e38a3bd8900e1e5e55008c1</data>
+    </edge>
+    <edge source="&quot;TWDIS&quot;" target="&quot;LWDIS&quot;">
+      <data key="d3">8.0</data>
+      <data key="d4">"twdis and lwdis are related as they both calculate discounts, twdis for the current week and lwdis for the previous week, enabling comparison over time."</data>
+      <data key="d5">"temporal comparison, weekly analysis"</data>
+      <data key="d6">chunk-28da327421b6cfdbcddb10d800dc8c4c</data>
+    </edge>
+    <edge source="&quot;TWDIS&quot;" target="&quot;LMDIS&quot;">
+      <data key="d3">8.0</data>
+      <data key="d4">"twdis and lmdis are related as they both calculate discounts, twdis for the current week and lmdis for the previous month, enabling analysis over different periods."</data>
+      <data key="d5">"temporal comparison, monthly analysis"</data>
+      <data key="d6">chunk-28da327421b6cfdbcddb10d800dc8c4c</data>
+    </edge>
+    <edge source="&quot;TWDIS&quot;" target="&quot;LYDIS&quot;">
+      <data key="d3">8.0</data>
+      <data key="d4">"twdis and lydis are related as they both calculate discounts, twdis for the current week and lydis for the previous year, supporting annual comparison."</data>
+      <data key="d5">"temporal comparison, yearly analysis"</data>
+      <data key="d6">chunk-28da327421b6cfdbcddb10d800dc8c4c</data>
+    </edge>
+    <edge source="&quot;EDW_DIM_STORE_PROD&quot;" target="&quot;COMP STORES&quot;">
+      <data key="d3">8.0</data>
+      <data key="d4">"The category of Comp Stores is assessed using data from the edw_dim_store_prod dataset to count the number of stores that participate in the comp evaluation."</data>
+      <data key="d5">"data analysis, store evaluation"</data>
+      <data key="d6">chunk-4c7d700fc24244d8591243053236229d</data>
+    </edge>
+    <edge source="&quot;CHINA&quot;" target="&quot;BH STORE&quot;">
+      <data key="d3">8.0</data>
+      <data key="d4">"The query focuses on the average size of BH Stores located in China during FY24."</data>
+      <data key="d5">"geographical analysis, store categorization"</data>
+      <data key="d6">chunk-3eba47b965db367686d4c29b285e7b7d</data>
+    </edge>
+    <edge source="&quot;BH STORE&quot;" target="&quot;FY24&quot;">
+      <data key="d3">7.0</data>
+      <data key="d4">"The stores being analyzed for average size are specifically BH Stores during the fiscal year FY24."</data>
+      <data key="d5">"temporal analysis, store categorization"</data>
+      <data key="d6">chunk-3eba47b965db367686d4c29b285e7b7d</data>
+    </edge>
+    <edge source="&quot;FY24&quot;" target="&quot;OPENSTORE&quot;">
+      <data key="d3">7.0</data>
+      <data key="d4">"The openstore CTE is used to identify the number of new stores opened in FY24."</data>
+      <data key="d5">"data analysis, fiscal year"</data>
+      <data key="d6">chunk-80feb7f9baa0e4d493fb4e9c682b6822</data>
+    </edge>
+    <edge source="&quot;STORES&quot;" target="&quot;SALES TARGET&quot;">
+      <data key="d3">9.0</data>
+      <data key="d4">"Stores are analyzed based on whether they achieve the predetermined Sales Target."</data>
+      <data key="d5">"performance evaluation, goal setting"</data>
+      <data key="d6">chunk-7acc96b4208534be2573509b9b3acb9f</data>
+    </edge>
+    <edge source="&quot;STORES&quot;" target="&quot;SALES PERFORMANCE&quot;">
+      <data key="d3">8.0</data>
+      <data key="d4">"Stores are evaluated based on their Sales Performance metrics."</data>
+      <data key="d5">"evaluation, performance metrics"</data>
+      <data key="d6">chunk-84e6029b32df619a952ad30929d009a2</data>
+    </edge>
+  </graph>
+</graphml>

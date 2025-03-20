@@ -1,0 +1,40 @@
+{
+  "global": {
+    "4726537c8fa51d4dd20b67f51cc0fd09": {
+      "return": "{\"high_level_keywords\": [\"Data analysis\", \"SQL code\", \"Sales performance\"], \"low_level_keywords\": [\"WTD Sales\", \"Target\", \"2025/2/20\", \"Thursday\"]}",
+      "cache_type": "keywords",
+      "embedding": null,
+      "embedding_shape": null,
+      "embedding_min": null,
+      "embedding_max": null,
+      "original_prompt": "You are a data analysis expert. Generate SQL code to calculate WTD Sales vs Target. Today is 2025/2/20, Thursday"
+    },
+    "c7d3ef5aaf5658700ee79a2d14d5c45b": {
+      "return": "To calculate the Week-to-Date (WTD) Sales versus Target as of February 20, 2025, you can use the following SQL query. This query sums up the sales amounts without tax and compares them to the target sales amounts for the week starting from last Sunday up until yesterday (Wednesday, February 19, 2025).\n\n```sql\nSELECT\n 'WTD' AS period,\n SUM(amt_notax) AS withouttax_amount,\n SUM(amt_notax_target) AS target_amount,\n CASE WHEN SUM(amt_notax_target) = 0 THEN 0 ELSE SUM(amt_notax)/SUM(amt_notax_target)-1 END AS achievement\nFROM\n dm_fact_sales_chatbi\nWHERE\n date_code BETWEEN '2025-02-16' AND '2025-02-19' -- Last Sunday to Yesterday\n;\n```\n\n### Explanation:\n- **Period**: The period is labeled 'WTD' indicating the data covers Week-to-Date.\n- **withouttax_amount**: This column calculates the total sales amount excluding taxes.\n- **target_amount**: This aggregates the target sales amount for the same period.\n- **achievement**: This calculates the sales achievement as a percentage using the formula: `(amt_notax / amt_notax_target) - 1`. If `amt_notax_target` is 0, it defaults to 0 to avoid division errors.\n- **Date Range**: The `WHERE` clause uses the `date_code` to filter dates between Sunday, February 16, 2025, and Wednesday, February 19, 2025, representing the Week-to-Date period up to yesterday.",
+      "cache_type": "query",
+      "embedding": null,
+      "embedding_shape": null,
+      "embedding_min": null,
+      "embedding_max": null,
+      "original_prompt": "You are a data analysis expert. Generate SQL code to calculate WTD Sales vs Target. Today is 2025/2/20, Thursday"
+    },
+    "1e0480921ce122eabfb949a4d74d93fd": {
+      "return": "{\"high_level_keywords\": [\"Data analysis\", \"SQL code\", \"Sales performance\"], \"low_level_keywords\": [\"MOM%\", \"APAC EC\", \"2025/2/20\", \"Thursday\"]}",
+      "cache_type": "keywords",
+      "embedding": null,
+      "embedding_shape": null,
+      "embedding_min": null,
+      "embedding_max": null,
+      "original_prompt": "You are a data analysis expert. Generate SQL code to calculate What is the sales MOM% for APAC EC?. Today is 2025/2/20, Thursday"
+    },
+    "8393386dfe0bf1ec73cd0f05c8972dd5": {
+      "return": "Here's an SQL query to calculate the Month-over-Month (MOM) percentage change in sales for the APAC EC region, taking into account today's date as February 20, 2025:\n\n```sql\nSELECT\n    month_id,\n    SUM(amt) AS sales_amt,\n    SUM(amt_notax) AS sales_notax,\n    SUM(amt_notax)/SUM(lm_amt_notax)-1 AS sales_notax_mom_per\nFROM\n    dm_fact_sales_chatbi\nWHERE\n    date_code BETWEEN TO_CHAR(DATE_TRUNC('MONTH', CURRENT_DATE), 'YYYY-MM-DD') AND TO_CHAR(DATEADD(day, -1, CURRENT_DATE), 'YYYY-MM-DD')\n    AND region = 'APAC' \n    AND channel = 'EC'\nGROUP BY\n    month_id;\n```\n\n### Explanation:\n- The query aggregates the sales data for the current month up to February 19, 2025 (the day before the current date).\n- It calculates the untaxed sales and compares it with the previous month's sales using the formula `SUM(amt_notax)/SUM(lm_amt_notax)-1`.\n- The conditions specified are for the APAC region and EC (E-Commerce) channel.\n- The result is grouped by `month_id` to give the Month-over-Month percentage.",
+      "cache_type": "query",
+      "embedding": null,
+      "embedding_shape": null,
+      "embedding_min": null,
+      "embedding_max": null,
+      "original_prompt": "You are a data analysis expert. Generate SQL code to calculate What is the sales MOM% for APAC EC?. Today is 2025/2/20, Thursday"
+    }
+  }
+}
