@@ -70,9 +70,7 @@ async def query(prompt : str):
     file_path_1 = os.path.join(script_dir, "technical_terms.txt")
     file_path_2 = os.path.join(script_dir, "schema_information.txt")
     with open(file_path_1, "r", encoding="utf-8") as f:
-        await rag.ainsert(f.read())
-    with open(file_path_2, "r", encoding="utf-8") as f:
-        await rag.ainsert(f.read(), split_by_character="(****)")
+        await rag.ainsert(f.read(), split_by_character="(****)\n")
     # with open("./sql_sample_kb-1.txt", "r", encoding="utf-8") as f:
     #     await rag.ainsert(f.read(), split_by_character="\n;")
     # Perform naive search

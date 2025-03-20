@@ -18,7 +18,7 @@ app = FastAPI(title="LightRAG API", description="API for RAG operations")
 # Configure working directory
 WORKING_DIR = os.environ.get("RAG_DIR", f"{DEFAULT_RAG_DIR}")
 print(f"WORKING_DIR: {WORKING_DIR}")
-LLM_MODEL = os.environ.get("LLM_MODEL", "o3-mini")
+LLM_MODEL = os.environ.get("LLM_MODEL", "gpt-4o-mini")
 print(f"LLM_MODEL: {LLM_MODEL}")
 EMBEDDING_MODEL = os.environ.get("EMBEDDING_MODEL", "text-embedding-3-large")
 print(f"EMBEDDING_MODEL: {EMBEDDING_MODEL}")
