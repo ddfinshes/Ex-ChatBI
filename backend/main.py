@@ -23,6 +23,8 @@ import json
 import LightRAG.examples.lightrag_openai_compatible_demo as rag
 from utils.get_NLExplain import ExplainAgent
 from utils.get_user_sql import SQLExtractAgent
+from utils.get_changeNLExSQL import ModifyAgent
+from utils.get_Chart import VisAgent
 from openai import OpenAI
 import csv
 from io import StringIO
@@ -179,14 +181,14 @@ async def query_handler(request: Dict[str, Any]):
         
         if not user_query:
             raise HTTPException(status_code=400, detail="Missing query parameter")
-
+        
         # 2. 知识库检索+生成sql代码
         print("==========================my_lightrag========================================")
-        rag_response, context, system_prompt = await rag.query(user_query)
+        rag_response, context = await rag.query(user_query)
+
         print("---------------context----------------\n")
-        print(rag_response)
+        print(context)
         print("\n--------------context---------------------")
-        print("??????????")
         # Extract knowledge base
         csv_file = StringIO(context.strip('"id", "content"\n'))
 
@@ -195,6 +197,7 @@ async def query_handler(request: Dict[str, Any]):
         list_of_lists = [row[1].split("**SQL query sample**:") for row in csv_reader]
 
 
+        print(list_of_lists)
 
 
 
@@ -241,9 +244,7 @@ async def query_handler(request: Dict[str, Any]):
             "highlight_words": highlight_words,
             "highlight_knowledges": highlight_knowledges,
             "liners": liners,
-            "list_of_lists": list_of_lists,
-            "system_prompt": system_prompt,
-            "system_query": user_query
+            "list_of_lists": list_of_lists
         }
         
         # 添加当前查询到历史

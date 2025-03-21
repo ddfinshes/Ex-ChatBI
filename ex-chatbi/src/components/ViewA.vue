@@ -87,13 +87,18 @@
           <div
             style="background-color: #ffffff; color: #303133; border-radius: 0 0 4px 4px; height: 150px; display: flex; justify-content: center; align-items: center;"
           >
-            <div
-              ref="editableDiv"
-              class="editable-input"
-              contenteditable="true"
-              @input="handleInput"
-              v-html="highlightedContent"
-            ></div>
+            <el-input
+              type="textarea"
+              v-model="modelResponse"
+              placeholder="Enter your response"
+              :rows="5"
+              style="width: 100%; max-width: 200px; height: 100%; max-height: 130px;"
+            ></el-input>
+          <div
+            style="background-color: #ffffff; color: #303133; padding: 10px; text-align: left; border-radius: 0 0 4px 4px; min-height: 40px;"
+          >
+            <p v-html="highlightText(modelResponse, searchtext)"></p>
+          </div>
 
           <!-- Confirm 按钮 -->
           <el-button
@@ -242,10 +247,7 @@
       },
       response() {
         return this.queryStore.response;
-      },
-      highlightedContent() {
-        return this.highlightText(this.modelResponse, this.searchtext);
-      },
+      }
     },
     data() {
       return {
@@ -254,9 +256,15 @@
         modelResponse: '',
         highlight: [],
         searchtext:[],
-        topKSimilar: [{ similarity: 0.95, query: "What is AI?", sql_code: "select" },],
+        topKSimilar: [{ similarity: 0.95, query: "What is AI?" },
+            { similarity: 0.85, query: "How does AI work?" },
+            { similarity: 0.65, query: "AI applications" },
+            { similarity: 0.40, query: "Machine learning basics" }],
         // 测试用
-        historyList:[{ similarity: 0.95, query: "What is aaaaaaa?", sql_code:"select" },],
+        historyList:[{ similarity: 0.95, query: "What is aaaaaaa?" },
+            { similarity: 0.85, query: "How does aaaaaaa work?" },
+            { similarity: 0.65, query: "aaaaaa applications" },
+            { similarity: 0.40, query: "aaaaaa basics" }],
         modelCardCenter: 50, // 默认值，避免初始渲染问题
         cardCenters: [],
         activeLine: null, // 当前激活的线索引
@@ -313,68 +321,16 @@
       //   this.topKSimilar = res.data.top_k_similar || [];
       // }
       //获取元素底部中心坐标
-    highlightText(text, searchTerms) {
-      if (!searchTerms || searchTerms.length === 0) return text;
+            highlightText(text, searchTextArray) {
+      if (!searchTextArray || searchTextArray.length === 0) return text;
 
-      let result = text;
-      searchTerms.forEach(term => {
-        const regex = new RegExp(`(${this.escapeRegExp(term)})`, 'gi');
-        result = result.replace(regex, '<span class="highlight">$1</span>');
+      // 遍历数组中的每个关键词
+      searchTextArray.forEach(searchText => {
+        const regex = new RegExp(`(${searchText})`, 'gi');
+        text = text.replace(regex, '<span class="highlight">$1</span>');
       });
-      return result;
-    },
 
-    // 处理特殊字符转义
-    escapeRegExp(string) {
-      return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    },
-
-    // 输入事件处理
-    handleInput(e) {
-      // 保存光标位置
-      this.saveCursorPosition();
-
-      // 获取纯文本内容并更新到父组件
-      const text = this.$refs.editableDiv.textContent;
-      this.$emit('input', text);
-
-      // 恢复光标位置
-      this.restoreCursorPosition();
-    },
-
-    // 保存光标位置
-    saveCursorPosition() {
-      const selection = window.getSelection();
-      if (selection.rangeCount > 0) {
-        const range = selection.getRangeAt(0);
-        const preCaretRange = range.cloneRange();
-        preCaretRange.selectNodeContents(this.$refs.editableDiv);
-        preCaretRange.setEnd(range.endContainer, range.endOffset);
-        this.lastCursorPos = preCaretRange.toString().length;
-      }
-    },
-
-    // 恢复光标位置
-    restoreCursorPosition() {
-      const textNode = this.findTextNode(this.$refs.editableDiv);
-      const range = document.createRange();
-
-      range.setStart(textNode, Math.min(this.lastCursorPos, textNode.length));
-      range.collapse(true);
-
-      const selection = window.getSelection();
-      selection.removeAllRanges();
-      selection.addRange(range);
-    },
-
-    // 查找文本节点
-    findTextNode(node) {
-      if (node.nodeType === Node.TEXT_NODE) return node;
-      for (const child of node.childNodes) {
-        const result = this.findTextNode(child);
-        if (result) return result;
-      }
-      return null;
+      return text;
     },
       getCardPositions() {
         return {
@@ -477,17 +433,6 @@
           this.showAdd = false;
         }, 2000);
       },
-
-      // History
-    addItem(query, sql_code) {
-    const newItem = {
-      similarity: 0.5,
-      query: query,
-      sql_code: sql_code
-
-    };
-    this.historyList.unshift(newItem); // 响应式添加
-    },
       toggleHistoryWindow() {
         this.showHistoryWindow = !this.showHistoryWindow;
         if (this.showHistoryWindow) {
@@ -554,19 +499,7 @@ border: 1px solid #ccc;
 padding: 8px;
 min-height: 40px;
 }
-.highlight {
-  background-color: yellow;
-  color: black;
-}
-.editable-input {
-  width: 100%;
-  min-height: 100px;
-  padding: 10px;
-  border: 1px solid #dcdfe6;
-  border-radius: 4px;
-  line-height: 1.5;
-  white-space: pre-wrap;
-}
+
   .highlight {
 
 

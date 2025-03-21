@@ -10,7 +10,7 @@ import nest_asyncio
 
 nest_asyncio.apply()
 dr = os.path.dirname(os.path.abspath(__file__))  # 获取脚本所在目录
-WORKING_DIR = dr + "/dickens"  # 生成正确路径
+WORKING_DIR = dr + "\dickens"  # 生成正确路径
 print(dr, WORKING_DIR)
 
 if not os.path.exists(WORKING_DIR):
@@ -21,11 +21,12 @@ async def llm_model_func(
     prompt, system_prompt=None, history_messages=[], keyword_extraction=False, **kwargs
 ) -> str:
     return await openai_complete_if_cache(
-        "o3-mini",
+        "gpt-4o",
         prompt,
         system_prompt=system_prompt,
         history_messages=history_messages,
-        api_key='sk-rzf6y244hnAJPxUE5eA02e5bA4Dd4098A3C21f96CeCe7a6f',
+        api_key = 'sk-rzf6y244hnAJPxUE5eA02e5bA4Dd4098A3C21f96CeCe7a6f',
+        #api_key='sk-234NEybMLmKyfLjp0bD64709016c4b67B0Cf405a2f90Ba7b',
         base_url='https://ai-yyds.com/v1',
         **kwargs,
     )
@@ -55,8 +56,7 @@ async def test_funcs():
     result = await embedding_func(["How are you?"])
     print("embedding_func: ", result)
 
-
-async def query(prompt : str, history : list | None = None, system_prompt = None):
+async def query(prompt : str):
     embedding_dimension = await get_embedding_dim()
     rag = LightRAG(
         working_dir=WORKING_DIR,

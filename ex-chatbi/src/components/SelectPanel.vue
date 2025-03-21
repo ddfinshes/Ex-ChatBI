@@ -125,8 +125,8 @@ export default {
           connections.push({
             source: this.viewAPositions.userInput,
             target: this.viewBPositions[id],
-            color: '#bdf9d6',
-            opacity: 0.7
+            color: '#00F5FF',
+            opacity: 0.8
           });
         }
         // ModelUnderstanding到当前ID的连线
@@ -134,8 +134,8 @@ export default {
           connections.push({
             source: this.viewAPositions.model,
             target: this.viewBPositions[id],
-            color: '#bdf9d6',
-            opacity: 0.7
+            color: '#00F5FF',
+            opacity: 0.8
           });
         }
       }

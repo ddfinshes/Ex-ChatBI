@@ -612,7 +612,7 @@ async def kg_query(
     hl_keywords_str = ", ".join(hl_keywords) if hl_keywords else ""
 
     # Build context
-    context, context_source = await _build_query_context(
+    context = await _build_query_context(
         ll_keywords_str,
         hl_keywords_str,
         knowledge_graph_inst,
@@ -621,7 +621,6 @@ async def kg_query(
         text_chunks_db,
         query_param,
     )
-
 
     if query_param.only_need_context:
         return context
@@ -644,7 +643,7 @@ async def kg_query(
 
     if query_param.only_need_prompt:
         return sys_prompt
-
+    print(sys_prompt)
     len_of_prompts = len(encode_string_by_tiktoken(query + sys_prompt))
     logger.debug(f"[kg_query]Prompt Tokens: {len_of_prompts}")
 
@@ -679,9 +678,9 @@ async def kg_query(
         ),
     )
     print("*****Responses are \n\n\n\n\n")
-    # print(response)
+    print(response)
     print("Done********\n\n\n\n\n")
-    return response, context_source
+    return response
 
 
 async def extract_keywords_only(
@@ -1061,7 +1060,7 @@ async def _build_query_context(
     {text_units_context}
     ```
     """.strip()
-    return result, text_units_context
+    return result
 
 
 async def _get_node_data(
