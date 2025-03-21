@@ -2,8 +2,11 @@
 	<el-container class="home">
 		<el-header class="header">
 			<el-row type="flex" align="middle">
-				<img style="width: 50px; height: 50px" src="@/assets/image/icon.png" alt="..." :fit="`fill`" />
-				<span class="header-title">TransBI</span>
+				<!-- @/assets/image/icon.png -->
+				<img style="width: 50px; height: 45px" src="@/assets/image/idea.png" alt="..." :fit="`fill`" />
+				<span class="header-title">
+					<span class="explainable">ExplainableBI</span>
+				</span>
 			</el-row>
 		</el-header>
 		<el-container class="body">
@@ -43,7 +46,7 @@ export default {
 				name: "uncreated",
 				action: []
 			},
-			isDataReady: false, // false
+			isDataReady: true, // false
 
 		}
 	},
@@ -59,8 +62,8 @@ export default {
 	watch: {
 		setIsDataReady(newVal) {
 			console.log('监听到新数据:', { newVal,  timestamp: Date.now() });
-			this.isDataReady = newVal;
-			// this.isDataReady = true;
+			// this.isDataReady = newVal;
+			this.isDataReady = true;
 		}
 	},
 	methods: {
@@ -95,6 +98,18 @@ export default {
 	display: flex;
 	align-items: center;
 	padding: 0 20px;
+}
+
+.explainable {
+  color: #dbce1b; /* 深蓝色 */
+  /* font-style: italic; 斜体 */
+  font-weight: bold;
+  background: linear-gradient(90deg, #f8a2a2, #356fee); /* 渐变背景 */
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent; /* 文字透明以展示渐变 */
+  padding: 0 4px;
+  border-radius: 4px;
 }
 
 .main {

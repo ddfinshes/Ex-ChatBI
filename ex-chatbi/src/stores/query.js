@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import axios from 'axios';
 
 export const useQueryStore = defineStore('query', {
     state: () => ({
@@ -7,7 +8,8 @@ export const useQueryStore = defineStore('query', {
         sqlcode: "",
         isReady: false,
         isDataReady: false,
-        subsqljson: false
+        clickinfo: '',
+        sqlresponse: null
     }),
     actions: {
         setCurrentQuery(query) {
@@ -24,7 +26,31 @@ export const useQueryStore = defineStore('query', {
             this.isDataReady = value;
         },
         setSubSQLJson(value) {
-            this.subsqljson = value;
+            this.clickinfo = value;
+        },
+        // 新增：从后端获取 response
+        async fetchSQLResponse(sql) {
+            try {
+                console.log(sql)
+                const res = await axios.post(
+                    "/api/sql2json",
+                    { data: sql },
+                    { headers: { "Content-Type": "application/json" } }
+                );
+                this.sqlresponse = { code: sql, result: res.data }; // 更新 response
+                this.isDataReady = true;
+                console.log("Fetched response:", this.sqlresponse);
+            } catch (error) {
+                console.error("Error fetching SQL response:", error);
+            }
         }
+        // async fetchSQLResponse(sql) {
+        //     const res = await axios.post(
+        //     "/api/sql2json",
+        //     { data: sql },
+        //     { headers: { "Content-Type": "application/json" } }
+        //     );
+        //     return res.data;
+        // }
     }
 });

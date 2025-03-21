@@ -92,7 +92,7 @@ export default {
           }
         );
 
-        this.queryStore.setResponse(res.data);
+        //this.queryStore.setResponse(res.data);
 
         const newMessage = {
           type: "ai",
@@ -101,6 +101,7 @@ export default {
             type: "code",
             timestamp: new Date().toLocaleTimeString(),
           },
+          response: res.data.response,
           data: res.data.response.data,
           understanding: res.data.response.understanding,
           explanation: res.data.response.explanation,

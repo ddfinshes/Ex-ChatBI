@@ -23,6 +23,8 @@ import json
 import LightRAG.examples.lightrag_openai_compatible_demo as rag
 from utils.get_NLExplain import ExplainAgent
 from utils.get_user_sql import SQLExtractAgent
+from utils.get_changeNLExSQL import ModifyAgent
+from utils.get_Chart import VisAgent
 from openai import OpenAI
 import csv
 from io import StringIO
@@ -36,9 +38,9 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # 生产环境应限制具体域名
+    allow_origins=["*"],  
     allow_credentials=True,
-    allow_methods=["POST", "GET"],  # 根据实际需求调整
+    allow_methods=["POST", "GET"],  
     allow_headers=["*"],
 )
 
@@ -73,7 +75,7 @@ def analyze_relation(understanding : str, knowledge_base : list):
     for i in range(len(knowledge_base)):
         result.append([])
         for j in range(2):
-            print(knowledge_base[i][j])
+            # print(knowledge_base[i][j])
             prompt = f'''I will provide you with two sentences. Please follow the process below to evaluate the two sentences:
 
             Identify and label which word or words in the first sentence are specialized terms that need explanation.
@@ -98,31 +100,16 @@ def analyze_relation(understanding : str, knowledge_base : list):
             result[i].append(response.choices[0].message.content)
     return result
 
+def getVisData(user_query, excute_sql_output):
+    chart_input = {
+            "question": user_query,
+            "data": str(excute_sql_output)
+        }
 
-
-# @app.post("/api/sql2json")
-# async def get_sql2json():
-#     try:
-#         sql_code = "select * from chatbi"
-#         sqljson = sql2json(sql_code)
-#         print("Response data:", sqljson)
-#         return sqljson
-#     except Exception as e:
-#         import traceback
-#         traceback.print_exc()
-#         raise HTTPException(status_code=500, detail=str(e))
-#
-# def get_extracted_sql(text):
-#     # 匹配获取sqlcode
-#     sql_code = re.search(r'```sql\n(.*?)\n```', text, re.DOTALL)
-#     if sql_code:
-#         extracted_sql = sql_code.group(1)
-#         print("提取的SQL代码:")
-#         print(extracted_sql)
-#     else:
-#         print("未找到SQL代码块")
-#     return extracted_sql
-
+    vis = VisAgent()
+    vis.run(str(chart_input))
+    report = vis.getLeastAnalysisReport()
+    return report
 
 @app.post("/api/sql2json")
 async def get_sql2json(data: dict = Body(...)):
@@ -130,11 +117,12 @@ async def get_sql2json(data: dict = Body(...)):
     sql_code = data.get("data")
     if not sql_code:
         raise HTTPException(status_code=400, detail="Missing 'data' field")
+    print("Processing SQL code:", sql_code)
     sql_code = sql_code['text']
     print("Processing SQL code:", sql_code)
     try:
         explain = ExplainAgent(model_name="o3-mini")
-        explain.run(sql_code)  # 无需 str()，因为 request.sql 已保证是字符串
+        explain.run(sql_code)  
         report = explain.getLeastAnalysisReport()
         print(report, type(report))
         return report
@@ -168,7 +156,28 @@ async def get_relatsql(sql_query: Dict[str, Any], query_out: Dict[str, Any], cli
         raise HTTPException(status_code=500, detail=str(e))
     return {"response": "error"}
 
+# NL explain change
+@app.post("/api/nlex")
+async def get_changeNLExSQL(data: dict = Body(...)):
+    # sql_query, sql_json, nl_ex, nl_sql
+    """
+    {
+        sql_query: "", // 完整的sql代码
+        sql_json: "", // sql 转json的完整结果
+        nl_ex: // 修改位置的nl explain
+        nl_sql: // 修改位置的小段sql
+    }
 
+    return 修改后的完整sql转json
+    """
+    ma = ModifyAgent()
+    ma.run(data)
+    resql = ma.getLeastAnalysisReport()
+    # 转为json
+    explain = ExplainAgent(model_name="o3-mini")
+    explain.run(resql)
+    sqljson = explain.getLeastAnalysisReport()
+    return sqljson
 
 
 @app.post("/api/query")
@@ -184,12 +193,7 @@ async def query_handler(request: Dict[str, Any]):
         # 2. 知识库检索+生成sql代码
         print("==========================my_lightrag========================================")
         rag_response, context = await rag.query(user_query)
-        rag_response = await rag.query(user_query)
-
-
-        print("---------------context----------------\n")
-        print(context)
-        print("\n--------------context---------------------")
+       
         # Extract knowledge base
         csv_file = StringIO(context.strip('"id", "content"\n'))
 
@@ -202,10 +206,15 @@ async def query_handler(request: Dict[str, Any]):
 
 
 
-        # print("rag_response: ", rag_response)
-        understanding = rag_response.split('\n')[0]
+        print("============================rag_response: =================================", rag_response)
+        # understanding = rag_response.split('\n')[0]
+        understanding = rag_response.split('SQL Code:')[0]
         sql_code = get_extracted_sql(rag_response)
         explanation = rag_response.split("```")[-1]
+        print('-------------------understanding-----------------------------', understanding)
+        print('-------------------sql_code-----------------------------', sql_code)
+        print('-------------------explanation-----------------------------', explanation)
+
 
         # Analyze relation here
         pair_relevance = analyze_relation(understanding, list_of_lists)
@@ -273,17 +282,20 @@ async def query_handler(request: Dict[str, Any]):
         # top_k = sorted(history_with_similarity, key=lambda x: x["similarity"], reverse=True)[:3]
 
         # 4. chart准备数据
+        vis_data = getVisData(user_query, excute_sql_output)
+        print('------------------vis_data-------------------', vis_data)
+
         # vis_data = get_vis_tag(user_query, excute_sql_output)
         # ===========================================================
-        vis_data = {
-            "vis_tag": "bar-chart",
-            "x": ["sales_amt", "sales_notax"],
-            "y": [-5235, -4634],
-            "title": "202502's sales for APAC EC",
-            "x-legend": "class",
-            "y-legend": "sales",
-            "tooltip": "sales_notax_mom_per:-1.000290111880263"
-        }
+        # vis_data = {
+        #     "vis_tag": "bar-chart",
+        #     "x": ["sales_amt", "sales_notax"],
+        #     "y": [-5235, -4634],
+        #     "title": "202502's sales for APAC EC",
+        #     "x-legend": "class",
+        #     "y-legend": "sales",
+        #     "tooltip": "sales_notax_mom_per:-1.000290111880263"
+        # }
         final_response['vis_data'] = vis_data
 
         # 返回标准化响应

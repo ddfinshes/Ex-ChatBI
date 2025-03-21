@@ -1,7 +1,7 @@
 <!-- QueryDisplay.vue -->
 <template>
   <div class="container">
-    <div class="header">View A</div>
+    <div class="header">Intent Alignment View</div>
     <el-row type="flex" justify="space-between" style="padding: 10px">
       <!-- User Input Card -->
       <el-col :span="5" style="display: flex; justify-content: center;">
@@ -300,15 +300,16 @@
         console.log('监听到新响应:', newVal);
 
         if (newVal) {
-          this.modelResponse = newVal.response.understanding;
+          console.log(newVal)
+          this.modelResponse = newVal.understanding;
           // this.topKSimilar = newVal.top_k_similar || [];
           this.topKSimilar = [{ similarity: 0.95, query: "What is AI?" },
             { similarity: 0.85, query: "How does AI work?" },
             { similarity: 0.65, query: "AI applications" },
             { similarity: 0.40, query: "Machine learning basics" }]
           this.messageHistory = newVal.message_history || [];
-          this.highlight = newVal.response.pair_relevance;
-          this.searchtext = newVal.response.highlight_words;
+          this.highlight = newVal.pair_relevance;
+          this.searchtext = newVal.highlight_words;
         }
       }
     },
@@ -463,8 +464,7 @@
   
   <style>
   .header {
-    background-color: #AEC6EA;
-    /* 设置背景颜色 */
+    background-color: #dbf1d5;
     padding: 10px;
     text-align: center;
     font-size: 18px;

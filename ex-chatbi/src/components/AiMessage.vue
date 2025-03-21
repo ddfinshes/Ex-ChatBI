@@ -13,24 +13,21 @@
           <MarkdownRenderer class="sql-code" :content="message.code?.text || ''" />
         </div>
       </div>
-
-      
-
       <!-- Data Card -->
       <div class="card-section">
         <div class="card-title">Data</div>
-        <div class="card-content">
+        <div class="card-content" @click="handleOutsideClick">
           <table v-if="message.data" class="result-table">
             <thead>
               <tr>
-                <th v-for="(column, idx) in message.data.column" :key="idx" @click="handleHeaderClick(column, idx)">
+                <th v-for="(column, idx) in message.data.column" :key="idx" :class="{ 'highlighted': highlighted.type === 'header' && highlighted.columnIndex === idx }" @click="handleHeaderClick(column, idx)">
                   {{ column }}
                 </th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="(row, rowIdx) in message.data.data" :key="rowIdx">
-                <td v-for="(cell, cellIdx) in row" :key="cellIdx" @click="handleCellClick(cell, rowIdx, message.data.column[cellIdx])">
+                <td v-for="(cell, cellIdx) in row" :key="cellIdx" :class="{ 'highlighted': highlighted.type === 'cell' && highlighted.rowIndex === rowIdx && highlighted.columnIndex === cellIdx }" @click="handleCellClick(cell, rowIdx, message.data.column[cellIdx])">
                   {{ cell }}
                 </td>
               </tr>
@@ -81,6 +78,11 @@ export default {
       clickdata: {},
       isMounted: false,
       timeoutId: null,
+      highlighted: {
+        type: null, // 'header' 或 'cell'
+        rowIndex: null,
+        columnIndex: null,
+      },
     }
   },
   setup() {
@@ -114,8 +116,15 @@ export default {
         columnName: column,
         columnIndex: columnIndex
       }
+      this.highlighted = {
+        type: 'header',
+        rowIndex: null,
+        columnIndex: columnIndex,
+      };
+      console.log('highlighted 点击了表头:', this.highlighted);
+      console.log('---点击了表头:', this.clickdata)
       this.relatSQL()
-      console.log('点击了表头:', this.clickdata);
+      
     },
     // handleRowClick(row, rowIndex) {
     //   this.clickdata = {
@@ -127,14 +136,30 @@ export default {
     //     this.clickdata
     //   );
     // },
-    handleCellClick(cellValue, rowIndex, columnIndex) {
+    handleCellClick(cellValue, rowIndex, columnName) {
       this.clickdata = {
         value: cellValue,
         rowIndex: rowIndex,
-        columnName: columnIndex
+        columnName: columnName
       }
+      this.highlighted = {
+        type: 'cell',
+        rowIndex: rowIndex,
+        columnIndex: this.message.data.column.indexOf(columnName),
+      };
+      console.log('highlighted 点击了单元格:', this.highlighted);
       this.relatSQL()
-      console.log('点击了单元格:', this.clickdata);
+      
+    },
+    handleOutsideClick(event) {
+      // 如果点击不在表格内，则取消高亮
+      if (!event.target.closest('.result-table')) {
+        this.highlighted = {
+          type: null,
+          rowIndex: null,
+          columnIndex: null,
+        };
+      }
     },
     async relatSQL() {
       if(!this.clickdata) return;
@@ -144,7 +169,7 @@ export default {
         query_out: this.message.data,
         click_info: this.clickdata
       };
-      this.queryStore.setSubSQLJson(subsqljson);
+      this.queryStore.setSubSQLJson(payload);
       console.log('Request payload:', payload);
         
       } catch(error) {
@@ -242,6 +267,10 @@ export default {
 
 .result-table tbody tr:hover {
   background-color: #fafafa;
+}
+
+.highlighted {
+  background-color: #f8f29d !important; /* 高亮颜色，可以自定义 */
 }
 
 .sql-code {

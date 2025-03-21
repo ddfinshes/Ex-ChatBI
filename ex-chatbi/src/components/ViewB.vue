@@ -1,47 +1,22 @@
 <!-- ViewB.vue -->
 <template>
-  <div class="header">View B</div>
+  <div class="header">Knowledge Base View</div>
   <div class="main-container" v-if="!activeCard">
     <!-- 左侧大卡片 -->
     <div class="left-carousel">
       <el-carousel 
+        v-if="dynamicCards.length > 0"
         indicator-position="none"
         arrow="always"
         :interval="0"
         height="carouselHeight"
         :loop="false"
       >
-        <!-- 第一页 -->
-        <el-carousel-item >
-            <el-row :gutter="60" class="card-row">
-              <el-col
-              v-for="(card, index) in thirdRowCards"
-              :key="'first-' + index"
-              :span="12"
-            >
-            <el-card
-                shadow="hover"
-                class="click-card"
-                @click="showExplanation(card)"
-              >
-                <template #header>
-                  <div class="card-title">
-                  <i :class="card.icon" class="card-icon"></i>
-                  {{ card.title }}
-                  </div>
-                </template>
-                <div class="card-content">{{ card.content }}</div>
-              </el-card>
-              </el-col>
-            </el-row>
-          </el-carousel-item>
-
-            <!-- 第二页 -->
-          <el-carousel-item>
-            <el-row :gutter="60" class="card-row">
+      <el-carousel-item v-for="(page, pageIndex) in chunkedDynamicCards" :key="'left-'+pageIndex">
+          <el-row :gutter="60" class="card-row">
             <el-col
-              v-for="(card, index) in fourthRowCards"
-              :key="'second-' + index"
+              v-for="(card, index) in page"
+              :key="'left-card-'+pageIndex+'-'+index"
               :span="12"
             >
               <el-card
@@ -51,21 +26,22 @@
               >
                 <template #header>
                   <div class="card-title">
-                  <i :class="card.icon" class="card-icon"></i>
-                  {{ card.title }}
+                    <i :class="card.icon" class="card-icon"></i>
+                    {{ card.title }}
                   </div>
                 </template>
                 <div class="card-content">{{ card.content }}</div>
               </el-card>
-              </el-col>
-            </el-row>
-          </el-carousel-item>
+            </el-col>
+          </el-row>
+        </el-carousel-item>
       </el-carousel>
     </div>
 
     <!-- 右侧小卡片 -->
     <div class="right-carousel"  ref="rightCarouselContainer">
       <el-carousel 
+        v-if="dynamicSmallCards.length > 0"
         ref="rightCarousel"
         indicator-position="none"
         arrow="always"
@@ -73,38 +49,11 @@
         :height="carouselHeight"
         :loop="false"
       >
-            <!-- 第一页 -->
-            <el-carousel-item >
-            <el-row :gutter="60" class="card-row">
-              <el-col
-              v-for="(card, index) in firstRowCards"
-              :key="'first-' + index"
-              :span="12"
-            >
-            <el-card
-                shadow="hover"
-                class="click-card"
-                @click="showExplanation(card)"
-                :ref="'card-' + card.id"
-              >
-                <template #header>
-                  <div class="card-title">
-                  <i :class="card.icon" class="card-icon"></i>
-                  {{ card.title }}
-                  </div>
-                </template>
-                <div class="card-content">{{ card.content }}</div>
-              </el-card>
-              </el-col>
-            </el-row>
-          </el-carousel-item>
-
-            <!-- 第二页 -->
-          <el-carousel-item>
-            <el-row :gutter="60" class="card-row">
+      <el-carousel-item v-for="(page, pageIndex) in chunkedSmallCards" :key="'right-'+pageIndex">
+          <el-row :gutter="60" class="card-row">
             <el-col
-              v-for="(card, index) in secondRowCards"
-              :key="'second-' + index"
+              v-for="(card, index) in page"
+              :key="'right-card-'+pageIndex+'-'+index"
               :span="12"
             >
               <el-card
@@ -115,15 +64,15 @@
               >
                 <template #header>
                   <div class="card-title">
-                  <i :class="card.icon" class="card-icon"></i>
-                  {{ card.title }}
+                    <i :class="card.icon" class="card-icon"></i>
+                    {{ card.title }}
                   </div>
                 </template>
                 <div class="card-content">{{ card.content }}</div>
               </el-card>
-              </el-col>
-            </el-row>
-          </el-carousel-item>
+            </el-col>
+          </el-row>
+        </el-carousel-item>
       </el-carousel>
     </div>
 </div>
@@ -188,159 +137,21 @@ export default {
       modelResponse: null,
       activeCard: null,
       carouselHeight: '400px', // 默认两行高度
-      firstRowCards: [
-        {
-          id: 1,
-          title: "销售分析",
-          icon: "el-icon-data-analysis",
-          content: "季度销售数据统计",
-          explanation:
-            "包含QTD销售额、目标达成率、环比增长率等核心指标的计算逻辑\n计算公式：QTD销售额 = SUM(销售金额) WHERE 日期 BETWEEN 季度初 AND 当前日期",
-          active: false,
-        },
-        {
-          id: 2,
-          title: "数据源",
-          icon: "el-icon-document",
-          content: "销售数据库2023",
-          explanation:
-            "数据表结构：\n- sales_fact: 销售事实表\n- product_dim: 产品维度表\n- date_dim: 日期维度表",
-          active: false,
-        },
-        {
-          id: 3,
-          title: "模型版本",
-          icon: "el-icon-cpu",
-          content: "预测模型v2.1",
-          explanation:
-            "基于时间序列的ARIMA模型\n参数设置：\n- 周期: 7天\n- 预测区间: 30天\n- 置信度: 95%",
-          active: false,
-        },
-        {
-          id: 4,
-          title: "权限管理",
-          icon: "el-icon-lock",
-          content: "访问控制列表",
-          explanation:
-            "角色权限分配：\n- 管理员: 完全访问\n- 分析师: 只读访问\n- 访客: 受限访问",
-          active: false,
-        },
-      ],
-      secondRowCards: [
-        {
-          id: 5,
-          title: "数据质量",
-          icon: "el-icon-check",
-          content: "完整性检查",
-          explanation:
-            "数据校验规则：\n1. 非空字段检查\n2. 值域范围验证\n3. 外键约束检查\n4. 时间序列连续性",
-          active: false,
-        },
-        {
-          id: 6,
-          title: "ETL日志",
-          icon: "el-icon-notebook-2",
-          content: "最近更新记录",
-          explanation:
-            "最新ETL任务状态：\n- 成功: 23次\n- 警告: 2次\n- 失败: 0次\n最后更新时间: 2023-07-20 14:30",
-          active: false,
-        },
-        {
-          id: 7,
-          title: "系统监控",
-          icon: "el-icon-monitor",
-          content: "资源使用情况",
-          explanation:
-            "当前状态：\nCPU: 62%\n内存: 45%\n存储: 78%\n网络: 120Mbps",
-          active: false,
-        },
-        {
-          id: 8,
-          title: "API文档",
-          icon: "el-icon-document-checked",
-          content: "接口规范v1.2",
-          explanation:
-            "主要接口：\n- GET /api/sales\n- POST /api/predict\n- GET /api/status\n认证方式: JWT Token",
-          active: false,
-        },
-      ],
-      thirdRowCards: [ // 新增的第三行卡片
-        {
-          id: 9,
-          title: "SQL1",
-          icon: "el-icon-pie-chart",
-          content: "SQL1",
-          explanation: "SQL1说明..."
-        },
-        {
-          id: 10,
-          title: "SQL2",
-          icon: "el-icon-map-location",
-          content: "SQL2",
-          explanation: "SQL2说明..."
-        },
-        {
-          id: 11,
-          title: "SQL3",
-          icon: "el-icon-alarm-clock",
-          content: "SQL3",
-          explanation: "SQL3说明..."
-        },
-        {
-          id: 12,
-          title: "SQL4",
-          icon: "el-icon-coin",
-          content: "SQL4",
-          explanation: "SQL4说明..."
-        }
-      ],
-      fourthRowCards: [ // 新增的第三行卡片
-        {
-          id: 13,
-          title: "SQL5",
-          icon: "el-icon-pie-chart",
-          content: "SQL5",
-          explanation: "SQL5说明..."
-        },
-        {
-          id: 14,
-          title: "SQL6",
-          icon: "el-icon-map-location",
-          content: "SQL6",
-          explanation: "SQL6说明..."
-        },
-        {
-          id: 15,
-          title: "SQL7",
-          icon: "el-icon-alarm-clock",
-          content: "SQL7",
-          explanation: "SQL7说明..."
-        },
-        {
-          id: 16,
-          title: "SQL8",
-          icon: "el-icon-coin",
-          content: "SQL8",
-          explanation: "SQL8说明..."
-        }
-      ],
+      dynamicCards: [],    // 左侧卡片数据
+      dynamicSmallCards: [], // 右侧卡片数据
     };
   },
   computed: {
     response() {
         return this.queryStore.response;
       },
-    bigCardPages() {
-      // 每页显示两个大卡片（使用thirdRowCards）
-      return this.chunkArray(this.thirdRowCards, 2);
+    // 将左侧卡片分页（每页4个）
+    chunkedDynamicCards() {
+      return this.chunkArray(this.dynamicCards, 4);
     },
-    smallCardPages() {
-    // 正确分页逻辑：每页显示4个，但按2x2排列
-    const allSmall = [...this.firstRowCards, ...this.secondRowCards];
-    return this.chunkArray(allSmall, 4).map(page => ({
-      row1: page.slice(0, 2),
-      row2: page.slice(2, 4)
-    }));
+    // 将右侧卡片分页（每页4个）
+    chunkedSmallCards() {
+      return this.chunkArray(this.dynamicSmallCards, 4);
     }
   },
   methods: {
@@ -361,47 +172,85 @@ export default {
       // 获取容器的可视区域边界
       const containerRect = container.getBoundingClientRect();
 
-      // 遍历所有卡片（ID 1-8）
-      for (let id = 1; id <= 8; id++) {
-        const cardRef = this.$refs[`card-${id}`];
-        if (!cardRef) continue;
+      // 合并所有动态卡片（左侧+右侧）
+    const allCards = [
+      ...this.dynamicCards,
+      ...this.dynamicSmallCards
+    ];
 
-        // 获取卡片元素（处理数组引用）
-        const element = Array.isArray(cardRef)
-          ? cardRef[0]?.$el
-          : cardRef?.$el;
-        if (!element) continue;
+      // 遍历所有动态生成的卡片
+    allCards.forEach(card => {
+      const cardRef = this.$refs[`card-${card.id}`];
+      if (!cardRef) return;
 
-        // 获取卡片边界
-        const cardRect = element.getBoundingClientRect();
+      // 处理数组类型的ref（ElementUI组件特性）
+      const element = Array.isArray(cardRef) 
+        ? cardRef[0]?.$el  // 取第一个元素
+        : cardRef?.$el;     // 直接获取元素
+      
+      if (!element) return;
 
-        // 判断卡片是否在可视区域内
-        const isVisible = (
-          cardRect.top >= containerRect.top - 20 && // 允许顶部溢出20px
-          cardRect.bottom <= containerRect.bottom + 40 && // 允许底部溢出40px
-          cardRect.left >= containerRect.left - 10 && // 允许左侧溢出10px
-          cardRect.right <= containerRect.right + 10 // 允许右侧溢出10px
-        );
+      // 获取卡片位置
+      const cardRect = element.getBoundingClientRect();
 
-        if (isVisible) {
-          positions[id] = {
-            x: cardRect.left + cardRect.width / 2,
-            y: cardRect.top
-          };
-        }
+      // 可见性判断（带容错边界）
+      const isVisible = (
+        cardRect.top >= containerRect.top - 20 &&
+        cardRect.bottom <= containerRect.bottom + 40 &&
+        cardRect.left >= containerRect.left - 10 && 
+        cardRect.right <= containerRect.right + 10
+      );
+
+      if (isVisible) {
+        positions[card.id] = {
+          x: cardRect.left + cardRect.width / 2,
+          y: cardRect.top,
+          width: cardRect.width,
+          height: cardRect.height
+        };
       }
+    });
 
       return positions;
-    }
+    },
+    // 数组分块方法
+    chunkArray(arr, chunkSize) {
+      return Array.from(
+        { length: Math.ceil(arr.length / chunkSize) },
+        (_, i) => arr.slice(i * chunkSize, i * chunkSize + chunkSize)
+      );
+    },
   },
   watch: {
     response(newVal) {
         console.log('监听到新响应1111:', newVal);
         if (newVal) {
           this.modelResponse = newVal.response.list_of_lists[0][1];
-          this.thirdRowCards[0].content = newVal.response.list_of_lists[0][1]
-          this.firstRowCards[0].content = newVal.response.list_of_lists[0][0]
-          console.log(newVal.response)
+          // 清空原有数据
+          this.dynamicCards = [];
+          this.dynamicSmallCards = [];
+          // 获取数据长度
+          const dataLength = newVal.response.list_of_lists.length;
+
+          // 生成左侧卡片
+          for(let i = 0; i < dataLength; i++) {        
+            this.dynamicCards.push({
+              id: dataLength + i + 1,
+              title: `SQL ${i + 1}`,
+              content: newVal.response.list_of_lists[i][1],
+              explanation: newVal.response.list_of_lists[i][1]
+            });
+            this.dynamicSmallCards.push({
+            id: i + 1,
+            title: `Knowledge Base ${i + 1}`,
+            content: newVal.response.list_of_lists[i][0],
+            explanation: newVal.response.list_of_lists[i][0]
+          });
+          }
+
+
+
+          console.log(newVal)
           console.log(this.modelResponse)
         }
       }
@@ -465,7 +314,7 @@ export default {
   align-items: center;
   margin-bottom: 0px;
   padding: 10px; /* 内边距 */
-  background: #f4f4f4; /* 背景色 */
+  background: #dbf1d5; /* 背景色 */
   border-top: 1px solid #dcdfe6; /* 上边框 */
   border-bottom: 1px solid #dcdfe6; /* 下边框 */
   border-left: 1px solid #dcdfe6; /* 左边框 */

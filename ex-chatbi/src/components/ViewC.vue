@@ -1,7 +1,7 @@
 <template>
   <div style="height: 747px; width: 100%;">
     <!-- 添加 Header -->
-    <div class="header">View C</div>
+    <div class="header">Dual-Mode SQL Refinement View</div>
     <!-- 原有的 chart 容器 -->
     <div ref="chart"></div>
     <div class="NLExplain">
@@ -13,215 +13,291 @@
 
 </template>
 
-<script setup>
+<script>
 import { ref, onMounted, nextTick, watch, computed, onUnmounted, watchEffect } from "vue";
 import * as d3 from "d3";
 import { useQueryStore } from '@/stores/query';
 import { emitter } from '@/assets/ts/eventBus.js';
 import axios from "axios";
 import { ca } from "element-plus/es/locales.mjs";
+
+export default {
+  data() {
+    return {
+      store: useQueryStore(),
+      sqlcode: '', // sql 代码
+      sqljson: '', // json 格式的 sql
+      subsql: '',
+      subsqljson: '',
+      explanation: "这个 SQL 查询使用了索引扫描，提高了查询效率，但可能还可以优化为覆盖索引...",
+      chart: null,
+      nodes: [],
+      nodeCards: [],
+      // res: {
+      //   content: [
+      //     {
+      //       "created_virtual_table": "False",
+      //       "sql_content": [
+      //         {
+      //           "keywords": "From",
+      //           "scratched_content": [
+      //             { "table_name": "Monthly_Growth", "is_virtual_table": "True", 'Nl Explain': "AAA"}
+      //           ]
+      //         },
+      //         {
+      //           "keywords": "Select",
+      //           "scratched_content": [
+      //             { "column_name": "month_id", "column_processing": "", 'Nl Explain': "BBB"},
+      //             { "column_name": "Current_Month_Effi", "column_processing": "TO_CHAR (Current_Month_Effi, 'FM999,999,999.00') AS Current_Month_Effi", 'Nl Explain': "CCC"},
+      //             { "column_name": "Previous_Month_Effi", "column_processing": "TO_CHAR (Previous_Month_Effi, 'FM999,999,999.00') AS Previous_Month_Effi", 'Nl Explain': "DDD"},
+      //             { "column_name": "Growth_Percentage", "column_processing": "TO_CHAR (Growth_Percentage, 'FM999,999,999.00') || '%' AS Growth_Percentage", 'Nl Explain': "EEE"}
+      //           ]
+      //         },
+      //         {
+      //           "keywords": "Join",
+      //           "scratched_content": [
+      //             { "content": "JOIN Effi_Comparison p ON c.month_id = TO_CHAR (DATEADD (month, 1, TO_DATE (p.month_id, 'YYYYMM')), 'YYYYMM')", 'Nl Explain': "FFF"}
+      //           ]
+      //         },
+      //         {
+      //           "keywords": "Where",
+      //           "scratched_content": [
+      //             { "content": "c.month_id = '202410'",'Nl Explain': "ZZZ"}
+      //           ]
+      //         }
+      //       ]
+      //     },
+      //     {
+      //       "created_virtual_table": "True",
+      //       "virtual_table_name": "Monthly_Growth",
+      //       "sql_content": [
+      //         {
+      //           "keywords": "Select",
+      //           "scratched_content": [
+      //             { "column_name": "c.month_id", "column_processing": "", 'Nl Explain': "hhh"},
+      //             { "column_name": "Current_Month_Effi", "column_processing": "c.Avg_effi AS Current_Month_Effi" },
+      //             { "column_name": "Previous_Month_Effi", "column_processing": "p.Avg_effi AS Previous_Month_Effi" },
+      //             { "column_name": "Growth_Percentage", "column_processing": "(c.Avg_effi / p.Avg_effi - 1) * 100 AS Growth_Percentage" }
+      //           ]
+      //         },
+      //         {
+      //           "keywords": "From",
+      //           "scratched_content": [
+      //             { "table_name": "Effi_Comparison c", "is_virtual_table": "True", 'Nl Explain': "wowowo"}
+      //           ]
+      //         },
+      //         {
+      //           "keywords": "Join",
+      //           "scratched_content": [
+      //             { "content": "JOIN Effi_Comparison p ON c.month_id = TO_CHAR (DATEADD (month, 1, TO_DATE (p.month_id, 'YYYYMM')), 'YYYYMM')" }
+      //           ]
+      //         },
+      //         {
+      //           "keywords": "Where",
+      //           "scratched_content": [
+      //             { "content": "c.month_id = '202410'" }
+      //           ]
+      //         }
+      //       ]
+      //     },
+      //     {
+      //       "created_virtual_table": "True",
+      //       "virtual_table_name": "Effi_Comparison",
+      //       "sql_content": [
+      //         {
+      //           "keywords": "Select",
+      //           "scratched_content": [
+      //             { "column_name": "month_id", "column_processing": "" },
+      //             { "column_name": "Avg_effi", "column_processing": "AVG(effi) AS Avg_effi" }
+      //           ]
+      //         },
+      //         {
+      //           "keywords": "From",
+      //           "scratched_content": [
+      //             { "table_name": "Store_effi", "is_virtual_table": "True" }
+      //           ]
+      //         },
+      //         {
+      //           "keywords": "Group By",
+      //           "scratched_content": [
+      //             { "content": "month_id" }
+      //           ]
+      //         }
+      //       ]
+      //     },
+      //     {
+      //       "created_virtual_table": "True",
+      //       "virtual_table_name": "Store_effi",
+      //       "sql_content": [
+      //         {
+      //           "keywords": "Select",
+      //           "scratched_content": [
+      //             { "column_name": "country", "column_processing": "" },
+      //             { "column_name": "channel", "column_processing": "" },
+      //             { "column_name": "store_type", "column_processing": "" },
+      //             { "column_name": "area", "column_processing": "" },
+      //             {
+      //               "column_name": "effi",
+      //               "column_processing": "CASE WHEN (COALESCE(area, '') = '' OR CAST(area AS DECIMAL(18, 2)) = 0) THEN 0 ELSE AVG(COALESCE(amt_usd_notax, 0)) * 365 / CAST(area AS DECIMAL(18, 2)) * 10.7639104 END AS effi"
+      //             },
+      //             { "column_name": "month_id", "column_processing": "" }
+      //           ]
+      //         },
+      //         {
+      //           "keywords": "From",
+      //           "scratched_content": [
+      //             { "table_name": "dm_fact_sales_chatbi", "is_virtual_table": "False" }
+      //           ]
+      //         },
+      //         {
+      //           "keywords": "Where",
+      //           "scratched_content": [
+      //             {
+      //               "content": "date_code <= '2024-10-31' AND country = 'Mainland' AND channel = 'O&O' AND store_type = 'BH' AND comp_flag = 'Y'"
+      //             }
+      //           ]
+      //         },
+      //         {
+      //           "keywords": "Group By",
+      //           "scratched_content": [
+      //             { "content": "country, channel, store_type, store_code, area, month_id" }
+      //           ]
+      //         }
+      //       ]
+      //     }
+      //   ]
+      // },
+      res: [],
+      SQL_KEYWORDS: [
+        "Select",
+        "From",
+        "Where",
+        "Group By",
+        "Join",
+        "Having",
+        "Order By",
+      ]
+    };
+  },
+  mounted() {
+    this.$nextTick(() => {
+      console.log("Component mounted, checking res...");
+      // console.log("Initial store state:", this.store.$state);
+      // this.store.fetchSQLResponse("SELECT * FROM table");
+      // const data = this.transformToTree(this.res);
+      // this.draw(data);
+    })
+  },
+  watch: {
+    'store.response': {
+      handler(newVal) {
+        setTimeout(() => {
+          if (newVal) {
+            this.sqlcode = newVal.code;
+            console.log('store.response updated:', this.sqlcode);
+            if (newVal.code) {
+              this.getSQL2JSON(newVal.code).then(result => {
+                this.sqljson = result;
+                this.res = result; // 将 res.data 直接作为新的 res
+                console.log('---------------sqljson----------------------', result);
+                console.log('---------------sqljson----------------------', this.sqljson);
+                if (this.res) {
+                  const data = this.transformToTree(this.res);
+                  this.draw(data); // 使用新的 res 数据绘制
+                }
+              }).catch(error => {
+                console.error("Error fetching SQL2JSON:", error);
+              });
+            }
+          }
+        }, 1000); // 保留原始 1000ms 延迟
+      },
+      deep: true,
+      immediate: true // 检查初始值
+    },
+
+    'store.subsqljson': {
+      handler(newVal) {
+        setTimeout(() => {
+          console.log(newVal);
+          if (newVal) {
+            this.subsql = newVal;
+            console.log('subsqljson', this.subsqljson);
+            this.getSubsqljson(this.subsqljson).then(res => {
+              this.subsqljson = res.content;
+              console.log('subsqljson', this.subsqljson);
+            }).catch(error => {
+              console.error("Error fetching subsqljson:", error);
+            });
+          }
+        }, 1000);
+      },
+      deep: true
+    }
+  },
 // ------------------------------------------------
-const store = useQueryStore();
-const sqlcode = ref(''); // sql代码
-let sqljson = '';
-const subsql = ref('');
-const subsqljson = '';
-watchEffect(() => {
-  setTimeout(() => {
-    if (store.response) {
-      sqlcode.value = store.response.code
-      console.log('store.response updated:', sqlcode.value);
-      if (store.response.code) {
-        getSQL2JSON(store.response.code).then(res => {
-          sqljson = res;
-          console.log('---------------sqljson----------------------', res)
-          console.log('---------------sqljson----------------------', sqljson)
-        })
-      }
-    }
+// const store = useQueryStore();
+// const sqlcode = ref(''); // sql代码
+// let sqljson = ''; // json格式的sql
+// const subsql = ref('');
+// const subsqljson = '';
+// watchEffect(() => {
+//   setTimeout(() => {
+//     if (store.response) {
+//       sqlcode.value = store.response.code
+//       console.log('store.response updated:', sqlcode.value);
+//       if (store.response.code) {
+//         getSQL2JSON(store.response.code).then(result => {
+//           sqljson = result;
+//           console.log('---------------sqljson----------------------', result)
+//           console.log('---------------sqljson----------------------', sqljson)
+//         })
+//       }
+//     }
 
-  }, 1000);
-  setTimeout(() => {
-    console.log(store.subsqljson)
-    if (store.subsqljson) {
-      subsql = store.subsqljson;
-      console.log('subsqljson', subsqljson);
-      getSubsqljson(subsqljson).then(res => {
-        subsqljson = res.content;
-        console.log('subsqljson', subsqljson);
-      })
-    }
-  }, 1000);
-})
+//   }, 1000);
+//   setTimeout(() => {
+//     console.log(store.subsqljson)
+//     if (store.subsqljson) {
+//       subsql = store.subsqljson;
+//       console.log('subsqljson', subsqljson);
+//       getSubsqljson(subsqljson).then(res => {
+//         subsqljson = res.content;
+//         console.log('subsqljson', subsqljson);
+//       })
+//     }
+//   }, 1000);
+// })
 
-async function getSubsqljson(payload) {
-  const res = await axios.post(
-    "/api/relatsql",
-    payload
-  );
-  return res.data;
-}
+// async function getSubsqljson(payload) {
+//   const res = await axios.post(
+//     "/api/relatsql",
+//     payload
+//   );
+//   return res.data;
+// }
 
-async function getSQL2JSON(sql) {
-  const res = await axios.post(
-    "/api/sql2json",
-    { data: sql },
-    { headers: { "Content-Type": "application/json" } }
-  );
-  return res.data;
-}
+// async function getSQL2JSON(sql) {
+//   const res = await axios.post(
+//     "/api/sql2json",
+//     { data: sql },
+//     { headers: { "Content-Type": "application/json" } }
+//   );
+//   return res.data;
+// }
 
-if (sqljson) {
-  console.log('sqljson', sqljson)
-}
+// if (sqljson) {
+//   console.log('sqljson', sqljson)
+// }
 
 
 //--------------------------------------------------------
-const explanation = "这个 SQL 查询使用了索引扫描，提高了查询效率，但可能还可以优化为覆盖索引..."
 
-const chart = ref(null);
-const nodes = ref([]);
-const nodeCards = ref([]);
-// const res = {
-//   content: [
-//     {
-//       "created_virtual_table": "False",
-//       "sql_content": [
-//         {
-//           "keywords": "From",
-//           "scratched_content": [
-//             { "table_name": "Monthly_Growth", "is_virtual_table": "True" }
-//           ]
-//         },
-//         {
-//           "keywords": "Select",
-//           "scratched_content": [
-//             { "column_name": "month_id", "column_processing": "" },
-//             { "column_name": "Current_Month_Effi", "column_processing": "TO_CHAR (Current_Month_Effi, 'FM999,999,999.00') AS Current_Month_Effi" },
-//             { "column_name": "Previous_Month_Effi", "column_processing": "TO_CHAR (Previous_Month_Effi, 'FM999,999,999.00') AS Previous_Month_Effi" },
-//             { "column_name": "Growth_Percentage", "column_processing": "TO_CHAR (Growth_Percentage, 'FM999,999,999.00') || '%' AS Growth_Percentage" }
-//           ]
-//         },
-//         {
-//           "keywords": "Join",
-//           "scratched_content": [
-//             { "content": "JOIN Effi_Comparison p ON c.month_id = TO_CHAR (DATEADD (month, 1, TO_DATE (p.month_id, 'YYYYMM')), 'YYYYMM')" }
-//           ]
-//         },
-//         {
-//           "keywords": "Where",
-//           "scratched_content": [
-//             { "content": "c.month_id = '202410'" }
-//           ]
-//         }
-//       ]
-//     },
-//     {
-//       "created_virtual_table": "True",
-//       "virtual_table_name": "Monthly_Growth",
-//       "sql_content": [
-//         {
-//           "keywords": "Select",
-//           "scratched_content": [
-//             { "column_name": "c.month_id", "column_processing": "" },
-//             { "column_name": "Current_Month_Effi", "column_processing": "c.Avg_effi AS Current_Month_Effi" },
-//             { "column_name": "Previous_Month_Effi", "column_processing": "p.Avg_effi AS Previous_Month_Effi" },
-//             { "column_name": "Growth_Percentage", "column_processing": "(c.Avg_effi / p.Avg_effi - 1) * 100 AS Growth_Percentage" }
-//           ]
-//         },
-//         {
-//           "keywords": "From",
-//           "scratched_content": [
-//             { "table_name": "Effi_Comparison c", "is_virtual_table": "True" }
-//           ]
-//         },
-//         {
-//           "keywords": "Join",
-//           "scratched_content": [
-//             { "content": "JOIN Effi_Comparison p ON c.month_id = TO_CHAR (DATEADD (month, 1, TO_DATE (p.month_id, 'YYYYMM')), 'YYYYMM')" }
-//           ]
-//         },
-//         {
-//           "keywords": "Where",
-//           "scratched_content": [
-//             { "content": "c.month_id = '202410'" }
-//           ]
-//         }
-//       ]
-//     },
-//     {
-//       "created_virtual_table": "True",
-//       "virtual_table_name": "Effi_Comparison",
-//       "sql_content": [
-//         {
-//           "keywords": "Select",
-//           "scratched_content": [
-//             { "column_name": "month_id", "column_processing": "" },
-//             { "column_name": "Avg_effi", "column_processing": "AVG(effi) AS Avg_effi" }
-//           ]
-//         },
-//         {
-//           "keywords": "From",
-//           "scratched_content": [
-//             { "table_name": "Store_effi", "is_virtual_table": "True" }
-//           ]
-//         },
-//         {
-//           "keywords": "Group By",
-//           "scratched_content": [
-//             { "content": "month_id" }
-//           ]
-//         }
-//       ]
-//     },
-//     {
-//       "created_virtual_table": "True",
-//       "virtual_table_name": "Store_effi",
-//       "sql_content": [
-//         {
-//           "keywords": "Select",
-//           "scratched_content": [
-//             { "column_name": "country", "column_processing": "" },
-//             { "column_name": "channel", "column_processing": "" },
-//             { "column_name": "store_type", "column_processing": "" },
-//             { "column_name": "area", "column_processing": "" },
-//             {
-//               "column_name": "effi",
-//               "column_processing": "CASE WHEN (COALESCE(area, '') = '' OR CAST(area AS DECIMAL(18, 2)) = 0) THEN 0 ELSE AVG(COALESCE(amt_usd_notax, 0)) * 365 / CAST(area AS DECIMAL(18, 2)) * 10.7639104 END AS effi"
-//             },
-//             { "column_name": "month_id", "column_processing": "" }
-//           ]
-//         },
-//         {
-//           "keywords": "From",
-//           "scratched_content": [
-//             { "table_name": "dm_fact_sales_chatbi", "is_virtual_table": "False" }
-//           ]
-//         },
-//         {
-//           "keywords": "Where",
-//           "scratched_content": [
-//             {
-//               "content": "date_code <= '2024-10-31' AND country = 'Mainland' AND channel = 'O&O' AND store_type = 'BH' AND comp_flag = 'Y'"
-//             }
-//           ]
-//         },
-//         {
-//           "keywords": "Group By",
-//           "scratched_content": [
-//             { "content": "country, channel, store_type, store_code, area, month_id" }
-//           ]
-//         }
-//       ]
-//     }
-//   ]
-
-// };
-let res = '';
-if (sqljson) {
-  res = sqljson;
-  console.log('-------res-------', res)
-}
+// let res = '';
+// if (sqljson) {
+//   res = sqljson;
+//   console.log('-------res-------', res)
+// }
 
 // const res = {
 //   content: [
@@ -280,16 +356,8 @@ if (sqljson) {
 //     }
 //     ]
 // };
+// const res = sqljson;
 
-const SQL_KEYWORDS = [
-  "Select",
-  "From",
-  "Where",
-  "Group By",
-  "Join",
-  "Having",
-  "Order By",
-];
 
 // onMounted(() => {
 //   const data = transformToTree(res);
@@ -495,22 +563,87 @@ const SQL_KEYWORDS = [
 //     })),
 //   };
 // }
+ methods: {
+  async getSubsqljson(payload) {
+      const res = await axios.post("/api/relatsql", payload);
+      return res.data;
+    },
 
-// **1. 数据转换：转换成树形结构**
-function transformToTree(data) {
-  const root = { name: "Main Query", children: [] };
-  const virtualTables = new Map(); // 存储虚拟表，便于查找和嵌套
+    async getSQL2JSON(sql) {
+      const res = await axios.post(
+        "/api/sql2json",
+        { data: sql },
+        { headers: { "Content-Type": "application/json" } }
+      );
+      return res.data;
+    },
 
-  // 第一步：处理所有虚拟表，构建子树
-  data.content.forEach((contentItem) => {
-    if (contentItem.created_virtual_table === "True") {
-      const virtualTableNode = {
-        name: contentItem.virtual_table_name,
-        children: [],
-        isVirtual: true // 标记为虚拟表
-      };
+  // **1. 数据转换：转换成树形结构**
+    transformToTree(data) {
+    const root = { name: "Main Query", children: [] };
+    const virtualTables = new Map(); // 存储虚拟表，便于查找和嵌套
 
-      contentItem.sql_content.forEach((section) => {
+    // 第一步：处理所有虚拟表，构建子树
+    data.content.forEach((contentItem) => {
+      if (contentItem.created_virtual_table === "True") {
+        const virtualTableNode = {
+          name: contentItem.virtual_table_name,
+          children: [],
+          isVirtual: true
+        };
+
+        contentItem.sql_content.forEach((section) => {
+          const sectionNode = { name: section.keywords, children: [] };
+
+          if (section.scratched_content) {
+            section.scratched_content.forEach((item) => {
+              let nodeName = item.column_name || item.table_name || item.content || "";
+              let newNode;
+
+              // 检查 nodeName 是否包含某个虚拟表名
+              let matchedVirtualTable = null;
+              for (const [virtualName, virtualNode] of virtualTables) {
+                if (nodeName.includes(virtualName)) {
+                  matchedVirtualTable = virtualNode;
+                  break;
+                }
+              }
+
+              if (matchedVirtualTable) {
+                newNode = matchedVirtualTable; // 使用匹配的虚拟表
+                // 如果有 Nl Explain，附加到虚拟表节点（可选）
+                if (item['Nl Explain']) {
+                  newNode.nlExplain = item['Nl Explain'];
+                }
+              } else {
+                newNode = {
+                  name: nodeName,
+                  children: [],
+                  nlExplain: item['Nl Explain'] || '' // 始终记录 Nl Explain
+                };
+                // 如果是 column_name 且有 column_processing，添加子节点
+                if (item.column_name && item.column_processing && item.column_processing.trim() !== '') {
+                  newNode.children.push({
+                    name: item.column_processing,
+                    nlExplain: '' // 子节点默认无 Nl Explain
+                  });
+                }
+              }
+
+              sectionNode.children.push(newNode);
+            });
+          }
+
+          virtualTableNode.children.push(sectionNode);
+        });
+
+        virtualTables.set(contentItem.virtual_table_name, virtualTableNode);
+      }
+    });
+
+    // 第二步：处理主查询
+    if (data.content[0].created_virtual_table === "False") {
+      data.content[0].sql_content.forEach((section) => {
         const sectionNode = { name: section.keywords, children: [] };
 
         if (section.scratched_content) {
@@ -523,17 +656,28 @@ function transformToTree(data) {
             for (const [virtualName, virtualNode] of virtualTables) {
               if (nodeName.includes(virtualName)) {
                 matchedVirtualTable = virtualNode;
-                break; // 找到第一个匹配的虚拟表后退出
+                break;
               }
             }
 
             if (matchedVirtualTable) {
-              newNode = matchedVirtualTable; // 嵌套匹配的虚拟表
+              newNode = matchedVirtualTable; // 使用匹配的虚拟表
+              // 如果有 Nl Explain，附加到虚拟表节点（可选）
+              if (item['Nl Explain']) {
+                newNode.nlExplain = item['Nl Explain'];
+              }
             } else {
-              newNode = { name: nodeName, children: [] };
+              newNode = {
+                name: nodeName,
+                children: [],
+                nlExplain: item['Nl Explain'] || '' // 始终记录 Nl Explain
+              };
               // 如果是 column_name 且有 column_processing，添加子节点
-              if (item.column_name && item.column_processing !== undefined) {
-                newNode.children.push({ name: item.column_processing });
+              if (item.column_name && item.column_processing && item.column_processing.trim() !== '') {
+                newNode.children.push({
+                  name: item.column_processing,
+                  nlExplain: '' // 子节点默认无 Nl Explain
+                });
               }
             }
 
@@ -541,59 +685,15 @@ function transformToTree(data) {
           });
         }
 
-        virtualTableNode.children.push(sectionNode);
+        root.children.push(sectionNode);
       });
-
-      virtualTables.set(contentItem.virtual_table_name, virtualTableNode);
     }
-  });
 
-  // 第二步：处理主查询
-  if (data.content[0].created_virtual_table === "False") {
-    data.content[0].sql_content.forEach((section) => {
-      const sectionNode = { name: section.keywords, children: [] };
+    return root;
+  },
 
-      if (section.scratched_content) {
-        section.scratched_content.forEach((item) => {
-          let nodeName = item.column_name || item.table_name || item.content || "";
-          let newNode;
-
-          // 检查 nodeName 是否包含某个虚拟表名
-          let matchedVirtualTable = null;
-          for (const [virtualName, virtualNode] of virtualTables) {
-            if (nodeName.includes(virtualName)) {
-              matchedVirtualTable = virtualNode;
-              break; // 找到第一个匹配的虚拟表后退出
-            }
-          }
-
-          if (matchedVirtualTable) {
-            newNode = matchedVirtualTable; // 嵌套匹配的虚拟表
-          } else {
-            newNode = { name: nodeName, children: [] };
-            // 如果是 column_name 且有 column_processing，添加子节点
-            if (item.column_name && item.column_processing !== undefined) {
-              newNode.children.push({ name: item.column_processing });
-            }
-          }
-
-          sectionNode.children.push(newNode);
-        });
-      }
-
-      root.children.push(sectionNode);
-    });
-  }
-
-  return root;
-}
-
-onMounted(() => {
-  watch(res, (newValue) => {
-    if (newValue !== '') {
-      let data = transformToTree(newValue);
-
-      // const data = transformToTree(res);
+    draw(data) {
+      d3.select(this.$refs.chart).select("svg").remove(); // 清除旧 SVG
       const root = d3.hierarchy(data);
 
       const width = 1205;
@@ -602,12 +702,9 @@ onMounted(() => {
       const padding = 20; // 矩形两侧的额外间距
 
 
-
-
-
       // 创建 SVG 画布
       const svgContainer = d3
-        .select(chart.value)
+        .select(this.$refs.chart)
         .append("svg")
         .attr("width", width)
         .attr("height", height);
@@ -638,7 +735,8 @@ onMounted(() => {
         .attr("stroke", "#aaa")
         .attr("stroke-width", 4)
         .attr("d", (d) => `M${d.source.y + 50},${d.source.x} L${d.target.y - 50},${d.target.x}`);
-
+      
+      
       // **绘制节点**
       const nodes = svg
         .selectAll("g.node")
@@ -676,7 +774,7 @@ onMounted(() => {
 
       // **处理表格样式的节点**
       const tableWidth = 250; // 表格宽度
-      const rowHeight = 40; // 每行高度
+      const rowHeight = 30; // 每行高度
       const headerHeight = 50; // 表头高度
       const tablePadding = 10; // 表格内边距
       const tableOffset = 300; // 表格相对于父节点的水平偏移量
@@ -712,7 +810,7 @@ onMounted(() => {
           .attr("height", headerHeight)
           .attr("fill", "#FFD700")
           .attr("stroke", "#333");
-
+         
         fromGroup
           .append("text")
           .attr("x", 0)
@@ -1384,7 +1482,7 @@ onMounted(() => {
 
           const textWidth = textElement.node().getBBox().width;
           let adjustedHeight = rowHeight;
-          if (textWidth > fixedTableWidth - 20) {
+          if (textWidth > fixedTableWidth - 25) {
             textElement.text("")
               .selectAll("tspan")
               .data(wrapText(processingText, fixedTableWidth - 20))
@@ -1393,8 +1491,9 @@ onMounted(() => {
               .attr("x", 0)
               .attr("dy", (t, j) => (j === 0 ? "0.35em" : "1.2em"))
               .text((t) => t);
-            const lineCount = wrapText(processingText, fixedTableWidth - 20).length;
-            adjustedHeight = rowHeight * lineCount / 2;
+            const lineCount = wrapText(processingText, fixedTableWidth - 25).length;
+            console.log(lineCount, processingText)
+            adjustedHeight = rowHeight * lineCount / 1.5;
           }
 
           group.insert("rect", "text")
@@ -1459,7 +1558,9 @@ onMounted(() => {
           .attr("width", fixedTableWidth)
           .attr("height", headerHeight)
           .attr("fill", headerFill)
-          .attr("stroke", "#333");
+          .attr("stroke", "none")
+          .attr("rx", 10)
+          .attr("ry", 10);
 
         group.append("text")
           .attr("x", 0)
@@ -1472,41 +1573,211 @@ onMounted(() => {
           .text("NL Explain");
 
         // 内容区域
-        let currentYOffset = headerHeight;
-        nodes.forEach((d, i) => {
-          // 这里假设每个节点有一个自然语言解释，暂时用占位文本
-          const explainText = `Explanation for ${d.data.name}`; // 替换为实际的解释内容
-          const textElement = group.append("text")
+      let currentYOffset = headerHeight;
+      nodes.forEach((d, i) => {
+        // 这里假设每个节点有一个自然语言解释，暂时用占位文本
+        const explainText = d.data.nlExplain && d.data.nlExplain.trim() !== ''
+              ? `${d.data.nlExplain}` // 如果 nlExplain 存在且非空，显示它
+              : `Explaination for ${d.data.name}`; // 否则显示 "explaination for <name>"
+        
+        console.log(d.data);
+        let currentText = explainText; // 保存当前文本，用于更新
+
+        // 计算文本的宽度和行数
+        const tempTextElement = group.append("text")
+          .attr("x", 0)
+          .attr("y", currentYOffset + rowHeight / 2)
+          .attr("dy", "0.35em")
+          .attr("text-anchor", "middle")
+          .attr("fill", "#333")
+          .style("font-size", "14px")
+          .text(explainText);
+
+        const textWidth = tempTextElement.node().getBBox().width;
+        let adjustedHeight = rowHeight;
+        let lines = [explainText];
+
+        if (textWidth > fixedTableWidth - 25) {
+          lines = wrapText(explainText, fixedTableWidth - 25);
+          const lineCount = lines.length;
+          console.log(lineCount, lines);
+          adjustedHeight = rowHeight * lineCount;
+        }
+        tempTextElement.remove(); // 删除临时文本元素
+
+        // 添加背景矩形
+        const rectElement = group.append("rect")
+          .attr("x", -fixedTableWidth / 2)
+          .attr("y", currentYOffset)
+          .attr("width", fixedTableWidth)
+          .attr("height", adjustedHeight)
+          .attr("fill", "#FFFFFF")
+          .attr("stroke", "#bdbaba")
+          .attr("rx", 5)
+          .attr("ry", 5);
+
+        // 默认展示不可编辑文本
+        const textElement = group.append("text")
+          .attr("x", 0)
+          .attr("y", currentYOffset + adjustedHeight / 2) // 垂直居中
+          .attr("text-anchor", "middle")
+          .attr("fill", "#333")
+          .style("font-size", "14px");
+
+        if (lines.length > 1) {
+          textElement.selectAll("tspan")
+            .data(lines)
+            .enter()
+            .append("tspan")
             .attr("x", 0)
-            .attr("y", currentYOffset + rowHeight / 2)
+            .attr("dy", (t, j) => (j === 0 ? `${-0.6 * (lines.length - 1)}em` : "1.2em")) // 多行居中
+            .text((t) => t);
+        } else {
+          textElement.text(explainText)
+            .attr("dy", "0.35em"); // 单行微调
+        }
+
+        // 左键点击文本触发编辑窗口
+        textElement.on("click", (event) => {
+          // 移除旧弹窗
+          d3.select("#edit-modal").remove();
+
+        // 创建弹窗容器
+        const modalWidth = window.innerWidth * 0.13; // 调整为较小的宽度
+        const modalHeight = window.innerHeight * 0.13;
+        const modal = d3.select("body")
+          .append("div")
+          .attr("id", "edit-modal")
+          .style("position", "fixed")
+          .style("top", `${event.clientY}px`) // 鼠标点击的 Y 坐标
+          .style("left", `${event.clientX}px`) // 鼠标点击的 X 坐标
+          .style("width", `${modalWidth}px`)
+          .style("height", `${modalHeight}px`)
+          .style("background", "#fff")
+          .style("box-shadow", "0 0 10px rgba(0,0,0,0.5)")
+          .style("z-index", 1000);
+
+          // 创建 SVG 画布
+          const svgContainer = modal.append("svg")
+            .attr("width", modalWidth)
+            .attr("height", modalHeight);
+
+          const svg = svgContainer.append("g")
+            .attr("transform", "translate(20, 20)"); // 留出边距
+
+          // 添加窗口背景矩形
+          svg.append("rect")
+            .attr("x", 0)
+            .attr("y", 0)
+            .attr("width", modalWidth - 20)
+            .attr("height", modalHeight - 20)
+            .attr("fill", "#FFFFFF")
+            .attr("stroke", "none")
+            .attr("rx", 5)
+            .attr("ry", 5);
+
+          // 可编辑文本区域
+          const foreignObject = svg.append("foreignObject")
+            .attr("x", 10)
+            .attr("y", 10)
+            .attr("width", modalWidth - 60)
+            .attr("height", modalHeight - 90);
+
+          const textarea = foreignObject.append("xhtml:textarea")
+            .style("width", "100%")
+            .style("height", "100%")
+            .style("font-size", "14px")
+            .style("color", "#333")
+            .style("border", "1px solid #ccc")
+            .style("background", "#fff")
+            .style("resize", "none")
+            .style("padding", "5px")
+            .text(currentText);
+
+          // Cancel 按钮
+          const cancelButton = svg.append("g")
+            .attr("transform", `translate(10, ${modalHeight - 70})`);
+          cancelButton.append("rect")
+            .attr("x", 0)
+            .attr("y", 0)
+            .attr("width", 80)
+            .attr("height", 30)
+            .attr("fill", "#f44336")
+            .attr("rx", 3)
+            .attr("ry", 3);
+          cancelButton.append("text")
+            .attr("x", 40)
+            .attr("y", 15)
             .attr("dy", "0.35em")
             .attr("text-anchor", "middle")
-            .attr("fill", "#333")
-            .style("font-size", "14px")
-            .text(explainText);
-
-          const textWidth = textElement.node().getBBox().width;
-          let adjustedHeight = rowHeight;
-          if (textWidth > fixedTableWidth - 20) {
-            textElement.text("")
-              .selectAll("tspan")
-              .data(wrapText(explainText, fixedTableWidth - 20))
-              .enter()
-              .append("tspan")
-              .attr("x", 0)
-              .attr("dy", (t, j) => (j === 0 ? "0.35em" : "1.2em"))
-              .text((t) => t);
-            const lineCount = wrapText(explainText, fixedTableWidth - 20).length;
-            adjustedHeight = rowHeight * lineCount;
-          }
-
-          group.insert("rect", "text")
-            .attr("x", -fixedTableWidth / 2)
-            .attr("y", currentYOffset)
-            .attr("width", fixedTableWidth)
-            .attr("height", adjustedHeight)
             .attr("fill", "#FFFFFF")
-            .attr("stroke", "#333");
+            .style("font-size", "14px")
+            .text("Cancel");
+
+          // Submit 按钮
+          const submitButton = svg.append("g")
+            .attr("transform", `translate(100, ${modalHeight - 70})`);
+          submitButton.append("rect")
+            .attr("x", 0)
+            .attr("y", 0)
+            .attr("width", 80)
+            .attr("height", 30)
+            .attr("fill", "#4CAF50")
+            .attr("rx", 3)
+            .attr("ry", 3);
+          submitButton.append("text")
+            .attr("x", 40)
+            .attr("y", 15)
+            .attr("dy", "0.35em")
+            .attr("text-anchor", "middle")
+            .attr("fill", "#FFFFFF")
+            .style("font-size", "14px")
+            .text("Submit");
+
+          // Cancel 按钮事件
+          cancelButton.on("click", () => {
+            modal.remove(); // 移除弹窗
+          });
+
+          // Submit 按钮事件
+          submitButton.on("click", () => {
+            const newText = textarea.property("value");
+            currentText = newText; // 更新当前文本
+
+            // 更新显示文本
+            textElement.selectAll("tspan").remove();
+            const newLines = wrapText(newText, fixedTableWidth - 25);
+            if (newLines.length > 1) {
+              textElement.selectAll("tspan")
+                .data(newLines)
+                .enter()
+                .append("tspan")
+                .attr("x", 0)
+                .attr("dy", (t, j) => (j === 0 ? `${-0.6 * (newLines.length - 1)}em` : "1.2em"))
+                .text((t) => t);
+            } else {
+              textElement.text(newText)
+                .attr("dy", "0.35em");
+            }
+
+            // 更新矩形高度
+            const newHeight = rowHeight * newLines.length;
+            if (newHeight !== adjustedHeight) {
+              adjustedHeight = newHeight;
+              rectElement.attr("height", adjustedHeight);
+              textElement.attr("y", currentYOffset + adjustedHeight / 2); // 重新居中
+            }
+
+            modal.remove(); // 移除弹窗
+
+            const updated_explain = {
+              sql_query: "", // 完整的sql代码
+              sql_json: "", // sql 转json的完整结果
+              nl_ex: '', // 修改位置的nl explain
+              nl_sql:'' // 修改位置的小段sql
+              }
+          });
+        });
 
           currentYOffset += adjustedHeight;
         });
@@ -2073,31 +2344,51 @@ onMounted(() => {
 
       // 辅助函数：将长文本拆分为多行
       function wrapText(text, maxWidth) {
-        const words = text.split(" ");
+        const words = text.trim().split(" "); // 移除首尾空格并按空格分割
         const lines = [];
-        let currentLine = words[0];
+        let currentLine = "";
 
-        const tempText = svg.append("text").attr("visibility", "hidden").style("font-size", "14px");
-        for (let i = 1; i < words.length; i++) {
-          tempText.text(currentLine + " " + words[i]);
-          if (tempText.node().getBBox().width < maxWidth) {
-            currentLine += " " + words[i];
+        // 创建临时文本元素用于测量
+        const tempText = svg.append("text")
+          .attr("visibility", "hidden")
+          .style("font-size", "14px");
+
+        // 如果文本为空，直接返回空数组
+        if (!text || words.length === 0) {
+          tempText.remove();
+          return [];
+        }
+
+        for (let i = 0; i < words.length; i++) {
+          const word = words[i];
+          const testLine = currentLine ? currentLine + " " + word : word; // 处理首词无空格的情况
+
+          tempText.text(testLine);
+          const textWidth = tempText.node().getBBox().width;
+
+          if (textWidth <= maxWidth) {
+            currentLine = testLine; // 如果宽度合适，追加到当前行
           } else {
-            lines.push(currentLine);
-            currentLine = words[i];
+            if (currentLine) {
+              lines.push(currentLine); // 推送当前行（非空）
+            }
+            currentLine = word; // 新词作为新行开始
           }
         }
-        lines.push(currentLine);
+
+        // 推送最后一行（如果有内容）
+        if (currentLine) {
+          lines.push(currentLine);
+        }
+
         tempText.remove();
         return lines;
       }
-
       // **将文本移回中心**
       texts.attr("text-anchor", "middle");
-
     }
-  })
-});
+  }
+}
 
 </script>
 
@@ -2107,7 +2398,7 @@ svg {
 }
 
 .header {
-  background-color: #AEC6EA;
+  background-color: #dbf1d5;
   /* 设置背景颜色 */
   padding: 10px;
   text-align: center;
