@@ -73,7 +73,6 @@ def analyze_relation(understanding : str, knowledge_base : list):
     for i in range(len(knowledge_base)):
         result.append([])
         for j in range(2):
-            print(knowledge_base[i][j])
             prompt = f'''I will provide you with two sentences. Please follow the process below to evaluate the two sentences:
 
             Identify and label which word or words in the first sentence are specialized terms that need explanation.
@@ -180,14 +179,14 @@ async def query_handler(request: Dict[str, Any]):
         
         if not user_query:
             raise HTTPException(status_code=400, detail="Missing query parameter")
-        
+
         # 2. 知识库检索+生成sql代码
         print("==========================my_lightrag========================================")
-        rag_response, context = await rag.query(user_query)
-
+        rag_response, context, system_prompt = await rag.query(user_query)
         print("---------------context----------------\n")
-        print(context)
+        print(rag_response)
         print("\n--------------context---------------------")
+        print("??????????")
         # Extract knowledge base
         csv_file = StringIO(context.strip('"id", "content"\n'))
 
@@ -196,7 +195,6 @@ async def query_handler(request: Dict[str, Any]):
         list_of_lists = [row[1].split("**SQL query sample**:") for row in csv_reader]
 
 
-        print(list_of_lists)
 
 
 
@@ -243,7 +241,9 @@ async def query_handler(request: Dict[str, Any]):
             "highlight_words": highlight_words,
             "highlight_knowledges": highlight_knowledges,
             "liners": liners,
-            "list_of_lists": list_of_lists
+            "list_of_lists": list_of_lists,
+            "system_prompt": system_prompt,
+            "system_query": user_query
         }
         
         # 添加当前查询到历史
