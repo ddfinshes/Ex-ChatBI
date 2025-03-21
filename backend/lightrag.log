@@ -3442,3 +3442,63 @@ Params: {}, Got: Error code: 401 - {'error': {'message': '该令牌额度已用�
 2025-03-21 20:46:48,631 - lightrag - INFO - Query edges: Data analysis, SQL code generation, Sales analysis, MOM percentage calculation, top_k: 60, cosine: 0.2
 2025-03-21 20:46:50,338 - lightrag - INFO - Global query uses 67 entites, 60 relations, 14 chunks
 2025-03-21 20:47:45,923 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-03-21 21:42:19,736 - lightrag - INFO - Logger initialized for working directory: E:\Code\UIST2025\Ex-ChatBI\backend\LightRAG\examples/dickens
+2025-03-21 21:42:19,737 - lightrag - INFO - Load KV llm_response_cache with 0 data
+2025-03-21 21:42:19,738 - lightrag - INFO - Load KV full_docs with 0 data
+2025-03-21 21:42:19,738 - lightrag - INFO - Load KV text_chunks with 0 data
+2025-03-21 21:42:19,739 - lightrag - INFO - Loaded document status storage with 0 records
+2025-03-21 21:42:19,740 - lightrag - INFO - Inserting 1 to doc_status
+2025-03-21 21:42:19,741 - lightrag - INFO - Stored 1 new unique documents
+2025-03-21 21:42:19,741 - lightrag - INFO - Number of batches to process: 1.
+2025-03-21 21:42:19,742 - lightrag - INFO - Start processing batch 1 of 1.
+2025-03-21 21:42:19,752 - lightrag - INFO - Inserting 1 to doc_status
+2025-03-21 21:42:19,753 - lightrag - INFO - Inserting 22 to chunks
+2025-03-21 21:42:19,754 - lightrag - INFO - Inserting 1 to full_docs
+2025-03-21 21:42:19,754 - lightrag - INFO - Inserting 22 to text_chunks
+2025-03-21 21:44:48,699 - lightrag - INFO - Inserting 161 to entities
+2025-03-21 21:45:00,640 - lightrag - INFO - Inserting 105 to relationships
+2025-03-21 21:45:09,272 - lightrag - INFO - New entities or relationships extracted.
+2025-03-21 21:45:09,272 - lightrag - INFO - Inserting 1 to doc_status
+2025-03-21 21:45:09,273 - lightrag - INFO - Completed batch 1 of 1.
+2025-03-21 21:45:09,331 - lightrag - INFO - Writing graph with 161 nodes, 105 edges
+2025-03-21 21:45:09,342 - lightrag - INFO - All Insert done
+2025-03-21 21:45:17,171 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-03-21 21:45:17,171 - lightrag - INFO - Query edges: data analysis, SQL code, sales analysis, MOM percentage, APAC EC, top_k: 60, cosine: 0.2
+2025-03-21 21:45:19,904 - lightrag - INFO - Global query uses 57 entites, 60 relations, 13 chunks
+2025-03-21 21:45:42,560 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-03-21 21:51:36,659 - lightrag - INFO - Logger initialized for working directory: E:\Code\UIST2025\Ex-ChatBI\backend\LightRAG\examples/dickens
+2025-03-21 21:51:36,661 - lightrag - INFO - Load KV llm_response_cache with 1 data
+2025-03-21 21:51:36,661 - lightrag - INFO - Load KV full_docs with 1 data
+2025-03-21 21:51:36,662 - lightrag - INFO - Load KV text_chunks with 22 data
+2025-03-21 21:51:36,667 - lightrag - INFO - Loaded graph from E:\Code\UIST2025\Ex-ChatBI\backend\LightRAG\examples/dickens\graph_chunk_entity_relation.graphml with 161 nodes, 105 edges
+2025-03-21 21:51:36,696 - lightrag - INFO - Loaded document status storage with 1 records
+2025-03-21 21:51:36,697 - lightrag - INFO - No new unique documents were found.
+2025-03-21 21:51:36,697 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-21 21:51:44,738 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-03-21 21:51:44,739 - lightrag - INFO - Query edges: Data analysis, SQL code generation, Sales performance, Month-on-month analysis, APAC EC, top_k: 60, cosine: 0.2
+2025-03-21 21:51:47,556 - lightrag - INFO - Global query uses 56 entites, 60 relations, 13 chunks
+2025-03-21 21:52:16,389 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-03-21 21:54:57,015 - lightrag - INFO - Logger initialized for working directory: E:\Code\UIST2025\Ex-ChatBI\backend\LightRAG\examples/dickens
+2025-03-21 21:54:57,029 - lightrag - INFO - Load KV llm_response_cache with 1 data
+2025-03-21 21:54:57,030 - lightrag - INFO - Load KV full_docs with 1 data
+2025-03-21 21:54:57,031 - lightrag - INFO - Load KV text_chunks with 22 data
+2025-03-21 21:54:57,040 - lightrag - INFO - Loaded graph from E:\Code\UIST2025\Ex-ChatBI\backend\LightRAG\examples/dickens\graph_chunk_entity_relation.graphml with 161 nodes, 105 edges
+2025-03-21 21:54:57,078 - lightrag - INFO - Loaded document status storage with 1 records
+2025-03-21 21:54:57,080 - lightrag - INFO - No new unique documents were found.
+2025-03-21 21:54:57,080 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-21 21:55:07,159 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-03-21 21:55:07,160 - lightrag - INFO - Query edges: Data analysis, SQL code generation, Sales performance analysis, Regional analysis, top_k: 60, cosine: 0.2
+2025-03-21 21:55:09,928 - lightrag - INFO - Global query uses 60 entites, 60 relations, 13 chunks
+2025-03-21 21:55:32,653 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-03-21 22:01:00,080 - lightrag - INFO - Logger initialized for working directory: E:\Code\UIST2025\Ex-ChatBI\backend\LightRAG\examples/dickens
+2025-03-21 22:01:00,081 - lightrag - INFO - Load KV llm_response_cache with 1 data
+2025-03-21 22:01:00,082 - lightrag - INFO - Load KV full_docs with 1 data
+2025-03-21 22:01:00,083 - lightrag - INFO - Load KV text_chunks with 22 data
+2025-03-21 22:01:00,088 - lightrag - INFO - Loaded graph from E:\Code\UIST2025\Ex-ChatBI\backend\LightRAG\examples/dickens\graph_chunk_entity_relation.graphml with 161 nodes, 105 edges
+2025-03-21 22:01:00,108 - lightrag - INFO - Loaded document status storage with 1 records
+2025-03-21 22:01:00,109 - lightrag - INFO - No new unique documents were found.
+2025-03-21 22:01:00,109 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-21 22:01:06,841 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-03-21 22:01:06,842 - lightrag - INFO - Query edges: Data analysis, SQL code generation, Sales performance analysis, Month-over-Month (MOM%) calculation, Region-specific analysis, top_k: 60, cosine: 0.2
+2025-03-21 22:01:09,540 - lightrag - INFO - Global query uses 59 entites, 60 relations, 13 chunks
+2025-03-21 22:01:56,830 - lightrag - INFO - Inserting 1 to llm_response_cache
