@@ -3435,3 +3435,10 @@ Params: {}, Got: Error code: 401 - {'error': {'message': '该令牌额度已用�
 2025-03-21 20:40:09,582 - lightrag - INFO - Query edges: Data analysis, SQL code generation, Sales analysis, Month-on-month percentage calculation, Regional performance analysis, top_k: 60, cosine: 0.2
 2025-03-21 20:40:11,262 - lightrag - INFO - Global query uses 67 entites, 60 relations, 14 chunks
 2025-03-21 20:40:48,778 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-03-21 20:46:38,717 - lightrag - INFO - Loaded document status storage with 1 records
+2025-03-21 20:46:38,719 - lightrag - INFO - No new unique documents were found.
+2025-03-21 20:46:38,719 - lightrag - INFO - All documents have been processed or are duplicates
+2025-03-21 20:46:48,631 - lightrag - INFO - Inserting 1 to llm_response_cache
+2025-03-21 20:46:48,631 - lightrag - INFO - Query edges: Data analysis, SQL code generation, Sales analysis, MOM percentage calculation, top_k: 60, cosine: 0.2
+2025-03-21 20:46:50,338 - lightrag - INFO - Global query uses 67 entites, 60 relations, 14 chunks
+2025-03-21 20:47:45,923 - lightrag - INFO - Inserting 1 to llm_response_cache
