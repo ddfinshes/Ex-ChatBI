@@ -222,13 +222,13 @@ export default {
           console.log(newVal);
           if (newVal) {
             this.subsql = newVal;
-            console.log('subsqljson', this.subsqljson);
-            this.getSubsqljson(this.subsqljson).then(res => {
-              this.subsqljson = res.content;
-              console.log('subsqljson', this.subsqljson);
-            }).catch(error => {
-              console.error("Error fetching subsqljson:", error);
-            });
+            console.log('subsql', this.subsql);
+            // this.getSubsqljson(this.subsql).then(res => {
+            //   this.subsqljson = res.content;
+            //   console.log('subsqljson', this.subsqljson);
+            // }).catch(error => {
+            //   console.error("Error fetching subsqljson:", error);
+            // });
           }
         }, 1000);
       },
@@ -564,10 +564,10 @@ export default {
 //   };
 // }
  methods: {
-  async getSubsqljson(payload) {
-      const res = await axios.post("/api/relatsql", payload);
-      return res.data;
-    },
+  // async getSubsqljson(payload) {
+  //     const res = await axios.post("/api/relatsql", payload);
+  //     return res.data;
+  //   },
 
     async getSQL2JSON(sql) {
       const res = await axios.post(

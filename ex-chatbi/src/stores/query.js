@@ -8,7 +8,7 @@ export const useQueryStore = defineStore('query', {
         sqlcode: "",
         isReady: false,
         isDataReady: false,
-        clickinfo: '',
+        subsqljson: '', // 点击table后的子sql信息
         sqlresponse: null
     }),
     actions: {
@@ -26,7 +26,7 @@ export const useQueryStore = defineStore('query', {
             this.isDataReady = value;
         },
         setSubSQLJson(value) {
-            this.clickinfo = value;
+            this.subsqljson = value;
         },
         // 新增：从后端获取 response
         async fetchSQLResponse(sql) {

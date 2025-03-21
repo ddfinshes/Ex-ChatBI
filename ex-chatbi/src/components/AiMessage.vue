@@ -169,9 +169,16 @@ export default {
         query_out: this.message.data,
         click_info: this.clickdata
       };
-      this.queryStore.setSubSQLJson(payload);
+      // this.queryStore.setSubSQLJson(payload);
       console.log('Request payload:', payload);
-        
+        const res = await axios.post(
+          "/api/relatsql",
+          payload
+        );
+        // 点击单元格后的sql2json
+        const subsqljson = res.data;
+        console.log('subsql2json: ', subsqljson)
+        this.queryStore.setSubSQLJson(subsqljson);
       } catch(error) {
         console.error("Error fetching response:", error);
       }
