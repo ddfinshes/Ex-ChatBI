@@ -18,15 +18,15 @@ if not os.path.exists(WORKING_DIR):
 
 
 async def llm_model_func(
-        prompt, system_prompt=None, history_messages=[], keyword_extraction=False, **kwargs
+    prompt, system_prompt=None, history_messages=[], keyword_extraction=False, **kwargs
 ) -> str:
     return await openai_complete_if_cache(
         "o3-mini",
         prompt,
         system_prompt=system_prompt,
         history_messages=history_messages,
-        api_key='sk-rzf6y244hnAJPxUE5eA02e5bA4Dd4098A3C21f96CeCe7a6f',
-        # api_key='sk-234NEybMLmKyfLjp0bD64709016c4b67B0Cf405a2f90Ba7b',
+        api_key = 'sk-rzf6y244hnAJPxUE5eA02e5bA4Dd4098A3C21f96CeCe7a6f',
+        #api_key='sk-234NEybMLmKyfLjp0bD64709016c4b67B0Cf405a2f90Ba7b',
         base_url='https://ai-yyds.com/v1',
         **kwargs,
     )
@@ -56,8 +56,7 @@ async def test_funcs():
     result = await embedding_func(["How are you?"])
     print("embedding_func: ", result)
 
-
-async def query(prompt: str, history = None):
+async def query(prompt : str):
     embedding_dimension = await get_embedding_dim()
     rag = LightRAG(
         working_dir=WORKING_DIR,
@@ -91,8 +90,15 @@ async def query(prompt: str, history = None):
 
     # Perform global search
     # prompt = "WTD sales vs Target?"
-    return await rag.aquery(
-        f"""You are a data analysis expert tasked with generating executable PostgreSQL code to calculate {prompt}. Follow these steps: 
+
+    """
+
+    
+    """
+    return  await rag.aquery(
+            f"""You are a data analysis expert tasked with generating executable PostgreSQL code to calculate {prompt}. 
+
+            Follow these steps: 
                 1. Identify Query Constraints: 
                 - For week-based date restrictions (e.g., "WTD" or "last week"), excluding weekid (e.g., "week 45"), convert them into a specific date range. Do not use built-in date functions.
                     - Example: If today is February 20, 2025, and the user asks for "WTD: From Sunday of this week to yesterday," use February 16 to February 19, 2025.
@@ -104,7 +110,7 @@ async def query(prompt: str, history = None):
                     - SQL Code: Enclose the code in sql marks.
                     - Explanation: Clarify the SQL output for business users.
                 5. You should strictly follow the output format.
-
+                
                 ***User Input Example:***
                 this month's weekly comp growth % for sales.
 
@@ -128,7 +134,7 @@ async def query(prompt: str, history = None):
                 ```
                 Explanation: .... ////Answer Explain:Explain about this sql output help business user understanding why generate this sql output. 
             """,
-        param=QueryParam(mode="global", conversation_history=history)
+            param=QueryParam(mode="global")
     )
 
     # Perform hybrid search

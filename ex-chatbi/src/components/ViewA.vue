@@ -10,12 +10,10 @@
           <div style="text-align: left">{{ currentQuery }}</div>
         </el-card> -->
 
-        <el-card ref="userInputCard"
-          shadow="hover"
-          style="width: 180px; margin-right: 10px; padding: 0; border: none;"
-          body-style="padding: 0;"
-        >
-          <div slot="header" style="background-color: #909aa3; color: white; padding: 10px; border-radius: 4px 4px 0 0; text-transform: uppercase; text-align: center;">
+        <el-card ref="userInputCard" shadow="hover" style="width: 180px; margin-right: 10px; padding: 0; border: none;"
+          body-style="padding: 0;">
+          <div slot="header"
+            style="background-color: #909aa3; color: white; padding: 10px; border-radius: 4px 4px 0 0; text-transform: uppercase; text-align: center;">
             User Requirements
           </div>
           <div style="background-color: #ffffff; color: #303133; padding: 10px; text-align: left; border-radius: 0 0 4px 4px; min-height: 40px;">
@@ -23,7 +21,7 @@
           </div>
         </el-card>
       </el-col>
-
+      
       <el-col :span="4" style="display: flex; justify-content: center;">
       <div
         class="arrow-connector"
@@ -44,22 +42,18 @@
             border-top: 10px solid transparent;
             border-bottom: 10px solid transparent;
             border-right: 16px solid #409EFF;
-          "
-        ></div>
+          "></div>
 
-        <!-- 中间圆点 -->
-        <div
-          style="
+          <!-- 中间圆点 -->
+          <div style="
             width: 25px;
             height: 25px;
             background-color: #3da59b;
             border-radius: 50%;
-          "
-        ></div>
+          "></div>
 
-        <!-- 右箭头 -->
-        <div
-          style="
+          <!-- 右箭头 -->
+          <div style="
             width: 0;
             height: 0;
             border-top: 10px solid transparent;
@@ -221,10 +215,10 @@
     </el-row>
   </div>
   </template>
-
+  
   <script>
   import { useQueryStore } from '@/stores/query'; // 假设这是你的 Pinia store 路径
-
+  
   export default {
     name: 'QueryDisplay',
     props: {
@@ -243,7 +237,7 @@
       response() {
         return this.queryStore.response;
       },
-      highlightedContent() {
+            highlightedContent() {
         return this.highlightText(this.modelResponse, this.searchtext);
       },
     },
@@ -254,7 +248,7 @@
         modelResponse: '',
         highlight: [],
         searchtext:[],
-        topKSimilar: [{ similarity: 0.95, query: "What is AI?", sql_code: "select" },],
+        topKSimilar: [{ similarity: 0.95, query: "What is AI?" }],
         // 测试用
         historyList:[],
         modelCardCenter: 50, // 默认值，避免初始渲染问题
@@ -300,7 +294,7 @@
           this.messageHistory = newVal.message_history || [];
           this.highlight = newVal.response.pair_relevance;
           this.searchtext = newVal.response.highlight_words;
-          this.addItem(newVal.response.system_query, newVal.response.code);
+          this.addItem(newVal.response.system_query, newVal.response.code)
           this.queryStore.setHistory(this.historyList);
           console.log("history", this.historyList)
         }
@@ -314,68 +308,16 @@
       //   this.topKSimilar = res.data.top_k_similar || [];
       // }
       //获取元素底部中心坐标
-    highlightText(text, searchTerms) {
-      if (!searchTerms || searchTerms.length === 0) return text;
+            highlightText(text, searchTextArray) {
+      if (!searchTextArray || searchTextArray.length === 0) return text;
 
       let result = text;
-      searchTerms.forEach(term => {
+      searchTextArray.forEach(term => {
         const regex = new RegExp(`(${this.escapeRegExp(term)})`, 'gi');
         result = result.replace(regex, '<span class="highlight">$1</span>');
       });
-      return result;
-    },
 
-    // 处理特殊字符转义
-    escapeRegExp(string) {
-      return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    },
-
-    // 输入事件处理
-    handleInput(e) {
-      // 保存光标位置
-      this.saveCursorPosition();
-
-      // 获取纯文本内容并更新到父组件
-      const text = this.$refs.editableDiv.textContent;
-      this.$emit('input', text);
-
-      // 恢复光标位置
-      this.restoreCursorPosition();
-    },
-
-    // 保存光标位置
-    saveCursorPosition() {
-      const selection = window.getSelection();
-      if (selection.rangeCount > 0) {
-        const range = selection.getRangeAt(0);
-        const preCaretRange = range.cloneRange();
-        preCaretRange.selectNodeContents(this.$refs.editableDiv);
-        preCaretRange.setEnd(range.endContainer, range.endOffset);
-        this.lastCursorPos = preCaretRange.toString().length;
-      }
-    },
-
-    // 恢复光标位置
-    restoreCursorPosition() {
-      const textNode = this.findTextNode(this.$refs.editableDiv);
-      const range = document.createRange();
-
-      range.setStart(textNode, Math.min(this.lastCursorPos, textNode.length));
-      range.collapse(true);
-
-      const selection = window.getSelection();
-      selection.removeAllRanges();
-      selection.addRange(range);
-    },
-
-    // 查找文本节点
-    findTextNode(node) {
-      if (node.nodeType === Node.TEXT_NODE) return node;
-      for (const child of node.childNodes) {
-        const result = this.findTextNode(child);
-        if (result) return result;
-      }
-      return null;
+      return text;
     },
       getCardPositions() {
         return {
@@ -478,9 +420,7 @@
           this.showAdd = false;
         }, 2000);
       },
-
-      // History
-    addItem(query, sql_code) {
+          addItem(query, sql_code) {
     const newItem = {
       similarity: 0.5,
       query: query,
@@ -516,26 +456,35 @@
     }
   };
   </script>
-
+  
   <style>
-  .header {
-    background-color: #AEC6EA;
-    /* 设置背景颜色 */
-    padding: 10px;
-    text-align: center;
-    font-size: 18px;
-    font-weight: bold;
-  }
-  .el-collapse-item__header {
-    background-color: #f5f5f5 !important;
-    padding: 10px !important;
-    height: 40px;
-    line-height: 40px;
-  }
-  .el-collapse-item__content {
-    background-color: #f9f9f9;
-    border-radius: 0 0 4px 4px;
-  }
+.view-header {
+  /* background-color: #dbf1d5;
+  padding: 10px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  height: 55px;
+	width: 100%; */
+  /* border-top: 1px solid #dcdfe6;
+  border-bottom: 1px solid #dcdfe6;
+  border-left: 1px solid #dcdfe6;
+  border-right: 1px solid #dcdfe6;
+   */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* 或 center，根据需求调整水平对齐 */
+  margin-bottom: 0;
+  font-size: 22px;
+  font-weight: 550; /* 比 bold（700）稍轻，现代感更强 */
+  color: #4e4e4e; /* 深灰色文字，确保对比度 */
+  background: #dbf1d5;
+  /* border-radius: 10px; */
+  height: 40px; /* 固定高度 */
+  padding: 0 15px; /* 左右padding增加，上下靠height控制 */
+  box-sizing: border-box; /* 确保padding不增加总高度 */
+  line-height: 1; /* 确保文字垂直居中更精确 */
+}
 
   .history-window {
     position: absolute;

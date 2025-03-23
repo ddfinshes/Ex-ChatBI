@@ -38,11 +38,15 @@ export default {
   data() {
     return {
       viewAPositions: null, // 新增坐标存储
-      viewBPositions: null,
+      viewBPositions_left: null,
+      viewBPositions_right: null,
       d3SVG: null,
       updateInterval: null,
       currentHoveredId: null,
-      liners: [1, 2],
+      liners_1_1: [],
+      liners_1_2: [],
+      liners_2_1: [],
+      liners_2_2: [],
     };
   },
   mounted() {
@@ -77,7 +81,8 @@ export default {
     initConnectionUpdate() {
       const update = () => {
         this.viewAPositions = this.$refs.viewA?.getCardPositions?.() || {};
-        this.viewBPositions = this.$refs.viewB?.getCardPositions?.() || {};
+        this.viewBPositions_left = this.$refs.viewB?.getCardPositions_left?.() || {};
+        this.viewBPositions_right = this.$refs.viewB?.getCardPositions_right?.() || {};
         // console.log('Coordinates:', {
         //   userInput: this.viewAPositions?.userInput,
         //   model: this.viewAPositions?.model,
@@ -119,7 +124,7 @@ export default {
 
       // 生成所有连接：每个ID生成两条线
       const connections = [];
-      for(let id of this.liners) {
+      /*for(let id of this.liners) {
         // UserInput到当前ID的连线
         if(this.viewAPositions?.userInput && this.viewBPositions?.[id]) {
           connections.push({
@@ -134,6 +139,50 @@ export default {
           connections.push({
             source: this.viewAPositions.model,
             target: this.viewBPositions[id],
+            color: '#00F5FF',
+            opacity: 0.8
+          });
+        }
+      }*/
+      for(let id of this.liners_1_1) {
+        // UserInput到KB的连线
+        if(this.viewAPositions?.userInput && this.viewBPositions_left?.[id-1]) {
+          connections.push({
+            source: this.viewAPositions.userInput,
+            target: this.viewBPositions_left[id-1],
+            color: '#00F5FF',
+            opacity: 0.8
+          });
+        }
+      }
+      for(let id of this.liners_1_2) {
+        // UserInput到SKB的连线
+        if(this.viewAPositions?.userInput && this.viewBPositions_right?.[id]) {
+          connections.push({
+            source: this.viewAPositions.userInput,
+            target: this.viewBPositions_right[id],
+            color: '#00F5FF',
+            opacity: 0.8
+          });
+        }
+      }
+      for(let id of this.liners_2_1) {
+        // ModelUnderstanding到KB的连线
+        if(this.viewAPositions?.model && this.viewBPositions_left?.[id-1]) {
+          connections.push({
+            source: this.viewAPositions.model,
+            target: this.viewBPositions_left[id-1],
+            color: '#00F5FF',
+            opacity: 0.8
+          });
+        }
+      }
+      for(let id of this.liners_2_2) {
+        // ModelUnderstanding到SKB的连线
+        if(this.viewAPositions?.model && this.viewBPositions_right?.[id]) {
+          connections.push({
+            source: this.viewAPositions.model,
+            target: this.viewBPositions_right[id],
             color: '#00F5FF',
             opacity: 0.8
           });
@@ -182,7 +231,13 @@ export default {
     response(newVal) {
         if (newVal) {
           console.log('select', newVal);
-          this.liners = newVal.response.liners;
+          this.liners_1_1 = newVal.response.liners.query_liners.bus_lines;
+          this.liners_1_2 = newVal.response.liners.query_liners.sql_lines;
+          this.liners_2_1 = newVal.response.liners.understanding_liners.bus_lines;
+          this.liners_2_2 = newVal.response.liners.understanding_liners.sql_lines;
+          const delta = newVal.response.list_of_lists[1].length;
+          this.liners_1_2 = this.liners_1_2.map(num => num + delta);
+          this.liners_2_2 = this.liners_2_2.map(num => num + delta);
         }
       }
   }
@@ -198,8 +253,17 @@ export default {
   flex-direction: column;
   background-color: #f0f0f0;
   border: 1px solid #dcdfe6;
-
+  border-radius: 10px;
+  margin-bottom: 20px;
 }
+
+#selectPanelContainer {
+  /* position: static !important;
+  transform: none !important;
+  overflow: visible !important; */
+  
+  /* height: 90%; */
+} 
 .d3-canvas {
   position: fixed;
   top: 0;
@@ -213,11 +277,7 @@ export default {
   transition: all 0.3s ease;
 }
 
-/* #selectPanelContainer {
-  position: static !important;
-  transform: none !important;
-  overflow: visible !important;
-} */
+
 
 .top-buttons {
   border-bottom: 1px solid #ebf4f5;

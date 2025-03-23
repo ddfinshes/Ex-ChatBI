@@ -3,11 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 # from LightRAG.examples.lightrag_openai_compatible_demo import query
 # lightrag have error for import 
 # from lightrag_deepseek import my_lightrag
-import uvicorn  # FastAPI推荐的生产级服务器
-# from LightRAG.examples.lightrag_openai_compatible_demo import query
-# lightrag have error for import 
-# from lightrag_deepseek import my_lightrag
-import uvicorn  # FastAPI推荐的生产级服务器
+import uvicorn  
 from typing import Dict, Any
 from pydantic import BaseModel, Field
 import re
@@ -25,6 +21,12 @@ from utils.get_NLExplain import ExplainAgent
 from utils.get_user_sql import SQLExtractAgent
 from utils.get_changeNLExSQL import ModifyAgent
 from utils.get_Chart import VisAgent
+from utils.get_stepNLSQLAgent import StepNLAgent
+from utils.analysis_relation import analyze_relation
+# from utils.sql_rag import SQLRAGAgent
+from utils.get_sql_rag import getSQLRAG
+from utils.kb2sql import process_file_to_chunks, get_chunks
+from utils.get_LLM4SQL import SQLCodeAgent
 from openai import OpenAI
 import csv
 from io import StringIO
@@ -53,52 +55,21 @@ excute_sql_output = {}
 
 def get_extracted_sql(text):
     # 匹配获取sqlcode
-    sql_code = re.search(r'```sql\n(.*?)\n```', text, re.DOTALL)
+    sql_code = re.search(r'```sql\n(.*?)\n```', str(text), re.DOTALL)
     if sql_code:
         extracted_sql = sql_code.group(1)
         print("提取的SQL代码:")
         print(extracted_sql)
     else:
         print("未找到SQL代码块")
+        return ''
     return extracted_sql
 
-
-def analyze_relation(understanding : str, knowledge_base : list):
-    client = OpenAI(
-        base_url='https://api.nuwaapi.com/v1',
-        api_key='sk-3El3h3N2q539ah6ofrqA1vQTm8iudtnQUQzhp9SsTltxeFNk'
-    )
-
-
-
-    result = []
-    for i in range(len(knowledge_base)):
-        result.append([])
-        for j in range(2):
-            prompt = f'''I will provide you with two sentences. Please follow the process below to evaluate the two sentences:
-
-            Identify and label which word or words in the first sentence are specialized terms that need explanation.
-
-            Determine whether the second sentence provides an explanation for the terms in the first sentence.
-
-            If an explanation is provided, label which parts of the second sentence contain the explanation.(you may label only a few words)
-            Your response should follow the format below:
-            If there is no relevance, answer "none".
-            If there is relevance, first state the term(s), and in the next line, provide the part of the sentence that explains it. Do not include any additional content in your response!
-            Please notice that, only when there's strong relation between two sentences should you reply content, or you reply none!!!!!
-            first sentence: {understanding}
-            second sentence: {knowledge_base[i][j]}'''
-            response = client.chat.completions.create(
-                model="deepseek-chat",
-                messages=[
-                    {"role": "system", "content": "You are an expert in data analysis"},
-                    {"role": "user", "content": prompt},
-                ],
-                stream=False
-            )
-            result[i].append(response.choices[0].message.content)
-    return result
-
+def getVisData(user_query, excute_sql_output):
+    chart_input = {
+            "question": user_query,
+            "data": str(excute_sql_output)
+        }
 
 
 # @app.post("/api/sql2json")
@@ -125,6 +96,114 @@ def analyze_relation(understanding : str, knowledge_base : list):
 #     return extracted_sql
 
 
+def getStepNLSQL(sql_code, sql_json):
+    user_input = {
+        'sql_code': sql_code,
+        'sql_json': sql_json
+    }
+    sna = StepNLAgent()
+    sna.run(user_input)
+    report = sna.getLeastAnalysisReport()
+    print('----------------SQL Step NL---------------------', report)
+    return report
+
+def get_anlyaiz_relation(understanding, list_of_lists):
+    pair_relevance = analyze_relation(understanding, list_of_lists)
+
+
+    print('------------pair_relevance------------',pair_relevance)
+
+    # Highlight words
+    sql_highlight_words = []
+    sql_highlight_knowledges = []
+    sql_lines = []
+    bus_highlight_words = []
+    bus_highlight_knowledges = []
+    bus_lines = []
+    
+    i = 0
+    for word in pair_relevance[0]:
+        if word != 'none':
+            sql_highlight_words.append(word.split('\n')[0].strip())
+            sql_highlight_knowledges.append(word.split('\n')[1].strip())
+            sql_lines.append(i + 1)
+        i += 1
+
+    i = 0
+    for word in pair_relevance[1]:
+        if word != 'none':
+            bus_highlight_words.append(word.split('\n')[0].strip())
+            bus_highlight_knowledges.append(word.split('\n')[1].strip())
+            bus_lines.append(i + 1)
+        i += 1
+    # if pair_relevance != 'None':
+    #     pair_relevance = pair_relevance.strip('```json\n').strip('```')
+    #     pair_relevance = json.loads(pair_relevance)
+    #     pairs = pair_relevance['pair']
+    #     for p in pairs:
+    #         highlight_words.append(p['mu'])
+    #         highlight_knowledges.append(p['kb'])
+    #         liners.append(p['index']+1)
+
+    # 连线
+    # for i in range(len(list_of_lists)):
+    #     if pair_relevance[i][0] != 'none':
+    #         liners.append(i + 1)
+    highlight_words = {
+        'sql_highlight_words': sql_highlight_words,
+        'bus_highlight_words': bus_highlight_words,
+    }
+    highlight_knowledges = {
+        'sql_highlight_knowledges': sql_highlight_knowledges,
+        'bus_highlight_knowledges': bus_highlight_knowledges
+    }
+    liners = {
+        'sql_lines': sql_lines,
+        'bus_lines': bus_lines,
+    }
+    return pair_relevance, highlight_words, highlight_knowledges, liners
+
+def get_SQLRAG(query):
+    report = getSQLRAG(query)
+    return report
+
+def get_business_chunks():
+    business_sentences = []
+    with open('./knowledge-base/business_info.txt', encoding='utf-8') as file:
+        content = file.read()
+        business_sentences = content.split('***')
+    return business_sentences
+
+def get_list_of_lists(rag_response):
+    sql_sentences = []
+    list_of_lists = []
+    align_data = rag_response['Align Data']
+    for ad in align_data:
+        sql_sentence = ad['Content']
+        sql_sentences.append(sql_sentence)
+    business_sentences = get_business_chunks()
+    list_of_lists.append(sql_sentences)
+    list_of_lists.append(business_sentences)
+    return list_of_lists
+
+
+def get_ragResponseForSQL(rag_response):
+    align_data = rag_response['Align Data']
+    ids = []
+    for ad in align_data:
+        idd = ad['ID']
+        ids.append(idd)
+    sql_chunks = get_chunks(ids)
+    print('-------------------sql_chunks--------------------------', sql_chunks)
+    return sql_chunks
+
+
+def get_llm4sql_response(user_info):
+    sca = SQLCodeAgent()
+    sca.run(user_info)
+    llm4sql_report = sca.getLeastAnalysisReport()
+    return llm4sql_report
+
 @app.post("/api/sql2json")
 async def get_sql2json(data: dict = Body(...)):
     # 检查是否存在 'data' 字段
@@ -132,17 +211,21 @@ async def get_sql2json(data: dict = Body(...)):
     if not sql_code:
         raise HTTPException(status_code=400, detail="Missing 'data' field")
     sql_code = sql_code['text']
-    print("Processing SQL code:", sql_code)
     try:
         explain = ExplainAgent(model_name="o3-mini")
-        explain.run(sql_code)  # 无需 str()，因为 request.sql 已保证是字符串
-        report = explain.getLeastAnalysisReport()
-        print(report, type(report))
+        explain.run(sql_code)  
+        sql_json = explain.getLeastAnalysisReport()
+        sql_stepnl = getStepNLSQL(sql_code, sql_json)
+        report = {
+            "sql_json": sql_json,
+            "sql_stepnl": sql_stepnl
+        }
         return report
     except Exception as e:
         import traceback
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=str(e))
+
     return {"response": "error"}
 
 
@@ -160,8 +243,14 @@ async def get_relatsql(sql_query: Dict[str, Any], query_out: Dict[str, Any], cli
     try:
         explain = ExplainAgent(model_name="o3-mini")
         explain.run(sql_code)  # 无需 str()，因为 request.sql 已保证是字符串
-        report = explain.getLeastAnalysisReport()
-        print('------------------sql to json----------------\n', report)
+        sql_json = explain.getLeastAnalysisReport()
+        print('------------------sub sql to json----------------\n', sql_json)
+        sql_stepnl = getStepNLSQL(sql_code, sql_json)
+        print('------------------sql to stepnl----------------\n', sql_json)
+        report = {
+            "sql_json": sql_json,
+            "sql_stepnl": sql_stepnl
+        }
         return report
     except Exception as e:
         import traceback
@@ -176,62 +265,83 @@ async def get_relatsql(sql_query: Dict[str, Any], query_out: Dict[str, Any], cli
 async def query_handler(request: Dict[str, Any]):
     try:
         # 1. 参数提取与验证
-        user_query = request['query'][0]
-        history = request['query'][1]
-        conv_his = []
-        print(history)
-        for conv in history:
-            conv_his.append({"role": "user", "content": conv['query']})
-            conv_his.append({"role": "assistant", "content": conv['sql_code']})
-        print("=====================user query=============================", history)
+        user_query = request['query']
+        print("=====================user query=============================", user_query)
         
         if not user_query:
             raise HTTPException(status_code=400, detail="Missing query parameter")
         
         # 2. 知识库检索+生成sql代码
         print("==========================my_lightrag========================================")
-        rag_response, context, system_prompt = await rag.query(user_query, conv_his)
-        print(rag_response)
-        print("---------------context----------------\n")
-
-        print("\n--------------context---------------------")
+        # rag_response, context = await rag.query(user_query)
+        rag_response = get_SQLRAG(user_query)
+        print('----------------rag_response----------------', rag_response)
+        
         # Extract knowledge base
-        csv_file = StringIO(context.strip('"id", "content"\n'))
+        # csv_file = StringIO(context.strip('"id", "content"\n'))
 
-        csv_reader = csv.reader(csv_file)
+        # csv_reader = csv.reader(csv_file)
 
-        list_of_lists = [row[1].split("**SQL query sample**:") for row in csv_reader]
+        # list_of_lists = [row[1].split("**SQL query sample**:") for row in csv_reader]
+        # list_of_lists = [[row[1], ''] for row in csv_reader]
+        list_of_lists = get_list_of_lists(rag_response)
+        print('-------------------list_of_lists---------------------', list_of_lists)
+        # understanding = rag_response.split('\n')[0]
+        # 获取rag_response with sql
+        sql_chunks = get_ragResponseForSQL(rag_response)
+        business_chunks = get_business_chunks()
+        user_info = {
+            'user_question': user_query,
+            'business_chunks': business_chunks,
+            'sql_chunks': sql_chunks,
+            'db_schema': ""
+        }
+        llm4sql_report = get_llm4sql_response(user_info)
+
+        # LLM4SQL
+        # understanding = rag_response.split('SQL Code:')[0]
+        # sql_code = get_extracted_sql(rag_response)
+        # explanation = rag_response.split("```")[-1]
+        understanding = llm4sql_report['Give User Answer']['Model Understanding']
+        sql_code = get_extracted_sql(llm4sql_report['Give User Answer']['SQL Code'])
+        explanation = llm4sql_report['Give User Answer']['Explanation']
+        print('-------------------understanding-----------------------------', understanding)
+        print('-------------------sql_code-----------------------------', sql_code)
+        print('-------------------explanation-----------------------------', explanation)
 
 
-        print(list_of_lists)
 
-
-
-        # print("rag_response: ", rag_response)
-        understanding = rag_response.split('```')[0]
-        sql_code = get_extracted_sql(rag_response)
-        explanation = rag_response.split("```")[-1]
         # Analyze relation here
-        pair_relevance = analyze_relation(understanding, list_of_lists)
-        print(pair_relevance)
+        understanding_pair_relevance, understanding_highlight_words, understanding_highlight_knowledges, understanding_liners = get_anlyaiz_relation(understanding, list_of_lists)
+        query_pair_relevance, query_highlight_words, query_highlight_knowledges, query_liners = get_anlyaiz_relation(user_query, list_of_lists)
+        
+        pair_relevance = {
+            'understanding_pair_relevance': understanding_pair_relevance,
+            'query_pair_relevance': query_pair_relevance
+        }
+        highlight_words = {
+            'understanding_highlight_words': understanding_highlight_words,
+            'query_highlight_words': query_highlight_words
+        }
+        highlight_knowledges = {
+            'understanding_highlight_knowledges': understanding_highlight_knowledges,
+            'query_highlight_knowledges': query_highlight_knowledges
+        }
+        liners = {
+            'understanding_liners':understanding_liners,
+            'query_liners': query_liners
+        }
 
-        # Highlight words
-        highlight_words = []
-        highlight_knowledges = []
-        for l in pair_relevance:
-            for word in l:
-                if word != 'none':
-                    highlight_words.append(word.split('\n')[0].strip())
-                    highlight_knowledges.append(word.split('\n')[1].strip())
-
-        print(highlight_words)
-
-        # 连线
-        liners = []
-        for i in range(len(list_of_lists)):
-            if pair_relevance[i][0] != 'none':
-                liners.append(i + 1)
-        print(liners)
+        # liners = {
+        #     'understanding_liners': {
+        #         'sql_lines': [1,2,4],
+        #         'bus_lines': [1,2,3],
+        #     },
+        #     'query_liners': {
+        #         'sql_lines': [1,2,4],
+        #         'bus_lines': [1,2,3],
+        #     }
+        # }
 
         # 3. 执行生成的sql 代码
         excute_sql_output = excute_sql(sql_code)
@@ -249,8 +359,7 @@ async def query_handler(request: Dict[str, Any]):
             "highlight_words": highlight_words,
             "highlight_knowledges": highlight_knowledges,
             "liners": liners,
-            "list_of_lists": list_of_lists,
-            "system_query": user_query,
+            "list_of_lists": list_of_lists
         }
         
         # 添加当前查询到历史
@@ -278,7 +387,9 @@ async def query_handler(request: Dict[str, Any]):
         # top_k = sorted(history_with_similarity, key=lambda x: x["similarity"], reverse=True)[:3]
 
         # 4. chart准备数据
-        # vis_data = get_vis_tag(user_query, excute_sql_output)
+        vis_data = getVisData(user_query, excute_sql_output)
+        print('------------------vis_data-------------------', vis_data)
+
         # ===========================================================
         vis_data = {
             "vis_tag": "bar-chart",
@@ -291,8 +402,9 @@ async def query_handler(request: Dict[str, Any]):
         }
         final_response['vis_data'] = vis_data
 
-        # 返回标准化响应
-        return {"response": final_response, "top_k_similar": history}
+        print({"response": final_response, "top_k_similar": 3})
+
+        return {"response": final_response, "top_k_similar": 3}
         # return final_response
 
     

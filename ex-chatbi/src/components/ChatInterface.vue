@@ -146,6 +146,7 @@ export default {
   flex-direction: column;
   background-color: #f0f0f0;
   border: 1px solid #dcdfe6;
+  border-radius: 10px;
 }
 .message-container {
   flex: 1;
@@ -158,7 +159,7 @@ export default {
 
 .messages-wrapper {
   /* max-height: 100%; */
-  overflow-y: auto;
+  /* overflow-y: auto; */
   padding-bottom: 20px;
 }
 
@@ -168,9 +169,9 @@ export default {
   padding-left: 10px;
   padding-right: 10px;
   border-top: 2px solid #a5a5a5;
-  margin-bottom: 17px;
+  margin-bottom: 10px;
   /* margin-top: 1000px; */
-  height: 15px;
+  /* height: 15px; */
 }
 
 .el-textarea {
