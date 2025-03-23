@@ -176,18 +176,24 @@ async def get_relatsql(sql_query: Dict[str, Any], query_out: Dict[str, Any], cli
 async def query_handler(request: Dict[str, Any]):
     try:
         # 1. 参数提取与验证
-        user_query = request['query']
-        print("=====================user query=============================", user_query)
+        user_query = request['query'][0]
+        history = request['query'][1]
+        conv_his = []
+        print(history)
+        for conv in history:
+            conv_his.append({"role": "user", "content": conv['query']})
+            conv_his.append({"role": "assistant", "content": conv['sql_code']})
+        print("=====================user query=============================", history)
         
         if not user_query:
             raise HTTPException(status_code=400, detail="Missing query parameter")
         
         # 2. 知识库检索+生成sql代码
         print("==========================my_lightrag========================================")
-        rag_response, context = await rag.query(user_query)
-
+        rag_response, context, system_prompt = await rag.query(user_query, conv_his)
+        print(rag_response)
         print("---------------context----------------\n")
-        print(context)
+
         print("\n--------------context---------------------")
         # Extract knowledge base
         csv_file = StringIO(context.strip('"id", "content"\n'))
@@ -202,10 +208,9 @@ async def query_handler(request: Dict[str, Any]):
 
 
         # print("rag_response: ", rag_response)
-        understanding = rag_response.split('\n')[0]
+        understanding = rag_response.split('```')[0]
         sql_code = get_extracted_sql(rag_response)
         explanation = rag_response.split("```")[-1]
-
         # Analyze relation here
         pair_relevance = analyze_relation(understanding, list_of_lists)
         print(pair_relevance)
@@ -244,7 +249,8 @@ async def query_handler(request: Dict[str, Any]):
             "highlight_words": highlight_words,
             "highlight_knowledges": highlight_knowledges,
             "liners": liners,
-            "list_of_lists": list_of_lists
+            "list_of_lists": list_of_lists,
+            "system_query": user_query,
         }
         
         # 添加当前查询到历史
@@ -286,7 +292,7 @@ async def query_handler(request: Dict[str, Any]):
         final_response['vis_data'] = vis_data
 
         # 返回标准化响应
-        return {"response": final_response, "top_k_similar": 3}
+        return {"response": final_response, "top_k_similar": history}
         # return final_response
 
     

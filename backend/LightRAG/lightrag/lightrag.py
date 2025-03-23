@@ -1115,7 +1115,7 @@ class LightRAG:
             str: The result of the query execution.
         """
         if param.mode in ["local", "global", "hybrid"]:
-            response = await kg_query(
+            response, response_source = await kg_query(
                 query,
                 self.chunk_entity_relation_graph,
                 self.entities_vdb,
@@ -1179,7 +1179,7 @@ class LightRAG:
         else:
             raise ValueError(f"Unknown mode {param.mode}")
         await self._query_done()
-        return response, system_prompt
+        return response, response_source, system_prompt
 
 
     def query_with_separate_keyword_extraction(

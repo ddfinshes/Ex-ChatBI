@@ -9,7 +9,8 @@ export const useQueryStore = defineStore('query', {
         isReady: false,
         isDataReady: false,
         subsqljson: '', // 点击table后的子sql信息
-        sqlresponse: null
+        sqlresponse: null,
+        history: []
     }),
     actions: {
         setCurrentQuery(query) {
@@ -17,6 +18,9 @@ export const useQueryStore = defineStore('query', {
         },
         setResponse(response) {
             this.response = response; // 更新响应数据
+        },
+        setHistory(history){
+            this.history = history;
         },
         async setCurrentSQL(code) {
             this.sqlcode = code;

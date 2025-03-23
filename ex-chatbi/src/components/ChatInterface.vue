@@ -83,7 +83,7 @@ export default {
       try {
         const res = await axios.post(
           "/api/query",
-          { query: this.currentQuery },
+          { query: [this.currentQuery,this.queryStore.history]},
           {
             headers: {
               "Content-Type": "application/json",
