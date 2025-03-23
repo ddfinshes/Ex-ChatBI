@@ -37,7 +37,7 @@ export default {
 		ChatInterfaceVue,
 		SelectPanelVue,
 	},
-	
+
 	data() {
 		return {
 			drawer: false,
@@ -61,7 +61,7 @@ export default {
 	},
 	watch: {
 		setIsDataReady(newVal) {
-			console.log('监听到新数据:', { newVal,  timestamp: Date.now() });
+			console.log('监听到新数据:', { newVal, timestamp: Date.now() });
 			// this.isDataReady = newVal;
 			this.isDataReady = true;
 		}
@@ -70,24 +70,26 @@ export default {
 
 	},
 	mounted() {
-		
+
 	}
 }
 </script>
-<style scoped>
+<style lang="css" scoped>
 .home {
-	height: 1351px;
+	height: 1280px;
 	width: 2048px;
 	border: 1px solid #dcdfe6;
+	overflow: hidden;
 }
 
 .body {
-	height: 100%;
-	width: 100%;
+	height: 1280px;
+	width: 2048px;
 	flex: 1;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	overflow: hidden;
 }
 
 .header {
@@ -98,18 +100,22 @@ export default {
 	display: flex;
 	align-items: center;
 	padding: 0 20px;
+	overflow: hidden;
 }
 
 .explainable {
-  color: #dbce1b; /* 深蓝色 */
-  /* font-style: italic; 斜体 */
-  font-weight: bold;
-  background: linear-gradient(90deg, #f8a2a2, #356fee); /* 渐变背景 */
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent; /* 文字透明以展示渐变 */
-  padding: 0 4px;
-  border-radius: 4px;
+	color: #dbce1b;
+	/* 深蓝色 */
+	/* font-style: italic; 斜体 */
+	font-weight: bold;
+	background: linear-gradient(90deg, #f8a2a2, #356fee);
+	/* 渐变背景 */
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+	/* 文字透明以展示渐变 */
+	padding: 0 4px;
+	border-radius: 4px;
 }
 
 .main {
@@ -118,7 +124,7 @@ export default {
 	margin-top: 0px;
 	height: 100%;
 	width: 40%;
-
+	overflow: hidden;
 }
 
 .aside {
@@ -128,6 +134,8 @@ export default {
 	margin: 0px;
 	margin-top: 40px;
 	height: 100%;
+	overflow-x: hidden;
+	border-radius: 10px;
 }
 
 .header-title {
@@ -136,16 +144,16 @@ export default {
 	margin-left: 10px;
 }
 
-#select-container {
-	height: 99%;
+/* #select-container {
+	height: 100%;
 	width: 100%;
 	padding: 0px;
-	margin-bottom: 20px;
+	
 	margin-top: 0px;
 	background-color: #ffffff;
-	overflow: clip;
+	overflow: visible;
 	display: flex;
-}
+} */
 
 #chat-container {
 	width: 100%;
@@ -154,7 +162,7 @@ export default {
 	margin: 2px;
 	/* margin-bottom: 50px; */
 	background-color: #ffffff;
-	overflow: clip;
+	/* overflow: clip; */
 	display: flex;
 }
 </style>

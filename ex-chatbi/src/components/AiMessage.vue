@@ -6,13 +6,7 @@
         <MarkdownRenderer class="explanation-text" :content="message.understanding" />
       </div>
 
-      <!-- Code Card -->
-      <div class="card-section">
-        <div class="card-title">Code</div>
-        <div class="card-content">
-          <MarkdownRenderer class="sql-code" :content="message.code?.text || ''" />
-        </div>
-      </div>
+      
       <!-- Data Card -->
       <div class="card-section">
         <div class="card-title">Data</div>
@@ -20,14 +14,18 @@
           <table v-if="message.data" class="result-table">
             <thead>
               <tr>
-                <th v-for="(column, idx) in message.data.column" :key="idx" :class="{ 'highlighted': highlighted.type === 'header' && highlighted.columnIndex === idx }" @click="handleHeaderClick(column, idx)">
+                <th v-for="(column, idx) in message.data.column" :key="idx"
+                  :class="{ 'highlighted': highlighted.type === 'header' && highlighted.columnIndex === idx }"
+                  @click="handleHeaderClick(column, idx)">
                   {{ column }}
                 </th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="(row, rowIdx) in message.data.data" :key="rowIdx">
-                <td v-for="(cell, cellIdx) in row" :key="cellIdx" :class="{ 'highlighted': highlighted.type === 'cell' && highlighted.rowIndex === rowIdx && highlighted.columnIndex === cellIdx }" @click="handleCellClick(cell, rowIdx, message.data.column[cellIdx])">
+                <td v-for="(cell, cellIdx) in row" :key="cellIdx"
+                  :class="{ 'highlighted': highlighted.type === 'cell' && highlighted.rowIndex === rowIdx && highlighted.columnIndex === cellIdx }"
+                  @click="handleCellClick(cell, rowIdx, message.data.column[cellIdx])">
                   {{ cell }}
                 </td>
               </tr>
@@ -47,15 +45,23 @@
         </div>
       </div>
 
+      <!-- Code Card -->
+      <div class="card-section">
+        <div class="card-title">Code</div>
+        <div class="card-content">
+          <MarkdownRenderer class="sql-code" :content="message.code?.text || ''" />
+        </div>
+      </div>
+
       <div class="explanation-section">
         <MarkdownRenderer class="explanation-text" :content="message.explanation" />
       </div>
-      
+
 
       <div class="bottom-section">
         <span class="timestamp">{{ message.timestamp }}</span>
         <button class="icon-button" @click="handleIconClick">
-          <img class="userIconClass" src="@/assets/image/detail.png"/>
+          <img class="userIconClass" src="@/assets/image/detail.png" />
         </button>
       </div>
     </div>
@@ -87,7 +93,7 @@ export default {
   },
   setup() {
     const queryStore = useQueryStore();
-    
+
     return { queryStore };
   },
   props: {
@@ -124,7 +130,7 @@ export default {
       console.log('highlighted 点击了表头:', this.highlighted);
       console.log('---点击了表头:', this.clickdata)
       this.relatSQL()
-      
+
     },
     // handleRowClick(row, rowIndex) {
     //   this.clickdata = {
@@ -149,7 +155,7 @@ export default {
       };
       console.log('highlighted 点击了单元格:', this.highlighted);
       this.relatSQL()
-      
+
     },
     handleOutsideClick(event) {
       // 如果点击不在表格内，则取消高亮
@@ -162,15 +168,15 @@ export default {
       }
     },
     async relatSQL() {
-      if(!this.clickdata) return;
+      if (!this.clickdata) return;
       try {
         const payload = {
-        sql_query: this.message.code,
-        query_out: this.message.data,
-        click_info: this.clickdata
-      };
-      // this.queryStore.setSubSQLJson(payload);
-      console.log('Request payload:', payload);
+          sql_query: this.message.code,
+          query_out: this.message.data,
+          click_info: this.clickdata
+        };
+        // this.queryStore.setSubSQLJson(payload);
+        console.log('Request payload:', payload);
         const res = await axios.post(
           "/api/relatsql",
           payload
@@ -179,17 +185,20 @@ export default {
         const subsqljson = res.data;
         console.log('subsql2json: ', subsqljson)
         this.queryStore.setSubSQLJson(subsqljson);
-      } catch(error) {
+      } catch (error) {
         console.error("Error fetching response:", error);
       }
     },
     async handleIconClick() {
       this.queryStore.setIsDataReady(!this.queryStore.isDataReady);
+      if (this.queryStore.isDataReady) {
+        this.timeoutId = setTimeout(() => {
+          this.queryStore.setResponse(this.message);
+          this.timeoutId = null;
+        }, 1000);
+      }
 
-      this.timeoutId = setTimeout(() => {
-        this.queryStore.setResponse(this.message);
-        this.timeoutId = null;
-      }, 1000);
+
     },
   }
 };
@@ -219,12 +228,6 @@ export default {
   flex-direction: column;
   justify-content: space-between;
 }
-
-/* .message-container {
-  flex: 1;
-  overflow-y: auto;
-  max-width: 100%;
-} */
 
 .user {
   border-bottom: 3px solid #a5a5a5;
@@ -277,7 +280,8 @@ export default {
 }
 
 .highlighted {
-  background-color: #f8f29d !important; /* 高亮颜色，可以自定义 */
+  background-color: #f8f29d !important;
+  /* 高亮颜色，可以自定义 */
 }
 
 .sql-code {
@@ -297,6 +301,7 @@ export default {
   padding: 20px;
   max-width: 800px;
   margin: 0 auto;
+  height: 1000px;
 }
 
 .message-wrapper {
@@ -404,7 +409,7 @@ export default {
   margin: 0 auto;
 }
 
-.bottom-section{
+.bottom-section {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -421,6 +426,7 @@ export default {
   font-size: 16px;
   color: #007bff;
 }
+
 .userIconClass {
   width: 30px;
   height: 30px;

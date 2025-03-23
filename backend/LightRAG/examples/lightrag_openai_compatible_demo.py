@@ -90,8 +90,15 @@ async def query(prompt : str):
 
     # Perform global search
     # prompt = "WTD sales vs Target?"
+
+    """
+
+    
+    """
     return  await rag.aquery(
-            f"""You are a data analysis expert tasked with generating executable PostgreSQL code to calculate {prompt}. Follow these steps: 
+            f"""You are a data analysis expert tasked with generating executable PostgreSQL code to calculate {prompt}. 
+
+            Follow these steps: 
                 1. Identify Query Constraints: 
                 - For week-based date restrictions (e.g., "WTD" or "last week"), excluding weekid (e.g., "week 45"), convert them into a specific date range. Do not use built-in date functions.
                     - Example: If today is February 20, 2025, and the user asks for "WTD: From Sunday of this week to yesterday," use February 16 to February 19, 2025.
