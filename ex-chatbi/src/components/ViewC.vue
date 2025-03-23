@@ -2149,7 +2149,7 @@ export default {
 
           // **绘制第二层节点（depth === 1）**
           const level1Data = root.descendants().filter(d => d.depth === 1);
-          const level1Nodes = virtual_svg.selectAll("g.level1node")
+          const level1Nodes = virtual_svg.selectAll("g.level1Node")
             .data(root.descendants().filter(d => d.depth === 1))
             .enter()
             .append("g")
@@ -2554,17 +2554,21 @@ export default {
 
     // 检查是否需要高亮（直接比较列表）
     const shouldHighlight = currentNames.includes(nameKey) || currentNames.includes(nlExplainKey);
-    console.log(nodeName, nodeNLExplain, nameKey, nlExplainKey)
+    // console.log(nodeName, '||', nodeNLExplain)
+    // console.log(nameKey, '||', nlExplainKey)
 
     // 第一层节点一定会被高亮 (depth === 0)
     svg.selectAll("g.level0node rect")
         .attr("stroke", "#ffee38")
         .attr("stroke-width", 5);
     if (shouldHighlight) {
+      console.log(nodeName, '||', nodeNLExplain)
+      console.log(nameKey, '||', nlExplainKey)
+      console.log(node)
       // 高亮第二层节点 (depth === 1)
-      svg.selectAll("g.level1node rect")
+      svg.selectAll("g.level1Node rect")
         .each(function(d) {
-          console.log("Level 1 Rect Data:", d.data ? d.data.name : d);
+          console.log(d);
         })
         .filter(d => d === node)
         .attr("stroke", "#ffee38")
