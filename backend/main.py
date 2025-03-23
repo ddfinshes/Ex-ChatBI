@@ -40,9 +40,9 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  
+    allow_origins=["*"],  # 生产环境应限制具体域名
     allow_credentials=True,
-    allow_methods=["POST", "GET"],  
+    allow_methods=["POST", "GET"],  # 根据实际需求调整
     allow_headers=["*"],
 )
 
@@ -71,10 +71,30 @@ def getVisData(user_query, excute_sql_output):
             "data": str(excute_sql_output)
         }
 
-    vis = VisAgent()
-    vis.run(str(chart_input))
-    report = vis.getLeastAnalysisReport()
-    return report
+
+# @app.post("/api/sql2json")
+# async def get_sql2json():
+#     try:
+#         sql_code = "select * from chatbi"
+#         sqljson = sql2json(sql_code)
+#         print("Response data:", sqljson)
+#         return sqljson
+#     except Exception as e:
+#         import traceback
+#         traceback.print_exc()
+#         raise HTTPException(status_code=500, detail=str(e))
+#
+# def get_extracted_sql(text):
+#     # 匹配获取sqlcode
+#     sql_code = re.search(r'```sql\n(.*?)\n```', text, re.DOTALL)
+#     if sql_code:
+#         extracted_sql = sql_code.group(1)
+#         print("提取的SQL代码:")
+#         print(extracted_sql)
+#     else:
+#         print("未找到SQL代码块")
+#     return extracted_sql
+
 
 def getStepNLSQL(sql_code, sql_json):
     user_input = {
@@ -238,28 +258,7 @@ async def get_relatsql(sql_query: Dict[str, Any], query_out: Dict[str, Any], cli
         raise HTTPException(status_code=500, detail=str(e))
     return {"response": "error"}
 
-# NL explain change
-@app.post("/api/nlex")
-async def get_changeNLExSQL(data: dict = Body(...)):
-    # sql_query, sql_json, nl_ex, nl_sql
-    """
-    {
-        sql_query: "", // 完整的sql代码
-        sql_json: "", // sql 转json的完整结果
-        nl_ex: // 修改位置的nl explain
-        nl_sql: // 修改位置的小段sql
-    }
 
-    return 修改后的完整sql转json
-    """
-    ma = ModifyAgent()
-    ma.run(data)
-    resql = ma.getLeastAnalysisReport()
-    # 转为json
-    explain = ExplainAgent(model_name="o3-mini")
-    explain.run(resql)
-    sqljson = explain.getLeastAnalysisReport()
-    return sqljson
 
 
 @app.post("/api/query")
@@ -392,15 +391,15 @@ async def query_handler(request: Dict[str, Any]):
         print('------------------vis_data-------------------', vis_data)
 
         # ===========================================================
-        # vis_data = {
-        #     "vis_tag": "bar-chart",
-        #     "x": ["sales_amt", "sales_notax"],
-        #     "y": [-5235, -4634],
-        #     "title": "202502's sales for APAC EC",
-        #     "x-legend": "class",
-        #     "y-legend": "sales",
-        #     "tooltip": "sales_notax_mom_per:-1.000290111880263"
-        # }
+        vis_data = {
+            "vis_tag": "bar-chart",
+            "x": ["sales_amt", "sales_notax"],
+            "y": [-5235, -4634],
+            "title": "202502's sales for APAC EC",
+            "x-legend": "class",
+            "y-legend": "sales",
+            "tooltip": "sales_notax_mom_per:-1.000290111880263"
+        }
         final_response['vis_data'] = vis_data
 
         print({"response": final_response, "top_k_similar": 3})

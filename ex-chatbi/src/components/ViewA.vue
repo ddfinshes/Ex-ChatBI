@@ -210,6 +210,7 @@ export default {
       selectedHistory: [],
       activeNames: []
     };
+    
   },
   mounted() {
     this.updateCardCenters();
@@ -243,6 +244,8 @@ export default {
         this.messageHistory = newVal.message_history || [];
         this.highlight = newVal.pair_relevance;
         this.searchtext = newVal.highlight_words;
+        this.addItem(newVal.response.system_query, newVal.response.code);
+        console.log("history", this.historyList);
       }
     }
   },
