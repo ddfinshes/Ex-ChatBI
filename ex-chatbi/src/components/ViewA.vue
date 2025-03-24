@@ -318,11 +318,10 @@
       let result = text;
       searchTextArray.forEach(term => {
         const regex = new RegExp(`(${this.escapeRegExp(term)})`, 'gi');
-        result = result.replace(term, '<span class="highlight">$1</span>');
-        console.log('result:', result, "replace:", term)
+        result = result.replace(regex, match => `<span class="highlight">${match}</span>`);
       });
 
-      return text;
+      return result;
     },
           escapeRegExp(string) {
       return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');

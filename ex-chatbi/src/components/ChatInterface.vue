@@ -59,6 +59,9 @@ export default {
   computed: {
     understanding(){
       return this.queryStore.revised_understanding;
+    },
+    knowledge(){
+      return this.queryStore.revised_knowledge;
     }
   },
   watch: {
@@ -68,6 +71,11 @@ export default {
       console.log(this.query)
       this.sendQuery();
       this.queryStore.setUnderstanding('');
+    },
+    knowledge(newVal){
+      this.query = this.queryStore.response.response.query;
+      this.sendQuery();
+      this.queryStore.setKnowledge('');
     }
   },
   methods: {
