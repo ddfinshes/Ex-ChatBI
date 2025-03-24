@@ -193,6 +193,7 @@ def get_ragResponseForSQL(rag_response):
     for ad in align_data:
         idd = ad['ID']
         ids.append(idd)
+    print(ids)
     sql_chunks = get_chunks(ids)
     print('-------------------sql_chunks--------------------------', sql_chunks)
     return sql_chunks
@@ -265,7 +266,19 @@ async def get_relatsql(sql_query: Dict[str, Any], query_out: Dict[str, Any], cli
 async def query_handler(request: Dict[str, Any]):
     try:
         # 1. 参数提取与验证
-        user_query = request['query']
+        user_query = request['query'][0]
+        history = request['query'][1]
+        conv_his = ''
+        print(history)
+        for conv in history:
+            conv_his += f'[role: user, content: {conv["query"]}]\n'
+            conv_his += f'role: assistant, content: {conv["sql_code"]}'
+        revised_knowledge = request['query'][2]
+        revised_understanding = request['query'][3]
+        if not revised_knowledge:
+            revised_knowledge = f'There are some mistakes in the knowledge, you should use the correct version that "{revised_knowledge}"'
+        if not revised_understanding:
+            revised_understanding = f'And during your thinking process, you need to follow this : {revised_understanding}'
         print("=====================user query=============================", user_query)
         
         if not user_query:
@@ -294,7 +307,10 @@ async def query_handler(request: Dict[str, Any]):
             'user_question': user_query,
             'business_chunks': business_chunks,
             'sql_chunks': sql_chunks,
-            'db_schema': ""
+            'db_schema': "",
+            "history": conv_his,
+            "revised_knowledge": revised_knowledge,
+            "revised_understanding": revised_understanding,
         }
         llm4sql_report = get_llm4sql_response(user_info)
 
@@ -359,7 +375,8 @@ async def query_handler(request: Dict[str, Any]):
             "highlight_words": highlight_words,
             "highlight_knowledges": highlight_knowledges,
             "liners": liners,
-            "list_of_lists": list_of_lists
+            "list_of_lists": list_of_lists,
+            "query": user_query,
         }
         
         # 添加当前查询到历史
