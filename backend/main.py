@@ -253,7 +253,7 @@ def modify_sql(data: Dict[str, Any]):
 async def query_handler(request: Dict[str, Any]):
     try:
         # 1. 参数提取与验证
-        user_query = request['query']
+        user_query = request['query'][0]
         print("=====================user query=============================", user_query)
         
         if not user_query:
