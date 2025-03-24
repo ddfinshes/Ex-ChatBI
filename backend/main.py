@@ -71,30 +71,10 @@ def getVisData(user_query, excute_sql_output):
             "data": str(excute_sql_output)
         }
 
-
-# @app.post("/api/sql2json")
-# async def get_sql2json():
-#     try:
-#         sql_code = "select * from chatbi"
-#         sqljson = sql2json(sql_code)
-#         print("Response data:", sqljson)
-#         return sqljson
-#     except Exception as e:
-#         import traceback
-#         traceback.print_exc()
-#         raise HTTPException(status_code=500, detail=str(e))
-#
-# def get_extracted_sql(text):
-#     # 匹配获取sqlcode
-#     sql_code = re.search(r'```sql\n(.*?)\n```', text, re.DOTALL)
-#     if sql_code:
-#         extracted_sql = sql_code.group(1)
-#         print("提取的SQL代码:")
-#         print(extracted_sql)
-#     else:
-#         print("未找到SQL代码块")
-#     return extracted_sql
-
+    vis = VisAgent()
+    vis.run(str(chart_input))
+    report = vis.getLeastAnalysisReport()
+    return report
 
 def getStepNLSQL(sql_code, sql_json):
     user_input = {
@@ -258,7 +238,15 @@ async def get_relatsql(sql_query: Dict[str, Any], query_out: Dict[str, Any], cli
         raise HTTPException(status_code=500, detail=str(e))
     return {"response": "error"}
 
-
+@app.post('/api/modify')
+def modify_sql(data: Dict[str, Any]):
+    ma = ModifyAgent()
+    ma.run(data)
+    modify_sql = ma.getLeastAnalysisReport()
+    explain = ExplainAgent(model_name="o3-mini")
+    explain.run(modify_sql)  
+    sql_json = explain.getLeastAnalysisReport()
+    return sql_json
 
 
 @app.post("/api/query")
@@ -391,15 +379,15 @@ async def query_handler(request: Dict[str, Any]):
         print('------------------vis_data-------------------', vis_data)
 
         # ===========================================================
-        vis_data = {
-            "vis_tag": "bar-chart",
-            "x": ["sales_amt", "sales_notax"],
-            "y": [-5235, -4634],
-            "title": "202502's sales for APAC EC",
-            "x-legend": "class",
-            "y-legend": "sales",
-            "tooltip": "sales_notax_mom_per:-1.000290111880263"
-        }
+        # vis_data = {
+        #     "vis_tag": "bar-chart",
+        #     "x": ["sales_amt", "sales_notax"],
+        #     "y": [-5235, -4634],
+        #     "title": "202502's sales for APAC EC",
+        #     "x-legend": "class",
+        #     "y-legend": "sales",
+        #     "tooltip": "sales_notax_mom_per:-1.000290111880263"
+        # }
         final_response['vis_data'] = vis_data
 
         print({"response": final_response, "top_k_similar": 3})

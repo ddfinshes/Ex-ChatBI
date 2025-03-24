@@ -100,6 +100,7 @@ export default {
       dynamicSmallCards: [], // 右侧卡片数据
       hightLightKB: [], // 高亮的知识库文本内容
       isEditing: false, // 控制编辑状态
+      highlightedExplanation: '', // 初始化为空字符串
     };
   },
   computed: {
@@ -115,66 +116,69 @@ export default {
       return this.chunkArray(this.dynamicSmallCards, 4);
     },
 
-    highlightText(highlightList) {
-      const contentDivs = document.querySelectorAll('.high-content');
+    // highlightText(highlightList) {
+    // const contentDivs = document.querySelectorAll('.high-content');
 
-      if (!contentDivs.length) {
-        console.warn('未找到任何 .high-content 元素');
-        return;
-      }
+    // if (!contentDivs.length) {
+    //   console.warn('未找到任何 .high-content 元素');
+    //   return;
+    // }
 
-      contentDivs.forEach(contentDiv => {
-        let content = contentDiv.innerHTML;
+    // contentDivs.forEach(contentDiv => {
+    //   let content = contentDiv.innerHTML;
 
-        // highlightList.forEach(keyword => {
-        //   if (keyword && keyword.trim()) {
-        //     console.log('keyword', keyword)
-        //     const regex = new RegExp(keyword.trim(), 'gi');
-        //     content = content.replace(regex, match => `<span class="highlight">${match}</span>`);
-        //   }
-        // });
-        let understanding_highlightList = highlightList.understanding_highlight_knowledges;
-        let understanding_sql_highlight_knowledges = understanding_highlightList.sql_highlight_knowledges;
-        let understanding_bus_highlight_knowledges = understanding_highlightList.bus_highlight_knowledges;
-        understanding_sql_highlight_knowledges.forEach(keyword => {
-          if (keyword && keyword.trim()) {
-            console.log('keyword', keyword)
-            const regex = new RegExp(keyword.trim(), 'gi');
-            content = content.replace(regex, match => `<span class="highlight">${match}</span>`);
-          }
-        });
-        understanding_bus_highlight_knowledges.forEach(keyword => {
-          if (keyword && keyword.trim()) {
-            console.log('keyword', keyword)
-            const regex = new RegExp(keyword.trim(), 'gi');
-            content = content.replace(regex, match => `<span class="highlight">${match}</span>`);
-          }
-        });
+    //   // highlightList.forEach(keyword => {
+    //   //   if (keyword && keyword.trim()) {
+    //   //     console.log('keyword', keyword)
+    //   //     const regex = new RegExp(keyword.trim(), 'gi');
+    //   //     content = content.replace(regex, match => `<span class="highlight">${match}</span>`);
+    //   //   }
+    //   // });
+    //   console.log('sql_highlight_knowledges',highlightList);
+    //   let understanding_highlightList = highlightList.hightLightKB.understanding_highlight_knowledges;
+    //   console.log('understanding_highlightList', understanding_highlightList)
+    //   let understanding_bus_highlight_knowledges = understanding_highlightList.bus_highlight_knowledges;
+    //   let understanding_sql_highlight_knowledges = understanding_highlightList.sql_highlight_knowledges;
+
+    //   understanding_sql_highlight_knowledges.forEach(keyword => {
+    //     if (keyword && keyword.trim()) {
+    //       console.log('keyword', keyword)
+    //       const regex = new RegExp(keyword.trim(), 'gi');
+    //       content = content.replace(regex, match => `<span class="highlight">${match}</span>`);
+    //     }
+    //   });
+    //   understanding_bus_highlight_knowledges.forEach(keyword => {
+    //     if (keyword && keyword.trim()) {
+    //       console.log('keyword', keyword)
+    //       const regex = new RegExp(keyword.trim(), 'gi');
+    //       content = content.replace(regex, match => `<span class="highlight">${match}</span>`);
+    //     }
+    //   });
 
 
-        let query_highlightList = highlightList.query_highlight_knowledges;
-        let query_sql_highlight_knowledges = query_highlightList.sql_highlight_knowledges;
-        let query_bus_highlight_knowledges = query_highlightList.bus_highlight_knowledges;
+    //   let query_highlightList = highlightList.hightLightKB.query_highlight_knowledges;
+    //   let query_sql_highlight_knowledges = query_highlightList.sql_highlight_knowledges;
+    //   let query_bus_highlight_knowledges = query_highlightList.bus_highlight_knowledges;
 
-        query_sql_highlight_knowledges.forEach(keyword => {
-          if (keyword && keyword.trim()) {
-            console.log('keyword', keyword)
-            const regex = new RegExp(keyword.trim(), 'gi');
-            content = content.replace(regex, match => `<span class="highlight">${match}</span>`);
-          }
-        });
+    //   query_sql_highlight_knowledges.forEach(keyword => {
+    //     if (keyword && keyword.trim()) {
+    //       console.log('keyword', keyword)
+    //       const regex = new RegExp(keyword.trim(), 'gi');
+    //       content = content.replace(regex, match => `<span class="highlight">${match}</span>`);
+    //     }
+    //   });
 
-        query_bus_highlight_knowledges.forEach(keyword => {
-          if (keyword && keyword.trim()) {
-            console.log('keyword', keyword)
-            const regex = new RegExp(keyword.trim(), 'gi');
-            content = content.replace(regex, match => `<span class="highlight">${match}</span>`);
-          }
-        });
+    //   query_bus_highlight_knowledges.forEach(keyword => {
+    //     if (keyword && keyword.trim()) {
+    //       console.log('keyword', keyword)
+    //       const regex = new RegExp(keyword.trim(), 'gi');
+    //       content = content.replace(regex, match => `<span class="highlight">${match}</span>`);
+    //     }
+    //   });
 
-        contentDiv.innerHTML = content;
-      });
-    },
+    //   contentDiv.innerHTML = content;
+    // });
+    // },
   },
   methods: {
     showExplanation(card) {
@@ -303,13 +307,56 @@ export default {
 
       contentDivs.forEach(contentDiv => {
         let content = contentDiv.innerHTML;
-        highlightList.forEach(keyword => {
+
+        // highlightList.forEach(keyword => {
+        //   if (keyword && keyword.trim()) {
+        //     console.log('keyword', keyword)
+        //     const regex = new RegExp(keyword.trim(), 'gi');
+        //     content = content.replace(regex, match => `<span class="highlight">${match}</span>`);
+        //   }
+        // });
+        console.log('sql_highlight_knowledges', highlightList);
+        let understanding_highlightList = highlightList.understanding_highlight_knowledges;
+        console.log('understanding_highlightList', understanding_highlightList)
+        let understanding_bus_highlight_knowledges = understanding_highlightList.bus_highlight_knowledges;
+        let understanding_sql_highlight_knowledges = understanding_highlightList.sql_highlight_knowledges;
+
+        understanding_sql_highlight_knowledges.forEach(keyword => {
           if (keyword && keyword.trim()) {
             console.log('keyword', keyword)
             const regex = new RegExp(keyword.trim(), 'gi');
             content = content.replace(regex, match => `<span class="highlight">${match}</span>`);
           }
         });
+        understanding_bus_highlight_knowledges.forEach(keyword => {
+          if (keyword && keyword.trim()) {
+            console.log('keyword', keyword)
+            const regex = new RegExp(keyword.trim(), 'gi');
+            content = content.replace(regex, match => `<span class="highlight">${match}</span>`);
+          }
+        });
+
+
+        let query_highlightList = highlightList.query_highlight_knowledges;
+        let query_sql_highlight_knowledges = query_highlightList.sql_highlight_knowledges;
+        let query_bus_highlight_knowledges = query_highlightList.bus_highlight_knowledges;
+
+        query_sql_highlight_knowledges.forEach(keyword => {
+          if (keyword && keyword.trim()) {
+            console.log('keyword', keyword)
+            const regex = new RegExp(keyword.trim(), 'gi');
+            content = content.replace(regex, match => `<span class="highlight">${match}</span>`);
+          }
+        });
+
+        query_bus_highlight_knowledges.forEach(keyword => {
+          if (keyword && keyword.trim()) {
+            console.log('keyword', keyword)
+            const regex = new RegExp(keyword.trim(), 'gi');
+            content = content.replace(regex, match => `<span class="highlight">${match}</span>`);
+          }
+        });
+
         contentDiv.innerHTML = content;
       });
     },
@@ -324,7 +371,39 @@ export default {
     showExplanation(card) {
       this.activeCard = card;
       this.isEditing = false; // 默认显示高亮视图
-    }
+      this.highlightedExplanation = this.getHighlightedExplanation(card.explanation, this.hightLightKB);
+    },
+    getHighlightedExplanation(explanation, highlightList) {
+      let content = explanation || ''; // 确保 explanation 有默认值
+      console.log('explanation:', explanation);
+
+      // 防御性获取 allKeywords
+      const allKeywords = [
+        ...(highlightList.understanding_highlight_knowledges?.bus_highlight_knowledges || []),
+        ...(highlightList.understanding_highlight_knowledges?.sql_highlight_knowledges || []),
+        ...(highlightList.query_highlight_knowledges?.bus_highlight_knowledges || []),
+        ...(highlightList.query_highlight_knowledges?.sql_highlight_knowledges || []),
+      ];
+      console.log('allKeywords:', allKeywords);
+
+      // 按长度降序排序，避免替换冲突
+      allKeywords.sort((a, b) => b.length - a.length);
+
+      // 转义特殊字符的函数
+      function escapeRegExp(string) {
+        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      }
+
+      // 对每个关键词进行高亮
+      allKeywords.forEach(keyword => {
+        if (keyword && keyword.trim()) {
+          const regex = new RegExp(escapeRegExp(keyword.trim()), 'gi');
+          content = content.replace(regex, match => `<span class="highlight">${match}</span>`);
+        }
+      });
+
+      return content;
+    },
   },
   watch: {
     response(newVal) {
@@ -338,24 +417,56 @@ export default {
         const SQLdataLength = newVal.response.list_of_lists[0].length;
         const KnowledgedataLength = newVal.response.list_of_lists[1].length;
 
-        // 生成左侧卡片
+        //获取liners
+        this.liners_1_1 = newVal.response.liners.query_liners.bus_lines;
+        this.liners_1_2 = newVal.response.liners.query_liners.sql_lines;
+        this.liners_2_1 = newVal.response.liners.understanding_liners.bus_lines;
+        this.liners_2_2 = newVal.response.liners.understanding_liners.sql_lines;
+        this.liners_1_2 = this.liners_1_2.map(num => num + KnowledgedataLength);
+        this.liners_2_2 = this.liners_2_2.map(num => num + KnowledgedataLength);
+        this.mergedBusLines = [...new Set([...this.liners_1_1, ...this.liners_2_1])];
+        this.mergedSqlLines = [...new Set([...this.liners_1_2, ...this.liners_2_2])];
+        //生成liners卡片
+        for (let i = 0; i < this.mergedBusLines.length; i++) {
+          this.dynamicCards.push({
+            id: this.mergedBusLines[i]-1,
+            title: `Knowledge Base ${this.dynamicCards.length + 1}`,
+            content: newVal.response.list_of_lists[1][this.mergedBusLines[i]-1],
+            explanation: newVal.response.list_of_lists[1][this.mergedBusLines[i]-1]
+          });
+        }
+        for (let i = 0; i < this.mergedSqlLines.length; i++) {
+          this.dynamicSmallCards.push({
+            id: this.mergedSqlLines[i],
+            title: `SQL Knowledge Base ${this.dynamicSmallCards + 1}`,
+            content: newVal.response.list_of_lists[0][this.mergedSqlLines[i] - KnowledgedataLength - 1],
+            explanation: newVal.response.list_of_lists[0][this.mergedSqlLines[i] - KnowledgedataLength - 1]
+          });
+        }
+        // 创建查重Set
+        const mergedBusSet = new Set(this.mergedBusLines);
+        const mergedSqlOriginalSet = new Set(
+          this.mergedSqlLines.map(num => num - KnowledgedataLength)
+        );
+        // 生成剩余卡片
         for (let i = 1; i < KnowledgedataLength; i++) {
+          if (mergedBusSet.has(i + 1)) continue;
           this.dynamicCards.push({
             id: i,
-            title: `Knowledge Base ${i}`,
+            title: `Knowledge Base ${this.dynamicCards.length + 1}`,
             content: newVal.response.list_of_lists[1][i],
             explanation: newVal.response.list_of_lists[1][i]
           });
         }
         for (let i = 0; i < SQLdataLength; i++) {
+          if (mergedSqlOriginalSet.has(i + 1)) continue;
           this.dynamicSmallCards.push({
             id: KnowledgedataLength + i + 1,
-            title: `SQL Knowledge Base ${i + 1}`,
+            title: `SQL Knowledge Base ${this.dynamicSmallCards + 1}`,
             content: newVal.response.list_of_lists[0][i],
             explanation: newVal.response.list_of_lists[0][i]
           });
         }
-        console.log(newVal)
         this.hightLightKB = newVal.response.highlight_knowledges;
         if (this.hightLightKB) {
           // 使用 $nextTick 确保 DOM 更新后再执行高亮
@@ -371,7 +482,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .view-container {
   display: flex;
   gap: 50px;

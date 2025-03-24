@@ -369,6 +369,14 @@ export default {
         this.showAdd = false;
       }, 2000);
     },
+    addItem(query, sql_code) {
+    const newItem = {
+      similarity: 0.5,
+      query: query,
+      sql_code: sql_code
+    };
+    this.historyList.unshift(newItem); // 响应式添加
+    },
     toggleHistoryWindow() {
       this.showHistoryWindow = !this.showHistoryWindow;
       if (this.showHistoryWindow) {
