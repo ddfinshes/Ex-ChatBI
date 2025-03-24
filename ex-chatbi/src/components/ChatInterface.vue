@@ -23,7 +23,8 @@
         v-model="query" 
         placeholder="Please enter your question"
         :autosize="{ minRows: 2, maxRows: 4 }"
-        @keydown.enter="handleEnter"
+        @keydown.enter=
+            "handleEnter"
       />
       <el-button type="primary" @click="sendQuery">Send</el-button>
     </div>
@@ -55,6 +56,28 @@ export default {
     const queryStore = useQueryStore();
     return { queryStore };
   },
+  computed: {
+    understanding(){
+      return this.queryStore.revised_understanding;
+    },
+    knowledge(){
+      return this.queryStore.revised_knowledge;
+    }
+  },
+  watch: {
+    understanding(newVal){
+      console.log('update understanding')
+      this.query = this.queryStore.response.response.query;
+      console.log(this.query)
+      this.sendQuery();
+      this.queryStore.setUnderstanding('');
+    },
+    knowledge(newVal){
+      this.query = this.queryStore.response.response.query;
+      this.sendQuery();
+      this.queryStore.setKnowledge('');
+    }
+  },
   methods: {
     extractSQL(text) {
       const sqlRegex = /```sql[\s\S]*?```/gis;
@@ -83,7 +106,7 @@ export default {
       try {
         const res = await axios.post(
           "/api/query",
-          { query: [this.currentQuery,this.queryStore.history]},
+          { query: [this.currentQuery,this.queryStore.history, this.queryStore.revised_knowledge, this.queryStore.revised_understanding]},
           {
             headers: {
               "Content-Type": "application/json",

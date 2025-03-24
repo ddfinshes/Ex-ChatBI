@@ -91,6 +91,10 @@ class SQLCodeAgent:
             {usr_input['sql_chunks']}
             DB Schema:
             {usr_input['db_schema']}
+            Conversation History:
+            {usr_input['history']}
+            {usr_input['revised_knowledge']}
+            {usr_input['revised_understanding']}
             """
 
         input_message = HumanMessage(content=query)

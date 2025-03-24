@@ -239,6 +239,7 @@
       },
             highlightedContent() {
         return this.highlightText(this.modelResponse, this.searchtext);
+        console.log(this.modelResponse)
       },
     },
     data() {
@@ -260,7 +261,8 @@
         addTimeout: null,
         showHistoryWindow: false,
         historyWindowPosition: { left: '60px', top: '60px' },
-        selectedHistory: []
+        selectedHistory: [],
+        understanding:''
       };
     },
     mounted() {
@@ -293,8 +295,9 @@
             { similarity: 0.40, query: "Machine learning basics" }]
           this.messageHistory = newVal.message_history || [];
           this.highlight = newVal.response.pair_relevance;
-          this.searchtext = newVal.response.highlight_words;
-          this.addItem(newVal.response.system_query, newVal.response.code)
+          this.searchtext = newVal.response.highlight_words.understanding_highlight_words.bus_highlight_words;
+          console.log("gaoliang", this.searchtext)
+          this.addItem(newVal.response.query, newVal.response.code)
           this.queryStore.setHistory(this.historyList);
           console.log("history", this.historyList)
         }
@@ -308,16 +311,67 @@
       //   this.topKSimilar = res.data.top_k_similar || [];
       // }
       //获取元素底部中心坐标
-            highlightText(text, searchTextArray) {
+      highlightText(text, searchTextArray) {
       if (!searchTextArray || searchTextArray.length === 0) return text;
+      console.log(searchTextArray)
 
       let result = text;
       searchTextArray.forEach(term => {
         const regex = new RegExp(`(${this.escapeRegExp(term)})`, 'gi');
-        result = result.replace(regex, '<span class="highlight">$1</span>');
+        result = result.replace(regex, match => `<span class="highlight">${match}</span>`);
       });
 
-      return text;
+      return result;
+    },
+          escapeRegExp(string) {
+      return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    },
+          handleInput(e) {
+      // 保存光标位置
+      this.saveCursorPosition();
+      this.understanding = e.target.innerHTML
+
+      // 获取纯文本内容并更新到父组件
+      const text = this.$refs.editableDiv.textContent;
+      this.$emit('input', text);
+
+      // 恢复光标位置
+      this.restoreCursorPosition();
+    },
+
+    // 保存光标位置
+    saveCursorPosition() {
+      const selection = window.getSelection();
+      if (selection.rangeCount > 0) {
+        const range = selection.getRangeAt(0);
+        const preCaretRange = range.cloneRange();
+        preCaretRange.selectNodeContents(this.$refs.editableDiv);
+        preCaretRange.setEnd(range.endContainer, range.endOffset);
+        this.lastCursorPos = preCaretRange.toString().length;
+      }
+    },
+
+    // 恢复光标位置
+    restoreCursorPosition() {
+      const textNode = this.findTextNode(this.$refs.editableDiv);
+      const range = document.createRange();
+
+      range.setStart(textNode, Math.min(this.lastCursorPos, textNode.length));
+      range.collapse(true);
+
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+    },
+
+    // 查找文本节点
+    findTextNode(node) {
+      if (node.nodeType === Node.TEXT_NODE) return node;
+      for (const child of node.childNodes) {
+        const result = this.findTextNode(child);
+        if (result) return result;
+      }
+      return null;
     },
       getCardPositions() {
         return {
@@ -358,7 +412,8 @@
         return Math.max(1, similarity * 20); // 粗细范围 1px 至 5px
       },
       handleConfirm() {
-        console.log("Confirmed value:", this.modelResponse);
+        this.queryStore.setUnderstanding(this.understanding);
+        console.log(this.understanding)
       },
       truncateText(text, maxLength) {
         // 截断文本，超过 maxLength 显示省略号
@@ -499,7 +554,6 @@
     clear: both;
   }
 div[contenteditable] {
-border: 1px solid #ccc;
 padding: 8px;
 min-height: 40px;
 }
@@ -510,9 +564,9 @@ min-height: 40px;
 .editable-input {
   width: 100%;
   min-height: 100px;
+  max-height: 400px;
   padding: 10px;
-  border: 1px solid #dcdfe6;
-  border-radius: 4px;
+
   line-height: 1.5;
   white-space: pre-wrap;
 }

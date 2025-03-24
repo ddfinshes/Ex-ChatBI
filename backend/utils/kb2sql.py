@@ -46,8 +46,10 @@ def process_file_to_chunks(filename):
         return []
 
 def get_chunks(ids):
-    filename = "/root/UIST2025/Ex-ChatBI/backend/knowledge-base/sql_sample_kb3.txt"  # 替换为你的文件名
+    filename = "knowledge-base/sql_sample_kb3.txt"  # 替换为你的文件名
+
     chunks = process_file_to_chunks(filename)
+    print(chunks)
     sql_chunks = []
     for idd in ids:
         sql_chunk = chunks[idd]

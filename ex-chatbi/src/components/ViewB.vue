@@ -181,9 +181,6 @@ export default {
     // },
   },
   methods: {
-    showExplanation(card) {
-      this.activeCard = card;
-    },
     hideExplanation() {
       this.activeCard = null;
     },
@@ -366,6 +363,7 @@ export default {
     saveExplanation() {
       this.isEditing = false;
       // 这里可以添加保存逻辑，比如发送到后端
+      this.queryStore.setKnowledge(this.activeCard.explanation);
       console.log('Saved explanation:', this.activeCard.explanation);
     },
     showExplanation(card) {
