@@ -41,187 +41,187 @@ export default {
       nodes: [],
       nodeCards: [],
       data: '',
-      res: {
-        content: [
-          {
-            "created_virtual_table": "False",
-            "sql_content": [
-              {
-                "keywords": "From",
-                "scratched_content": [
-                  { "table_name": "Monthly_Growth", "is_virtual_table": "True", 'NL Explain': "AAA"}
-                ]
-              },
-              {
-                "keywords": "Select",
-                "scratched_content": [
-                  { "column_name": "month_id", "column_processing": "", 'NL Explain': "BBB"},
-                  { "column_name": "Current_Month_Effi", "column_processing": "TO_CHAR (Current_Month_Effi, 'FM999,999,999.00') AS Current_Month_Effi", 'NL Explain': "CCC"},
-                  { "column_name": "Previous_Month_Effi", "column_processing": "TO_CHAR (Previous_Month_Effi, 'FM999,999,999.00') AS Previous_Month_Effi", 'NL Explain': "DDD"},
-                  { "column_name": "Growth_Percentage", "column_processing": "TO_CHAR (Growth_Percentage, 'FM999,999,999.00') || '%' AS Growth_Percentage", 'NL Explain': "EEE"}
-                ]
-              },
-              {
-                "keywords": "Join",
-                "scratched_content": [
-                  { "content": "TO_CHAR (DATEADD (month, 1, TO_DATE (p.month_id, 'YYYYMM')), 'YYYYMM')", 'NL Explain': "FFF"}
-                ]
-              },
-              {
-                "keywords": "Where",
-                "scratched_content": [
-                  { "content": "c.month_id = '202410'",'NL Explain': "ZZZ"}
-                ]
-              }
-            ]
-          },
-          {
-            "created_virtual_table": "True",
-            "virtual_table_name": "Monthly_Growth",
-            "sql_content": [
-              {
-                "keywords": "Select",
-                "scratched_content": [
-                  { "column_name": "c.month_id", "column_processing": "", 'NL Explain': "hhh"},
-                  { "column_name": "Current_Month_Effi", "column_processing": "c.Avg_effi AS Current_Month_Effi" },
-                  { "column_name": "Previous_Month_Effi", "column_processing": "p.Avg_effi AS Previous_Month_Effi" },
-                  { "column_name": "Growth_Percentage", "column_processing": "(c.Avg_effi / p.Avg_effi - 1) * 100 AS Growth_Percentage" }
-                ]
-              },
-              {
-                "keywords": "From",
-                "scratched_content": [
-                  { "table_name": "Effi_Comparison c", "is_virtual_table": "True", 'NL Explain': "wowowo"}
-                ]
-              },
-              {
-                "keywords": "Join",
-                "scratched_content": [
-                  { "content": "JOIN Effi_Comparison p ON c.month_id = TO_CHAR (DATEADD (month, 1, TO_DATE (p.month_id, 'YYYYMM')), 'YYYYMM')" }
-                ]
-              },
-              {
-                "keywords": "Where",
-                "scratched_content": [
-                  { "content": "c.month_id = '202410'" }
-                ]
-              }
-            ]
-          },
-          {
-            "created_virtual_table": "True",
-            "virtual_table_name": "Effi_Comparison",
-            "sql_content": [
-              {
-                "keywords": "Select",
-                "scratched_content": [
-                  { "column_name": "month_id", "column_processing": "" },
-                  { "column_name": "Avg_effi", "column_processing": "AVG(effi) AS Avg_effi" }
-                ]
-              },
-              {
-                "keywords": "From",
-                "scratched_content": [
-                  { "table_name": "Store_effi", "is_virtual_table": "True" }
-                ]
-              },
-              {
-                "keywords": "Group By",
-                "scratched_content": [
-                  { "content": "month_id" }
-                ]
-              }
-            ]
-          },
-          {
-            "created_virtual_table": "True",
-            "virtual_table_name": "Store_effi",
-            "sql_content": [
-              {
-                "keywords": "Select",
-                "scratched_content": [
-                  { "column_name": "country", "column_processing": "" },
-                  { "column_name": "channel", "column_processing": "" },
-                  { "column_name": "store_type", "column_processing": "" },
-                  { "column_name": "area", "column_processing": "" },
-                  {
-                    "column_name": "effi",
-                    "column_processing": "CASE WHEN (COALESCE(area, '') = '' OR CAST(area AS DECIMAL(18, 2)) = 0) THEN 0 ELSE AVG(COALESCE(amt_usd_notax, 0)) * 365 / CAST(area AS DECIMAL(18, 2)) * 10.7639104 END AS effi"
-                  },
-                  { "column_name": "month_id", "column_processing": "" }
-                ]
-              },
-              {
-                "keywords": "From",
-                "scratched_content": [
-                  { "table_name": "dm_fact_sales_chatbi", "is_virtual_table": "False" }
-                ]
-              },
-              {
-                "keywords": "Where",
-                "scratched_content": [
-                  {
-                    "content": "date_code <= '2024-10-31' AND country = 'Mainland' AND channel = 'O&O' AND store_type = 'BH' AND comp_flag = 'Y'"
-                  }
-                ]
-              },
-              {
-                "keywords": "Group By",
-                "scratched_content": [
-                  { "content": "country, channel, store_type, store_code, area, month_id" }
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      subsql: {
-        content: [
-          {
-            "created_virtual_table": "False",
-            "sql_content": [
-              {
-                "keywords": "From",
-                "scratched_content": [
-                  { "table_name": "Monthly_Growth", "is_virtual_table": "True", 'Nl Explain': "AAA"}
-                ]
-              },
-              {
-                "keywords": "Select",
-                "scratched_content": [
-                { "column_name": "Current_Month_Effi", "column_processing": "TO_CHAR (Current_Month_Effi, 'FM999,999,999.00') AS Current_Month_Effi", 'NL Explain': "CCC"},
-                ]
-              },
-              {
-                "keywords": "Join",
-                "scratched_content": [
-                  { "content": "TO_CHAR (DATEADD (month, 1, TO_DATE (p.month_id, 'YYYYMM')), 'YYYYMM')", 'Nl Explain': "FFF"}
-                ]
-              }
-            ]
-          },
-          {
-            "created_virtual_table": "True",
-            "virtual_table_name": "Monthly_Growth",
-            "sql_content": [
-              {
-                "keywords": "Select",
-                "scratched_content": [
-                  { "column_name": "c.month_id", "column_processing": "", 'NL Explain': "hhh"},
-                  { "column_name": "Growth_Percentage", "column_processing": "(c.Avg_effi / p.Avg_effi - 1) * 100 AS Growth_Percentage" }
-                ]
-              },
-              {
-                "keywords": "From",
-                "scratched_content": [
-                  { "table_name": "Effi_Comparison c", "is_virtual_table": "True", 'NL Explain': "wowowo"}
-                ]
-              },
-            ]
-          }
-        ]
-      },
-      // res: [],
+      // res: {
+      //   content: [
+      //     {
+      //       "created_virtual_table": "False",
+      //       "sql_content": [
+      //         {
+      //           "keywords": "From",
+      //           "scratched_content": [
+      //             { "table_name": "Monthly_Growth", "is_virtual_table": "True", 'NL Explain': "AAA"}
+      //           ]
+      //         },
+      //         {
+      //           "keywords": "Select",
+      //           "scratched_content": [
+      //             { "column_name": "month_id", "column_processing": "", 'NL Explain': "BBB"},
+      //             { "column_name": "Current_Month_Effi", "column_processing": "TO_CHAR (Current_Month_Effi, 'FM999,999,999.00') AS Current_Month_Effi", 'NL Explain': "CCC"},
+      //             { "column_name": "Previous_Month_Effi", "column_processing": "TO_CHAR (Previous_Month_Effi, 'FM999,999,999.00') AS Previous_Month_Effi", 'NL Explain': "DDD"},
+      //             { "column_name": "Growth_Percentage", "column_processing": "TO_CHAR (Growth_Percentage, 'FM999,999,999.00') || '%' AS Growth_Percentage", 'NL Explain': "EEE"}
+      //           ]
+      //         },
+      //         {
+      //           "keywords": "Join",
+      //           "scratched_content": [
+      //             { "content": "TO_CHAR (DATEADD (month, 1, TO_DATE (p.month_id, 'YYYYMM')), 'YYYYMM')", 'NL Explain': "FFF"}
+      //           ]
+      //         },
+      //         {
+      //           "keywords": "Where",
+      //           "scratched_content": [
+      //             { "content": "c.month_id = '202410'",'NL Explain': "ZZZ"}
+      //           ]
+      //         }
+      //       ]
+      //     },
+      //     {
+      //       "created_virtual_table": "True",
+      //       "virtual_table_name": "Monthly_Growth",
+      //       "sql_content": [
+      //         {
+      //           "keywords": "Select",
+      //           "scratched_content": [
+      //             { "column_name": "c.month_id", "column_processing": "", 'NL Explain': "hhh"},
+      //             { "column_name": "Current_Month_Effi", "column_processing": "c.Avg_effi AS Current_Month_Effi" },
+      //             { "column_name": "Previous_Month_Effi", "column_processing": "p.Avg_effi AS Previous_Month_Effi" },
+      //             { "column_name": "Growth_Percentage", "column_processing": "(c.Avg_effi / p.Avg_effi - 1) * 100 AS Growth_Percentage" }
+      //           ]
+      //         },
+      //         {
+      //           "keywords": "From",
+      //           "scratched_content": [
+      //             { "table_name": "Effi_Comparison c", "is_virtual_table": "True", 'NL Explain': "wowowo"}
+      //           ]
+      //         },
+      //         {
+      //           "keywords": "Join",
+      //           "scratched_content": [
+      //             { "content": "JOIN Effi_Comparison p ON c.month_id = TO_CHAR (DATEADD (month, 1, TO_DATE (p.month_id, 'YYYYMM')), 'YYYYMM')" }
+      //           ]
+      //         },
+      //         {
+      //           "keywords": "Where",
+      //           "scratched_content": [
+      //             { "content": "c.month_id = '202410'" }
+      //           ]
+      //         }
+      //       ]
+      //     },
+      //     {
+      //       "created_virtual_table": "True",
+      //       "virtual_table_name": "Effi_Comparison",
+      //       "sql_content": [
+      //         {
+      //           "keywords": "Select",
+      //           "scratched_content": [
+      //             { "column_name": "month_id", "column_processing": "" },
+      //             { "column_name": "Avg_effi", "column_processing": "AVG(effi) AS Avg_effi" }
+      //           ]
+      //         },
+      //         {
+      //           "keywords": "From",
+      //           "scratched_content": [
+      //             { "table_name": "Store_effi", "is_virtual_table": "True" }
+      //           ]
+      //         },
+      //         {
+      //           "keywords": "Group By",
+      //           "scratched_content": [
+      //             { "content": "month_id" }
+      //           ]
+      //         }
+      //       ]
+      //     },
+      //     {
+      //       "created_virtual_table": "True",
+      //       "virtual_table_name": "Store_effi",
+      //       "sql_content": [
+      //         {
+      //           "keywords": "Select",
+      //           "scratched_content": [
+      //             { "column_name": "country", "column_processing": "" },
+      //             { "column_name": "channel", "column_processing": "" },
+      //             { "column_name": "store_type", "column_processing": "" },
+      //             { "column_name": "area", "column_processing": "" },
+      //             {
+      //               "column_name": "effi",
+      //               "column_processing": "CASE WHEN (COALESCE(area, '') = '' OR CAST(area AS DECIMAL(18, 2)) = 0) THEN 0 ELSE AVG(COALESCE(amt_usd_notax, 0)) * 365 / CAST(area AS DECIMAL(18, 2)) * 10.7639104 END AS effi"
+      //             },
+      //             { "column_name": "month_id", "column_processing": "" }
+      //           ]
+      //         },
+      //         {
+      //           "keywords": "From",
+      //           "scratched_content": [
+      //             { "table_name": "dm_fact_sales_chatbi", "is_virtual_table": "False" }
+      //           ]
+      //         },
+      //         {
+      //           "keywords": "Where",
+      //           "scratched_content": [
+      //             {
+      //               "content": "date_code <= '2024-10-31' AND country = 'Mainland' AND channel = 'O&O' AND store_type = 'BH' AND comp_flag = 'Y'"
+      //             }
+      //           ]
+      //         },
+      //         {
+      //           "keywords": "Group By",
+      //           "scratched_content": [
+      //             { "content": "country, channel, store_type, store_code, area, month_id" }
+      //           ]
+      //         }
+      //       ]
+      //     }
+      //   ]
+      // },
+      // subsql: {
+      //   content: [
+      //     {
+      //       "created_virtual_table": "False",
+      //       "sql_content": [
+      //         {
+      //           "keywords": "From",
+      //           "scratched_content": [
+      //             { "table_name": "Monthly_Growth", "is_virtual_table": "True", 'Nl Explain': "AAA"}
+      //           ]
+      //         },
+      //         {
+      //           "keywords": "Select",
+      //           "scratched_content": [
+      //           { "column_name": "Current_Month_Effi", "column_processing": "TO_CHAR (Current_Month_Effi, 'FM999,999,999.00') AS Current_Month_Effi", 'NL Explain': "CCC"},
+      //           ]
+      //         },
+      //         {
+      //           "keywords": "Join",
+      //           "scratched_content": [
+      //             { "content": "TO_CHAR (DATEADD (month, 1, TO_DATE (p.month_id, 'YYYYMM')), 'YYYYMM')", 'Nl Explain': "FFF"}
+      //           ]
+      //         }
+      //       ]
+      //     },
+      //     {
+      //       "created_virtual_table": "True",
+      //       "virtual_table_name": "Monthly_Growth",
+      //       "sql_content": [
+      //         {
+      //           "keywords": "Select",
+      //           "scratched_content": [
+      //             { "column_name": "c.month_id", "column_processing": "", 'NL Explain': "hhh"},
+      //             { "column_name": "Growth_Percentage", "column_processing": "(c.Avg_effi / p.Avg_effi - 1) * 100 AS Growth_Percentage" }
+      //           ]
+      //         },
+      //         {
+      //           "keywords": "From",
+      //           "scratched_content": [
+      //             { "table_name": "Effi_Comparison c", "is_virtual_table": "True", 'NL Explain': "wowowo"}
+      //           ]
+      //         },
+      //       ]
+      //     }
+      //   ]
+      // },
+      res: [],
       currentTree: null,
       vistualtable_svgs: [],
       // testData: {
@@ -260,65 +260,64 @@ export default {
     this.$nextTick(() => {
       console.log("Component mounted, checking res...");
       // console.log("Initial store state:", this.store.$state);
-      // this.store.fetchSQLResponse("SELECT * FROM table");
-      const data = this.transformToTree(this.res);
-      this.currentTree = this.transformToTree(this.subsql)
-      this.draw(data);
+      // const data = this.transformToTree(this.res);
+      // this.currentTree = this.transformToTree(this.subsql)
+      // this.draw(data);
     })
   },
-  // watch: {
-  //   'store.response': {
-  //     handler(newVal) {
-  //       setTimeout(() => {
-  //         if (newVal) {
-  //           this.sqlcode = newVal.code;
-  //           console.log('store.response updated:', this.sqlcode);
-  //           if (newVal.code) {
-  //             this.getSQL2JSON(newVal.code).then(result => {
-  //               this.sqljson = result['sql_json'];
-  //               this.res = result['sql_json']; // 将 res.data 直接作为新的 res
-  //               this.sqlstepnl = result['sql_stepnl']
-  //               console.log('---------------sqlstepnl----------------------', this.sqlstepnl);
-  //               console.log('---------------sqljson----------------------', this.sqljson);
-  //               if (this.res) {
-  //                 this.data = this.transformToTree(this.res);
-  //                 this.draw(this.data); // 使用新的 res 数据绘制
-  //               }
-  //             }).catch(error => {
-  //               console.error("Error fetching SQL2JSON:", error);
-  //             });
-  //           }
-  //         }
-  //       }, 1000); // 保留原始 1000ms 延迟
-  //     },
-  //     deep: true,
-  //     immediate: true // 检查初始值
-  //   },
+  watch: {
+    'store.response': {
+      handler(newVal) {
+        setTimeout(() => {
+          if (newVal) {
+            this.sqlcode = newVal.code;
+            console.log('store.response updated:', this.sqlcode);
+            if (newVal.code) {
+              this.getSQL2JSON(newVal.code).then(result => {
+                this.sqljson = result['sql_json'];
+                this.res = result['sql_json']; // 将 res.data 直接作为新的 res
+                this.sqlstepnl = result['sql_stepnl']
+                console.log('---------------sqlstepnl----------------------', this.sqlstepnl);
+                console.log('---------------sqljson----------------------', this.sqljson);
+                if (this.res) {
+                  this.data = this.transformToTree(this.res);
+                  this.draw(this.data); // 使用新的 res 数据绘制
+                }
+              }).catch(error => {
+                console.error("Error fetching SQL2JSON:", error);
+              });
+            }
+          }
+        }, 1000); // 保留原始 1000ms 延迟
+      },
+      deep: true,
+      immediate: true // 检查初始值
+    },
 
-  //   'store.subsqljson': {
-  //     handler(newVal) {
-  //       setTimeout(() => {
-  //         console.log(newVal);
-  //         if (newVal) {
-  //           this.subsql = newVal['sql_json'];
-  //           console.log('subsql', this.subsql);
-  //           this.sqlstepnl = newVal['sql_stepnl']
-  //           console.log('---------------sub-sqlstepnl----------------------', this.sqlstepnl)
-  //           this.currentTree = this.transformToTree(this.subsql);
-  //           console.log('----------------currentTree for highlight------------------', this.currentTree);
-  //           this.draw(this.data)
-  //           // this.getSubsqljson(this.subsql).then(res => {
-  //           //   this.subsqljson = res.content;
-  //           //   console.log('subsqljson', this.subsqljson);
-  //           // }).catch(error => {
-  //           //   console.error("Error fetching subsqljson:", error);
-  //           // });
-  //         }
-  //       }, 1000);
-  //     },
-  //     deep: true
-  //   }
-  // },
+    'store.subsqljson': {
+      handler(newVal) {
+        setTimeout(() => {
+          console.log(newVal);
+          if (newVal) {
+            this.subsql = newVal['sql_json'];
+            console.log('subsql', this.subsql);
+            this.sqlstepnl = newVal['sql_stepnl']
+            console.log('---------------sub-sqlstepnl----------------------', this.sqlstepnl)
+            this.currentTree = this.transformToTree(this.subsql);
+            console.log('----------------currentTree for highlight------------------', this.currentTree);
+            this.draw(this.data)
+            // this.getSubsqljson(this.subsql).then(res => {
+            //   this.subsqljson = res.content;
+            //   console.log('subsqljson', this.subsqljson);
+            // }).catch(error => {
+            //   console.error("Error fetching subsqljson:", error);
+            // });
+          }
+        }, 1000);
+      },
+      deep: true
+    }
+  },
 // ------------------------------------------------
 // const store = useQueryStore();
 // const sqlcode = ref(''); // sql代码
@@ -909,7 +908,7 @@ export default {
           .attr("y", 0)
           .attr("width", fixedTableWidth)
           .attr("height", headerHeight)
-          .attr("fill", "#FFB338")
+          .attr("fill", "#ffae78")
           .attr("stroke", "#333");
          
         fromGroup
@@ -995,7 +994,7 @@ export default {
           .attr("y", 0)
           .attr("width", fixedTableWidth)
           .attr("height", headerHeight)
-          .attr("fill", "#FFB338")
+          .attr("fill", "#ffae78")
           .attr("stroke", "#333");
 
         selectGroup
@@ -1185,7 +1184,7 @@ export default {
             .attr("y", 0)
             .attr("width", fixedTableWidth)
             .attr("height", headerHeight)
-            .attr("fill", "#FFB338") // 可根据需要调整颜色
+            .attr("fill", "#ffae78") // 可根据需要调整颜色
             .attr("stroke", "#333");
 
           tableGroup
@@ -1331,7 +1330,7 @@ export default {
           const selectTableX = selectParent.y + tableOffset;
           const selectTableY = selectParent.x - selectHeight / 2;
           const selectGroup = svg.append("g").attr("class", "table-group").attr("transform", `translate(${selectTableX},${selectTableY})`);
-          drawTable(selectGroup, "Column Name", selectNodes, "#FFB338", fixedTableWidth, headerHeight, rowHeight, tablePadding, selectParent);
+          drawTable(selectGroup, "Column Name", selectNodes, "#ffae78", fixedTableWidth, headerHeight, rowHeight, tablePadding, selectParent);
 
           const processingTableX = selectTableX + fixedTableWidth + 100;
           const processingTableY = selectTableY - 50;
@@ -1358,7 +1357,7 @@ export default {
               const virtualGroup = svg.append("g")
                 .attr("class", "virtual-table-group")
                 .attr("transform", `translate(${virtualTableX},${virtualTableY})`);
-              drawVirtualTable(virtualGroup, node, "#FFB338", fixedTableWidth, headerHeight, rowHeight, tablePadding);
+              drawVirtualTable(virtualGroup, node, "#ffae78", fixedTableWidth, headerHeight, rowHeight, tablePadding);
 
               // 绘制从 Column Name 到虚拟表的连接线
               const sourceX = selectTableX + fixedTableWidth / 2; // Column Name 的右侧中心
@@ -1395,7 +1394,7 @@ export default {
           const fromTableX = fromParent.y + tableOffset;
           const fromTableY = fromParent.x - fromHeight / 2;
           const fromGroup = svg.append("g").attr("class", "table-group").attr("transform", `translate(${fromTableX},${fromTableY})`);
-          drawTable(fromGroup, "Table Name", fromNodes, "#FFB338", fixedTableWidth, headerHeight, rowHeight, tablePadding, fromParent);
+          drawTable(fromGroup, "Table Name", fromNodes, "#ffae78", fixedTableWidth, headerHeight, rowHeight, tablePadding, fromParent);
 
           // 添加 Table Name 的 NL Explain 表格
           const fromExplainTableX = fromTableX + fixedTableWidth + 5;
@@ -1411,7 +1410,7 @@ export default {
               const virtualTableX = lastTableX;
               const virtualTableY = fromTableY; // 与 From 对齐
               const virtualGroup = svg.append("g").attr("class", "virtual-table-group").attr("transform", `translate(${virtualTableX},${virtualTableY})`);
-              drawVirtualTable(virtualGroup, node, "#FFB338", fixedTableWidth, headerHeight, rowHeight, tablePadding);
+              drawVirtualTable(virtualGroup, node, "#ffae78", fixedTableWidth, headerHeight, rowHeight, tablePadding);
 
               // 绘制从 Table Name 到虚拟表的连接线
               const sourceX = fromTableX + fixedTableWidth / 2; // Table Name 的右侧中心
@@ -1452,7 +1451,7 @@ export default {
             const tableX = parentNode.y + tableOffset;
             const tableY = Math.max(parentNode.x - tableHeight / 2, lastTableBottom + tableSpacing);
             const tableGroup = svg.append("g").attr("class", "table-group").attr("transform", `translate(${tableX},${tableY})`);
-            drawTable(tableGroup, parentNode.data.name, childNodes, "#FFB338", fixedTableWidth, headerHeight, rowHeight, tablePadding, parentNode);
+            drawTable(tableGroup, parentNode.data.name, childNodes, "#ffae78", fixedTableWidth, headerHeight, rowHeight, tablePadding, parentNode);
 
             // 添加 NL Explain 表格（在虚拟表之前）
             let lastTableX = tableX; // 从主表格右侧开始
@@ -1474,7 +1473,7 @@ export default {
                 const virtualGroup = svg.append("g")
                   .attr("class", "virtual-table-group")
                   .attr("transform", `translate(${virtualTableX},${virtualTableY})`);
-                drawVirtualTable(virtualGroup, node, "#FFB338", fixedTableWidth, headerHeight, rowHeight, tablePadding);
+                drawVirtualTable(virtualGroup, node, "#ffae78", fixedTableWidth, headerHeight, rowHeight, tablePadding);
 
                 // 绘制从表格行到虚拟表的连接线
                 const sourceX = tableX + fixedTableWidth / 2; // 主表格右侧中心
@@ -1843,6 +1842,7 @@ export default {
               const newText = textarea.property("value");
               currentText = newText;
 
+              // 更新显示文本
               textElement.selectAll("tspan").remove();
               const newLines = wrapText(newText, fixedTableWidth - 25);
               if (newLines.length > 1) {
@@ -1867,8 +1867,42 @@ export default {
 
               modal.remove();
 
-              // 更新节点的 nlExplain（可选）
-              d.data.nlExplain = newText; // 将编辑后的文本保存回数据
+              // 更新节点的 nlExplain
+              d.data.nlExplain = newText;
+
+              // 构造请求数据
+              const requestData = {
+                sql_query: self.sqlcode, // 完整的 SQL
+                nl_sql: (d.data.children && d.data.children.length > 0) ? d.data.children[0].name : d.data.name, // 当前 nl_explain 的上一级内容
+                nl_ex: newText // 修改后的 nl_explain
+              };
+
+              console.log("-----------Update NL Explain-----------:");
+              console.log(requestData)
+
+              // 发送 POST 请求到后端
+              fetch('/api/modify', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestData)
+              })
+                .then(response => {
+                  if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                  }
+                  return response.json();
+                })
+                .then(result => {
+                  console.log("Received from backend:", result);
+                  self.res = result
+                  self.data = self.transformToTree(res);
+                  self.draw(self.data); // 使用新的 res 数据绘制
+                })
+                .catch(error => {
+                  console.error("Error sending data to backend:", error);
+                });
             });
           });
 
@@ -2153,7 +2187,7 @@ export default {
             .data(root.descendants().filter(d => d.depth === 1))
             .enter()
             .append("g")
-            .attr("class", "level2node")
+            .attr("class", "level1Node")
             .attr("transform", (d) => `translate(${d.y},${d.x})`);
 
           const level1Texts = level1Nodes.append("text")
@@ -2203,7 +2237,7 @@ export default {
               .attr("y", 0)
               .attr("width", tableWidth)
               .attr("height", headerHeight)
-              .attr("fill", "#FFB338")
+              .attr("fill", "#ffae78")
               .attr("stroke", "#333");
 
             tableGroup.append("text")
@@ -2559,25 +2593,30 @@ export default {
 
     // 第一层节点一定会被高亮 (depth === 0)
     svg.selectAll("g.level0node rect")
-        .attr("stroke", "#ffee38")
+        .attr("stroke", "#FFDA20")
         .attr("stroke-width", 5);
+    
     if (shouldHighlight) {
       console.log(nodeName, '||', nodeNLExplain)
       console.log(nameKey, '||', nlExplainKey)
-      console.log(node)
+      // console.log(node)
       // 高亮第二层节点 (depth === 1)
       svg.selectAll("g.level1Node rect")
-        .each(function(d) {
-          console.log(d);
+        .filter(function(d) {
+          // 检查 name 是否匹配
+          if (!d || !node) return false;
+          const matchesName = d.data.name === node.data.name;
+          // 可选：检查父节点名称
+          const matchesParent = d.parent && node.parent && d.parent.data.name === node.parent.data.name;
+          return matchesName && matchesParent; // 根据需要调整条件
         })
-        .filter(d => d === node)
-        .attr("stroke", "#ffee38")
+        .attr("stroke", "#FFDA20")
         .attr("stroke-width", 5);
 
       // 高亮所有矩形（通用选择器）
       svg.selectAll("rect")
         .filter(d => d === node)
-        .attr("stroke", "#ffee38")
+        .attr("stroke", "#FFDA20")
         .attr("stroke-width", 5);
 
       // 高亮表格节点
@@ -2586,7 +2625,7 @@ export default {
           const text = d3.select(this.parentNode).select("text").text() || '';
           return text.replace(/\s+/g, '') === nodeName.replace(/\s+/g, '');
         })
-        .attr("stroke", "#ffee38")
+        .attr("stroke", "#FFDA20")
         .attr("stroke-width", 5);
 
       svg.selectAll(".explain-group rect")
@@ -2594,7 +2633,7 @@ export default {
           const text = d3.select(this.parentNode).select("text").text() || '';
           return text.replace(/\s+/g, '') === nodeNLExplain.replace(/\s+/g, '');
         })
-        .attr("stroke", "#ffee38")
+        .attr("stroke", "#FFDA20")
         .attr("stroke-width", 5);
     }
   });
@@ -2619,13 +2658,13 @@ export default {
       }
       return shouldHighlightLink;
     })
-    .attr("stroke", "#ffee38")
+    .attr("stroke", "#FFDA20")
     .attr("stroke-width", 4);
 }
       // 如果有 currentTree，则高亮
       if (this.currentTree && this.currentTree !== null) {
         console.log("------enter highlight-------")
-        // highlightSubtree(svg, root, this.currentTree);
+        highlightSubtree(svg, root, this.currentTree);
       }
     }
   }

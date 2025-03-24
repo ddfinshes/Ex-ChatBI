@@ -23,7 +23,7 @@ def analyze_relation(understanding : str, knowledge_base : list):
             #     continue
             prompt = f'''
             You need to complete a data statement matching and alignment task.
-            
+
             I will provide you with two sentences. Please follow the process below to evaluate the two sentences:
 
             Identify and label which word or words in the first sentence are specialized terms that need explanation.
@@ -34,8 +34,9 @@ def analyze_relation(understanding : str, knowledge_base : list):
             Your response should follow the format below:
             - If there is no relevance, answer "none".
             - If there is relevance, first state the term(s), and in the next line, provide the part of the sentence that explains it. Do not include any additional content in your response!
-            Please notice that, only when there's strong relation between two sentences should you reply content, or you reply none!!!!!
-
+            Please notice that, only when there's strong relation between two sentences should you reply content, or you reply none!!!!! 
+            To support subsequent string matching tasks, the output matching content must be consistent with the input text content, and no modifications to punctuation, capitalization, or any other content are allowed.
+            
             first sentence: {understanding}
             second sentence: {kb}'''
             response = client.chat.completions.create(

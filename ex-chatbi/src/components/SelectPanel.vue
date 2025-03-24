@@ -150,7 +150,7 @@ export default {
           connections.push({
             source: this.viewAPositions.userInput,
             target: this.viewBPositions_left[id-1],
-            color: '#00F5FF',
+            color: '#00f5d4',
             opacity: 0.8
           });
         }
@@ -161,7 +161,7 @@ export default {
           connections.push({
             source: this.viewAPositions.userInput,
             target: this.viewBPositions_right[id],
-            color: '#00F5FF',
+            color: '#00bbf9',
             opacity: 0.8
           });
         }
@@ -172,7 +172,7 @@ export default {
           connections.push({
             source: this.viewAPositions.model,
             target: this.viewBPositions_left[id-1],
-            color: '#00F5FF',
+            color: '#9b5de5',
             opacity: 0.8
           });
         }
@@ -183,7 +183,7 @@ export default {
           connections.push({
             source: this.viewAPositions.model,
             target: this.viewBPositions_right[id],
-            color: '#00F5FF',
+            color: '#f15bb5',
             opacity: 0.8
           });
         }
