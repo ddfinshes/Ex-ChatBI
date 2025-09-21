@@ -100,7 +100,7 @@ def insert_query(conn, cursor, table_name, CSV_FILE):
 if __name__ == "__main__":
     # 数据库连接配置
     DB_CONFIG = {
-        "dbname": "chatbi",
+        "dbname": "postgres",
         "user": "postgres",
         "password": "123456",
         "host": "localhost",
@@ -108,9 +108,16 @@ if __name__ == "__main__":
         "options": "-c client_encoding=utf8"
     }
     
-    # 建立数据库连接
-    conn = psycopg2.connect(**DB_CONFIG)
-    cursor = conn.cursor()
+    # 尝试建立数据库连接，并判断是否连接成功
+    try:
+        conn = psycopg2.connect(**DB_CONFIG)
+        cursor = conn.cursor()
+        print("数据库连接成功！")
+    except Exception as e:
+        print("数据库连接失败！")
+        print(f"错误信息: {str(e)}")
+        exit(1)
+        
     
     # CSV文件路径
     table_name = ''
